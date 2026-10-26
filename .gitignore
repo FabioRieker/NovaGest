@@ -58,6 +58,11 @@ yarn-error.log
 /.angular/cache
 .sass-cache/
 /.nx
+
+*.zip
+*.pdf
+lighthouse-*.json
+lighthouse-*.html
 /.nx/cache
 /connect.lock
 /coverage
