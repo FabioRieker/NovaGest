@@ -1,27 +1,169 @@
-
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonRouterLink } from '@ionic/angular';
+import { Component, inject, computed, effect } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import {
+  IonApp,
+  IonSplitPane,
+  IonMenu,
+  IonContent,
+  IonList,
+  IonListHeader,
+  IonMenuToggle,
+  IonItem,
+  IonIcon,
+  IonLabel,
+  IonRouterOutlet,
+  IonRouterLink,
+  IonBadge,
+  IonButton,
+  IonToggle
+} from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp } from 'ionicons/icons';
+import {
+  statsChartOutline,
+  statsChartSharp,
+  cubeOutline,
+  cubeSharp,
+  addCircleOutline,
+  addCircleSharp,
+  pulseOutline,
+  pulseSharp,
+  documentTextOutline,
+  documentTextSharp,
+  helpCircleOutline,
+  helpCircleSharp,
+  logOutOutline,
+  logOutSharp,
+  logInOutline,
+  logInSharp,
+  moonOutline,
+  moonSharp,
+  sunnyOutline,
+  sunnySharp,
+  personCircleOutline,
+  shieldCheckmarkOutline,
+  businessOutline
+} from 'ionicons/icons';
+import { AuthService } from './core/services/auth.service';
+import { NotificationService } from './core/services/notification.service';
 
+interface NavPage {
+  title: string;
+  url: string;
+  icon: string;
+  adminOnly?: boolean;
+}
+
+/**
+ * Componente Raíz de la Aplicación (FASE 1 - Paso 1.1).
+ * Implementa el sistema de navegación global mediante Side Menu responsivo con IonSplitPane.
+ * Adapta dinámicamente las opciones del menú según el rol autenticado (RBAC).
+ */
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  imports: [RouterLink, RouterLinkActive, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterLink, IonRouterOutlet],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    IonApp,
+    IonSplitPane,
+    IonMenu,
+    IonContent,
+    IonList,
+    IonListHeader,
+    IonMenuToggle,
+    IonItem,
+    IonIcon,
+    IonLabel,
+    IonRouterLink,
+    IonRouterOutlet,
+    IonBadge,
+    IonButton,
+    IonToggle
+  ]
 })
 export class AppComponent {
-  protected readonly appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+  public authService = inject(AuthService);
+  private notificationService = inject(NotificationService);
+  private router = inject(Router);
+
+  public isDarkMode = false;
+
+  private readonly allPages: NavPage[] = [
+    { title: 'Cuadro de Mando', url: '/dashboard', icon: 'stats-chart', adminOnly: true },
+    { title: 'Inventario & Catálogo', url: '/products', icon: 'cube' },
+    { title: 'Alta de Producto', url: '/product-form', icon: 'add-circle', adminOnly: true },
+    { title: 'Auditoría NoSQL en Vivo', url: '/realtime-audit', icon: 'pulse', adminOnly: true },
+    { title: 'Informes & Exportación', url: '/reports', icon: 'document-text' },
+    { title: 'Manual de Usuario', url: '/help', icon: 'help-circle' }
   ];
-  protected readonly labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
+  // Páginas visibles filtradas reactivamente según sesión y rol
+  public visiblePages = computed(() => {
+    const user = this.authService.currentUserSignal();
+    if (!user) {
+      return [
+        { title: 'Iniciar Sesión', url: '/login', icon: 'log-in' },
+        { title: 'Manual de Usuario', url: '/help', icon: 'help-circle' }
+      ];
+    }
+
+    if (user.role === 'admin') {
+      return this.allPages;
+    }
+
+    return this.allPages.filter(p => !p.adminOnly);
+  });
+
   constructor() {
-    addIcons({ mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
+    addIcons({
+      statsChartOutline,
+      statsChartSharp,
+      cubeOutline,
+      cubeSharp,
+      addCircleOutline,
+      addCircleSharp,
+      pulseOutline,
+      pulseSharp,
+      documentTextOutline,
+      documentTextSharp,
+      helpCircleOutline,
+      helpCircleSharp,
+      logOutOutline,
+      logOutSharp,
+      logInOutline,
+      logInSharp,
+      moonOutline,
+      moonSharp,
+      sunnyOutline,
+      sunnySharp,
+      personCircleOutline,
+      shieldCheckmarkOutline,
+      businessOutline
+    });
+
+    this.checkInitialTheme();
+  }
+
+  private checkInitialTheme(): void {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('novagest_theme');
+    this.isDarkMode = savedTheme ? savedTheme === 'dark' : prefersDark;
+    document.body.classList.toggle('dark', this.isDarkMode);
+  }
+
+  public toggleTheme(event: any): void {
+    this.isDarkMode = event.detail.checked;
+    document.body.classList.toggle('dark', this.isDarkMode);
+    localStorage.setItem('novagest_theme', this.isDarkMode ? 'dark' : 'light');
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast('Sesión cerrada correctamente.', 'primary');
+    this.router.navigate(['/login']);
   }
 }

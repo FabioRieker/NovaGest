@@ -1,14 +1,57 @@
 <ion-app>
-  <ion-split-pane contentId="main-content">
+  <ion-split-pane contentId="main-content" when="md">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi&#64;ionicframework.com</ion-note>
+        <!-- Cabecera de la Aplicación y Perfil de Usuario -->
+        <div class="menu-profile-box">
+          <div class="brand-badge-row">
+            <div class="brand-icon" aria-hidden="true">
+              <ion-icon name="business-outline"></ion-icon>
+            </div>
+            <div>
+              <h2 class="app-name">NovaGest ERP</h2>
+              <span class="app-version">v1.0 • PWA Empresarial</span>
+            </div>
+          </div>
 
-          @for (p of appPages; track p; let i = $index) {
+          @if (authService.currentUserSignal(); as user) {
+            <div class="user-info-card">
+              <div class="user-avatar-row">
+                <ion-icon name="person-circle-outline" class="user-avatar-icon" aria-hidden="true"></ion-icon>
+                <div class="user-meta">
+                  <span class="user-name">{{ user.name }}</span>
+                  <span class="user-email">{{ user.email }}</span>
+                </div>
+              </div>
+              <div class="user-role-badge">
+                <ion-badge [color]="user.role === 'admin' ? 'primary' : 'medium'">
+                  <ion-icon name="shield-checkmark-outline" aria-hidden="true"></ion-icon>
+                  {{ user.role === 'admin' ? 'Administrador' : 'Usuario Estándar' }}
+                </ion-badge>
+              </div>
+            </div>
+          } @else {
+            <div class="guest-box">
+              <p>Sesión no iniciada</p>
+            </div>
+          }
+        </div>
+
+        <!-- Lista de Navegación Global (Side Menu) -->
+        <ion-list id="navigation-list" lines="none">
+          <ion-list-header>Navegación Principal</ion-list-header>
+
+          @for (p of visiblePages(); track p.url) {
             <ion-menu-toggle auto-hide="false">
-              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-item
+                routerDirection="root"
+                [routerLink]="[p.url]"
+                lines="none"
+                detail="false"
+                routerLinkActive="selected"
+                class="menu-item"
+                [attr.aria-label]="p.title"
+              >
                 <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
@@ -16,18 +59,34 @@
           }
         </ion-list>
 
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
+        <!-- Sección de Preferencias y Sesión -->
+        <div class="menu-bottom-section">
+          <!-- Conmutador de Modo Oscuro / Claro -->
+          <div class="theme-toggle-row">
+            <div class="theme-label">
+              <ion-icon [name]="isDarkMode ? 'moon-outline' : 'sunny-outline'" aria-hidden="true"></ion-icon>
+              <span>Modo Oscuro</span>
+            </div>
+            <ion-toggle
+              [checked]="isDarkMode"
+              (ionChange)="toggleTheme($event)"
+              aria-label="Alternar modo oscuro"
+            ></ion-toggle>
+          </div>
 
-          @for (label of labels; track label) {
-            <ion-item lines="none">
-              <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
-            </ion-item>
+          @if (authService.isAuthenticatedSignal()) {
+            <ion-menu-toggle auto-hide="false">
+              <ion-button expand="block" fill="outline" color="danger" size="small" (click)="logout()" class="logout-btn">
+                <ion-icon slot="start" name="log-out-outline"></ion-icon>
+                Cerrar Sesión
+              </ion-button>
+            </ion-menu-toggle>
           }
-        </ion-list>
+        </div>
       </ion-content>
     </ion-menu>
+
+    <!-- Enrutador Principal -->
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
