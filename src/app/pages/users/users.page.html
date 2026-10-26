@@ -1,0 +1,432 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Gestión de Cuentas & Usuarios</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="loadUsers()" aria-label="Actualizar lista de usuarios">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="users-content">
+  <div class="users-container">
+    <!-- Breadcrumb & Cabecera -->
+    <div class="users-header-bar">
+      <div>
+        <div class="breadcrumb-tag">SISTEMA / SEGURIDAD & RBAC</div>
+        <h1 class="page-title">Administración de Cuentas de Usuario</h1>
+        <p class="page-subtitle">Control de identidades, asignación de roles y aprovisionamiento de accesos</p>
+      </div>
+
+      <!-- Segment Selector de Pestañas -->
+      <ion-segment
+        [value]="selectedTab()"
+        (ionChange)="onTabChange($event)"
+        class="cyber-segment"
+      >
+        <ion-segment-button value="create">
+          <ion-icon name="person-add-outline"></ion-icon>
+          <ion-label>Crear Cuenta</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="list">
+          <ion-icon name="people-outline"></ion-icon>
+          <ion-label>Directorio ({{ totalUsersCount() }})</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <!-- Widgets KPI de Resumen -->
+    <ion-grid class="stats-grid">
+      <ion-row>
+        <ion-col size="12" size-sm="6" size-lg="3">
+          <div class="kpi-card kpi-primary">
+            <div class="kpi-icon-box">
+              <ion-icon name="people-outline"></ion-icon>
+            </div>
+            <div class="kpi-data">
+              <span class="kpi-title">Total Usuarios</span>
+              <span class="kpi-value">{{ totalUsersCount() }}</span>
+              <span class="kpi-meta">Cuentas activas en sistema</span>
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="12" size-sm="6" size-lg="3">
+          <div class="kpi-card kpi-danger">
+            <div class="kpi-icon-box">
+              <ion-icon name="shield-checkmark-outline"></ion-icon>
+            </div>
+            <div class="kpi-data">
+              <span class="kpi-title">Administradores</span>
+              <span class="kpi-value">{{ adminCount() }}</span>
+              <span class="kpi-meta">Privilegios totales RBAC</span>
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="12" size-sm="6" size-lg="3">
+          <div class="kpi-card kpi-secondary">
+            <div class="kpi-icon-box">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+            <div class="kpi-data">
+              <span class="kpi-title">Usuarios Estándar</span>
+              <span class="kpi-value">{{ standardCount() }}</span>
+              <span class="kpi-meta">Operaciones y reportes</span>
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="12" size-sm="6" size-lg="3">
+          <div class="kpi-card kpi-success">
+            <div class="kpi-icon-box">
+              <ion-icon name="business-outline"></ion-icon>
+            </div>
+            <div class="kpi-data">
+              <span class="kpi-title">Departamentos</span>
+              <span class="kpi-value">{{ departmentsCount() }}</span>
+              <span class="kpi-meta">Áreas corporativas activas</span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- VISTA 1: CREAR CUENTA DE USUARIO -->
+    @if (selectedTab() === 'create') {
+      <div class="create-card-wrapper">
+        <ion-card class="cyber-form-card">
+          <ion-card-header>
+            <div class="card-badge">APROVISIONAMIENTO RÁPIDO</div>
+            <ion-card-title>Alta de Nueva Cuenta de Usuario</ion-card-title>
+            <ion-card-subtitle>
+              Registre un nuevo colaborador. El usuario podrá iniciar sesión inmediatamente con sus credenciales.
+            </ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+              <ion-grid>
+                <ion-row>
+                  <!-- Nombre y Apellidos -->
+                  <ion-col size="12" size-md="6">
+                    <div class="form-group">
+                      <ion-item lines="none" class="cyber-input-item">
+                        <ion-icon name="person-outline" slot="start" aria-hidden="true"></ion-icon>
+                        <ion-input
+                          label="Nombre Completo"
+                          labelPlacement="floating"
+                          placeholder="Ej. Carmen Navarro Sánchez"
+                          formControlName="name"
+                          autocomplete="name"
+                        ></ion-input>
+                      </ion-item>
+                      @if (userForm.get('name')?.touched && userForm.get('name')?.invalid) {
+                        <span class="field-error">El nombre debe tener al menos 3 caracteres.</span>
+                      }
+                    </div>
+                  </ion-col>
+
+                  <!-- Correo Electrónico -->
+                  <ion-col size="12" size-md="6">
+                    <div class="form-group">
+                      <ion-item lines="none" class="cyber-input-item">
+                        <ion-icon name="mail-outline" slot="start" aria-hidden="true"></ion-icon>
+                        <ion-input
+                          label="Correo Corporativo"
+                          labelPlacement="floating"
+                          type="email"
+                          placeholder="usuario@empresa.com"
+                          formControlName="email"
+                          autocomplete="email"
+                        ></ion-input>
+                      </ion-item>
+                      @if (userForm.get('email')?.touched && userForm.get('email')?.invalid) {
+                        <span class="field-error">Ingrese un correo electrónico válido.</span>
+                      }
+                    </div>
+                  </ion-col>
+
+                  <!-- Departamento -->
+                  <ion-col size="12" size-md="6">
+                    <div class="form-group">
+                      <ion-item lines="none" class="cyber-input-item">
+                        <ion-icon name="business-outline" slot="start" aria-hidden="true"></ion-icon>
+                        <ion-select
+                          label="Departamento"
+                          labelPlacement="floating"
+                          formControlName="department"
+                          interface="popover"
+                        >
+                          <ion-select-option value="Dirección General & TI">Dirección General & TI</ion-select-option>
+                          <ion-select-option value="Operaciones & Logística">Operaciones & Logística</ion-select-option>
+                          <ion-select-option value="Finanzas & Contabilidad">Finanzas & Contabilidad</ion-select-option>
+                          <ion-select-option value="Ventas & Fidelización">Ventas & Fidelización</ion-select-option>
+                          <ion-select-option value="Almacén Central & Stock">Almacén Central & Stock</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </div>
+                  </ion-col>
+
+                  <!-- Teléfono -->
+                  <ion-col size="12" size-md="6">
+                    <div class="form-group">
+                      <ion-item lines="none" class="cyber-input-item">
+                        <ion-icon name="call-outline" slot="start" aria-hidden="true"></ion-icon>
+                        <ion-input
+                          label="Teléfono Móvil (Opcional)"
+                          labelPlacement="floating"
+                          placeholder="+34 600 000 000"
+                          formControlName="phone"
+                          type="tel"
+                        ></ion-input>
+                      </ion-item>
+                    </div>
+                  </ion-col>
+
+                  <!-- Selector Visual de Rol RBAC -->
+                  <ion-col size="12">
+                    <label class="section-label">Rol y Privilegios en NovaGest (RBAC):</label>
+                    <div class="roles-grid">
+                      <!-- Tarjeta Rol Usuario Estándar -->
+                      <div
+                        class="role-card"
+                        [class.active]="userForm.get('role')?.value === 'user'"
+                        (click)="selectRole('user')"
+                        tabindex="0"
+                        role="button"
+                      >
+                        <div class="role-card-header">
+                          <ion-icon name="person-outline" class="role-icon"></ion-icon>
+                          <div>
+                            <h4 class="role-title">Usuario Estándar</h4>
+                            <span class="role-tag standard-tag">Acceso Operativo</span>
+                          </div>
+                        </div>
+                        <p class="role-desc">
+                          Consulta de catálogo, filtros avanzados, alertas de stock e informes descargables en PDF/CSV.
+                        </p>
+                      </div>
+
+                      <!-- Tarjeta Rol Administrador -->
+                      <div
+                        class="role-card"
+                        [class.active]="userForm.get('role')?.value === 'admin'"
+                        (click)="selectRole('admin')"
+                        tabindex="0"
+                        role="button"
+                      >
+                        <div class="role-card-header">
+                          <ion-icon name="shield-checkmark-outline" class="role-icon admin-icon"></ion-icon>
+                          <div>
+                            <h4 class="role-title">Administrador</h4>
+                            <span class="role-tag admin-tag">Control Total</span>
+                          </div>
+                        </div>
+                        <p class="role-desc">
+                          Acceso a Cuadro de Mando Ejecutivo, alta/edición de catálogo, auditoría NoSQL en vivo y gestión de usuarios.
+                        </p>
+                      </div>
+                    </div>
+                  </ion-col>
+
+                  <!-- Contraseña -->
+                  <ion-col size="12" size-md="6">
+                    <div class="form-group">
+                      <ion-item lines="none" class="cyber-input-item">
+                        <ion-icon name="lock-closed-outline" slot="start" aria-hidden="true"></ion-icon>
+                        <ion-input
+                          label="Contraseña"
+                          labelPlacement="floating"
+                          [type]="showPassword() ? 'text' : 'password'"
+                          placeholder="Mínimo 6 caracteres"
+                          formControlName="password"
+                          autocomplete="new-password"
+                        ></ion-input>
+                        <ion-button fill="clear" slot="end" type="button" (click)="togglePassword()">
+                          <ion-icon slot="icon-only" [name]="showPassword() ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+                        </ion-button>
+                      </ion-item>
+
+                      <!-- Medidor de Fuerza de Contraseña -->
+                      <div class="strength-meter">
+                        <div class="meter-bar">
+                          <div
+                            class="meter-fill"
+                            [style.width.%]="passwordStrength().score"
+                            [style.background]="passwordStrength().color === 'success' ? '#10b981' : (passwordStrength().color === 'warning' ? '#f59e0b' : '#ef4444')"
+                          ></div>
+                        </div>
+                        <div class="meter-meta">
+                          <span>Seguridad:</span>
+                          <strong [style.color]="passwordStrength().color === 'success' ? '#10b981' : (passwordStrength().color === 'warning' ? '#f59e0b' : '#ef4444')">
+                            {{ passwordStrength().label }}
+                          </strong>
+                        </div>
+                      </div>
+                    </div>
+                  </ion-col>
+
+                  <!-- Confirmar Contraseña -->
+                  <ion-col size="12" size-md="6">
+                    <div class="form-group">
+                      <ion-item lines="none" class="cyber-input-item">
+                        <ion-icon name="key-outline" slot="start" aria-hidden="true"></ion-icon>
+                        <ion-input
+                          label="Confirmar Contraseña"
+                          labelPlacement="floating"
+                          [type]="showConfirmPassword() ? 'text' : 'password'"
+                          placeholder="Repita la contraseña"
+                          formControlName="confirmPassword"
+                          autocomplete="new-password"
+                        ></ion-input>
+                        <ion-button fill="clear" slot="end" type="button" (click)="toggleConfirmPassword()">
+                          <ion-icon slot="icon-only" [name]="showConfirmPassword() ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+                        </ion-button>
+                      </ion-item>
+                      @if (userForm.get('confirmPassword')?.touched && userForm.get('confirmPassword')?.hasError('passwordMismatch')) {
+                        <span class="field-error">Las contraseñas no coinciden.</span>
+                      }
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+              <!-- Botón de Envío -->
+              <div class="form-actions-row">
+                <ion-button
+                  type="submit"
+                  class="cyber-submit-btn"
+                  [disabled]="isSubmitting() || userForm.invalid"
+                >
+                  @if (isSubmitting()) {
+                    <ion-spinner name="crescent" slot="start"></ion-spinner>
+                    <span>Creando cuenta de usuario...</span>
+                  } @else {
+                    <ion-icon slot="start" name="person-add-outline"></ion-icon>
+                    <span>Crear y Registrar Cuenta</span>
+                  }
+                </ion-button>
+              </div>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    }
+
+    <!-- VISTA 2: DIRECTORIO DE USUARIOS -->
+    @if (selectedTab() === 'list') {
+      <div class="list-card-wrapper">
+        <!-- Barra de Búsqueda y Filtro de Rol -->
+        <div class="directory-filter-bar">
+          <ion-searchbar
+            placeholder="Buscar por nombre, correo o departamento..."
+            [value]="searchQuery()"
+            (ionInput)="searchQuery.set($event.detail.value || '')"
+            class="cyber-searchbar"
+          ></ion-searchbar>
+
+          <div class="role-filter-chips">
+            <button
+              class="chip-btn"
+              [class.active]="filterRole() === 'ALL'"
+              (click)="filterRole.set('ALL')"
+            >
+              Todos ({{ totalUsersCount() }})
+            </button>
+            <button
+              class="chip-btn admin-chip"
+              [class.active]="filterRole() === 'admin'"
+              (click)="filterRole.set('admin')"
+            >
+              Admins ({{ adminCount() }})
+            </button>
+            <button
+              class="chip-btn standard-chip"
+              [class.active]="filterRole() === 'user'"
+              (click)="filterRole.set('user')"
+            >
+              Estándar ({{ standardCount() }})
+            </button>
+          </div>
+        </div>
+
+        <!-- Grid de Tarjetas de Usuarios -->
+        <div class="users-grid">
+          @for (u of filteredUsers(); track u.id) {
+            <div class="user-profile-card">
+              <div class="user-card-top">
+                <div class="user-avatar-wrap">
+                  <ion-icon name="person-circle-outline"></ion-icon>
+                  <span class="online-indicator" title="Estado activo"></span>
+                </div>
+                <div class="user-info">
+                  <h3 class="name">{{ u.name }}</h3>
+                  <span class="email">{{ u.email }}</span>
+                </div>
+                <div class="user-badge-wrap">
+                  <span
+                    class="badge-pill"
+                    [class.badge-admin]="u.role === 'admin'"
+                    [class.badge-user]="u.role === 'user'"
+                  >
+                    {{ u.role === 'admin' ? 'ADMINISTRADOR' : 'ESTÁNDAR' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="user-details-body">
+                <div class="detail-row">
+                  <ion-icon name="business-outline"></ion-icon>
+                  <span>{{ u.department || 'Operaciones' }}</span>
+                </div>
+                @if (u.phone) {
+                  <div class="detail-row">
+                    <ion-icon name="call-outline"></ion-icon>
+                    <span>{{ u.phone }}</span>
+                  </div>
+                }
+                <div class="detail-row">
+                  <ion-icon name="shield-checkmark-outline"></ion-icon>
+                  <span>Alta: {{ u.createdAt | date:'dd/MM/yyyy' }}</span>
+                </div>
+              </div>
+
+              <div class="user-card-actions">
+                <span class="status-text">
+                  <span class="status-dot"></span> Activo
+                </span>
+
+                @if (u.email !== 'admin@empresa.com' && u.id !== authService.currentUserSignal()?.id) {
+                  <ion-button
+                    fill="clear"
+                    color="danger"
+                    size="small"
+                    (click)="confirmDelete(u)"
+                    aria-label="Eliminar cuenta de usuario"
+                    class="delete-user-btn"
+                  >
+                    <ion-icon slot="start" name="trash-outline"></ion-icon>
+                    Eliminar
+                  </ion-button>
+                } @else {
+                  <span class="protected-tag">Cuenta Principal</span>
+                }
+              </div>
+            </div>
+          } @empty {
+            <div class="empty-state-card">
+              <ion-icon name="people-outline"></ion-icon>
+              <h4>No se encontraron usuarios</h4>
+              <p>Modifique los criterios de búsqueda o cree una nueva cuenta.</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</ion-content>

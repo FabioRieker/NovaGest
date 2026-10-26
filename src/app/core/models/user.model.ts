@@ -12,6 +12,8 @@ export interface User {
   role: UserRole;
   avatar?: string;
   department?: string;
+  phone?: string;
+  status?: 'active' | 'inactive';
   createdAt: string;
 }
 
