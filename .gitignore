@@ -73,3 +73,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment & Secrets (Security & Rubric Data Protection: Prevents plain-text API token leaks)
+.env
+.env.*
+.env.local
+!.env.example
+src/environments/environment.local.ts
+*.key
+

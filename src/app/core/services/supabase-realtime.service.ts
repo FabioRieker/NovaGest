@@ -220,9 +220,3 @@ export class SupabaseRealtimeService implements OnDestroy {
     );
   }
 }
-
-/**
- * Exportaciones compatibles
- */
-export const RealtimeFirestoreService = SupabaseRealtimeService;
-export type RealtimeFirestoreService = SupabaseRealtimeService;

@@ -12,6 +12,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false",
     "lint": "ng lint",
+    "env:setup": "node scripts/setup-env.js",
+    "env:reset": "node scripts/setup-env.js --reset",
     "doc:build": "compodoc -p tsconfig.app.json -d documentation --disableCoverage",
     "compodoc": "compodoc -p tsconfig.app.json -d documentation -s -r 8080"
   },

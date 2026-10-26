@@ -106,7 +106,7 @@ src/
 │   │   ├── guards/                # authGuard y roleGuard (RBAC)
 │   │   ├── interceptors/          # authInterceptor (JWT Bearer)
 │   │   ├── models/                # Modelos TypeScript (User, Product, AuditLog)
-│   │   └── services/              # AuthService, SqlRestService, RealtimeFirestoreService, ExportService
+│   │   └── services/              # AuthService, SqlRestService, SupabaseService, SupabaseRealtimeService, ExportService
 │   ├── shared/
 │   │   └── components/            # Componentes reutilizables e independientes
 │   │       ├── data-table/        # Componente 1: Tabla avanzada con buscador y ordenación
