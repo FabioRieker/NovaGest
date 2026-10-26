@@ -1,2 +1,74 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+// NovaGest ERP Design System - Tokens de Color y Accesibilidad WCAG (RA 4)
+
+:root {
+  --ion-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  // Azul Corporativo de Alto Contraste (Cumple WCAG AA/AAA para texto e iconos)
+  --ion-color-primary: #2563eb;
+  --ion-color-primary-rgb: 37, 99, 235;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1d4ed8;
+  --ion-color-primary-tint: #3b82f6;
+
+  // Secundario Cyan/Teal
+  --ion-color-secondary: #0891b2;
+  --ion-color-secondary-rgb: 8, 145, 178;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #0e7490;
+  --ion-color-secondary-tint: #06b6d4;
+
+  // Éxito / En Stock
+  --ion-color-success: #059669;
+  --ion-color-success-rgb: 5, 150, 105;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #047857;
+  --ion-color-success-tint: #10b981;
+
+  // Advertencia / Stock Bajo
+  --ion-color-warning: #d97706;
+  --ion-color-warning-rgb: 217, 119, 6;
+  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade: #b45309;
+  --ion-color-warning-tint: #f59e0b;
+
+  // Peligro / Agotado / Alertas Críticas
+  --ion-color-danger: #dc2626;
+  --ion-color-danger-rgb: 220, 38, 38;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #b91c1c;
+  --ion-color-danger-tint: #ef4444;
+
+  // Fondos y texto de alto contraste en Modo Claro
+  --ion-background-color: #f8fafc;
+  --ion-background-color-rgb: 248, 250, 252;
+  --ion-text-color: #0f172a;
+  --ion-text-color-rgb: 15, 23, 42;
+
+  --ion-card-background: #ffffff;
+  --ion-card-background-rgb: 255, 255, 255;
+}
+
+// Variables para Modo Oscuro Activado mediante clase .dark
+body.dark {
+  --ion-color-primary: #3b82f6;
+  --ion-color-primary-rgb: 59, 130, 246;
+  --ion-color-primary-contrast: #0f172a;
+  --ion-color-primary-contrast-rgb: 15, 23, 42;
+  --ion-color-primary-shade: #2563eb;
+  --ion-color-primary-tint: #60a5fa;
+
+  --ion-background-color: #0b1120;
+  --ion-background-color-rgb: 11, 17, 32;
+  --ion-text-color: #f1f5f9;
+  --ion-text-color-rgb: 241, 245, 249;
+
+  --ion-card-background: #151e34;
+  --ion-card-background-rgb: 21, 30, 52;
+
+  --ion-item-background: #151e34;
+}

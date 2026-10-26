@@ -1,0 +1,121 @@
+.help-content {
+  --background: var(--ion-background-color, #f8fafc);
+}
+
+.help-container {
+  padding: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.help-header-bar {
+  margin-bottom: 24px;
+
+  .page-title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: var(--ion-text-color, #0f172a);
+    margin: 0 0 6px 0;
+  }
+
+  .page-subtitle {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium, #64748b);
+    margin: 0;
+  }
+}
+
+.help-card {
+  margin: 0 0 24px 0;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.15);
+  background: var(--ion-card-background, #ffffff);
+
+  .card-icon-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    ion-icon {
+      font-size: 1.5rem;
+    }
+
+    ion-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ion-text-color, #0f172a);
+    }
+  }
+}
+
+.credentials-table-wrapper, .keyboard-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.credentials-table, .keyboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+  margin-top: 10px;
+
+  th {
+    padding: 10px 12px;
+    background: rgba(var(--ion-color-light-rgb, 244, 245, 248), 0.8);
+    color: var(--ion-text-color, #0f172a);
+    font-weight: 700;
+    border-bottom: 2px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.2);
+  }
+
+  td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.15);
+    color: var(--ion-text-color, #334155);
+
+    code, kbd {
+      background: rgba(var(--ion-color-light-rgb, 244, 245, 248), 1);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.3);
+      font-weight: 600;
+    }
+  }
+}
+
+.help-accordion {
+  border-radius: 12px;
+  overflow: hidden;
+
+  ion-accordion {
+    border-bottom: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.15);
+
+    ion-item {
+      --background: var(--ion-card-background, #ffffff);
+      font-weight: 600;
+    }
+
+    .accordion-content {
+      padding: 16px 20px;
+      background: var(--ion-card-background, #ffffff);
+      color: var(--ion-text-color, #334155);
+      line-height: 1.6;
+      font-size: 0.92rem;
+
+      p {
+        margin: 0 0 12px 0;
+      }
+
+      ul {
+        margin: 0 0 12px 0;
+        padding-left: 20px;
+
+        li {
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
+}

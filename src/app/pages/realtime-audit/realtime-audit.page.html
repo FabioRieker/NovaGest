@@ -1,0 +1,98 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Auditoría NoSQL en Tiempo Real</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="simulatePing()" aria-label="Emitir evento de prueba">
+        <ion-icon slot="icon-only" name="radio-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="audit-page-content">
+  <div class="audit-container">
+    <div class="page-top-bar">
+      <div>
+        <h1 class="page-title">Flujo Reactivo de Eventos (Firestore Simulado)</h1>
+        <p class="page-subtitle">Suscripción continua de eventos sin bloqueo del hilo principal (RA 5)</p>
+      </div>
+
+      <div class="action-buttons-group">
+        <ion-button fill="outline" color="secondary" size="small" (click)="simulatePing()">
+          <ion-icon slot="start" name="radio-outline"></ion-icon>
+          Emitir Evento
+        </ion-button>
+        <ion-button fill="outline" color="danger" size="small" (click)="clearAudit()">
+          <ion-icon slot="start" name="trash-outline"></ion-icon>
+          Limpiar Log
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Barra de Filtro de Severidad -->
+    <div class="filter-card">
+      <div class="filter-item">
+        <span class="filter-label">Severidad:</span>
+        <ion-select
+          interface="popover"
+          [value]="severityFilter()"
+          (ionChange)="severityFilter.set($event.detail.value); onFilterChange()"
+          aria-label="Filtrar por severidad"
+        >
+          <ion-select-option value="ALL">Todos los Niveles</ion-select-option>
+          <ion-select-option value="critical">Crítico</ion-select-option>
+          <ion-select-option value="warning">Advertencia</ion-select-option>
+          <ion-select-option value="success">Éxito</ion-select-option>
+          <ion-select-option value="info">Informativo</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div class="stats-counter" aria-live="polite">
+        <span>Mostrando <strong>{{ filteredLogs().length }}</strong> eventos</span>
+      </div>
+    </div>
+
+    <!-- Lista de Documentos NoSQL -->
+    <div class="logs-feed" role="feed" aria-label="Lista de eventos de auditoría">
+      @if (filteredLogs().length === 0) {
+        <div class="empty-state">
+          <p>No se encontraron eventos para el filtro seleccionado.</p>
+        </div>
+      } @else {
+        @for (log of filteredLogs(); track log.id) {
+          <article
+            class="log-card"
+            [class.severity-critical]="log.severity === 'critical'"
+            [class.severity-warning]="log.severity === 'warning'"
+            [class.severity-success]="log.severity === 'success'"
+            tabindex="0"
+          >
+            <div class="log-card-header">
+              <div class="log-badges">
+                <ion-badge [color]="log.severity === 'critical' ? 'danger' : (log.severity === 'warning' ? 'warning' : (log.severity === 'success' ? 'success' : 'primary'))">
+                  {{ log.action }}
+                </ion-badge>
+                <span class="log-entity">{{ log.entity }}</span>
+              </div>
+              <span class="log-timestamp">
+                <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+                {{ log.timestamp | date:'dd/MM/yyyy HH:mm:ss' }}
+              </span>
+            </div>
+
+            <div class="log-card-body">
+              <p class="log-details">{{ log.details }}</p>
+              <div class="log-footer">
+                <span class="log-user">Emitido por: <strong>{{ log.userEmail }}</strong></span>
+                <span class="log-id">Doc ID: {{ log.id }}</span>
+              </div>
+            </div>
+          </article>
+        }
+      }
+    </div>
+  </div>
+</ion-content>

@@ -1,13 +1,8 @@
 /*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * Global Stylesheet & WCAG Accessibility Configuration - NovaGest ERP
  */
+
+@import "./theme/variables.scss";
 
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
@@ -18,20 +13,50 @@
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
+/* Optional CSS utils */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* Ionic Dark Mode por Clase para conmutación interactiva */
+@import "@ionic/angular/css/palettes/dark.class.css";
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* Pautas de Accesibilidad WCAG: Indicador de Foco Visible Universal */
+*:focus-visible {
+  outline: 3px solid var(--ion-color-primary, #2563eb) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+/* Tipografía fluida escalable con unidades rem */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--ion-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Personalización accesible de barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.4);
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(var(--ion-color-primary-rgb, 37, 99, 235), 0.6);
+  }
+}

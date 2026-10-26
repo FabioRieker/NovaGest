@@ -1,0 +1,171 @@
+<div class="data-table-container" role="region" aria-label="Tabla de datos interactiva">
+  <!-- Barra superior con buscador y contador -->
+  <div class="table-toolbar">
+    <div class="search-wrapper">
+      <ion-searchbar
+        [placeholder]="searchPlaceholder"
+        [value]="searchTerm"
+        (ionInput)="onSearchInput($event)"
+        debounce="0"
+        aria-label="Buscar en la tabla"
+      ></ion-searchbar>
+    </div>
+    <div class="toolbar-stats" aria-live="polite">
+      <span class="count-badge">
+        Mostrando {{ paginatedData.length }} de {{ filteredData.length }} registros
+      </span>
+    </div>
+  </div>
+
+  <!-- Estado de Carga -->
+  @if (loading) {
+    <div class="table-loading-state" role="status" aria-live="polite">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <span>Cargando datos del servidor...</span>
+    </div>
+  }
+
+  <!-- Contenedor Responsive de la Tabla -->
+  <div class="table-responsive-wrapper">
+    <table class="custom-table" role="table">
+      <caption class="sr-only">Listado de registros del sistema</caption>
+      <thead>
+        <tr role="row">
+          @for (col of columns; track col.key) {
+            <th
+              role="columnheader"
+              [style.width]="col.width || 'auto'"
+              [attr.aria-sort]="sortColumn === col.key ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'"
+              [class.sortable]="col.sortable"
+              (click)="onSort(col)"
+              (keydown.enter)="onSort(col)"
+              (keydown.space)="onSort(col)"
+              [tabindex]="col.sortable ? 0 : -1"
+            >
+              <div class="th-content">
+                <span>{{ col.label }}</span>
+                @if (col.sortable) {
+                  <span class="sort-indicator" aria-hidden="true">
+                    @if (sortColumn === col.key) {
+                      <ion-icon [name]="sortDirection === 'asc' ? 'arrow-up-outline' : 'arrow-down-outline'"></ion-icon>
+                    } @else {
+                      <ion-icon name="swap-vertical-outline" class="neutral-sort"></ion-icon>
+                    }
+                  </span>
+                }
+              </div>
+            </th>
+          }
+          @if (showActions) {
+            <th role="columnheader" class="actions-header">Acciones</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @if (!loading && paginatedData.length === 0) {
+          <tr role="row">
+            <td [attr.colspan]="columns.length + (showActions ? 1 : 0)" class="empty-cell">
+              <div class="empty-state">
+                <p>{{ emptyMessage }}</p>
+              </div>
+            </td>
+          </tr>
+        } @else {
+          @for (item of paginatedData; track item.id || $index) {
+            <tr
+              role="row"
+              class="table-row"
+              (click)="onRowSelect(item)"
+              (keydown.enter)="onRowSelect(item)"
+              tabindex="0"
+              aria-label="Fila de datos, presione enter para ver detalle"
+            >
+              @for (col of columns; track col.key) {
+                <td role="cell" [attr.data-label]="col.label">
+                  @if (col.type === 'badge') {
+                    <ion-badge [color]="getBadgeColor(item[col.key])" class="status-badge">
+                      {{ item[col.key] }}
+                    </ion-badge>
+                  } @else {
+                    <span>{{ formatCellValue(item, col) }}</span>
+                  }
+                </td>
+              }
+              @if (showActions) {
+                <td role="cell" class="actions-cell" (click)="$event.stopPropagation()">
+                  <div class="actions-group">
+                    @if (canView) {
+                      <ion-button
+                        fill="clear"
+                        size="small"
+                        color="secondary"
+                        (click)="triggerAction('view', item, $event)"
+                        [attr.aria-label]="'Ver detalle de ' + (item.name || item.sku || 'registro')"
+                      >
+                        <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+                      </ion-button>
+                    }
+                    @if (canEdit) {
+                      <ion-button
+                        fill="clear"
+                        size="small"
+                        color="primary"
+                        (click)="triggerAction('edit', item, $event)"
+                        [attr.aria-label]="'Editar ' + (item.name || item.sku || 'registro')"
+                      >
+                        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                      </ion-button>
+                    }
+                    @if (canDelete) {
+                      <ion-button
+                        fill="clear"
+                        size="small"
+                        color="danger"
+                        (click)="triggerAction('delete', item, $event)"
+                        [attr.aria-label]="'Eliminar ' + (item.name || item.sku || 'registro')"
+                      >
+                        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                      </ion-button>
+                    }
+                  </div>
+                </td>
+              }
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginación Accesible -->
+  @if (totalPages > 1) {
+    <nav class="table-pagination" aria-label="Navegación por páginas de la tabla">
+      <div class="page-info">
+        Página <strong>{{ currentPage }}</strong> de <strong>{{ totalPages }}</strong>
+      </div>
+      <div class="pagination-buttons">
+        <ion-button
+          fill="outline"
+          size="small"
+          [disabled]="currentPage === 1"
+          (click)="setPage(currentPage - 1)"
+          aria-label="Ir a la página anterior"
+        >
+          <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+
+        <span class="page-indicator" aria-current="page">{{ currentPage }}</span>
+
+        <ion-button
+          fill="outline"
+          size="small"
+          [disabled]="currentPage === totalPages"
+          (click)="setPage(currentPage + 1)"
+          aria-label="Ir a la página siguiente"
+        >
+          <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </nav>
+  }
+</div>
