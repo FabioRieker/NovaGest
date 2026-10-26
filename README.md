@@ -1,6 +1,6 @@
 # 🏢 NovaGest ERP - Sistema de Gestión Multiplataforma (PWA/Híbrida)
 
-[![CI/CD Pipeline](https://github.com/FabioRieker/ActividadInd1/actions/workflows/ci.yml/badge.svg)](https://github.com/FabioRieker/ActividadInd1/actions)
+[![CI/CD Pipeline](https://github.com/FabioRieker/NovaGest/actions/workflows/ci.yml/badge.svg)](https://github.com/FabioRieker/NovaGest/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Framework: Ionic 8](https://img.shields.io/badge/Ionic-8.0-3880ff.svg)](https://ionicframework.com/)
 [![Angular: 18/22](https://img.shields.io/badge/Angular-Standalone-dd0031.svg)](https://angular.dev/)
@@ -64,8 +64,8 @@
 ### Instrucciones
 1. Clonar el repositorio:
    ```bash
-   git clone git@github.com:FabioRieker/ActividadInd1.git
-   cd ActividadInd1
+   git clone git@github.com:FabioRieker/NovaGest.git
+   cd NovaGest
    ```
 2. Instalar dependencias:
    ```bash
