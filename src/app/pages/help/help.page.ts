@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -17,7 +18,8 @@ import {
   IonItem,
   IonLabel,
   IonIcon,
-  IonBadge
+  IonBadge,
+  IonButton
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
@@ -27,8 +29,12 @@ import {
   documentTextOutline,
   keyOutline,
   accessibilityOutline,
-  layersOutline
+  layersOutline,
+  logOutOutline,
+  logInOutline
 } from 'ionicons/icons';
+import { AuthService } from '../../core/services/auth.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 /**
  * Manual de Usuario Embebido y Sistema de Ayuda Contextual (RA 6 & FASE 5).
@@ -58,10 +64,15 @@ import {
     IonItem,
     IonLabel,
     IonIcon,
-    IonBadge
+    IonBadge,
+    IonButton
   ]
 })
 export class HelpPage {
+  public authService = inject(AuthService);
+  private notificationService = inject(NotificationService);
+  private router = inject(Router);
+
   constructor() {
     addIcons({
       helpCircleOutline,
@@ -70,7 +81,19 @@ export class HelpPage {
       documentTextOutline,
       keyOutline,
       accessibilityOutline,
-      layersOutline
+      layersOutline,
+      logOutOutline,
+      logInOutline
     });
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast('Sesión cerrada correctamente.', 'primary');
+    this.router.navigate(['/login']);
+  }
+
+  public goToLogin(): void {
+    this.router.navigate(['/login']);
   }
 }

@@ -21,9 +21,12 @@ import {
   pulseOutline,
   radioOutline,
   addCircleOutline,
-  shieldCheckmarkOutline
+  shieldCheckmarkOutline,
+  logOutOutline
 } from 'ionicons/icons';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { AuditLogDocument, AuditSeverity } from '../../core/models/audit-log.model';
@@ -58,6 +61,8 @@ import { AuditLogDocument, AuditSeverity } from '../../core/models/audit-log.mod
 export class RealtimeAuditPage implements OnInit, OnDestroy {
   private realtimeService = inject(RealtimeFirestoreService);
   private notificationService = inject(NotificationService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   public allLogs = signal<AuditLogDocument[]>([]);
   public filteredLogs = signal<AuditLogDocument[]>([]);
@@ -72,8 +77,15 @@ export class RealtimeAuditPage implements OnInit, OnDestroy {
       pulseOutline,
       radioOutline,
       addCircleOutline,
-      shieldCheckmarkOutline
+      shieldCheckmarkOutline,
+      logOutOutline
     });
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast('Sesión cerrada correctamente.', 'primary');
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {

@@ -41,13 +41,17 @@ import {
   alertCircleOutline,
   timeOutline,
   sparklesOutline,
-  documentTextOutline
+  documentTextOutline,
+  logOutOutline
 } from 'ionicons/icons';
 import { forkJoin, Subscription } from 'rxjs';
 import { Chart, registerables } from 'chart.js';
 import { SqlRestService } from '../../core/services/sql-rest.service';
 import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
 import { ExportService } from '../../core/services/export.service';
+import { AuthService } from '../../core/services/auth.service';
+import { NotificationService } from '../../core/services/notification.service';
+import { Router } from '@angular/router';
 import { StatWidgetComponent } from '../../shared/components/stat-widget/stat-widget.component';
 import { Product } from '../../core/models/product.model';
 import { AuditLogDocument } from '../../core/models/audit-log.model';
@@ -100,6 +104,9 @@ export class DashboardPage implements OnInit, OnDestroy {
   private sqlService = inject(SqlRestService);
   private realtimeService = inject(RealtimeFirestoreService);
   private exportService = inject(ExportService);
+  public authService = inject(AuthService);
+  private notificationService = inject(NotificationService);
+  private router = inject(Router);
 
   public isLoading = signal(true);
   public filterCategory = signal<string>('ALL');
@@ -128,8 +135,15 @@ export class DashboardPage implements OnInit, OnDestroy {
       alertCircleOutline,
       timeOutline,
       sparklesOutline,
-      documentTextOutline
+      documentTextOutline,
+      logOutOutline
     });
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast('Sesión cerrada correctamente.', 'primary');
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {

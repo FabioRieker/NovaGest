@@ -4,6 +4,19 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Manual de Usuario & Ayuda</ion-title>
+    <ion-buttons slot="end">
+      @if (authService.isAuthenticatedSignal()) {
+        <ion-button (click)="logout()" color="light" aria-label="Cerrar sesión">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          Salir
+        </ion-button>
+      } @else {
+        <ion-button (click)="goToLogin()" color="light" aria-label="Iniciar sesión">
+          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+          Entrar
+        </ion-button>
+      }
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

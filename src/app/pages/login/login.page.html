@@ -29,8 +29,10 @@
             <div class="form-group">
               <ion-item lines="inset" class="custom-input-item" [class.ion-invalid]="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
                 <ion-icon name="mail-outline" slot="start" aria-hidden="true"></ion-icon>
-                <ion-label position="floating">Correo Electrónico Corporativo</ion-label>
                 <ion-input
+                  label="Correo Electrónico Corporativo"
+                  labelPlacement="floating"
+                  aria-label="Correo Electrónico Corporativo"
                   type="email"
                   formControlName="email"
                   autocomplete="email"
@@ -54,8 +56,10 @@
             <div class="form-group">
               <ion-item lines="inset" class="custom-input-item" [class.ion-invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
                 <ion-icon name="lock-closed-outline" slot="start" aria-hidden="true"></ion-icon>
-                <ion-label position="floating">Contraseña de Seguridad</ion-label>
                 <ion-input
+                  label="Contraseña de Seguridad"
+                  labelPlacement="floating"
+                  aria-label="Contraseña de Seguridad"
                   [type]="showPassword() ? 'text' : 'password'"
                   formControlName="password"
                   autocomplete="current-password"
@@ -120,7 +124,7 @@
               <ion-button
                 fill="outline"
                 size="small"
-                color="medium"
+                color="secondary"
                 type="button"
                 (click)="fillCredentials('user')"
                 aria-label="Cargar credenciales de Usuario Estándar"

@@ -66,7 +66,7 @@
 
     ion-card-subtitle {
       font-size: 0.88rem;
-      color: var(--ion-color-medium, #64748b);
+      color: #334155 !important;
       margin-top: 4px;
     }
   }
@@ -99,13 +99,21 @@
   margin-bottom: 16px;
 
   .custom-input-item {
-    --background: rgba(var(--ion-color-light-rgb, 244, 245, 248), 0.5);
+    --background: rgba(var(--ion-color-light-rgb, 244, 245, 248), 0.7);
     --border-radius: 10px;
     --highlight-color-focused: var(--ion-color-primary, #2563eb);
+    --color: #0f172a;
+    color: #0f172a;
     margin-bottom: 4px;
 
+    ion-input {
+      --color: #0f172a;
+      --placeholder-color: #334155;
+      color: #0f172a;
+    }
+
     ion-icon {
-      color: var(--ion-color-medium, #64748b);
+      color: #334155;
       margin-inline-end: 12px;
     }
   }
@@ -134,9 +142,9 @@
 
   .demo-title {
     display: block;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--ion-color-medium, #64748b);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--ion-text-color, #1e293b);
     margin-bottom: 10px;
     text-align: center;
   }
@@ -148,7 +156,8 @@
 
     ion-button {
       --border-radius: 8px;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
+      font-weight: 600;
     }
   }
 }

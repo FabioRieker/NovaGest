@@ -19,7 +19,8 @@ import {
   refreshOutline,
   downloadOutline,
   documentTextOutline,
-  filterOutline
+  filterOutline,
+  logOutOutline
 } from 'ionicons/icons';
 import { SqlRestService } from '../../core/services/sql-rest.service';
 import { AuthService } from '../../core/services/auth.service';
@@ -84,8 +85,15 @@ export class ProductsPage implements OnInit {
       refreshOutline,
       downloadOutline,
       documentTextOutline,
-      filterOutline
+      filterOutline,
+      logOutOutline
     });
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast('Sesión cerrada correctamente.', 'primary');
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {

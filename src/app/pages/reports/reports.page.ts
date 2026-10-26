@@ -22,8 +22,12 @@ import {
   documentTextOutline,
   printOutline,
   statsChartOutline,
-  folderOpenOutline
+  folderOpenOutline,
+  logOutOutline
 } from 'ionicons/icons';
+import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { NotificationService } from '../../core/services/notification.service';
 import { SqlRestService } from '../../core/services/sql-rest.service';
 import { ExportService } from '../../core/services/export.service';
 import { Product } from '../../core/models/product.model';
@@ -59,6 +63,9 @@ import { Product } from '../../core/models/product.model';
 export class ReportsPage implements OnInit {
   private sqlService = inject(SqlRestService);
   private exportService = inject(ExportService);
+  private authService = inject(AuthService);
+  private notificationService = inject(NotificationService);
+  private router = inject(Router);
 
   public products = signal<Product[]>([]);
   public isLoading = signal(false);
@@ -69,8 +76,15 @@ export class ReportsPage implements OnInit {
       documentTextOutline,
       printOutline,
       statsChartOutline,
-      folderOpenOutline
+      folderOpenOutline,
+      logOutOutline
     });
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast('Sesión cerrada correctamente.', 'primary');
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {

@@ -4,6 +4,12 @@
       <ion-back-button defaultHref="/products"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ isEditMode() ? 'Editar Producto' : 'Alta de Nuevo Producto' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" color="light" aria-label="Cerrar sesión">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Salir
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

@@ -40,10 +40,12 @@ import {
   pricetagOutline,
   mailOutline,
   checkmarkCircleOutline,
-  alertCircleOutline
+  alertCircleOutline,
+  logOutOutline
 } from 'ionicons/icons';
 import { Observable, timer } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
+import { AuthService } from '../../core/services/auth.service';
 import { SqlRestService } from '../../core/services/sql-rest.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
@@ -108,6 +110,7 @@ export class ProductFormPage implements OnInit {
   private sqlService = inject(SqlRestService);
   private notificationService = inject(NotificationService);
   private realtimeService = inject(RealtimeFirestoreService);
+  private authService = inject(AuthService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
@@ -126,8 +129,15 @@ export class ProductFormPage implements OnInit {
       pricetagOutline,
       mailOutline,
       checkmarkCircleOutline,
-      alertCircleOutline
+      alertCircleOutline,
+      logOutOutline
     });
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast('Sesión cerrada correctamente.', 'primary');
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {

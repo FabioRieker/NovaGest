@@ -28,6 +28,10 @@
                   <ion-icon name="shield-checkmark-outline" aria-hidden="true"></ion-icon>
                   {{ user.role === 'admin' ? 'Administrador' : 'Usuario Estándar' }}
                 </ion-badge>
+                <ion-button fill="clear" size="small" color="danger" (click)="logout()" class="quick-logout-btn" aria-label="Cerrar sesión">
+                  <ion-icon slot="start" name="log-out-outline"></ion-icon>
+                  Salir
+                </ion-button>
               </div>
             </div>
           } @else {

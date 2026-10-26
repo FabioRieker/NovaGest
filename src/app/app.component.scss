@@ -79,6 +79,10 @@ ion-menu ion-content {
     }
 
     .user-role-badge {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
       ion-badge {
         display: inline-flex;
         align-items: center;
@@ -88,6 +92,15 @@ ion-menu ion-content {
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.04em;
+      }
+
+      .quick-logout-btn {
+        --padding-start: 6px;
+        --padding-end: 6px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        height: 26px;
+        margin: 0;
       }
     }
   }
