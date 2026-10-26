@@ -1,0 +1,114 @@
+.form-content {
+  --background: var(--ion-background-color, #f8fafc);
+}
+
+.form-page-container {
+  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-header-intro {
+  margin-bottom: 20px;
+
+  .page-title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: var(--ion-text-color, #0f172a);
+    margin: 0 0 6px 0;
+  }
+
+  .page-subtitle {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium, #64748b);
+    margin: 0;
+  }
+}
+
+.form-card {
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.2);
+  margin: 0;
+  background: var(--ion-card-background, #ffffff);
+
+  ion-card-header {
+    border-bottom: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.15);
+    padding-bottom: 12px;
+
+    ion-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ion-text-color, #0f172a);
+    }
+
+    ion-card-subtitle {
+      font-size: 0.85rem;
+      color: var(--ion-color-medium, #64748b);
+      margin-top: 4px;
+    }
+  }
+
+  ion-card-content {
+    padding: 20px;
+  }
+}
+
+.form-group {
+  margin-bottom: 16px;
+
+  .custom-field {
+    --background: rgba(var(--ion-color-light-rgb, 244, 245, 248), 0.6);
+    --border-radius: 10px;
+    margin-bottom: 4px;
+
+    ion-icon {
+      color: var(--ion-color-medium, #64748b);
+      margin-inline-end: 10px;
+    }
+  }
+
+  .feedback-text {
+    padding-left: 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    min-height: 18px;
+
+    .error-msg {
+      color: var(--ion-color-danger, #dc2626);
+    }
+
+    .pending-msg {
+      color: var(--ion-color-primary, #2563eb);
+      font-style: italic;
+    }
+  }
+}
+
+.form-row-duo {
+  display: flex;
+  gap: 16px;
+
+  .flex-1 {
+    flex: 1;
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.15);
+
+  ion-button {
+    --border-radius: 8px;
+    font-weight: 600;
+  }
+}

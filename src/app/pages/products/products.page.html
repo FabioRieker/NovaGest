@@ -1,0 +1,91 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Inventario & Catálogo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="fetchProducts()" aria-label="Actualizar listado de productos">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="products-content">
+  <div class="products-container">
+    <div class="page-top-bar">
+      <div>
+        <h1 class="page-title">Gestión de Productos</h1>
+        <p class="page-subtitle">Consumo de API REST relacional (SQL simulado) con persistencia</p>
+      </div>
+
+      <div class="action-buttons-group">
+        <ion-button fill="outline" color="primary" size="small" (click)="exportPdf()" aria-label="Exportar a PDF">
+          <ion-icon slot="start" name="download-outline"></ion-icon>
+          PDF
+        </ion-button>
+        <ion-button fill="outline" color="secondary" size="small" (click)="exportCsv()" aria-label="Exportar a CSV">
+          <ion-icon slot="start" name="document-text-outline"></ion-icon>
+          CSV
+        </ion-button>
+        @if (authService.isAdminSignal()) {
+          <ion-button color="primary" size="small" (click)="navigateToCreate()" aria-label="Añadir nuevo producto">
+            <ion-icon slot="start" name="add-outline"></ion-icon>
+            Nuevo Producto
+          </ion-button>
+        }
+      </div>
+    </div>
+
+    <!-- Filtros de Categoría y Estado -->
+    <div class="filters-bar">
+      <div class="filter-group">
+        <ion-icon name="filter-outline" aria-hidden="true"></ion-icon>
+        <span class="filter-title">Filtrar por:</span>
+      </div>
+
+      <div class="filter-controls">
+        <ion-select
+          interface="popover"
+          [value]="selectedCategory()"
+          (ionChange)="selectedCategory.set($event.detail.value); onFilterChange()"
+          aria-label="Filtrar por categoría"
+        >
+          <ion-select-option value="ALL">Todas las Categorías</ion-select-option>
+          <ion-select-option value="Hardware">Hardware</ion-select-option>
+          <ion-select-option value="Electrónica">Electrónica</ion-select-option>
+          <ion-select-option value="Mobiliario">Mobiliario</ion-select-option>
+          <ion-select-option value="Servicios">Servicios</ion-select-option>
+          <ion-select-option value="Papelería">Papelería</ion-select-option>
+        </ion-select>
+
+        <ion-select
+          interface="popover"
+          [value]="selectedStatus()"
+          (ionChange)="selectedStatus.set($event.detail.value); onFilterChange()"
+          aria-label="Filtrar por estado de stock"
+        >
+          <ion-select-option value="ALL">Cualquier Estado</ion-select-option>
+          <ion-select-option value="in_stock">En Stock</ion-select-option>
+          <ion-select-option value="low_stock">Stock Bajo</ion-select-option>
+          <ion-select-option value="out_of_stock">Agotado</ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+
+    <!-- Componente 1 Visual Reutilizable (RA 3) -->
+    <app-data-table
+      [columns]="tableColumns"
+      [data]="products()"
+      [pageSize]="6"
+      searchPlaceholder="Buscar por SKU, nombre o proveedor..."
+      [loading]="isLoading()"
+      [showActions]="true"
+      [canEdit]="authService.isAdminSignal()"
+      [canDelete]="authService.isAdminSignal()"
+      [canView]="true"
+      (actionClick)="onTableAction($event)"
+    ></app-data-table>
+  </div>
+</ion-content>

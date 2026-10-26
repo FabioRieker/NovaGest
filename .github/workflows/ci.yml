@@ -1,0 +1,59 @@
+name: NovaGest ERP - CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Pruebas Unitarias y Calidad de Código
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Instalar Dependencias
+        run: npm ci
+
+      - name: Ejecutar Tests Unitarios (Bloqueante)
+        run: npm test -- --watch=false
+
+      - name: Generar Documentación Técnica (Compodoc)
+        run: npm run doc:build
+
+  build:
+    name: Compilación de Artefacto de Producción (PWA)
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Instalar Dependencias
+        run: npm ci
+
+      - name: Compilar Producción
+        run: npm run build
+
+      - name: Subir Artefacto Compilado
+        uses: actions/upload-artifact@v4
+        with:
+          name: novagest-production-bundle
+          path: www/
+          retention-days: 7

@@ -1,0 +1,88 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Informes & Exportación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="reports-content">
+  <div class="reports-container">
+    <div class="reports-header-bar">
+      <h1 class="page-title">Generación de Informes Oficiales</h1>
+      <p class="page-subtitle">Exportación estandarizada en formatos tabulados PDF y CSV (RA 5)</p>
+    </div>
+
+    <div class="export-options-grid">
+      <!-- Opción PDF -->
+      <ion-card class="export-card pdf-card">
+        <ion-card-header>
+          <div class="format-badge pdf-badge">PDF</div>
+          <ion-card-title>Informe Formal en PDF</ion-card-title>
+          <ion-card-subtitle>Diseño con membrete corporativo, metadatos y tabla formateada</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="format-desc">
+            Genera un documento imprimible con encabezado institucional, fecha de emisión, usuario emisor,
+            paginación automática y resumen contable del valor del catálogo.
+          </p>
+          <ion-button expand="block" color="primary" (click)="exportPdf()" [disabled]="isLoading()" aria-label="Descargar informe en formato PDF">
+            <ion-icon slot="start" name="download-outline"></ion-icon>
+            Descargar Documento PDF
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Opción CSV -->
+      <ion-card class="export-card csv-card">
+        <ion-card-header>
+          <div class="format-badge csv-badge">CSV</div>
+          <ion-card-title>Exportación de Datos CSV</ion-card-title>
+          <ion-card-subtitle>Formato plano estandarizado RFC 4180 con UTF-8 BOM</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="format-desc">
+            Descarga los registros tabulados listos para importación directa en hojas de cálculo (Microsoft Excel,
+            Google Sheets, LibreOffice Calc) preservando caracteres en español.
+          </p>
+          <ion-button expand="block" color="secondary" (click)="exportCsv()" [disabled]="isLoading()" aria-label="Descargar datos en formato CSV">
+            <ion-icon slot="start" name="document-text-outline"></ion-icon>
+            Descargar Archivo CSV
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Vista previa de datos listos para exportar -->
+    <ion-card class="preview-card">
+      <ion-card-header>
+        <ion-card-title>Vista Previa del Conjunto de Datos</ion-card-title>
+        <ion-card-subtitle>Se exportarán {{ products().length }} registros consolidados</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        @if (isLoading()) {
+          <div class="loading-state">
+            <ion-spinner name="crescent" color="primary"></ion-spinner>
+            <span>Preparando registros para exportación...</span>
+          </div>
+        } @else {
+          <div class="preview-summary">
+            <div class="summary-pill">
+              <span>Total Artículos:</span>
+              <strong>{{ products().length }}</strong>
+            </div>
+            <div class="summary-pill">
+              <span>Formato de codificación:</span>
+              <strong>UTF-8 con BOM</strong>
+            </div>
+            <div class="summary-pill">
+              <span>Resolución de exportación:</span>
+              <strong>Vectorial A4</strong>
+            </div>
+          </div>
+        }
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

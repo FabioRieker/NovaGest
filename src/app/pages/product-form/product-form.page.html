@@ -1,0 +1,204 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/products"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isEditMode() ? 'Editar Producto' : 'Alta de Nuevo Producto' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="form-content">
+  <div class="form-page-container">
+    <div class="form-header-intro">
+      <h1 class="page-title">{{ isEditMode() ? 'Modificar Registro de Catálogo' : 'Crear Registro de Inventario' }}</h1>
+      <p class="page-subtitle">Formulario reactivo con validaciones asíncronas de unicidad contra la API SQL</p>
+    </div>
+
+    <ion-card class="form-card">
+      <ion-card-header>
+        <ion-card-title>Detalles Técnicos y Comerciales</ion-card-title>
+        <ion-card-subtitle>Los campos marcados con asterisco (*) son obligatorios</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>
+
+          <!-- SKU con Validación Asíncrona (Paso 1.2 & RA 2) -->
+          <div class="form-group">
+            <ion-item lines="inset" class="custom-field" [class.ion-invalid]="productForm.get('sku')?.touched && productForm.get('sku')?.invalid">
+              <ion-icon name="pricetagOutline" slot="start" aria-hidden="true"></ion-icon>
+              <ion-label position="floating">Código SKU Único *</ion-label>
+              <ion-input
+                type="text"
+                formControlName="sku"
+                placeholder="Ej. HARD-SRV-99"
+                [attr.aria-invalid]="productForm.get('sku')?.touched && productForm.get('sku')?.invalid"
+                aria-describedby="sku-feedback"
+              ></ion-input>
+
+              <!-- Spinner de validación asíncrona -->
+              @if (productForm.get('sku')?.pending) {
+                <ion-spinner name="crescent" slot="end" color="primary" aria-label="Verificando disponibilidad de SKU"></ion-spinner>
+              }
+              @if (productForm.get('sku')?.valid && productForm.get('sku')?.touched) {
+                <ion-icon name="checkmarkCircleOutline" slot="end" color="success" aria-hidden="true"></ion-icon>
+              }
+            </ion-item>
+
+            <div id="sku-feedback" class="feedback-text" role="alert" aria-live="polite">
+              @if (productForm.get('sku')?.pending) {
+                <span class="pending-msg">Comprobando unicidad del SKU en la base de datos...</span>
+              }
+              @if (productForm.get('sku')?.touched && productForm.get('sku')?.hasError('required')) {
+                <span class="error-msg">El SKU es obligatorio.</span>
+              }
+              @if (productForm.get('sku')?.touched && productForm.get('sku')?.hasError('pattern')) {
+                <span class="error-msg">Formato de SKU inválido (solo letras, números y guiones).</span>
+              }
+              @if (productForm.get('sku')?.hasError('skuExists')) {
+                <span class="error-msg">Este SKU ya existe en la base de datos. Elija otro identificador.</span>
+              }
+            </div>
+          </div>
+
+          <!-- Nombre del Producto -->
+          <div class="form-group">
+            <ion-item lines="inset" class="custom-field" [class.ion-invalid]="productForm.get('name')?.touched && productForm.get('name')?.invalid">
+              <ion-icon name="cubeOutline" slot="start" aria-hidden="true"></ion-icon>
+              <ion-label position="floating">Nombre del Producto / Activo *</ion-label>
+              <ion-input
+                type="text"
+                formControlName="name"
+                [attr.aria-invalid]="productForm.get('name')?.touched && productForm.get('name')?.invalid"
+                aria-describedby="name-feedback"
+              ></ion-input>
+            </ion-item>
+            @if (productForm.get('name')?.touched && productForm.get('name')?.errors) {
+              <div id="name-feedback" class="feedback-text" role="alert" aria-live="polite">
+                @if (productForm.get('name')?.hasError('required')) {
+                  <span class="error-msg">El nombre es requerido.</span>
+                }
+                @if (productForm.get('name')?.hasError('minlength')) {
+                  <span class="error-msg">Debe tener al menos 4 caracteres.</span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Categoría -->
+          <div class="form-group">
+            <ion-item lines="inset" class="custom-field">
+              <ion-label position="floating">Categoría Empresarial *</ion-label>
+              <ion-select formControlName="category" interface="popover" aria-label="Seleccionar categoría">
+                @for (cat of categories; track cat) {
+                  <ion-select-option [value]="cat">{{ cat }}</ion-select-option>
+                }
+              </ion-select>
+            </ion-item>
+          </div>
+
+          <!-- Fila de Precio y Stock (Grilla Flexbox) -->
+          <div class="form-row-duo">
+            <!-- Precio -->
+            <div class="form-group flex-1">
+              <ion-item lines="inset" class="custom-field" [class.ion-invalid]="productForm.get('price')?.touched && productForm.get('price')?.invalid">
+                <ion-label position="floating">Precio Unitario (€) *</ion-label>
+                <ion-input
+                  type="number"
+                  step="0.01"
+                  formControlName="price"
+                  [attr.aria-invalid]="productForm.get('price')?.touched && productForm.get('price')?.invalid"
+                  aria-describedby="price-feedback"
+                ></ion-input>
+              </ion-item>
+              @if (productForm.get('price')?.touched && productForm.get('price')?.errors) {
+                <div id="price-feedback" class="feedback-text" role="alert" aria-live="polite">
+                  <span class="error-msg">El precio debe ser un número positivo mayor a 0.</span>
+                </div>
+              }
+            </div>
+
+            <!-- Stock -->
+            <div class="form-group flex-1">
+              <ion-item lines="inset" class="custom-field" [class.ion-invalid]="productForm.get('stock')?.touched && productForm.get('stock')?.invalid">
+                <ion-label position="floating">Unidades en Stock *</ion-label>
+                <ion-input
+                  type="number"
+                  step="1"
+                  formControlName="stock"
+                  [attr.aria-invalid]="productForm.get('stock')?.touched && productForm.get('stock')?.invalid"
+                  aria-describedby="stock-feedback"
+                ></ion-input>
+              </ion-item>
+              @if (productForm.get('stock')?.touched && productForm.get('stock')?.errors) {
+                <div id="stock-feedback" class="feedback-text" role="alert" aria-live="polite">
+                  <span class="error-msg">El stock no puede ser negativo.</span>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Email Proveedor -->
+          <div class="form-group">
+            <ion-item lines="inset" class="custom-field" [class.ion-invalid]="productForm.get('supplierEmail')?.touched && productForm.get('supplierEmail')?.invalid">
+              <ion-icon name="mailOutline" slot="start" aria-hidden="true"></ion-icon>
+              <ion-label position="floating">Correo de Contacto del Proveedor *</ion-label>
+              <ion-input
+                type="email"
+                formControlName="supplierEmail"
+                [attr.aria-invalid]="productForm.get('supplierEmail')?.touched && productForm.get('supplierEmail')?.invalid"
+                aria-describedby="email-feedback"
+              ></ion-input>
+            </ion-item>
+            @if (productForm.get('supplierEmail')?.touched && productForm.get('supplierEmail')?.errors) {
+              <div id="email-feedback" class="feedback-text" role="alert" aria-live="polite">
+                <span class="error-msg">Introduzca un correo electrónico de proveedor válido.</span>
+              </div>
+            }
+          </div>
+
+          <!-- Descripción -->
+          <div class="form-group">
+            <ion-item lines="inset" class="custom-field" [class.ion-invalid]="productForm.get('description')?.touched && productForm.get('description')?.invalid">
+              <ion-label position="floating">Descripción Detallada *</ion-label>
+              <ion-textarea
+                formControlName="description"
+                rows="3"
+                [attr.aria-invalid]="productForm.get('description')?.touched && productForm.get('description')?.invalid"
+                aria-describedby="desc-feedback"
+              ></ion-textarea>
+            </ion-item>
+            @if (productForm.get('description')?.touched && productForm.get('description')?.errors) {
+              <div id="desc-feedback" class="feedback-text" role="alert" aria-live="polite">
+                <span class="error-msg">La descripción debe tener entre 10 y 500 caracteres.</span>
+              </div>
+            }
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="form-actions">
+            <ion-button fill="outline" color="medium" type="button" (click)="cancel()">
+              <ion-icon slot="start" name="closeOutline"></ion-icon>
+              Cancelar
+            </ion-button>
+
+            <ion-button
+              type="submit"
+              color="primary"
+              [disabled]="productForm.invalid || productForm.pending || isSaving()"
+              aria-label="Guardar registro"
+            >
+              @if (isSaving()) {
+                <ion-spinner name="crescent" slot="start"></ion-spinner>
+                Guardando en SQL...
+              } @else {
+                <ion-icon slot="start" name="saveOutline"></ion-icon>
+                {{ isEditMode() ? 'Actualizar Producto' : 'Registrar Producto' }}
+              }
+            </ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

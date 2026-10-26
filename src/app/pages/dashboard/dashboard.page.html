@@ -1,0 +1,180 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cuadro de Mando Ejecutivo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="loadConsolidatedData()" aria-label="Actualizar datos del cuadro de mando">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="dashboard-content">
+  <div class="dashboard-container">
+    <!-- Encabezado de Sección y Acciones Rápidas -->
+    <div class="dashboard-header-bar">
+      <div>
+        <h1 class="page-title">Métricas de Rendimiento & Auditoría</h1>
+        <p class="page-subtitle">Consolidación dual: API Relacional (SQL) y Stream Firestore (NoSQL)</p>
+      </div>
+
+      <div class="action-buttons-group">
+        <ion-button fill="outline" color="primary" size="small" (click)="exportPdfReport()" aria-label="Descargar informe en PDF">
+          <ion-icon slot="start" name="download-outline"></ion-icon>
+          Exportar PDF
+        </ion-button>
+        <ion-button fill="outline" color="secondary" size="small" (click)="exportCsvReport()" aria-label="Descargar informe en CSV">
+          <ion-icon slot="start" name="document-text-outline"></ion-icon>
+          Exportar CSV
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Filtros Interactivos en Tiempo Real (Paso 3.2) -->
+    <div class="filters-card">
+      <div class="filter-item">
+        <label for="period-select" class="filter-label">Período de Análisis:</label>
+        <ion-select
+          id="period-select"
+          interface="popover"
+          [value]="filterPeriod()"
+          (ionChange)="filterPeriod.set($event.detail.value); onFilterChange()"
+          aria-label="Seleccionar período temporal"
+        >
+          <ion-select-option value="7d">Últimos 7 días</ion-select-option>
+          <ion-select-option value="30d">Últimos 30 días</ion-select-option>
+          <ion-select-option value="year">Año 2026</ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+
+    <!-- Indicador de Carga Concurrente (Paso 3.1) -->
+    @if (isLoading()) {
+      <div class="loading-overlay" role="status" aria-live="polite">
+        <ion-spinner name="crescent" color="primary"></ion-spinner>
+        <span>Orquestando fuentes de datos asíncronas concurrentes (forkJoin)...</span>
+      </div>
+    }
+
+    <!-- Grid de Widgets Estadísticos Reutilizables (RA 3) -->
+    <ion-grid class="stats-grid">
+      <ion-row>
+        <ion-col size="12" size-sm="6" size-lg="3">
+          <app-stat-widget
+            title="Valor del Inventario"
+            [value]="(totalInventoryValue() | number:'1.2-2') + ' €'"
+            subtitle="Basado en stock físico"
+            trend="up"
+            [trendPercentage]="12.4"
+            icon="cash-outline"
+            color="primary"
+          ></app-stat-widget>
+        </ion-col>
+
+        <ion-col size="12" size-sm="6" size-lg="3">
+          <app-stat-widget
+            title="Artículos en Catálogo"
+            [value]="totalProducts()"
+            subtitle="5 categorías activas"
+            trend="neutral"
+            icon="cube-outline"
+            color="secondary"
+          ></app-stat-widget>
+        </ion-col>
+
+        <ion-col size="12" size-sm="6" size-lg="3">
+          <app-stat-widget
+            title="Stock Bajo (Atención)"
+            [value]="lowStockCount()"
+            subtitle="Menos de 5 unidades"
+            trend="down"
+            [trendPercentage]="5.1"
+            icon="alert-circle-outline"
+            color="warning"
+          ></app-stat-widget>
+        </ion-col>
+
+        <ion-col size="12" size-sm="6" size-lg="3">
+          <app-stat-widget
+            title="Productos Agotados"
+            [value]="outOfStockCount()"
+            subtitle="Requiere compra urgente"
+            trend="down"
+            icon="alert-circle-outline"
+            color="danger"
+          ></app-stat-widget>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Gráficos Interactivos Chart.js (Paso 3.2) -->
+    <ion-grid class="charts-grid">
+      <ion-row>
+        <!-- Gráfico de Barras: Comparativa Ingresos / Gastos -->
+        <ion-col size="12" size-lg="7">
+          <ion-card class="chart-card">
+            <ion-card-header>
+              <ion-card-title>Evolución Financiera Operativa</ion-card-title>
+              <p class="chart-subtitle">Comparativa consolidada de ingresos y costes operativos</p>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="chart-wrapper">
+                <canvas #revenueBarChartCanvas role="img" aria-label="Gráfico de barras que compara ingresos mensuales frente a costes"></canvas>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <!-- Gráfico Doughnut: Distribución por Categorías -->
+        <ion-col size="12" size-lg="5">
+          <ion-card class="chart-card">
+            <ion-card-header>
+              <ion-card-title>Distribución de Activos</ion-card-title>
+              <p class="chart-subtitle">Valoración económica distribuida por categoría de producto</p>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="chart-wrapper doughnut-wrapper">
+                <canvas #categoryDoughnutChartCanvas role="img" aria-label="Gráfico circular de distribución porcentual por categoría"></canvas>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Auditoría en Tiempo Real NoSQL (Paso 3.1) -->
+    <ion-card class="audit-stream-card">
+      <ion-card-header>
+        <div class="audit-header-content">
+          <div>
+            <ion-card-title>Registro de Auditoría en Tiempo Real (NoSQL Firestore)</ion-card-title>
+            <p class="chart-subtitle">Flujo reactivo de eventos y trazabilidad emitidos por el sistema</p>
+          </div>
+          <ion-badge color="success" class="live-badge">
+            <span class="live-dot" aria-hidden="true"></span> EN VIVO
+          </ion-badge>
+        </div>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="audit-list">
+          @for (log of recentLogs(); track log.id) {
+            <div class="audit-item" [class.severity-critical]="log.severity === 'critical'" [class.severity-warning]="log.severity === 'warning'">
+              <div class="audit-time">
+                <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+                <span>{{ log.timestamp | date:'HH:mm:ss' }}</span>
+              </div>
+              <div class="audit-body">
+                <span class="audit-action-tag">{{ log.action }} - {{ log.entity }}</span>
+                <p class="audit-details">{{ log.details }}</p>
+                <span class="audit-user">Usuario: {{ log.userEmail }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
