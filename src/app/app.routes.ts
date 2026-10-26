@@ -9,7 +9,11 @@ import { roleGuard } from './core/guards/role.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    loadComponent: () => import('./pages/welcome/welcome.page').then(m => m.WelcomePage)
+  },
+  {
+    path: 'welcome',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {

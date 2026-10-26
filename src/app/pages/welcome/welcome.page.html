@@ -1,0 +1,274 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="header-brand-wrap">
+      <div class="brand-icon-mini">
+        <ion-icon name="business-outline"></ion-icon>
+      </div>
+      <ion-title>NovaGest <span class="accent-title">ERP</span></ion-title>
+    </div>
+    <ion-buttons slot="end">
+      @if (authService.isAuthenticatedSignal()) {
+        <ion-button (click)="navigateToPrimaryAction()" color="light" class="header-cta-btn">
+          <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
+          Ir al Panel
+        </ion-button>
+      } @else {
+        <ion-button (click)="navigateToLogin()" color="light" class="header-cta-btn">
+          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+          Acceso Usuarios
+        </ion-button>
+      }
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="welcome-content">
+  <div class="welcome-container">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>SISTEMA DE GESTIÓN EMPRESARIAL & STOCK • V1.0</span>
+      </div>
+
+      <h1 class="hero-title">
+        Gestión Inteligente en Tiempo Real con
+        <span class="gradient-headline">NovaGest ERP</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Plataforma multiplataforma de inventario corporativo, cuadro de mando ejecutivo,
+        auditoría reactiva NoSQL y control de accesos RBAC de alto rendimiento.
+      </p>
+
+      <!-- Botones Principales de Acción (CTA) -->
+      <div class="hero-cta-group">
+        <button class="primary-cta-btn" (click)="navigateToPrimaryAction()">
+          @if (authService.isAuthenticatedSignal()) {
+            <ion-icon name="speedometer-outline"></ion-icon>
+            <span>Continuar a mi Panel ({{ authService.currentUserSignal()?.name?.split(' ')?.[0] }})</span>
+          } @else {
+            <ion-icon name="log-in-outline"></ion-icon>
+            <span>Iniciar Sesión en el Portal</span>
+          }
+          <ion-icon name="arrow-forward-outline" class="btn-arrow"></ion-icon>
+        </button>
+
+        <button class="secondary-cta-btn" (click)="navigateToHelp()">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <span>Manual de Usuario & Ayuda</span>
+        </button>
+      </div>
+
+      <!-- Notificación si ya hay sesión iniciada -->
+      @if (authService.currentUserSignal(); as user) {
+        <div class="active-session-banner">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>Sesión activa como <strong>{{ user.name }}</strong> (Rol: {{ user.role === 'admin' ? 'Administrador' : 'Usuario Estándar' }})</span>
+        </div>
+      }
+    </section>
+
+    <!-- FRANJA DE MÉTRICAS DEL SISTEMA -->
+    <section class="system-metrics-strip">
+      <div class="metric-item">
+        <span class="metric-num">99.98%</span>
+        <span class="metric-label">Disponibilidad SLA</span>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <span class="metric-num">&lt; 20ms</span>
+        <span class="metric-label">Latencia con Signals</span>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <span class="metric-num">SQL + NoSQL</span>
+        <span class="metric-label">Arquitectura Dual Híbrida</span>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <span class="metric-num">RBAC + JWT</span>
+        <span class="metric-label">Seguridad de Acceso</span>
+      </div>
+    </section>
+
+    <!-- SHOWCASE DE MÓDULOS PRINCIPALES -->
+    <section class="modules-section">
+      <div class="section-title-wrap">
+        <span class="section-kicker">CAPACIDADES DE LA APLICACIÓN</span>
+        <h2 class="section-heading">Arquitectura Modular & Características Clave</h2>
+        <p class="section-desc">Diseñada bajo estándares de Desarrollo de Interfaces (DAM2) con Angular Standalone y Ionic Framework.</p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Módulo 1 -->
+        <div class="module-card">
+          <div class="module-icon-wrap icon-ruby">
+            <ion-icon name="stats-chart-outline"></ion-icon>
+          </div>
+          <h3 class="module-title">Cuadro de Mando Ejecutivo</h3>
+          <p class="module-text">
+            Métricas de inventario en tiempo real, gráficos de ondas financieras continuas (Spline Wave)
+            y medidores radiales circulares interactivos con soporte multidispositivo.
+          </p>
+          <div class="module-tags">
+            <span class="tag">Chart.js</span>
+            <span class="tag">Gauges SVG</span>
+            <span class="tag">Filtro Temporal</span>
+          </div>
+        </div>
+
+        <!-- Módulo 2 -->
+        <div class="module-card">
+          <div class="module-icon-wrap icon-cyan">
+            <ion-icon name="cube-outline"></ion-icon>
+          </div>
+          <h3 class="module-title">Inventario & Catálogo Físico</h3>
+          <p class="module-text">
+            Gestión completa del ciclo de vida de productos (CRUD), ordenación multicriterio, paginación reactiva,
+            búsqueda instantánea y alertas tempranas de stock mínimo.
+          </p>
+          <div class="module-tags">
+            <span class="tag">REST SQL</span>
+            <span class="tag">Data-Table Reutilizable</span>
+            <span class="tag">Stock Crítico</span>
+          </div>
+        </div>
+
+        <!-- Módulo 3 -->
+        <div class="module-card">
+          <div class="module-icon-wrap icon-purple">
+            <ion-icon name="pulse-outline"></ion-icon>
+          </div>
+          <h3 class="module-title">Auditoría NoSQL en Vivo</h3>
+          <p class="module-text">
+            Flujo reactivo asíncrono tipo Firestore (`BehaviorSubject`) que emite y registra cada evento,
+            alta, borrado o inicio de sesión con trazabilidad completa.
+          </p>
+          <div class="module-tags">
+            <span class="tag">NoSQL Stream</span>
+            <span class="tag">RxJS Observables</span>
+            <span class="tag">Trazabilidad Total</span>
+          </div>
+        </div>
+
+        <!-- Módulo 4 -->
+        <div class="module-card">
+          <div class="module-icon-wrap icon-amber">
+            <ion-icon name="people-outline"></ion-icon>
+          </div>
+          <h3 class="module-title">Gestión de Cuentas & Usuarios</h3>
+          <p class="module-text">
+            Aprovisionamiento dinámico de usuarios con selector visual de rol (Admin vs Estándar),
+            medidor de seguridad de contraseñas y validación de correo corporativo único.
+          </p>
+          <div class="module-tags">
+            <span class="tag">RBAC</span>
+            <span class="tag">Formularios Reactivos</span>
+            <span class="tag">LocalStorage</span>
+          </div>
+        </div>
+
+        <!-- Módulo 5 -->
+        <div class="module-card">
+          <div class="module-icon-wrap icon-emerald">
+            <ion-icon name="document-text-outline"></ion-icon>
+          </div>
+          <h3 class="module-title">Informes & Exportación Oficial</h3>
+          <p class="module-text">
+            Generación instantánea en el navegador de documentos PDF vectoriales maquetados y hojas de cálculo
+            CSV estructuradas para análisis contable y auditorías externas.
+          </p>
+          <div class="module-tags">
+            <span class="tag">jsPDF</span>
+            <span class="tag">autoTable</span>
+            <span class="tag">Descarga CSV</span>
+          </div>
+        </div>
+
+        <!-- Módulo 6 -->
+        <div class="module-card">
+          <div class="module-icon-wrap icon-blue">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+          </div>
+          <h3 class="module-title">Accesibilidad & Modo Oscuro</h3>
+          <p class="module-text">
+            Cumplimiento riguroso de pautas WCAG AA/AAA con conmutador dinámico de modo oscuro,
+            contraste garantizado, foco visual asistido e interfaz intuitiva de alta legibilidad.
+          </p>
+          <div class="module-tags">
+            <span class="tag">WCAG 2.1</span>
+            <span class="tag">Alto Contraste</span>
+            <span class="tag">Modo Oscuro Cyber</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAJA DE CREDENCIALES DE PRUEBA RÁPIDA -->
+    <section class="demo-box-section">
+      <div class="demo-card">
+        <div class="demo-header">
+          <ion-icon name="hardware-chip-outline" class="demo-icon"></ion-icon>
+          <div>
+            <h3 class="demo-title">Acceso Rápido para Evaluación Docente</h3>
+            <p class="demo-desc">Puede utilizar las cuentas preconfiguradas o registrar una nueva en el módulo de usuarios:</p>
+          </div>
+        </div>
+
+        <div class="credentials-table">
+          <div class="cred-row">
+            <div class="cred-role-col">
+              <span class="role-badge badge-admin">ADMINISTRADOR</span>
+            </div>
+            <div class="cred-info-col">
+              <span class="cred-email">admin&#64;empresa.com</span>
+              <span class="cred-pass">Clave: <code>Admin1234*</code></span>
+            </div>
+            <div class="cred-action-col">
+              <button class="try-btn" (click)="navigateToLogin()">Probar como Admin</button>
+            </div>
+          </div>
+
+          <div class="cred-row">
+            <div class="cred-role-col">
+              <span class="role-badge badge-user">ESTÁNDAR</span>
+            </div>
+            <div class="cred-info-col">
+              <span class="cred-email">user&#64;empresa.com</span>
+              <span class="cred-pass">Clave: <code>User1234*</code></span>
+            </div>
+            <div class="cred-action-col">
+              <button class="try-btn secondary" (click)="navigateToLogin()">Probar como Usuario</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER INFORMATIVO -->
+    <footer class="welcome-footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h4>NovaGest ERP</h4>
+          <p>Módulo de Desarrollo de Interfaces • DAM2 (Código: 0488)</p>
+        </div>
+        <div class="footer-links">
+          <a routerLink="/help" class="footer-link">Manual de Usuario</a>
+          <a routerLink="/login" class="footer-link">Iniciar Sesión</a>
+          <a href="https://github.com/FabioRieker/NovaGest" target="_blank" rel="noopener noreferrer" class="footer-link github-link">
+            <ion-icon name="logo-github"></ion-icon> Repositorio GitHub
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 NovaGest ERP. Todos los derechos reservados. Desarrollado por Fabio Rieker.</span>
+      </div>
+    </footer>
+
+  </div>
+</ion-content>
