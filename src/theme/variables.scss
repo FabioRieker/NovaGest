@@ -1,25 +1,34 @@
 // NovaGest ERP Design System - Tokens de Color y Accesibilidad WCAG (RA 4)
+// Paleta Premium Crimson & Obsidian (Rojo Corporativo de Alto Impacto)
 
 :root {
-  --ion-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --ion-font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-  // Azul Corporativo de Alto Contraste (Cumple WCAG AA/AAA para texto e iconos)
-  --ion-color-primary: #2563eb;
-  --ion-color-primary-rgb: 37, 99, 235;
+  // Rojo Primario Crimson / Ruby (Accesibilidad WCAG AA/AAA para texto e iconos)
+  --ion-color-primary: #e11d48;
+  --ion-color-primary-rgb: 225, 29, 72;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #1d4ed8;
-  --ion-color-primary-tint: #3b82f6;
+  --ion-color-primary-shade: #be123c;
+  --ion-color-primary-tint: #f43f5e;
 
-  // Secundario Cyan/Teal
-  --ion-color-secondary: #0891b2;
-  --ion-color-secondary-rgb: 8, 145, 178;
+  // Secundario Slate Oscuro / Titanio
+  --ion-color-secondary: #0f172a;
+  --ion-color-secondary-rgb: 15, 23, 42;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #0e7490;
-  --ion-color-secondary-tint: #06b6d4;
+  --ion-color-secondary-shade: #020617;
+  --ion-color-secondary-tint: #1e293b;
 
-  // Éxito / En Stock
+  // Terciario Rose / Acento
+  --ion-color-tertiary: #f43f5e;
+  --ion-color-tertiary-rgb: 244, 63, 94;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #e11d48;
+  --ion-color-tertiary-tint: #fb7185;
+
+  // Éxito / En Stock (Esmeralda Cálido)
   --ion-color-success: #059669;
   --ion-color-success-rgb: 5, 150, 105;
   --ion-color-success-contrast: #ffffff;
@@ -27,7 +36,7 @@
   --ion-color-success-shade: #047857;
   --ion-color-success-tint: #10b981;
 
-  // Advertencia / Stock Bajo
+  // Advertencia / Stock Bajo (Ámbar Dorado)
   --ion-color-warning: #d97706;
   --ion-color-warning-rgb: 217, 119, 6;
   --ion-color-warning-contrast: #ffffff;
@@ -35,13 +44,13 @@
   --ion-color-warning-shade: #b45309;
   --ion-color-warning-tint: #f59e0b;
 
-  // Peligro / Agotado / Alertas Críticas
-  --ion-color-danger: #dc2626;
-  --ion-color-danger-rgb: 220, 38, 38;
+  // Peligro / Agotado / Alertas Críticas (Garnet Intenso / Borgoña)
+  --ion-color-danger: #9f1239;
+  --ion-color-danger-rgb: 159, 18, 57;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #b91c1c;
-  --ion-color-danger-tint: #ef4444;
+  --ion-color-danger-shade: #881337;
+  --ion-color-danger-tint: #be123c;
 
   // Fondos y texto de alto contraste en Modo Claro
   --ion-background-color: #f8fafc;
@@ -51,24 +60,88 @@
 
   --ion-card-background: #ffffff;
   --ion-card-background-rgb: 255, 255, 255;
+
+  // Tokens personalizados de estética premium
+  --brand-glow-primary: rgba(225, 29, 72, 0.25);
+  --brand-gradient: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  --brand-glass-border: rgba(225, 29, 72, 0.12);
+  --brand-glass-bg: rgba(255, 255, 255, 0.85);
+  --card-shadow-ambient: 0 10px 30px -5px rgba(225, 29, 72, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  --card-shadow-hover: 0 18px 40px -8px rgba(225, 29, 72, 0.16), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
 }
 
-// Variables para Modo Oscuro Activado mediante clase .dark
+// Variables para Modo Oscuro Activado mediante clase .dark (Obsidian & Velvet Ruby con Máxima Legibilidad WCAG)
 body.dark {
-  --ion-color-primary: #3b82f6;
-  --ion-color-primary-rgb: 59, 130, 246;
-  --ion-color-primary-contrast: #0f172a;
-  --ion-color-primary-contrast-rgb: 15, 23, 42;
-  --ion-color-primary-shade: #2563eb;
-  --ion-color-primary-tint: #60a5fa;
+  // Primario: Ruby vibrante con contraste blanco puro (NUNCA texto oscuro)
+  --ion-color-primary: #fb7185;
+  --ion-color-primary-rgb: 251, 113, 133;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #f43f5e;
+  --ion-color-primary-tint: #fda4af;
 
-  --ion-background-color: #0b1120;
-  --ion-background-color-rgb: 11, 17, 32;
-  --ion-text-color: #f1f5f9;
-  --ion-text-color-rgb: 241, 245, 249;
+  // Secundario: Sky / Platino de alta legibilidad
+  --ion-color-secondary: #38bdf8;
+  --ion-color-secondary-rgb: 56, 189, 248;
+  --ion-color-secondary-contrast: #0f172a;
+  --ion-color-secondary-contrast-rgb: 15, 23, 42;
+  --ion-color-secondary-shade: #0ea5e9;
+  --ion-color-secondary-tint: #7dd3fc;
 
-  --ion-card-background: #151e34;
-  --ion-card-background-rgb: 21, 30, 52;
+  // Elementos "light" en modo oscuro deben ser pizarra oscuro para no romper el contraste
+  --ion-color-light: #1e2235;
+  --ion-color-light-rgb: 30, 34, 53;
+  --ion-color-light-contrast: #f8fafc;
+  --ion-color-light-contrast-rgb: 248, 250, 252;
+  --ion-color-light-shade: #181b2a;
+  --ion-color-light-tint: #2a2f47;
 
-  --ion-item-background: #151e34;
+  // Textos y etiquetas secundarias con alto contraste (> 4.5:1)
+  --ion-color-medium: #94a3b8;
+  --ion-color-medium-rgb: 148, 163, 184;
+  --ion-color-medium-contrast: #0f172a;
+  --ion-color-medium-contrast-rgb: 15, 23, 42;
+
+  // Peligro / Agotado / Alertas (Coral brillante, perfectamente visible sobre fondo oscuro)
+  --ion-color-danger: #f87171;
+  --ion-color-danger-rgb: 248, 113, 113;
+  --ion-color-danger-contrast: #0f172a;
+  --ion-color-danger-contrast-rgb: 15, 23, 42;
+  --ion-color-danger-shade: #ef4444;
+  --ion-color-danger-tint: #fca5a5;
+
+  // Advertencia / Stock Bajo (Ámbar brillante)
+  --ion-color-warning: #fbbf24;
+  --ion-color-warning-rgb: 251, 191, 36;
+  --ion-color-warning-contrast: #0f172a;
+  --ion-color-warning-contrast-rgb: 15, 23, 42;
+  --ion-color-warning-shade: #f59e0b;
+  --ion-color-warning-tint: #fcd34d;
+
+  // Éxito / En Stock (Esmeralda brillante)
+  --ion-color-success: #34d399;
+  --ion-color-success-rgb: 52, 211, 153;
+  --ion-color-success-contrast: #0f172a;
+  --ion-color-success-contrast-rgb: 15, 23, 42;
+  --ion-color-success-shade: #10b981;
+  --ion-color-success-tint: #6ee7b7;
+
+  // Fondos y textos
+  --ion-background-color: #0b0d14;
+  --ion-background-color-rgb: 11, 13, 20;
+  --ion-text-color: #f8fafc;
+  --ion-text-color-rgb: 248, 250, 252;
+
+  --ion-card-background: #141724;
+  --ion-card-background-rgb: 20, 23, 36;
+
+  --ion-item-background: #141724;
+
+  --brand-glow-primary: rgba(251, 113, 133, 0.3);
+  --brand-gradient: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+  --brand-glass-border: rgba(251, 113, 133, 0.2);
+  --brand-glass-bg: rgba(20, 23, 36, 0.92);
+  --card-shadow-ambient: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(251, 113, 133, 0.08);
+  --card-shadow-hover: 0 20px 45px -8px rgba(0, 0, 0, 0.7), 0 0 25px rgba(251, 113, 133, 0.2);
 }
