@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Auditoría NoSQL en Tiempo Real</ion-title>
+    <ion-title>Auditoría en Tiempo Real (Supabase Realtime)</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="simulatePing()" aria-label="Emitir evento de prueba">
         <ion-icon slot="icon-only" name="radio-outline"></ion-icon>
@@ -20,8 +20,8 @@
   <div class="audit-container">
     <div class="page-top-bar">
       <div>
-        <h1 class="page-title">Flujo Reactivo de Eventos (Firestore Simulado)</h1>
-        <p class="page-subtitle">Suscripción continua de eventos sin bloqueo del hilo principal (RA 5)</p>
+        <h1 class="page-title">Flujo Reactivo de Eventos (Supabase Realtime)</h1>
+        <p class="page-subtitle">Suscripción WebSocket continua a eventos de base de datos sin bloqueo del hilo principal (RA 5)</p>
       </div>
 
       <div class="action-buttons-group">
@@ -59,7 +59,7 @@
       </div>
     </div>
 
-    <!-- Lista de Documentos NoSQL -->
+    <!-- Lista de Eventos Supabase Realtime -->
     <div class="logs-feed" role="feed" aria-label="Lista de eventos de auditoría">
       @if (filteredLogs().length === 0) {
         <div class="empty-state">

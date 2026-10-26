@@ -26,7 +26,7 @@ import { SqlRestService } from '../../core/services/sql-rest.service';
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { ExportService } from '../../core/services/export.service';
-import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
+import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { DataTableComponent, TableColumn, TableActionPayload } from '../../shared/components/data-table/data-table.component';
 import { Product } from '../../core/models/product.model';
 
@@ -61,7 +61,7 @@ export class ProductsPage implements OnInit {
   public authService = inject(AuthService);
   private notificationService = inject(NotificationService);
   private exportService = inject(ExportService);
-  private realtimeService = inject(RealtimeFirestoreService);
+  private realtimeService = inject(SupabaseRealtimeService);
   private router = inject(Router);
 
   public products = signal<Product[]>([]);

@@ -2,7 +2,7 @@
  * Global Stylesheet & WCAG Accessibility Configuration - NovaGest ERP
  */
 
-@import "./theme/variables.scss";
+@use "./theme/variables.scss" as *;
 
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";

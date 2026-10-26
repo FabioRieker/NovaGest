@@ -100,34 +100,125 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content overview">
+               <div class="content readme">
                    <div class="content-data">
 
 
-
-
-
-
-<ol class="breadcrumb">
-    <li class="breadcrumb-item">Overview</li>
+<h1>🏢 NovaGest ERP - Sistema de Gestión Multiplataforma (PWA/Híbrida)</h1>
+<p><a href="https://github.com/FabioRieker/NovaGest/actions"><img src="https://github.com/FabioRieker/NovaGest/actions/workflows/ci.yml/badge.svg" alt="CI/CD Pipeline" class="img-responsive"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" class="img-responsive"></a>
+<a href="https://ionicframework.com/"><img src="https://img.shields.io/badge/Ionic-8.0-3880ff.svg" alt="Framework: Ionic 8" class="img-responsive"></a>
+<a href="https://angular.dev/"><img src="https://img.shields.io/badge/Angular-Standalone-dd0031.svg" alt="Angular: 18/22" class="img-responsive"></a>
+<a href="https://www.w3.org/WAI/standards-guidelines/wcag/"><img src="https://img.shields.io/badge/WCAG-2.1%20AA%2FAAA-success.svg" alt="Accessibility: WCAG AA" class="img-responsive"></a></p>
+<blockquote>
+<p><strong>Actividad Individual 1 - Módulo Profesional:</strong> Desarrollo de Interfaces (Código: 0488)<br><strong>Ciclo Formativo:</strong> Grado Superior en Desarrollo de Aplicaciones Multiplataforma (DAM2)<br><strong>Estudiante:</strong> Fabio Luis Rieker González<br><strong>Comunidad de Madrid</strong></p>
+</blockquote>
+<hr>
+<h2>📌 Descripción del Proyecto</h2>
+<p><strong>NovaGest ERP</strong> es una aplicación de gestión empresarial multiplataforma desarrollada desde cero con <strong>Ionic</strong> y <strong>Angular Standalone</strong>. La solución incorpora:</p>
+<ul>
+<li>Arquitectura desacoplada <strong>MVVM</strong> con servicios reactivos basados en Signals y RxJS.</li>
+<li><strong>Control de Acceso Basado en Roles (RBAC)</strong> con enrutamiento protegido mediante Guards e inyección asíncrona de tokens JWT con interceptores HTTP.</li>
+<li><strong>Backend y persistencia íntegra con Supabase:</strong><ul>
+<li>API REST Relacional (PostgreSQL en Supabase) con almacenamiento persistente y validaciones de clave única.</li>
+<li>Servicio en tiempo real con Supabase Realtime (WebSockets) con stream continuo de eventos de auditoría y telemetría.</li>
+</ul>
+</li>
+<li><strong>Componentes visuales reutilizables e independientes:</strong><ul>
+<li><code>&lt;app-data-table&gt;</code>: Tabla avanzada con buscador en tiempo real, ordenación bidireccional, paginación dinámica y acciones CRUD.</li>
+<li><code>&lt;app-stat-widget&gt;</code>: Tarjeta métrica/KPI con indicadores de tendencia, icono personalizable y eventos <code>@Output()</code>.</li>
+</ul>
+</li>
+<li><strong>Cuadro de Mando Ejecutivo (Dashboard):</strong> Gráficos analíticos con <strong>Chart.js</strong> y filtros dinámicos.</li>
+<li><strong>Generación y exportación de informes:</strong> Exportación en <strong>PDF formal</strong> tabulado con <code>jspdf-autotable</code> y <strong>CSV</strong> compatible con Microsoft Excel (UTF-8 con BOM).</li>
+<li><strong>Cumplimiento estricto de accesibilidad WCAG 2.1 AA/AAA:</strong> Puntuación superior a 95/100 en Google Lighthouse, navegación íntegra por teclado y atributos semánticos WAI-ARIA.</li>
+<li><strong>Control de versiones Git Flow:</strong> Ramas <code>main</code>, <code>develop</code> y ramas de características individuales.</li>
+<li><strong>Integración continua (CI/CD):</strong> Pipeline con GitHub Actions que valida linters, ejecuta tests unitarios bloqueantes y compila el bundle de producción.</li>
+</ul>
+<hr>
+<h2>🔑 Credenciales de Acceso Oficiales</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr><th style="text-align: left">Rol</th><th style="text-align: left">Usuario / Email</th><th style="text-align: left">Contraseña</th><th style="text-align: left">Vistas y Capacidades</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>Administrador</strong></td><td style="text-align: left"><code>admin@empresa.com</code></td><td style="text-align: left"><code>Admin1234*</code></td><td style="text-align: left">Acceso irrestricto: Cuadro de Mando, Gestión de Catálogo (Creación, Edición, Eliminación), Auditoría Supabase Realtime en vivo, Exportación.</td></tr>
+<tr><td style="text-align: left"><strong>Usuario Estándar</strong></td><td style="text-align: left"><code>user@empresa.com</code></td><td style="text-align: left"><code>User1234*</code></td><td style="text-align: left">Acceso de consulta: Listado de inventario con filtros, visualización de fichas de detalle, informes tabulados y manual de usuario.</td></tr>
+</tbody>
+</table>
+<p><em>La pantalla de Login incluye botones de acceso rápido para autorellenar ambas credenciales instantáneamente.</em></p>
+<hr>
+<h2>🛠️ Tecnologías Empleadas</h2>
+<ul>
+<li><strong>Framework Híbrido:</strong> Ionic Framework 8 (<code>@ionic/angular</code>)</li>
+<li><strong>Lógica y Arquitectura:</strong> Angular Standalone Components &amp; Signals</li>
+<li><strong>Backend, Base de Datos y Realtime:</strong> Supabase (<code>@supabase/supabase-js</code>, PostgreSQL &amp; WebSockets)</li>
+<li><strong>Librería de Gráficos:</strong> Chart.js 4.x</li>
+<li><strong>Generación de Informes:</strong> jsPDF + jsPDF-AutoTable</li>
+<li><strong>Control de Versiones y CI:</strong> Git, GitHub Actions</li>
+<li><strong>Documentación Técnica Automatizada:</strong> Compodoc 2.x</li>
+<li><strong>Test Runner:</strong> Vitest con pruebas asíncronas</li>
+</ul>
+<hr>
+<h2>🚀 Instalación y Puesta en Marcha</h2>
+<h3>Prerrequisitos</h3>
+<ul>
+<li>Node.js (v18.x o superior)</li>
+<li>npm (v9.x o superior)</li>
+<li>Ionic CLI (<code>npm install -g @ionic/cli</code>)</li>
+</ul>
+<h3>Instrucciones</h3>
+<ol>
+<li><p>Clonar el repositorio:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">git clone git&#64;github.com:FabioRieker/NovaGest.git
+cd NovaGest</code></pre></div></li>
+<li><p>Instalar dependencias:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm install</code></pre></div></li>
+<li><p>Iniciar el servidor de desarrollo local:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ionic serve</code></pre></div><p><em>La aplicación estará disponible en <code>http://localhost:8100/</code>.</em></p>
+</li>
+<li><p>Ejecutar pruebas unitarias:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm test</code></pre></div></li>
+<li><p>Generar la documentación técnica (Compodoc):</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run doc:build</code></pre></div><p><em>Para servir la documentación en local: <code>npm run compodoc</code> (puerto 8080).</em></p>
+</li>
+<li><p>Compilar para producción (PWA):</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run build</code></pre></div><p><em>Los artefactos optimizados se generarán en la carpeta <code>www/</code>.</em></p>
+</li>
 </ol>
-    
-<div class="tab-content overview">
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="card text-center">
-                <div class="card-block">
-                    <h4 class="card-title"><span class="icon ion-ios-git-branch"></span></h4>
-                    <p class="card-text">
-                        <a href="./routes.html">0 </a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="js/libs/svg-pan-zoom.min.js"></script>
-<script src="js/svg-pan-zoom.controls.js"></script> 
+<hr>
+<h2>📁 Estructura del Proyecto</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-text">src/
+├── app/
+│   ├── core/                      # Núcleo de la aplicación
+│   │   ├── guards/                # authGuard y roleGuard (RBAC)
+│   │   ├── interceptors/          # authInterceptor (JWT Bearer)
+│   │   ├── models/                # Modelos TypeScript (User, Product, AuditLog)
+│   │   └── services/              # AuthService, SqlRestService, RealtimeFirestoreService, ExportService
+│   ├── shared/
+│   │   └── components/            # Componentes reutilizables e independientes
+│   │       ├── data-table/        # Componente 1: Tabla avanzada con buscador y ordenación
+│   │       └── stat-widget/       # Componente 2: Widget estadístico/KPI configurable
+│   └── pages/                     # Vistas con carga diferida (Lazy Loading)
+│       ├── login/                 # Formulario reactivo de login
+│       ├── dashboard/             # Cuadro de mando interactivo con Chart.js
+│       ├── products/              # Catálogo que instancia &lt;app-data-table&gt;
+│       ├── product-form/          # Alta y edición con validación asíncrona de SKU
+│       ├── realtime-audit/        # Stream Supabase Realtime en vivo
+│       ├── reports/               # Descarga de informes PDF/CSV
+│       ├── help/                  # Manual de usuario embebido en la aplicación
+│       └── unauthorized/          # Pantalla de acceso denegado (403)
+├── theme/
+│   └── variables.scss             # Paleta de colores de alto contraste WCAG
+└── global.scss                    # Estilos globales y foco visible</code></pre></div><hr>
+<h2>📄 Licencia y Autoría</h2>
+<p>Proyecto desarrollado por <strong>Fabio Luis Rieker González</strong> como entrega oficial de la Actividad Individual 1 de DAM2. Distribuido bajo licencia MIT.</p>
+
+
+
+
+
+
 
 
 
@@ -171,7 +262,7 @@
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'overview';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
             var COMPODOC_CURRENT_PAGE_URL = 'index.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>

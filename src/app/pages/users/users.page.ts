@@ -54,7 +54,7 @@ import {
 } from 'ionicons/icons';
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
-import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
+import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { User, UserRole } from '../../core/models/user.model';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
@@ -107,7 +107,7 @@ export class UsersPage implements OnInit {
   private fb = inject(FormBuilder);
   public authService = inject(AuthService);
   private notificationService = inject(NotificationService);
-  private realtimeService = inject(RealtimeFirestoreService);
+  private realtimeService = inject(SupabaseRealtimeService);
   private alertCtrl = inject(AlertController);
 
   public userForm: FormGroup;
@@ -272,7 +272,7 @@ export class UsersPage implements OnInit {
         this.isSubmitting.set(false);
         this.notificationService.showToast(`¡Cuenta para ${createdUser.name} creada exitosamente!`, 'success');
 
-        // Registro de auditoría NoSQL en vivo
+        // Registro de auditoría Supabase Realtime en vivo
         this.realtimeService.logActivity(
           'CREATE',
           'AUTH',

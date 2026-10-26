@@ -1,9 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { jsPDF } from 'jspdf';
-import autoTable from 'jspdf-autotable';
 import { Product } from '../models/product.model';
 import { AuthService } from './auth.service';
-import { RealtimeFirestoreService } from './nosql-realtime.service';
+import { SupabaseRealtimeService } from './supabase-realtime.service';
 
 /**
  * Servicio para generación y descarga de informes tabulados en PDF y CSV (RA 5).
@@ -14,12 +12,17 @@ import { RealtimeFirestoreService } from './nosql-realtime.service';
 })
 export class ExportService {
   private authService = inject(AuthService);
-  private realtimeService = inject(RealtimeFirestoreService);
+  private realtimeService = inject(SupabaseRealtimeService);
 
   /**
-   * Genera un informe formal en PDF tabulado con diseño profesional
+   * Genera un informe formal en PDF tabulado con diseño profesional (carga perezosa de librerías PDF)
    */
-  public exportProductsToPdf(products: Product[], title = 'Informe de Inventario y Catálogo'): void {
+  public async exportProductsToPdf(products: Product[], title = 'Informe de Inventario y Catálogo'): Promise<void> {
+    const [{ jsPDF }, { default: autoTable }] = await Promise.all([
+      import('jspdf'),
+      import('jspdf-autotable')
+    ]);
+
     const doc = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
@@ -104,7 +107,7 @@ export class ExportService {
     const fileName = `Informe_Inventario_NovaGest_${Date.now()}.pdf`;
     doc.save(fileName);
 
-    // Registrar en auditoría NoSQL
+    // Registrar en auditoría Supabase Realtime
     this.realtimeService.logActivity(
       'EXPORT',
       'REPORT',
@@ -147,7 +150,7 @@ export class ExportService {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    // Registrar en auditoría NoSQL
+    // Registrar en auditoría Supabase Realtime
     this.realtimeService.logActivity(
       'EXPORT',
       'REPORT',

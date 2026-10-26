@@ -27,7 +27,7 @@ import {
 } from 'ionicons/icons';
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
-import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
+import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 
 /**
  * Página de Autenticación de Usuarios (FASE 1 - Paso 1.2).
@@ -60,7 +60,7 @@ export class LoginPage {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private notificationService = inject(NotificationService);
-  private realtimeService = inject(RealtimeFirestoreService);
+  private realtimeService = inject(SupabaseRealtimeService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 

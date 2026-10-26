@@ -5,6 +5,11 @@
     </ion-buttons>
     <ion-title>Cuadro de Mando Ejecutivo</ion-title>
     <ion-buttons slot="end">
+      <!-- Botón Personalizar Widgets -->
+      <ion-button (click)="toggleCustomizer()" aria-label="Personalizar diseño del cuadro de mando">
+        <ion-icon slot="start" name="options-outline"></ion-icon>
+        <span class="toolbar-btn-text">Personalizar</span>
+      </ion-button>
       <ion-button (click)="loadConsolidatedData()" aria-label="Actualizar métricas">
         <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
       </ion-button>
@@ -17,13 +22,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="dashboard-content">
+  <!-- Fondo Cósmico Neón & Malla Espacial con Blur -->
+  <div class="ambient-nebula-bg" aria-hidden="true">
+    <div class="nebula-glow glow-1"></div>
+    <div class="nebula-glow glow-2"></div>
+    <div class="nebula-glow glow-3"></div>
+    <div class="cyber-grid-overlay"></div>
+  </div>
+
   <div class="dashboard-container">
 
-    <!-- BARRA SUPERIOR CYBER: Búsqueda, Notificaciones y Perfil -->
-    <div class="cyber-top-bar">
+    <!-- BARRA SUPERIOR CYBER: Búsqueda, Notificaciones, Personalizador y Perfil -->
+    <div class="cyber-top-bar glass-window">
       <div class="breadcrumb-box">
-        <span class="breadcrumb-label">DASHBOARD / RESUMEN EJECUTIVO</span>
-        <h1 class="dashboard-title">Panel de Control & Inteligencia Operativa</h1>
+        <span class="breadcrumb-label">DASHBOARD / CUADRO DE MANDO</span>
+        <h1 class="dashboard-title">Panel Ejecutivo & Control de Activos</h1>
       </div>
 
       <!-- Barra de Búsqueda Estilo Píldora Luminosa -->
@@ -38,8 +51,30 @@
         />
       </div>
 
-      <!-- Acciones de Cabecera: Alertas, Exportar y Avatar -->
+      <!-- Acciones de Cabecera: Modo Edición, Módulos, Alertas y Perfil -->
       <div class="cyber-header-actions">
+        <!-- Botón Modo Edición (Activar/Desactivar) -->
+        <button
+          class="action-icon-btn edit-mode-btn"
+          [class.active]="isEditMode()"
+          (click)="toggleEditMode()"
+          [title]="isEditMode() ? 'Finalizar personalización y guardar lienzo' : 'Personalizar lienzo (organizar, redimensionar, añadir)'"
+        >
+          <ion-icon [name]="isEditMode() ? 'checkmark-circle-outline' : 'color-wand-outline'"></ion-icon>
+          <span class="btn-text-badge">{{ isEditMode() ? 'Listo' : 'Editar Lienzo' }}</span>
+        </button>
+
+        <!-- Botón Catálogo de Módulos (Bandeja Lateral) -->
+        <button
+          class="action-icon-btn modules-btn"
+          [class.active]="isCatalogDrawerOpen()"
+          (click)="toggleCatalogDrawer()"
+          title="Bandeja de módulos y catálogo de widgets"
+        >
+          <ion-icon name="grid-outline"></ion-icon>
+          <span class="btn-text-badge">Módulos</span>
+        </button>
+
         <!-- Botón Exportar PDF -->
         <button class="action-icon-btn" (click)="exportPdfReport()" title="Exportar Informe PDF">
           <ion-icon name="download-outline"></ion-icon>
@@ -50,12 +85,83 @@
           <ion-icon name="document-text-outline"></ion-icon>
         </button>
 
-        <!-- Notificaciones con badge pulsante -->
-        <div class="notification-wrap" title="3 Alertas no leídas">
-          <button class="action-icon-btn">
+        <!-- BOTÓN DE NOTIFICACIONES INTERACTIVO -->
+        <div class="notification-wrap">
+          <button
+            class="action-icon-btn notification-btn"
+            [class.active]="isNotificationsOpen()"
+            (click)="toggleNotifications()"
+            aria-label="Abrir centro de notificaciones"
+            title="Centro de Notificaciones"
+          >
             <ion-icon name="notifications-outline"></ion-icon>
-            <span class="pulsing-badge">3</span>
+            @if (unreadNotificationsCount() > 0) {
+              <span class="pulsing-badge">{{ unreadNotificationsCount() }}</span>
+            }
           </button>
+
+          <!-- PANEL DESPLEGABLE DE NOTIFICACIONES (GLASSMORPHIC) -->
+          @if (isNotificationsOpen()) {
+            <div class="notifications-dropdown glass-window" role="dialog" aria-label="Notificaciones del Sistema">
+              <div class="notif-header">
+                <div class="notif-title-row">
+                  <ion-icon name="notifications-outline" class="notif-icon-lead"></ion-icon>
+                  <h4>Notificaciones del Sistema</h4>
+                  @if (unreadNotificationsCount() > 0) {
+                    <span class="unread-pill">{{ unreadNotificationsCount() }} nuevas</span>
+                  }
+                </div>
+                <div class="notif-header-actions">
+                  <button class="notif-action-link" (click)="markAllNotificationsAsRead()" title="Marcar todas como leídas">
+                    <ion-icon name="checkmark-done-outline"></ion-icon> Leídas
+                  </button>
+                  <button class="notif-action-link danger" (click)="clearNotifications()" title="Limpiar lista">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </button>
+                  <button class="notif-close-btn" (click)="toggleNotifications()" aria-label="Cerrar panel">
+                    <ion-icon name="close-outline"></ion-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="notif-list">
+                @for (item of notifications(); track item.id) {
+                  <div
+                    class="notif-item"
+                    [class.unread]="!item.read"
+                    [class.sev-critical]="item.severity === 'critical'"
+                    [class.sev-warning]="item.severity === 'warning'"
+                    [class.sev-success]="item.severity === 'success'"
+                    (click)="markNotificationAsRead(item.id)"
+                  >
+                    <div class="notif-icon-col">
+                      @if (item.severity === 'critical') {
+                        <ion-icon name="alert-circle-outline" class="col-crit"></ion-icon>
+                      } @else if (item.severity === 'warning') {
+                        <ion-icon name="flash-outline" class="col-warn"></ion-icon>
+                      } @else if (item.severity === 'success') {
+                        <ion-icon name="checkmark-circle-outline" class="col-succ"></ion-icon>
+                      } @else {
+                        <ion-icon name="mail-outline" class="col-info"></ion-icon>
+                      }
+                    </div>
+                    <div class="notif-body-col">
+                      <div class="notif-item-top">
+                        <span class="item-title">{{ item.title }}</span>
+                        <span class="item-time">{{ item.time }}</span>
+                      </div>
+                      <p class="item-msg">{{ item.message }}</p>
+                    </div>
+                  </div>
+                } @empty {
+                  <div class="notif-empty-state">
+                    <ion-icon name="notifications-off-outline"></ion-icon>
+                    <p>No tienes alertas pendientes</p>
+                  </div>
+                }
+              </div>
+            </div>
+          }
         </div>
 
         <!-- Avatar de Usuario con Anillo Online -->
@@ -72,313 +178,679 @@
       </div>
     </div>
 
-    <!-- Indicador de Carga Asíncrona Concurrent forkJoin -->
-    @if (isLoading()) {
-      <div class="loading-overlay" role="status" aria-live="polite">
-        <ion-spinner name="crescent"></ion-spinner>
-        <span>Sincronizando flujos asíncronos SQL y NoSQL en tiempo real...</span>
+    <!-- INDICADOR DE BÚSQUEDA ACTIVA (FILTRADO INTUITIVO DE WIDGETS) -->
+    @if (hasSearchQuery()) {
+      <div class="search-active-pill glass-window" role="status">
+        <div class="search-pill-content">
+          <ion-icon name="search-outline"></ion-icon>
+          <span>Filtrando módulos por "<strong>{{ searchQuery() }}</strong>" ({{ searchMatchCount() }} de {{ activeWidgets().length }} módulos coinciden)</span>
+        </div>
+        <button class="clear-search-btn" (click)="clearSearch()" title="Quitar filtro de búsqueda">
+          <ion-icon name="close-circle-outline"></ion-icon> Limpiar
+        </button>
       </div>
     }
 
-    <!-- FILA 1: MEDIDORES RADIALES / GAUGES CIRCULARES (Inspirados en la Maqueta) -->
-    <div class="section-heading-row">
-      <div class="heading-badge">MÉTRICAS CLAVE EN TIEMPO REAL</div>
-      <span class="heading-sub">Indicadores de rendimiento logístico y cumplimiento operativo</span>
-    </div>
-
-    <div class="ring-gauges-grid">
-      @for (gauge of ringGauges; track gauge.label) {
-        <div class="gauge-card">
-          <div class="gauge-svg-wrap">
-            <svg viewBox="0 0 100 100" class="gauge-svg">
-              <!-- Círculo de fondo con marcas -->
-              <circle
-                class="gauge-bg"
-                cx="50"
-                cy="50"
-                r="40"
-                stroke-dasharray="3, 3"
-              ></circle>
-              <!-- Círculo de progreso neón -->
-              <circle
-                class="gauge-progress"
-                cx="50"
-                cy="50"
-                r="40"
-                [style.stroke]="gauge.color"
-                [style.strokeDashoffset]="251.2 - (gauge.percent / 100) * 251.2"
-              ></circle>
-            </svg>
-            <div class="gauge-center-content">
-              <span class="gauge-val" [style.color]="gauge.color">{{ gauge.value }}</span>
-            </div>
+    <!-- BARRA INTERACTIVA DE MODO EDICIÓN (PRESETS & ACCIONES RÁPIDAS) -->
+    @if (isEditMode()) {
+      <div class="canvas-edit-ribbon glass-window" role="region" aria-label="Controles del modo edición">
+        <div class="ribbon-headline">
+          <div class="ribbon-badge">
+            <span class="pulsing-neon-dot"></span>
+            <span>MODO EDICIÓN ACTIVO</span>
           </div>
-          <div class="gauge-info">
-            <h4 class="gauge-title">{{ gauge.label }}</h4>
-            <span class="gauge-sub">{{ gauge.subtitle }}</span>
-          </div>
-        </div>
-      }
-    </div>
-
-    <!-- FILA 2: TARJETAS DE MÉTRICAS / KPIS FINANCIEROS Y STOCK -->
-    <ion-grid class="kpi-grid">
-      <ion-row>
-        <ion-col size="12" size-sm="6" size-lg="3">
-          <div class="kpi-box box-ruby">
-            <div class="kpi-top">
-              <span class="kpi-label">Valor del Inventario</span>
-              <span class="trend-badge trend-up">
-                <ion-icon name="trending-up-outline"></ion-icon> +12.4%
-              </span>
-            </div>
-            <div class="kpi-value-row">
-              <h2 class="kpi-number">{{ (totalInventoryValue() | number:'1.2-2') }} €</h2>
-              <div class="kpi-icon-bubble">
-                <ion-icon name="cash-outline"></ion-icon>
-              </div>
-            </div>
-            <span class="kpi-footnote">Basado en existencias físicas en almacén</span>
-          </div>
-        </ion-col>
-
-        <ion-col size="12" size-sm="6" size-lg="3">
-          <div class="kpi-box box-cyan">
-            <div class="kpi-top">
-              <span class="kpi-label">Artículos en Catálogo</span>
-              <span class="trend-badge trend-neutral">
-                <ion-icon name="remove-outline"></ion-icon> 5 Categorías
-              </span>
-            </div>
-            <div class="kpi-value-row">
-              <h2 class="kpi-number">{{ totalProducts() }}</h2>
-              <div class="kpi-icon-bubble">
-                <ion-icon name="cube-outline"></ion-icon>
-              </div>
-            </div>
-            <span class="kpi-footnote">Referencias SKU activas registradas</span>
-          </div>
-        </ion-col>
-
-        <ion-col size="12" size-sm="6" size-lg="3">
-          <div class="kpi-box box-amber">
-            <div class="kpi-top">
-              <span class="kpi-label">Stock Crítico / Bajo</span>
-              <span class="trend-badge trend-warning">
-                <ion-icon name="alert-circle-outline"></ion-icon> Atención
-              </span>
-            </div>
-            <div class="kpi-value-row">
-              <h2 class="kpi-number">{{ lowStockCount() }}</h2>
-              <div class="kpi-icon-bubble">
-                <ion-icon name="alert-circle-outline"></ion-icon>
-              </div>
-            </div>
-            <span class="kpi-footnote">Menos de 5 unidades disponibles</span>
-          </div>
-        </ion-col>
-
-        <ion-col size="12" size-sm="6" size-lg="3">
-          <div class="kpi-box box-purple">
-            <div class="kpi-top">
-              <span class="kpi-label">Artículos Agotados</span>
-              <span class="trend-badge trend-danger">
-                <ion-icon name="flash-outline"></ion-icon> Urgente
-              </span>
-            </div>
-            <div class="kpi-value-row">
-              <h2 class="kpi-number">{{ outOfStockCount() }}</h2>
-              <div class="kpi-icon-bubble">
-                <ion-icon name="sparkles-outline"></ion-icon>
-              </div>
-            </div>
-            <span class="kpi-footnote">Requieren orden de reposición inmediata</span>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- FILA 3: GRÁFICO DE ONDAS MULTICAPA (TIME LINE) & ECUALIZADOR POR CATEGORÍA -->
-    <div class="charts-section-grid">
-      <!-- Gráfico de Ondas Spline Wave Chart -->
-      <div class="cyber-chart-card wave-card">
-        <div class="chart-header-row">
-          <div>
-            <span class="chart-tag">TIME LINE</span>
-            <h3 class="chart-main-title">Evolución Financiera Operativa</h3>
-            <p class="chart-desc">Flujo de ingresos frente a costes operativos y proyecciones</p>
-          </div>
-
-          <!-- Conmutador de Período Temporal -->
-          <div class="period-toggle-group">
-            <button
-              class="period-btn"
-              [class.active]="filterPeriod() === '7d'"
-              (click)="setPeriod('7d')"
-            >
-              7 Días
-            </button>
-            <button
-              class="period-btn"
-              [class.active]="filterPeriod() === '30d'"
-              (click)="setPeriod('30d')"
-            >
-              30 Días
-            </button>
-            <button
-              class="period-btn"
-              [class.active]="filterPeriod() === 'year'"
-              (click)="setPeriod('year')"
-            >
-              Año 2026
-            </button>
-          </div>
+          <p class="ribbon-instruction">Arrastra tarjetas para reordenar, pulsa en 1/3, 1/2, 2/3 o Full, o aplica una plantilla:</p>
         </div>
 
-        <div class="canvas-container">
-          <canvas #timelineWaveChartCanvas role="img" aria-label="Gráfico de líneas con ondas suaves de ingresos y costes"></canvas>
-        </div>
-      </div>
-
-      <!-- Gráfico Ecualizador de Categorías -->
-      <div class="cyber-chart-card category-card">
-        <div class="chart-header-row">
-          <div>
-            <span class="chart-tag cyan-tag">DISTRIBUCIÓN DE ACTIVOS</span>
-            <h3 class="chart-main-title">Valoración por Categoría</h3>
-            <p class="chart-desc">Capital inmovilizado distribuido por sector</p>
-          </div>
-        </div>
-
-        <div class="canvas-container equalizer-container">
-          <canvas #categoryEqualizerChartCanvas role="img" aria-label="Gráfico de barras de distribución por categoría"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <!-- FILA 4: CALENDARIO INTERACTIVO + ACTIVIDADES EN VIVO + CAPACIDAD ALMACÉN -->
-    <div class="bottom-widgets-grid">
-
-      <!-- Widget 1: Mini Calendario Interactivo -->
-      <div class="bottom-card calendar-card">
-        <div class="card-header-styled">
-          <div class="calendar-header-nav">
-            <button class="cal-nav-btn" (click)="prevMonth()" aria-label="Mes anterior">
-              <ion-icon name="chevron-back-outline"></ion-icon>
-            </button>
-            <span class="cal-month-title">{{ calendarMonthTitle() }}</span>
-            <button class="cal-nav-btn" (click)="nextMonth()" aria-label="Mes siguiente">
-              <ion-icon name="chevron-forward-outline"></ion-icon>
-            </button>
-          </div>
-        </div>
-
-        <div class="calendar-body">
-          <!-- Cabecera de días de la semana -->
-          <div class="cal-weekdays">
-            <span>L</span>
-            <span>M</span>
-            <span>X</span>
-            <span>J</span>
-            <span>V</span>
-            <span>S</span>
-            <span>D</span>
-          </div>
-
-          <!-- Matriz de días -->
-          <div class="cal-days-grid">
-            @for (c of calendarDays(); track $index) {
-              <div
-                class="cal-day-cell"
-                [class.empty-cell]="c.day === null"
-                [class.today-cell]="c.isToday"
-                [class.selected-cell]="c.day === selectedCalendarDay()"
-                (click)="selectDay(c.day)"
+        <!-- Selector de Plantillas Predefinidas (Presets) -->
+        <div class="ribbon-templates-box">
+          <span class="templates-title">Plantillas predefinidas:</span>
+          <div class="templates-pills">
+            @for (tpl of templates; track tpl.id) {
+              <button
+                class="tpl-pill-btn"
+                [class.active]="activeTemplateId() === tpl.id"
+                (click)="applyTemplate(tpl.id)"
+                [title]="tpl.description"
               >
-                @if (c.day !== null) {
-                  <span class="day-num">{{ c.day }}</span>
-                  @if (c.hasEvent) {
-                    <span class="day-event-dot"></span>
-                  }
-                }
-              </div>
+                <ion-icon [name]="tpl.icon"></ion-icon>
+                <span>{{ tpl.name }}</span>
+              </button>
             }
           </div>
         </div>
-      </div>
 
-      <!-- Widget 2: Actividades & Flujo NoSQL en Tiempo Real -->
-      <div class="bottom-card activities-card">
-        <div class="card-header-styled flex-between">
-          <div>
-            <span class="card-kicker">AUDITORÍA CONTINUA (NoSQL)</span>
-            <h4 class="card-headline">Actividades en Vivo</h4>
-          </div>
-          <div class="live-pill">
-            <span class="live-blink-dot"></span>
-            EN VIVO
-          </div>
+        <!-- Acciones Rápidas del Modo Edición -->
+        <div class="ribbon-actions">
+          <button class="ribbon-action-btn add-btn" (click)="toggleCatalogDrawer()" title="Abrir bandeja para añadir widgets">
+            <ion-icon name="add-outline"></ion-icon> + Añadir Módulos
+          </button>
+          <button class="ribbon-action-btn reset-btn" (click)="resetDefaultLayout()" title="Restablecer diseño original de fábrica">
+            <ion-icon name="refresh-outline"></ion-icon> Restablecer
+          </button>
+          <button class="ribbon-action-btn finish-btn" (click)="toggleEditMode()" title="Guardar cambios y salir del modo edición">
+            <ion-icon name="checkmark-done-outline"></ion-icon> Salir de Edición
+          </button>
         </div>
+      </div>
+    }
 
-        <div class="activities-feed">
-          @for (log of recentLogs(); track log.id) {
-            <div
-              class="activity-row"
-              [class.sev-warning]="log.severity === 'warning'"
-              [class.sev-critical]="log.severity === 'critical'"
-            >
-              <div class="act-time-col">
-                <span class="act-time">{{ log.timestamp | date:'HH:mm:ss' }}</span>
-              </div>
-              <div class="act-body-col">
-                <div class="act-tag-row">
-                  <span class="act-tag">{{ log.action }}</span>
-                  <span class="act-entity">{{ log.entity }}</span>
+    <!-- Indicador de Carga Asíncrona -->
+    @if (isLoading()) {
+      <div class="loading-overlay glass-window" role="status" aria-live="polite">
+        <ion-spinner name="crescent"></ion-spinner>
+        <span>Sincronizando fuentes asíncronas concurrentes Supabase (SQL & Realtime)...</span>
+      </div>
+    }
+
+    <!-- ====================================================================
+         REJILLA MODULAR INTERACTIVA DE 12 COLUMNAS (CANVAS TIPO NOTION / GRAFANA)
+         ==================================================================== -->
+    <div class="dashboard-widgets-flow" [class.is-editing-canvas]="isEditMode()">
+
+      @for (widget of orderedWidgets(); track widget.id) {
+        @if (widget.visible) {
+          <div
+            class="widget-box resizable-widget glass-window"
+            [class.width-12]="widget.width === 'col-12'"
+            [class.width-8]="widget.width === 'col-8'"
+            [class.width-6]="widget.width === 'col-6'"
+            [class.width-4]="widget.width === 'col-4'"
+            [class.is-editing]="isEditMode()"
+            [class.drag-over-target]="dragOverWidgetId() === widget.id"
+            [class.search-dimmed]="hasSearchQuery() && !isWidgetSearchMatch(widget)"
+            [attr.draggable]="isEditMode() ? 'true' : null"
+            (dragstart)="onDragStart($event, widget.id)"
+            (dragover)="onDragOver($event, widget.id)"
+            (dragleave)="onDragLeave($event, widget.id)"
+            (dragend)="onDragEnd()"
+            (drop)="onDrop($event, widget.id)"
+          >
+            <!-- CABECERA EN MODO VISTA LIMPIO (SIN SATURACIÓN NI BOTONES DE EDICIÓN) -->
+            @if (!isEditMode()) {
+              <div class="widget-window-header view-mode">
+                <div class="widget-headline-group">
+                  <span class="widget-cat-tag">{{ widget.category }}</span>
+                  <h3 class="widget-headline-title">{{ widget.title }}</h3>
                 </div>
-                <p class="act-desc">{{ log.details }}</p>
-                <span class="act-user">Por: {{ log.userEmail }}</span>
+                @if (widget.id === 'timeline_wave') {
+                  <div class="header-period-chips">
+                    <button class="header-period-chip" [class.active]="filterPeriod() === '7d'" (click)="setPeriod('7d')">7D</button>
+                    <button class="header-period-chip" [class.active]="filterPeriod() === '30d'" (click)="setPeriod('30d')">30D</button>
+                    <button class="header-period-chip" [class.active]="filterPeriod() === 'year'" (click)="setPeriod('year')">2026</button>
+                  </div>
+                }
               </div>
-            </div>
-          }
-        </div>
-      </div>
+            }
 
-      <!-- Widget 3: Capacidad Operativa & Sliders de Almacén -->
-      <div class="bottom-card operations-card">
-        <div class="card-header-styled">
-          <span class="card-kicker">LOGÍSTICA & ALMACENES</span>
-          <h4 class="card-headline">Capacidad Operativa</h4>
-        </div>
+            <!-- CABECERA EN MODO EDICIÓN (DRAG HANDLE, ANCHURAS 12-COL, MOVER Y QUITAR) -->
+            @if (isEditMode()) {
+              <div class="widget-window-header edit-mode">
+                <div class="drag-handle-wrap" title="Arrastra este módulo para recolocarlo en la rejilla">
+                  <ion-icon name="move-outline" class="drag-icon"></ion-icon>
+                  <span class="drag-label">Arrastrar</span>
+                  <div class="widget-headline-group">
+                    <span class="widget-cat-tag">{{ widget.category }}</span>
+                    <h3 class="widget-headline-title">{{ widget.title }}</h3>
+                  </div>
+                </div>
 
-        <div class="operations-meters-list">
-          @for (m of operationalMeters; track m.name) {
-            <div class="meter-block">
-              <div class="meter-header">
-                <span class="meter-name">{{ m.name }}</span>
-                <span class="meter-percent" [style.color]="m.color">{{ m.progress }}%</span>
+                <div class="window-controls">
+                  <!-- Botones de ancho de rejilla 12 columnas: 1/3, 1/2, 2/3, Full -->
+                  <div class="quick-size-pills" title="Ajustar ancho en la rejilla de 12 columnas">
+                    <button
+                      class="size-mini-btn"
+                      [class.active]="widget.width === 'col-4'"
+                      (click)="setWidgetWidth(widget.id, 'col-4')"
+                      title="1/3 de pantalla (4 columnas)"
+                    >
+                      1/3
+                    </button>
+                    <button
+                      class="size-mini-btn"
+                      [class.active]="widget.width === 'col-6'"
+                      (click)="setWidgetWidth(widget.id, 'col-6')"
+                      title="1/2 de pantalla (6 columnas)"
+                    >
+                      1/2
+                    </button>
+                    <button
+                      class="size-mini-btn"
+                      [class.active]="widget.width === 'col-8'"
+                      (click)="setWidgetWidth(widget.id, 'col-8')"
+                      title="2/3 de pantalla (8 columnas)"
+                    >
+                      2/3
+                    </button>
+                    <button
+                      class="size-mini-btn"
+                      [class.active]="widget.width === 'col-12'"
+                      (click)="setWidgetWidth(widget.id, 'col-12')"
+                      title="Ancho completo (12 columnas)"
+                    >
+                      Full
+                    </button>
+                  </div>
+
+                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, 'up')" title="Mover antes">
+                    <ion-icon name="arrow-up-outline"></ion-icon>
+                  </button>
+                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, 'down')" title="Mover después">
+                    <ion-icon name="arrow-down-outline"></ion-icon>
+                  </button>
+                  <button class="win-ctrl-btn close-action" (click)="removeWidget(widget.id)" title="Quitar módulo del lienzo">
+                    <ion-icon name="close-outline"></ion-icon>
+                  </button>
+                </div>
               </div>
-              <div class="meter-track">
-                <div
-                  class="meter-fill-bar"
-                  [style.width.%]="m.progress"
-                  [style.background]="m.color"
-                  [style.box-shadow]="'0 0 10px ' + m.color"
-                ></div>
-                <!-- Pomo / Knob luminoso estilo slider de la maqueta -->
-                <div
-                  class="meter-knob"
-                  [style.left.%]="m.progress"
-                  [style.background]="m.color"
-                  [style.box-shadow]="'0 0 10px ' + m.color"
-                ></div>
-              </div>
-              <span class="meter-detail">{{ m.detail }}</span>
+            }
+
+            <!-- CONTENIDO ESPECÍFICO SEGÚN ID DE WIDGET -->
+            <div class="widget-inner-body">
+
+              <!-- 1. MEDIDORES RADIALES SLA -->
+              @if (widget.id === 'ring_gauges') {
+                <div class="ring-gauges-grid">
+                  @for (gauge of ringGauges; track gauge.label) {
+                    <div class="gauge-card glass-subcard">
+                      <div class="gauge-svg-wrap">
+                        <svg viewBox="0 0 100 100" class="gauge-svg">
+                          <circle class="gauge-bg" cx="50" cy="50" r="40" stroke-dasharray="3, 3"></circle>
+                          <circle
+                            class="gauge-progress"
+                            cx="50"
+                            cy="50"
+                            r="40"
+                            [style.stroke]="gauge.color"
+                            [style.strokeDashoffset]="251.2 - (gauge.percent / 100) * 251.2"
+                          ></circle>
+                        </svg>
+                        <div class="gauge-center-content">
+                          <span class="gauge-val" [style.color]="gauge.color">{{ gauge.value }}</span>
+                        </div>
+                      </div>
+                      <div class="gauge-info">
+                        <h4 class="gauge-title">{{ gauge.label }}</h4>
+                        <span class="gauge-sub">{{ gauge.subtitle }}</span>
+                      </div>
+                    </div>
+                  }
+                </div>
+              }
+
+              <!-- 2. MÉTRICAS PRINCIPALES KPI -->
+              @if (widget.id === 'kpis') {
+                <div class="kpi-cards-grid">
+                  <div class="kpi-box box-ruby glass-subcard">
+                    <div class="kpi-top">
+                      <span class="kpi-label">Valor del Inventario</span>
+                      <span class="trend-badge trend-up">
+                        <ion-icon name="trending-up-outline"></ion-icon> +12.4%
+                      </span>
+                    </div>
+                    <div class="kpi-value-row">
+                      <h2 class="kpi-number">{{ (totalInventoryValue() | number:'1.2-2') }} €</h2>
+                      <div class="kpi-icon-bubble">
+                        <ion-icon name="cash-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <span class="kpi-footnote">Basado en existencias físicas en almacén</span>
+                  </div>
+
+                  <div class="kpi-box box-cyan glass-subcard">
+                    <div class="kpi-top">
+                      <span class="kpi-label">Artículos en Catálogo</span>
+                      <span class="trend-badge trend-neutral">
+                        <ion-icon name="remove-outline"></ion-icon> 5 Categorías
+                      </span>
+                    </div>
+                    <div class="kpi-value-row">
+                      <h2 class="kpi-number">{{ totalProducts() }}</h2>
+                      <div class="kpi-icon-bubble">
+                        <ion-icon name="cube-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <span class="kpi-footnote">Referencias SKU activas registradas</span>
+                  </div>
+
+                  <div class="kpi-box box-amber glass-subcard">
+                    <div class="kpi-top">
+                      <span class="kpi-label">Stock Crítico / Bajo</span>
+                      <span class="trend-badge trend-warning">
+                        <ion-icon name="alert-circle-outline"></ion-icon> Atención
+                      </span>
+                    </div>
+                    <div class="kpi-value-row">
+                      <h2 class="kpi-number">{{ lowStockCount() }}</h2>
+                      <div class="kpi-icon-bubble">
+                        <ion-icon name="alert-circle-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <span class="kpi-footnote">Menos de 5 unidades disponibles</span>
+                  </div>
+
+                  <div class="kpi-box box-purple glass-subcard">
+                    <div class="kpi-top">
+                      <span class="kpi-label">Artículos Agotados</span>
+                      <span class="trend-badge trend-danger">
+                        <ion-icon name="flash-outline"></ion-icon> Urgente
+                      </span>
+                    </div>
+                    <div class="kpi-value-row">
+                      <h2 class="kpi-number">{{ outOfStockCount() }}</h2>
+                      <div class="kpi-icon-bubble">
+                        <ion-icon name="sparkles-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <span class="kpi-footnote">Requieren reposición inmediata</span>
+                  </div>
+                </div>
+              }
+
+              <!-- 3. EVOLUCIÓN FINANCIERA (TIME LINE) -->
+              @if (widget.id === 'timeline_wave') {
+                <div class="chart-content-inner">
+                  <div class="period-toggle-row">
+                    <span class="chart-subtitle-mini">Flujo continuo de ingresos netos vs costes operativos</span>
+                    <div class="period-toggle-group">
+                      <button class="period-btn" [class.active]="filterPeriod() === '7d'" (click)="setPeriod('7d')">7D</button>
+                      <button class="period-btn" [class.active]="filterPeriod() === '30d'" (click)="setPeriod('30d')">30D</button>
+                      <button class="period-btn" [class.active]="filterPeriod() === 'year'" (click)="setPeriod('year')">2026</button>
+                    </div>
+                  </div>
+                  <div class="canvas-responsive-wrap">
+                    <canvas #timelineWaveChartCanvas role="img" aria-label="Gráfico de líneas con curvas suaves"></canvas>
+                  </div>
+                </div>
+              }
+
+              <!-- 4. GRÁFICA CIRCULAR DE DISTRIBUCIÓN DE ACTIVOS (DOUGHNUT) -->
+              @if (widget.id === 'category_doughnut') {
+                <div class="doughnut-content-inner">
+                  <p class="chart-subtitle-mini">Valoración económica distribuida por categoría de producto</p>
+                  <div class="canvas-responsive-wrap doughnut-wrap">
+                    <canvas #categoryDoughnutChartCanvas role="img" aria-label="Gráfica circular de distribución de activos"></canvas>
+                  </div>
+                </div>
+              }
+
+              <!-- 5. MINI CALENDARIO INTERACTIVO -->
+              @if (widget.id === 'mini_calendar') {
+                <div class="calendar-content-inner">
+                  <div class="calendar-nav-bar">
+                    <button class="cal-nav-btn" (click)="prevMonth()" aria-label="Mes anterior">
+                      <ion-icon name="chevron-back-outline"></ion-icon>
+                    </button>
+                    <span class="cal-month-title">{{ calendarMonthTitle() }}</span>
+                    <button class="cal-nav-btn" (click)="nextMonth()" aria-label="Mes siguiente">
+                      <ion-icon name="chevron-forward-outline"></ion-icon>
+                    </button>
+                  </div>
+                  <div class="cal-weekdays">
+                    <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                  </div>
+                  <div class="cal-days-grid">
+                    @for (c of calendarDays(); track $index) {
+                      <div
+                        class="cal-day-cell"
+                        [class.empty-cell]="c.day === null"
+                        [class.today-cell]="c.isToday"
+                        [class.selected-cell]="c.day === selectedCalendarDay()"
+                        (click)="selectDay(c.day)"
+                      >
+                        @if (c.day !== null) {
+                          <span class="day-num">{{ c.day }}</span>
+                          @if (c.hasEvent) {
+                            <span class="day-event-dot"></span>
+                          }
+                        }
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+
+              <!-- 6. ACTIVIDADES EN VIVO (Supabase Realtime) -->
+              @if (widget.id === 'live_activities') {
+                <div class="activities-content-inner">
+                  <div class="activities-status-bar">
+                    <span class="feed-sub">Flujo de trazabilidad reactivo</span>
+                    <div class="live-pill">
+                      <span class="live-blink-dot"></span> EN VIVO
+                    </div>
+                  </div>
+                  <div class="activities-scroll-feed">
+                    @for (log of recentLogs(); track log.id) {
+                      <div
+                        class="activity-row"
+                        [class.sev-warning]="log.severity === 'warning'"
+                        [class.sev-critical]="log.severity === 'critical'"
+                      >
+                        <div class="act-time-col">
+                          <span>{{ log.timestamp | date:'HH:mm:ss' }}</span>
+                        </div>
+                        <div class="act-body-col">
+                          <div class="act-tag-row">
+                            <span class="act-tag">{{ log.action }}</span>
+                            <span class="act-entity">{{ log.entity }}</span>
+                          </div>
+                          <p class="act-desc">{{ log.details }}</p>
+                          <span class="act-user">Por: {{ log.userEmail }}</span>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+
+              <!-- 7. CAPACIDAD OPERATIVA DE ALMACENES -->
+              @if (widget.id === 'operations') {
+                <div class="operations-content-inner">
+                  <div class="operations-meters-list">
+                    @for (m of operationalMeters; track m.name) {
+                      <div class="meter-block">
+                        <div class="meter-header">
+                          <span class="meter-name">{{ m.name }}</span>
+                          <span class="meter-percent" [style.color]="m.color">{{ m.progress }}%</span>
+                        </div>
+                        <div class="meter-track">
+                          <div
+                            class="meter-fill-bar"
+                            [style.width.%]="m.progress"
+                            [style.background]="m.color"
+                            [style.box-shadow]="'0 0 10px ' + m.color"
+                          ></div>
+                          <div
+                            class="meter-knob"
+                            [style.left.%]="m.progress"
+                            [style.background]="m.color"
+                            [style.box-shadow]="'0 0 10px ' + m.color"
+                          ></div>
+                        </div>
+                        <span class="meter-detail">{{ m.detail }}</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+
+              <!-- 8. ACCIONES RÁPIDAS & ATAJOS -->
+              @if (widget.id === 'quick_actions') {
+                <div class="quick-actions-inner">
+                  <div class="quick-actions-grid">
+                    <button class="quick-action-tile" (click)="navigateTo('/product-form')">
+                      <div class="tile-icon-bubble tile-ruby">
+                        <ion-icon name="create-outline"></ion-icon>
+                      </div>
+                      <div class="tile-texts">
+                        <span class="tile-title">Nuevo Producto</span>
+                        <span class="tile-sub">Alta en inventario SQL</span>
+                      </div>
+                    </button>
+
+                    <button class="quick-action-tile" (click)="navigateTo('/products')">
+                      <div class="tile-icon-bubble tile-cyan">
+                        <ion-icon name="cube-outline"></ion-icon>
+                      </div>
+                      <div class="tile-texts">
+                        <span class="tile-title">Catálogo Completo</span>
+                        <span class="tile-sub">Consultar referencias</span>
+                      </div>
+                    </button>
+
+                    <button class="quick-action-tile" (click)="navigateTo('/reports')">
+                      <div class="tile-icon-bubble tile-amber">
+                        <ion-icon name="stats-chart-outline"></ion-icon>
+                      </div>
+                      <div class="tile-texts">
+                        <span class="tile-title">Informes & Reportes</span>
+                        <span class="tile-sub">Métricas operativas</span>
+                      </div>
+                    </button>
+
+                    <button class="quick-action-tile" (click)="navigateTo('/realtime-audit')">
+                      <div class="tile-icon-bubble tile-purple">
+                        <ion-icon name="pulse-outline"></ion-icon>
+                      </div>
+                      <div class="tile-texts">
+                        <span class="tile-title">Auditoría en Vivo</span>
+                        <span class="tile-sub">Supabase Realtime</span>
+                      </div>
+                    </button>
+
+                    <button class="quick-action-tile" (click)="exportPdfReport()">
+                      <div class="tile-icon-bubble tile-green">
+                        <ion-icon name="download-outline"></ion-icon>
+                      </div>
+                      <div class="tile-texts">
+                        <span class="tile-title">Exportar PDF</span>
+                        <span class="tile-sub">Informe ejecutivo</span>
+                      </div>
+                    </button>
+
+                    <button class="quick-action-tile" (click)="exportCsvReport()">
+                      <div class="tile-icon-bubble tile-blue">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                      </div>
+                      <div class="tile-texts">
+                        <span class="tile-title">Descargar CSV</span>
+                        <span class="tile-sub">Datos tabulados</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              }
+
+              <!-- 9. ALERTA DE STOCK CRÍTICO & REPOSICIÓN -->
+              @if (widget.id === 'critical_stock_table') {
+                <div class="critical-stock-inner">
+                  <div class="critical-stock-table-wrap">
+                    <table class="critical-stock-table">
+                      <thead>
+                        <tr>
+                          <th>Artículo / Ref</th>
+                          <th>Categoría</th>
+                          <th>Stock</th>
+                          <th>PVP</th>
+                          <th>Acción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (item of criticalProducts(); track item.id) {
+                          <tr>
+                            <td>
+                              <div class="prod-cell">
+                                <span class="prod-name">{{ item.name }}</span>
+                                <span class="prod-sku">ID #{{ item.id }}</span>
+                              </div>
+                            </td>
+                            <td>
+                              <span class="badge-cat">{{ item.category }}</span>
+                            </td>
+                            <td>
+                              <span class="stock-pill" [class.out-of-stock]="item.stock === 0">
+                                {{ item.stock === 0 ? 'AGOTADO' : item.stock + ' uds' }}
+                              </span>
+                            </td>
+                            <td class="price-cell">{{ item.price | number:'1.2-2' }} €</td>
+                            <td>
+                              <button class="table-action-btn" (click)="navigateToProduct(item.id)" title="Gestionar existencias">
+                                <ion-icon name="create-outline"></ion-icon> Gestionar
+                              </button>
+                            </td>
+                          </tr>
+                        } @empty {
+                          <tr>
+                            <td colspan="5" class="empty-stock-td">
+                              <ion-icon name="shield-checkmark-outline"></ion-icon> Todas las referencias tienen stock suficiente.
+                            </td>
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              }
+
             </div>
-          }
+
+            <!-- Maneta / Indicador de Redimensión en la Esquina Inferior Derecha (Solo en Modo Edición) -->
+            @if (isEditMode()) {
+              <div
+                class="corner-resize-indicator"
+                (click)="cycleWidgetWidth(widget.id)"
+                title="Cambiar tamaño del widget (Clic para ciclar: 1/3 → 1/2 → 2/3 → Full)"
+              >
+                <span class="resize-pill-indicator">{{ widget.width === 'col-12' ? 'Full' : widget.width === 'col-8' ? '2/3' : widget.width === 'col-6' ? '1/2' : '1/3' }}</span>
+                <svg viewBox="0 0 10 10" class="resize-grip-icon" aria-hidden="true">
+                  <path d="M8 2 L2 8 M9 5 L5 9 M9 8 L8 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+            }
+          </div>
+        }
+      }
+
+      <!-- ESTADO VACÍO CUANDO SE HAN QUITADO TODOS LOS WIDGETS -->
+      @if (activeWidgets().length === 0) {
+        <div class="dashboard-empty-state glass-window">
+          <div class="empty-icon-wrap">
+            <ion-icon name="layers-outline"></ion-icon>
+          </div>
+          <h3>El Cuadro de Mando está vacío</h3>
+          <p>Has quitado todos los widgets activos de tu pantalla. Puedes volver a añadirlos fácilmente desde la bandeja de módulos o restablecer la vista inicial.</p>
+          <div class="empty-actions">
+            <button class="btn-add-primary" (click)="toggleCatalogDrawer()">
+              <ion-icon name="add-outline"></ion-icon> Abrir Bandeja de Módulos
+            </button>
+            <button class="btn-restore-sec" (click)="resetDefaultLayout()">
+              <ion-icon name="refresh-outline"></ion-icon> Restablecer Predeterminados
+            </button>
+          </div>
         </div>
-      </div>
+      }
 
     </div>
+
+    <!-- BOTÓN CONTEXTUAL FLOTANTE (+) EN EL LIENZO -->
+    <div class="canvas-floating-dock" role="complementary" aria-label="Añadir módulos disponibles">
+      <button
+        class="canvas-fab-btn"
+        [class.is-editing]="isEditMode()"
+        (click)="toggleCatalogDrawer()"
+        title="Añadir o gestionar módulos disponibles (+)"
+      >
+        <span class="fab-pulse-effect" aria-hidden="true"></span>
+        <ion-icon name="add-outline" class="fab-main-icon"></ion-icon>
+        <span class="fab-text">Añadir Módulos</span>
+        <span class="fab-badge">{{ activeWidgets().length }}/{{ catalogWidgets.length }}</span>
+      </button>
+    </div>
+
+    <!-- BANDEJA / DRAWER LATERAL DE CATÁLOGO DE WIDGETS -->
+    @if (isCatalogDrawerOpen()) {
+      <div class="drawer-backdrop" (click)="closeCatalogDrawer()" aria-hidden="true"></div>
+      <aside class="catalog-drawer glass-window" role="dialog" aria-modal="true" aria-label="Bandeja de módulos disponibles">
+        <div class="drawer-header">
+          <div class="drawer-title-group">
+            <div class="drawer-icon-wrap">
+              <ion-icon name="grid-outline"></ion-icon>
+            </div>
+            <div>
+              <h3>Bandeja de Módulos</h3>
+              <p>Personaliza tu cuadro de mando activando o retirando widgets</p>
+            </div>
+          </div>
+          <button class="drawer-close-btn" (click)="closeCatalogDrawer()" aria-label="Cerrar bandeja">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+
+        <!-- Buscador y Filtros por Categoría en la Bandeja -->
+        <div class="drawer-filter-bar">
+          <div class="drawer-search-box">
+            <ion-icon name="search-outline"></ion-icon>
+            <input
+              type="text"
+              placeholder="Buscar módulo en catálogo..."
+              [value]="catalogSearch()"
+              (input)="catalogSearch.set($any($event.target).value)"
+            />
+            @if (catalogSearch()) {
+              <button class="clear-drawer-search" (click)="catalogSearch.set('')">
+                <ion-icon name="close-circle-outline"></ion-icon>
+              </button>
+            }
+          </div>
+
+          <div class="category-chips-row">
+            @for (cat of catalogCategories(); track cat) {
+              <button
+                class="cat-chip-btn"
+                [class.active]="catalogFilterCategory() === cat"
+                (click)="catalogFilterCategory.set(cat)"
+              >
+                {{ cat === 'all' ? 'Todos' : cat }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Lista de Widgets Disponibles -->
+        <div class="drawer-cards-list">
+          @for (item of filteredCatalogWidgets(); track item.id) {
+            <div class="drawer-item-card" [class.is-active]="isWidgetVisible(item.id)">
+              <div class="card-icon-col">
+                <ion-icon [name]="item.icon"></ion-icon>
+              </div>
+              <div class="card-info-col">
+                <div class="card-meta-top">
+                  <span class="cat-pill">{{ item.category }}</span>
+                  <span class="size-hint">Base: {{ item.defaultWidth === 'col-12' ? 'Full' : item.defaultWidth === 'col-8' ? '2/3' : item.defaultWidth === 'col-6' ? '1/2' : '1/3' }}</span>
+                </div>
+                <h4 class="card-title">{{ item.title }}</h4>
+                <p class="card-desc">{{ item.description }}</p>
+              </div>
+              <div class="card-actions-col">
+                @if (isWidgetVisible(item.id)) {
+                  <span class="in-canvas-tag">
+                    <ion-icon name="checkmark-circle-outline"></ion-icon> En Lienzo
+                  </span>
+                  <button class="drawer-action-link danger" (click)="removeWidget(item.id)" title="Quitar del lienzo">
+                    Quitar
+                  </button>
+                } @else {
+                  <button class="drawer-add-pill-btn" (click)="addWidget(item.id)" title="Añadir a mi lienzo">
+                    <ion-icon name="add-outline"></ion-icon> Añadir
+                  </button>
+                }
+              </div>
+            </div>
+          } @empty {
+            <div class="drawer-empty-state">
+              <ion-icon name="search-outline"></ion-icon>
+              <p>No se encontraron módulos coincidentes con el filtro.</p>
+            </div>
+          }
+        </div>
+
+        <!-- Pie de Bandeja -->
+        <div class="drawer-footer">
+          <div class="status-summary">
+            <span class="num">{{ activeWidgets().length }} de {{ catalogWidgets.length }}</span>
+            <span class="lbl">módulos en lienzo</span>
+          </div>
+          <div class="footer-btns">
+            <button class="btn-sec" (click)="resetDefaultLayout()" title="Restablecer diseño inicial">
+              <ion-icon name="refresh-outline"></ion-icon> Restablecer
+            </button>
+            <button class="btn-pri" (click)="closeCatalogDrawer()">
+              <ion-icon name="checkmark-outline"></ion-icon> Listo
+            </button>
+          </div>
+        </div>
+      </aside>
+    }
 
   </div>
 </ion-content>

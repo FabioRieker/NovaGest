@@ -48,7 +48,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { AuthService } from '../../core/services/auth.service';
 import { SqlRestService } from '../../core/services/sql-rest.service';
 import { NotificationService } from '../../core/services/notification.service';
-import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
+import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { ProductCategory, StockStatus } from '../../core/models/product.model';
 
 /**
@@ -109,7 +109,7 @@ export class ProductFormPage implements OnInit {
   private fb = inject(FormBuilder);
   private sqlService = inject(SqlRestService);
   private notificationService = inject(NotificationService);
-  private realtimeService = inject(RealtimeFirestoreService);
+  private realtimeService = inject(SupabaseRealtimeService);
   private authService = inject(AuthService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);

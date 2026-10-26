@@ -6,9 +6,9 @@ import { Product, ProductFilterOptions, StockStatus } from '../models/product.mo
 const SQL_STORAGE_KEY = 'novagest_sql_products';
 
 /**
- * Servicio que simula el consumo de una API REST conectada a Base de Datos Relacional (SQL).
- * Incluye persistencia local estructurada, validaciones de integridad referencial,
- * filtrado por índices, cálculo de agregaciones y latencia asíncrona realista.
+ * Servicio de Consumo de Base de Datos Relacional (SQL) conectada a Supabase PostgreSQL (RA 5).
+ * Gestiona operaciones CRUD asíncronas sobre la tabla `products`, validaciones de integridad referencial,
+ * filtrado por índices, cálculo de agregaciones y resiliencia con caché local estructurada.
  */
 @Injectable({
   providedIn: 'root'

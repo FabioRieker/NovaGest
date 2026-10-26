@@ -52,7 +52,7 @@
                 <td><ion-badge color="primary">Administrador</ion-badge></td>
                 <td><strong>admin&#64;empresa.com</strong></td>
                 <td><code>Admin1234*</code></td>
-                <td>Acceso total: Cuadro de Mando, CRUD de Productos, Informes y Auditoría NoSQL.</td>
+                <td>Acceso total: Cuadro de Mando, CRUD de Productos, Informes y Auditoría Supabase Realtime.</td>
               </tr>
               <tr>
                 <td><ion-badge color="medium">Estándar</ion-badge></td>
@@ -132,7 +132,7 @@
           <p>
             El <strong>Cuadro de Mando</strong> integra gráficos interactivos renderizados con <strong>Chart.js</strong>
             y widgets KPI estadísticos (<code>&lt;app-stat-widget&gt;</code>). Se sincroniza de forma concurrente
-            (<code>forkJoin</code>) con la API SQL y el servicio NoSQL en tiempo real.
+            (<code>forkJoin</code>) con la API SQL de Supabase (PostgreSQL) y el canal WebSocket de Supabase Realtime.
           </p>
           <p>
             La exportación permite generar informes en <strong>PDF formal tabulado</strong> (mediante <code>jspdf-autotable</code>)

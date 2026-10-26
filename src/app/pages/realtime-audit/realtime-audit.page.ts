@@ -27,13 +27,13 @@ import {
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
-import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
+import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { AuditLogDocument, AuditSeverity } from '../../core/models/audit-log.model';
 
 /**
- * Vista de Auditoría y Trazabilidad en Tiempo Real (FASE 3 - Paso 3.1 & RA 5).
- * Demuestra la suscripción a una fuente NoSQL basada en documentos en tiempo real
+ * Vista de Auditoría y Trazabilidad en Tiempo Real con Supabase Realtime (FASE 3 - Paso 3.1 & RA 5).
+ * Demuestra la suscripción a canales WebSocket de Supabase en tiempo real
  * con actualización reactiva en vivo y gestión de memoria (OnDestroy).
  */
 @Component({
@@ -59,7 +59,7 @@ import { AuditLogDocument, AuditSeverity } from '../../core/models/audit-log.mod
   ]
 })
 export class RealtimeAuditPage implements OnInit, OnDestroy {
-  private realtimeService = inject(RealtimeFirestoreService);
+  private realtimeService = inject(SupabaseRealtimeService);
   private notificationService = inject(NotificationService);
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -121,11 +121,11 @@ export class RealtimeAuditPage implements OnInit, OnDestroy {
       'Prueba de telemetría y sincronización manual disparada por el usuario',
       'info'
     );
-    this.notificationService.showToast('Evento emitido al stream NoSQL en tiempo real.', 'success');
+    this.notificationService.showToast('Evento emitido a Supabase Realtime con éxito.', 'success');
   }
 
   public clearAudit(): void {
     this.realtimeService.clearLogs();
-    this.notificationService.showToast('Historial NoSQL reiniciado.', 'primary');
+    this.notificationService.showToast('Historial de auditoría reiniciado.', 'primary');
   }
 }

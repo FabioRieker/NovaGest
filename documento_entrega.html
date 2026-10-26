@@ -341,7 +341,7 @@
           <td><span class="pill pill-blue">Administrador</span></td>
           <td><strong>admin@empresa.com</strong></td>
           <td><code>Admin1234*</code></td>
-          <td>Acceso total: Cuadro de Mando Ejecutivo, Gráficos Chart.js, Altas/Bajas/Modificaciones de Inventario, Informes y Auditoría NoSQL en vivo.</td>
+          <td>Acceso total: Cuadro de Mando Ejecutivo, Gráficos Chart.js, Altas/Bajas/Modificaciones de Inventario, Informes y Auditoría Supabase Realtime en vivo.</td>
         </tr>
         <tr>
           <td><span class="pill pill-amber">Usuario Estándar</span></td>
@@ -403,8 +403,8 @@
 
     <h3>FASE 3: Consumo de Datos y Generación de Informes (RA 5) • Peso: 15%</h3>
     <ul class="check-list">
-      <li><strong>Concurrencia Asíncrona Dual:</strong> Orquestación simultánea sin bloqueo de hilo mediante <code>forkJoin</code> de dos orígenes de persistencia: API REST Relacional (SQL simulada) y servicio basado en documentos NoSQL con emisión continua reactiva (Firestore simulado).</li>
-      <li><strong>Dashboard Interactivo:</strong> Cuadro de mando para Administrador con gráficos integrados mediante <strong>Chart.js</strong> (gráfico de barras comparativo de balance financiero y gráfico donut de distribución por categorías) con reactividad ante filtros en tiempo real.</li>
+      <li><strong>Concurrencia Asíncrona Dual con Supabase:</strong> Orquestación simultánea sin bloqueo de hilo mediante <code>forkJoin</code> de dos orígenes de datos en Supabase: API REST Relacional (PostgreSQL) y servicio de suscripción continua en tiempo real mediante Supabase Realtime WebSockets.</li>
+      <li><strong>Dashboard Interactivo:</strong> Cuadro de mando para Administrador con gráficos integrados mediante <strong>Chart.js</strong> (gráfico spline de balance financiero y gráfico donut de distribución por categorías) con reactividad ante filtros en tiempo real.</li>
       <li><strong>Exportación Multiformato:</strong> Descarga de informes tabulados oficiales en <strong>PDF formal</strong> (mediante <code>jspdf-autotable</code> con encabezado corporativo) y <strong>CSV estandarizado</strong> (RFC 4180 codificado en UTF-8 con BOM para visualización inmediata en Microsoft Excel).</li>
     </ul>
 
