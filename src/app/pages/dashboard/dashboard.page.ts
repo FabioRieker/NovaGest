@@ -45,6 +45,7 @@ import {
   logOutOutline
 } from 'ionicons/icons';
 import { forkJoin, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Chart, registerables } from 'chart.js';
 import { SqlRestService } from '../../core/services/sql-rest.service';
 import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
@@ -181,7 +182,7 @@ export class DashboardPage implements OnInit, OnDestroy {
       forkJoin({
         products: this.sqlService.getProducts(),
         metrics: this.sqlService.getSummaryMetrics(),
-        recentAlerts: this.realtimeService.getRecentAlerts()
+        recentAlerts: this.realtimeService.getRecentAlerts().pipe(take(1))
       }).subscribe({
         next: ({ products, metrics }) => {
           this.allProducts.set(products);
@@ -245,14 +246,14 @@ export class DashboardPage implements OnInit, OnDestroy {
           {
             label: 'Ingresos (€)',
             data: salesData,
-            backgroundColor: '#2563eb',
-            borderRadius: 6
+            backgroundColor: '#e11d48',
+            borderRadius: 8
           },
           {
             label: 'Costes Operativos (€)',
             data: costsData,
             backgroundColor: '#94a3b8',
-            borderRadius: 6
+            borderRadius: 8
           }
         ]
       },
@@ -262,7 +263,7 @@ export class DashboardPage implements OnInit, OnDestroy {
         plugins: {
           legend: {
             position: 'top',
-            labels: { font: { family: 'inherit', size: 12 } }
+            labels: { font: { family: 'inherit', size: 12, weight: 600 } }
           }
         },
         scales: {
@@ -300,7 +301,7 @@ export class DashboardPage implements OnInit, OnDestroy {
         datasets: [
           {
             data: dataValues,
-            backgroundColor: ['#2563eb', '#06b6d4', '#10b981', '#f59e0b', '#8b5cf6'],
+            backgroundColor: ['#e11d48', '#f43f5e', '#fb7185', '#9f1239', '#334155'],
             borderWidth: 2,
             borderColor: '#ffffff'
           }

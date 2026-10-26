@@ -1,6 +1,6 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, interval, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { AuditLogDocument, AuditAction, AuditEntity, AuditSeverity } from '../models/audit-log.model';
 import { AuthService } from './auth.service';
 
@@ -157,7 +157,8 @@ export class RealtimeFirestoreService implements OnDestroy {
    */
   public getRecentAlerts(): Observable<AuditLogDocument[]> {
     return this.documents$.pipe(
-      map(docs => docs.filter(d => d.severity === 'critical' || d.severity === 'warning'))
+      map(docs => docs.filter(d => d.severity === 'critical' || d.severity === 'warning')),
+      take(1)
     );
   }
 }

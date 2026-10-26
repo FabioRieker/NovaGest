@@ -7,39 +7,56 @@
   align-items: center;
   justify-content: center;
   min-height: 80%;
-  padding: 24px 16px;
+  padding: 32px 16px;
 }
 
 .unauthorized-card {
-  max-width: 500px;
+  max-width: 520px;
   text-align: center;
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 32px 24px;
+  box-shadow: var(--card-shadow-ambient, 0 14px 36px rgba(225, 29, 72, 0.1));
+  border: 1px solid var(--brand-glass-border, rgba(225, 29, 72, 0.12));
+  background: var(--ion-card-background, #ffffff);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--brand-gradient);
+  }
 
   .lock-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
-    height: 64px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    background: rgba(239, 68, 68, 0.12);
-    color: #dc2626;
-    font-size: 2rem;
-    margin: 0 auto 16px auto;
+    background: rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.12);
+    color: var(--ion-color-primary, #e11d48);
+    font-size: 2.2rem;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 8px 20px rgba(225, 29, 72, 0.2);
   }
 
   ion-card-title {
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ion-text-color, #0f172a);
   }
 
   p {
-    font-size: 0.95rem;
+    font-size: 0.96rem;
     color: var(--ion-text-color, #334155);
-    line-height: 1.5;
-    margin: 16px 0 24px 0;
+    line-height: 1.6;
+    margin: 16px 0 28px 0;
   }
 
   .unauthorized-actions {
@@ -49,8 +66,9 @@
     flex-wrap: wrap;
 
     ion-button {
-      --border-radius: 8px;
-      font-weight: 600;
+      --border-radius: 10px;
+      font-weight: 700;
+      height: 44px;
     }
   }
 }
