@@ -46,7 +46,9 @@ import {
   peopleOutline,
   peopleSharp,
   personAddOutline,
-  personAddSharp
+  personAddSharp,
+  homeOutline,
+  homeSharp
 } from 'ionicons/icons';
 import { AuthService } from './core/services/auth.service';
 import { NotificationService } from './core/services/notification.service';
@@ -97,6 +99,7 @@ export class AppComponent {
   public isDarkMode = false;
 
   private readonly allPages: NavPage[] = [
+    { title: 'Inicio & Bienvenida', url: '/', icon: 'home' },
     { title: 'Cuadro de Mando', url: '/dashboard', icon: 'stats-chart', adminOnly: true },
     { title: 'Inventario & Catálogo', url: '/products', icon: 'cube' },
     { title: 'Alta de Producto', url: '/product-form', icon: 'add-circle', adminOnly: true },
@@ -111,6 +114,7 @@ export class AppComponent {
     const user = this.authService.currentUserSignal();
     if (!user) {
       return [
+        { title: 'Inicio & Bienvenida', url: '/', icon: 'home' },
         { title: 'Iniciar Sesión', url: '/login', icon: 'log-in' },
         { title: 'Manual de Usuario', url: '/help', icon: 'help-circle' }
       ];
@@ -151,7 +155,9 @@ export class AppComponent {
       peopleOutline,
       peopleSharp,
       personAddOutline,
-      personAddSharp
+      personAddSharp,
+      homeOutline,
+      homeSharp
     });
 
     this.checkInitialTheme();
