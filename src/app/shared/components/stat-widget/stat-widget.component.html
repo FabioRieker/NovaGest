@@ -1,0 +1,48 @@
+<div
+  class="stat-widget-card"
+  [class.clickable]="clickable"
+  [class.color-primary]="color === 'primary'"
+  [class.color-secondary]="color === 'secondary'"
+  [class.color-success]="color === 'success'"
+  [class.color-warning]="color === 'warning'"
+  [class.color-danger]="color === 'danger'"
+  (click)="onClick()"
+  (keydown)="onKeyDown($event)"
+  [tabindex]="clickable ? 0 : -1"
+  role="region"
+  [attr.aria-label]="title + ': ' + value + (subtitle ? ' (' + subtitle + ')' : '')"
+>
+  <div class="widget-header">
+    <div class="icon-bubble" aria-hidden="true">
+      <ion-icon [name]="icon"></ion-icon>
+    </div>
+    @if (trend) {
+      <div
+        class="trend-indicator"
+        [class.trend-up]="trend === 'up'"
+        [class.trend-down]="trend === 'down'"
+        [class.trend-neutral]="trend === 'neutral'"
+        aria-label="Tendencia de la métrica"
+      >
+        @if (trend === 'up') {
+          <ion-icon name="trending-up-outline"></ion-icon>
+        } @else if (trend === 'down') {
+          <ion-icon name="trending-down-outline"></ion-icon>
+        } @else {
+          <ion-icon name="remove-outline"></ion-icon>
+        }
+        @if (trendPercentage !== undefined) {
+          <span>{{ trendPercentage }}%</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="widget-body">
+    <span class="widget-title">{{ title }}</span>
+    <h3 class="widget-value">{{ value }}</h3>
+    @if (subtitle) {
+      <p class="widget-subtitle">{{ subtitle }}</p>
+    }
+  </div>
+</div>
