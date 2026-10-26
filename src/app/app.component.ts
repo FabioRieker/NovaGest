@@ -42,7 +42,11 @@ import {
   sunnySharp,
   personCircleOutline,
   shieldCheckmarkOutline,
-  businessOutline
+  businessOutline,
+  peopleOutline,
+  peopleSharp,
+  personAddOutline,
+  personAddSharp
 } from 'ionicons/icons';
 import { AuthService } from './core/services/auth.service';
 import { NotificationService } from './core/services/notification.service';
@@ -97,6 +101,7 @@ export class AppComponent {
     { title: 'Inventario & Catálogo', url: '/products', icon: 'cube' },
     { title: 'Alta de Producto', url: '/product-form', icon: 'add-circle', adminOnly: true },
     { title: 'Auditoría NoSQL en Vivo', url: '/realtime-audit', icon: 'pulse', adminOnly: true },
+    { title: 'Gestión de Usuarios', url: '/users', icon: 'people', adminOnly: true },
     { title: 'Informes & Exportación', url: '/reports', icon: 'document-text' },
     { title: 'Manual de Usuario', url: '/help', icon: 'help-circle' }
   ];
@@ -142,7 +147,11 @@ export class AppComponent {
       sunnySharp,
       personCircleOutline,
       shieldCheckmarkOutline,
-      businessOutline
+      businessOutline,
+      peopleOutline,
+      peopleSharp,
+      personAddOutline,
+      personAddSharp
     });
 
     this.checkInitialTheme();

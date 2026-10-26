@@ -51,6 +51,12 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/reports/reports.page').then(m => m.ReportsPage)
   },
   {
+    path: 'users',
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'admin' },
+    loadComponent: () => import('./pages/users/users.page').then(m => m.UsersPage)
+  },
+  {
     path: 'help',
     loadComponent: () => import('./pages/help/help.page').then(m => m.HelpPage)
   },
