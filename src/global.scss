@@ -25,9 +25,9 @@
 
 /* Pautas de Accesibilidad WCAG: Indicador de Foco Visible Universal */
 *:focus-visible {
-  outline: 3px solid var(--ion-color-primary, #2563eb) !important;
+  outline: 3px solid var(--ion-color-primary, #e11d48) !important;
   outline-offset: 2px !important;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 /* Tipografía fluida escalable con unidades rem */
@@ -40,23 +40,331 @@ body {
   font-family: var(--ion-font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
-/* Personalización accesible de barra de desplazamiento */
+/* Clases de utilidad para estética premium */
+.glass-panel {
+  background: var(--brand-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--brand-glass-border);
+  box-shadow: var(--card-shadow-ambient);
+}
+
+.gradient-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Personalización accesible de barra de desplazamiento con tono Crimson */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.1);
+  background: rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.08);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.4);
-  border-radius: 4px;
+  background: rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.3);
+  border-radius: 6px;
 
   &:hover {
-    background: rgba(var(--ion-color-primary-rgb, 37, 99, 235), 0.6);
+    background: rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.7);
+  }
+}
+
+/* ==========================================================================
+   OPTIMIZACIONES DE MÁXIMA LEGIBILIDAD EN MODO OSCURO (WCAG AA/AAA)
+   ========================================================================== */
+body.dark {
+  // 1. Cabecera y Barra Superior (Toolbar)
+  ion-toolbar[color="primary"] {
+    --background: linear-gradient(135deg, #9f1239 0%, #881337 100%) !important;
+    --color: #ffffff !important;
+    color: #ffffff !important;
+
+    ion-title {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    ion-menu-button {
+      --color: #ffffff !important;
+      color: #ffffff !important;
+    }
+
+    ion-button {
+      --color: #ffffff !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+
+      ion-icon {
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  // 2. Títulos y Textos Secundarios
+  .page-title, h1, h2, h3 {
+    color: #f8fafc !important;
+  }
+
+  .page-subtitle, .chart-subtitle, .format-desc {
+    color: #cbd5e1 !important;
+  }
+
+  // 3. Filtros y Selectores (Eliminación del fondo gris incongruente)
+  ion-select {
+    --background: #1e2235 !important;
+    --color: #f8fafc !important;
+    --placeholder-color: #cbd5e1 !important;
+    color: #f8fafc !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .filters-bar, .filters-card, .filter-card {
+    background: #141724 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+
+    .filter-label, .filter-group {
+      color: #cbd5e1 !important;
+    }
+  }
+
+  // 4. Barra de Búsqueda (Searchbar)
+  ion-searchbar {
+    --background: #141724 !important;
+    --color: #f8fafc !important;
+    --placeholder-color: #94a3b8 !important;
+    --icon-color: #fb7185 !important;
+    --clear-button-color: #cbd5e1 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+
+    input {
+      color: #f8fafc !important;
+    }
+  }
+
+  // 5. Tabla de Datos Avanzada (<app-data-table>)
+  .data-table-container {
+    background: #141724 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  .table-toolbar {
+    background: #181c2d !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+
+    .toolbar-stats {
+      color: #cbd5e1 !important;
+    }
+  }
+
+  .custom-table {
+    thead {
+      background: rgba(251, 113, 133, 0.16) !important;
+
+      th {
+        color: #ffffff !important;
+        border-bottom: 2px solid rgba(251, 113, 133, 0.35) !important;
+        font-weight: 800 !important;
+
+        .sort-indicator {
+          color: #fb7185 !important;
+
+          .neutral-sort {
+            color: #94a3b8 !important;
+            opacity: 0.8 !important;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr.table-row {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+
+        &:hover {
+          background-color: rgba(251, 113, 133, 0.1) !important;
+        }
+
+        td {
+          color: #f1f5f9 !important;
+          font-weight: 500 !important;
+        }
+
+        // Acciones de tabla (iconos brillantes y perfectamente visibles)
+        .actions-group {
+          ion-button {
+            &[color="primary"] ion-icon {
+              color: #fb7185 !important;
+            }
+            &[color="danger"] ion-icon {
+              color: #f87171 !important;
+            }
+            &[color="secondary"] ion-icon {
+              color: #38bdf8 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .table-pagination {
+    background: #181c2d !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+
+    .page-info {
+      color: #cbd5e1 !important;
+    }
+  }
+
+  // 6. Menú Lateral de Navegación
+  ion-menu ion-content {
+    --background: #141724 !important;
+  }
+
+  .menu-profile-box {
+    background: linear-gradient(180deg, rgba(251, 113, 133, 0.14) 0%, rgba(20, 23, 36, 0) 100%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+
+    .brand-badge-row {
+      .app-name {
+        color: #f8fafc !important;
+      }
+      .app-version {
+        color: #94a3b8 !important;
+      }
+    }
+
+    .user-info-card {
+      background: #1a1e30 !important;
+      border: 1px solid rgba(251, 113, 133, 0.25) !important;
+
+      .user-meta {
+        .user-name {
+          color: #f8fafc !important;
+        }
+        .user-email {
+          color: #cbd5e1 !important;
+        }
+      }
+    }
+  }
+
+  ion-list#navigation-list {
+    ion-list-header {
+      color: #94a3b8 !important;
+    }
+
+    .menu-item {
+      color: #e2e8f0 !important;
+
+      ion-icon {
+        color: #cbd5e1 !important;
+      }
+
+      &:hover {
+        --background: rgba(251, 113, 133, 0.15) !important;
+        color: #fb7185 !important;
+
+        ion-icon {
+          color: #fb7185 !important;
+        }
+      }
+
+      &.selected {
+        --background: rgba(251, 113, 133, 0.22) !important;
+        color: #fb7185 !important;
+
+        ion-icon {
+          color: #fb7185 !important;
+        }
+      }
+    }
+  }
+
+  .menu-bottom-section {
+    background: #10121d !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+
+    .theme-label {
+      color: #e2e8f0 !important;
+
+      ion-icon {
+        color: #cbd5e1 !important;
+      }
+    }
+
+    .logout-btn {
+      --color: #f87171 !important;
+      --border-color: #f87171 !important;
+      color: #f87171 !important;
+    }
+  }
+
+  // 7. Botones con contorno (Outline)
+  ion-button[fill="outline"] {
+    --color: #fb7185 !important;
+    --border-color: rgba(251, 113, 133, 0.6) !important;
+    color: #fb7185 !important;
+    font-weight: 700 !important;
+
+    &:hover {
+      --background: rgba(251, 113, 133, 0.15) !important;
+    }
+  }
+
+  // 8. Badges / Etiquetas de Estado con Alto Contraste
+  ion-badge {
+    padding: 6px 12px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.05em !important;
+    border-radius: 6px !important;
+    font-size: 0.75rem !important;
+
+    &[color="warning"] {
+      color: #0f172a !important;
+      background: #fbbf24 !important;
+    }
+    &[color="success"] {
+      color: #0f172a !important;
+      background: #34d399 !important;
+    }
+    &[color="danger"] {
+      color: #ffffff !important;
+      background: #ef4444 !important;
+    }
+    &[color="primary"] {
+      color: #ffffff !important;
+      background: #e11d48 !important;
+    }
+    &[color="medium"] {
+      color: #ffffff !important;
+      background: #475569 !important;
+    }
+  }
+
+  // 9. Stat Widgets en Modo Oscuro
+  .stat-widget-card {
+    background: #141724 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+
+    .widget-title {
+      color: #cbd5e1 !important;
+    }
+    .widget-value {
+      color: #ffffff !important;
+    }
+    .widget-subtitle {
+      color: #94a3b8 !important;
+    }
   }
 }
