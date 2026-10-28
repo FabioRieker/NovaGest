@@ -102,6 +102,7 @@
 
           <!-- PANEL DESPLEGABLE DE NOTIFICACIONES (GLASSMORPHIC) -->
           @if (isNotificationsOpen()) {
+            <div class="notif-click-away-backdrop" (click)="toggleNotifications()" aria-hidden="true"></div>
             <div class="notifications-dropdown glass-window" role="dialog" aria-label="Notificaciones del Sistema">
               <div class="notif-header">
                 <div class="notif-title-row">

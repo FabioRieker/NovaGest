@@ -86,6 +86,8 @@
    BARRA SUPERIOR CYBER
    ========================================================================== */
 .cyber-top-bar {
+  position: relative;
+  z-index: 120;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -204,6 +206,7 @@
 
     .notification-wrap {
       position: relative;
+      z-index: 130;
 
       .pulsing-badge {
         position: absolute;
@@ -290,10 +293,17 @@
   max-width: 90vw;
   border-radius: 18px;
   padding: 16px;
-  z-index: 100;
+  z-index: 250;
   border: 1px solid rgba(255, 42, 109, 0.35);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
   animation: fadeInDown 0.22s ease-out;
+
+.notif-click-away-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 125;
+  background: transparent;
+}
 
   .notif-header {
     display: flex;
