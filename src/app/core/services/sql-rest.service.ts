@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, of, throwError, from } from 'rxjs';
 import { delay, map, tap } from 'rxjs/operators';
-import { Product, ProductFilterOptions, StockStatus } from '../models/product.model';
+import { Product, ProductCategory, ProductFilterOptions, StockStatus } from '../models/product.model';
+import { SupabaseService } from './supabase.service';
 
 const SQL_STORAGE_KEY = 'novagest_sql_products';
 
@@ -14,6 +15,7 @@ const SQL_STORAGE_KEY = 'novagest_sql_products';
   providedIn: 'root'
 })
 export class SqlRestService {
+  private supabaseService = inject(SupabaseService);
 
   private readonly initialSeed: Product[] = [
     {
@@ -150,11 +152,52 @@ export class SqlRestService {
 
   constructor() {
     this.ensureInitialized();
+    this.syncProductsWithSupabase();
   }
 
   private ensureInitialized(): void {
     if (!localStorage.getItem(SQL_STORAGE_KEY)) {
       localStorage.setItem(SQL_STORAGE_KEY, JSON.stringify(this.initialSeed));
+    }
+  }
+
+  /**
+   * Sincroniza el catálogo con la tabla 'products' de Supabase
+   */
+  public async syncProductsWithSupabase(): Promise<void> {
+    const client = this.supabaseService.client;
+    if (!client || !this.supabaseService.isConfigured) return;
+
+    try {
+      const { data, error } = await client
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.warn('Aviso sincronizando productos con Supabase:', error.message);
+        return;
+      }
+
+      if (data && data.length > 0) {
+        const mapped: Product[] = data.map((item: any) => ({
+          id: item.id,
+          sku: item.sku,
+          name: item.name,
+          category: item.category as ProductCategory,
+          price: Number(item.price),
+          stock: Number(item.stock),
+          status: item.status as StockStatus,
+          supplierEmail: item.supplier_email,
+          description: item.description || '',
+          createdAt: item.created_at,
+          updatedAt: item.updated_at
+        }));
+
+        this.saveProducts(mapped);
+      }
+    } catch (e) {
+      console.warn('Error al obtener productos de Supabase:', e);
     }
   }
 
@@ -175,8 +218,10 @@ export class SqlRestService {
    * Obtiene todos los productos con soporte para filtrado, búsqueda y ordenación
    */
   public getProducts(filters?: ProductFilterOptions): Observable<Product[]> {
-    return of(this.getStoredProducts()).pipe(
-      delay(350), // Latencia de consulta SQL
+    return from((async () => {
+      await this.syncProductsWithSupabase();
+      return this.getStoredProducts();
+    })()).pipe(
       map(items => {
         let result = [...items];
 
@@ -233,83 +278,125 @@ export class SqlRestService {
   }
 
   /**
-   * Inserta un nuevo producto garantizando unicidad de SKU
+   * Inserta un nuevo producto en Supabase PostgreSQL garantizando unicidad de SKU
    */
   public createProduct(data: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>): Observable<Product> {
-    return of(null).pipe(
-      delay(450),
-      map(() => {
-        const items = this.getStoredProducts();
-        const skuExists = items.some(p => p.sku.toUpperCase() === data.sku.toUpperCase());
-        if (skuExists) {
-          throw new Error(`Error de restricción UNIQUE: El SKU '${data.sku}' ya está registrado.`);
+    return from((async () => {
+      const items = this.getStoredProducts();
+      const skuExists = items.some(p => p.sku.toUpperCase() === data.sku.toUpperCase());
+      if (skuExists) {
+        throw new Error(`Error de restricción UNIQUE: El SKU '${data.sku}' ya está registrado.`);
+      }
+
+      const newProduct: Product = {
+        ...data,
+        id: `prod-${Date.now().toString(36)}`,
+        sku: data.sku.toUpperCase().trim(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      const client = this.supabaseService.client;
+      if (client && this.supabaseService.isConfigured) {
+        const { error } = await client.from('products').insert({
+          id: newProduct.id,
+          sku: newProduct.sku,
+          name: newProduct.name,
+          category: newProduct.category,
+          price: newProduct.price,
+          stock: newProduct.stock,
+          status: newProduct.status,
+          supplier_email: newProduct.supplierEmail,
+          description: newProduct.description,
+          created_at: newProduct.createdAt,
+          updated_at: newProduct.updatedAt
+        });
+
+        if (error) {
+          console.error('Error insertando producto en Supabase:', error);
+          throw new Error(`Error en Supabase: ${error.message}`);
         }
+      }
 
-        const newProduct: Product = {
-          ...data,
-          id: `prod-${Date.now().toString(36)}`,
-          sku: data.sku.toUpperCase().trim(),
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        };
-
-        items.unshift(newProduct);
-        this.saveProducts(items);
-        return newProduct;
-      })
-    );
+      items.unshift(newProduct);
+      this.saveProducts(items);
+      return newProduct;
+    })());
   }
 
   /**
-   * Actualiza un producto existente
+   * Actualiza un producto existente en Supabase PostgreSQL
    */
   public updateProduct(id: string, changes: Partial<Product>): Observable<Product> {
-    return of(null).pipe(
-      delay(400),
-      map(() => {
-        const items = this.getStoredProducts();
-        const index = items.findIndex(p => p.id === id);
-        if (index === -1) {
-          throw new Error(`Error: Producto con ID ${id} no existe.`);
-        }
+    return from((async () => {
+      const items = this.getStoredProducts();
+      const index = items.findIndex(p => p.id === id);
+      if (index === -1) {
+        throw new Error(`Error: Producto con ID ${id} no existe.`);
+      }
 
-        if (changes.sku) {
-          const skuConflict = items.some(p => p.id !== id && p.sku.toUpperCase() === changes.sku!.toUpperCase());
-          if (skuConflict) {
-            throw new Error(`Error de integridad: El SKU '${changes.sku}' ya está en uso.`);
-          }
+      if (changes.sku) {
+        const skuConflict = items.some(p => p.id !== id && p.sku.toUpperCase() === changes.sku!.toUpperCase());
+        if (skuConflict) {
+          throw new Error(`Error de integridad: El SKU '${changes.sku}' ya está en uso.`);
         }
+      }
 
-        const updated: Product = {
-          ...items[index],
-          ...changes,
-          sku: changes.sku ? changes.sku.toUpperCase().trim() : items[index].sku,
-          updatedAt: new Date().toISOString()
+      const updated: Product = {
+        ...items[index],
+        ...changes,
+        sku: changes.sku ? changes.sku.toUpperCase().trim() : items[index].sku,
+        updatedAt: new Date().toISOString()
+      };
+
+      const client = this.supabaseService.client;
+      if (client && this.supabaseService.isConfigured) {
+        const payload: any = {
+          updated_at: updated.updatedAt
         };
+        if (changes.sku !== undefined) payload.sku = updated.sku;
+        if (changes.name !== undefined) payload.name = updated.name;
+        if (changes.category !== undefined) payload.category = updated.category;
+        if (changes.price !== undefined) payload.price = updated.price;
+        if (changes.stock !== undefined) payload.stock = updated.stock;
+        if (changes.status !== undefined) payload.status = updated.status;
+        if (changes.supplierEmail !== undefined) payload.supplier_email = updated.supplierEmail;
+        if (changes.description !== undefined) payload.description = updated.description;
 
-        items[index] = updated;
-        this.saveProducts(items);
-        return updated;
-      })
-    );
+        const { error } = await client.from('products').update(payload).eq('id', id);
+        if (error) {
+          console.warn('Error actualizando producto en Supabase:', error.message);
+        }
+      }
+
+      items[index] = updated;
+      this.saveProducts(items);
+      return updated;
+    })());
   }
 
   /**
-   * Elimina un producto por su ID
+   * Elimina un producto por su ID en Supabase PostgreSQL
    */
   public deleteProduct(id: string): Observable<boolean> {
-    return of(null).pipe(
-      delay(350),
-      map(() => {
-        const items = this.getStoredProducts();
-        const filtered = items.filter(p => p.id !== id);
-        if (filtered.length === items.length) {
-          throw new Error(`Producto con ID ${id} no encontrado.`);
+    return from((async () => {
+      const items = this.getStoredProducts();
+      const filtered = items.filter(p => p.id !== id);
+      if (filtered.length === items.length) {
+        throw new Error(`Producto con ID ${id} no encontrado.`);
+      }
+
+      const client = this.supabaseService.client;
+      if (client && this.supabaseService.isConfigured) {
+        const { error } = await client.from('products').delete().eq('id', id);
+        if (error) {
+          console.warn('Error eliminando producto de Supabase:', error.message);
         }
-        this.saveProducts(filtered);
-        return true;
-      })
-    );
+      }
+
+      this.saveProducts(filtered);
+      return true;
+    })());
   }
 
   /**

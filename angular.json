@@ -72,22 +72,15 @@
                   "minify": true,
                   "inlineCritical": true
                 },
-                "fonts": true
+                "fonts": false
               },
               "outputHashing": "all"
             },
             "development": {
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": true
-                },
-                "fonts": true
-              },
+              "optimization": false,
               "extractLicenses": false,
-              "sourceMap": false,
-              "namedChunks": false
+              "sourceMap": true,
+              "namedChunks": true
             },
             "ci": {
               "progress": false
@@ -102,13 +95,13 @@
               "buildTarget": "app:build:production"
             },
             "development": {
-              "buildTarget": "app:build:production"
+              "buildTarget": "app:build:development"
             },
             "ci": {
               "progress": false
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",

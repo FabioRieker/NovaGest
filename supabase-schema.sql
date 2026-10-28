@@ -77,6 +77,12 @@ CREATE POLICY "Inserción de eventos de auditoría" ON public.audit_logs
 CREATE POLICY "Lectura de usuarios" ON public.users
     FOR SELECT USING (true);
 
+CREATE POLICY "Inserción de usuarios" ON public.users
+    FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Modificación de usuarios" ON public.users
+    FOR ALL USING (true) WITH CHECK (true);
+
 -- 7. Datos Iniciales de Prueba (Seed Data)
 INSERT INTO public.products (id, sku, name, category, price, stock, status, supplier_email, description)
 VALUES
