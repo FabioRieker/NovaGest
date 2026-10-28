@@ -71,6 +71,7 @@ export class ProductsPage implements OnInit {
 
   // Configuración de columnas para <app-data-table>
   public tableColumns: TableColumn[] = [
+    { key: 'imageUrl', label: 'Foto', sortable: false, type: 'image', width: '70px' },
     { key: 'sku', label: 'SKU / Código', sortable: true, width: '130px' },
     { key: 'name', label: 'Nombre de Artículo', sortable: true },
     { key: 'category', label: 'Categoría', sortable: true, width: '130px' },

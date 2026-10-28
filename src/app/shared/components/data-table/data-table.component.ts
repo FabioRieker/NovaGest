@@ -7,7 +7,8 @@ import {
   OnInit,
   OnChanges,
   OnDestroy,
-  SimpleChanges
+  SimpleChanges,
+  signal
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +28,9 @@ import {
   createOutline,
   trashOutline,
   eyeOutline,
-  swapVerticalOutline
+  swapVerticalOutline,
+  imageOutline,
+  closeOutline
 } from 'ionicons/icons';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -36,7 +39,7 @@ export interface TableColumn {
   key: string;
   label: string;
   sortable?: boolean;
-  type?: 'text' | 'currency' | 'badge' | 'date';
+  type?: 'text' | 'currency' | 'badge' | 'date' | 'image';
   width?: string;
 }
 
@@ -97,6 +100,8 @@ export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
   private searchSubject = new Subject<string>();
   private subscriptions = new Subscription();
 
+  public previewModal = signal<{ url: string; title: string } | null>(null);
+
   constructor() {
     addIcons({
       arrowUpOutline,
@@ -106,7 +111,9 @@ export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
       createOutline,
       trashOutline,
       eyeOutline,
-      swapVerticalOutline
+      swapVerticalOutline,
+      imageOutline,
+      closeOutline
     });
   }
 
@@ -240,5 +247,16 @@ export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
       }
     }
     return String(val);
+  }
+
+  public openImagePreview(url: string, title: string, event: Event): void {
+    event.stopPropagation();
+    if (url) {
+      this.previewModal.set({ url, title });
+    }
+  }
+
+  public closeImagePreview(): void {
+    this.previewModal.set(null);
   }
 }

@@ -27,6 +27,7 @@ export class SqlRestService {
       stock: 8,
       status: 'in_stock',
       supplierEmail: 'dell.enterprise@proveedor.es',
+      imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80',
       description: 'Servidor 2U para virtualización de alta densidad con doble Intel Xeon.',
       createdAt: '2026-01-10T10:00:00Z',
       updatedAt: '2026-01-10T10:00:00Z'
@@ -40,6 +41,7 @@ export class SqlRestService {
       stock: 14,
       status: 'in_stock',
       supplierEmail: 'ventas@lenovobusiness.com',
+      imageUrl: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&q=80',
       description: 'Estación de trabajo portátil para ingenieros con GPU NVIDIA RTX 4080.',
       createdAt: '2026-01-12T11:20:00Z',
       updatedAt: '2026-01-12T11:20:00Z'
@@ -66,6 +68,7 @@ export class SqlRestService {
       stock: 3,
       status: 'low_stock',
       supplierEmail: 'contacto@ergodesign.es',
+      imageUrl: 'https://images.unsplash.com/photo-1580481077195-c2763297a73e?w=400&q=80',
       description: 'Silla ergonómica de oficina con soporte lumbar ajustable PostureFit SL.',
       createdAt: '2026-01-18T14:40:00Z',
       updatedAt: '2026-01-18T14:40:00Z'
@@ -92,6 +95,7 @@ export class SqlRestService {
       stock: 0,
       status: 'out_of_stock',
       supplierEmail: 'distribucion@lgdisplays.com',
+      imageUrl: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80',
       description: 'Panel IPS QHD+ con Thunderbolt 3 y cobertura DCI-P3 98%.',
       createdAt: '2026-01-22T08:30:00Z',
       updatedAt: '2026-01-22T08:30:00Z'
@@ -105,6 +109,7 @@ export class SqlRestService {
       stock: 22,
       status: 'in_stock',
       supplierEmail: 'pedidos@sonypro.es',
+      imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80',
       description: 'Cancelación activa de ruido líder en el mercado para conferencias y trabajo remoto.',
       createdAt: '2026-01-25T13:10:00Z',
       updatedAt: '2026-01-25T13:10:00Z'
@@ -131,6 +136,7 @@ export class SqlRestService {
       stock: 6,
       status: 'in_stock',
       supplierEmail: 'sales@ciscopartner.com',
+      imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&q=80',
       description: 'Conmutador PoE+ Gigabit con enlaces ascendentes 4x10G para red troncal.',
       createdAt: '2026-02-02T12:00:00Z',
       updatedAt: '2026-02-02T12:00:00Z'
@@ -190,6 +196,7 @@ export class SqlRestService {
           status: item.status as StockStatus,
           supplierEmail: item.supplier_email,
           description: item.description || '',
+          imageUrl: item.image_url || '',
           createdAt: item.created_at,
           updatedAt: item.updated_at
         }));
@@ -308,6 +315,7 @@ export class SqlRestService {
           status: newProduct.status,
           supplier_email: newProduct.supplierEmail,
           description: newProduct.description,
+          image_url: newProduct.imageUrl || null,
           created_at: newProduct.createdAt,
           updated_at: newProduct.updatedAt
         });
@@ -362,6 +370,7 @@ export class SqlRestService {
         if (changes.status !== undefined) payload.status = updated.status;
         if (changes.supplierEmail !== undefined) payload.supplier_email = updated.supplierEmail;
         if (changes.description !== undefined) payload.description = updated.description;
+        if (changes.imageUrl !== undefined) payload.image_url = updated.imageUrl || null;
 
         const { error } = await client.from('products').update(payload).eq('id', id);
         if (error) {

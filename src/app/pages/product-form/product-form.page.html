@@ -230,7 +230,89 @@
             </div>
           </div>
 
-          <!-- FILA 4: DESCRIPCIÓN DETALLADA -->
+          <!-- FILA 4: FOTOGRAFÍA DEL PRODUCTO (SUPABASE STORAGE) -->
+          <div class="form-grid-row single">
+            <div class="field-item">
+              <label class="field-label">
+                <ion-icon name="image-outline"></ion-icon>
+                <span>Fotografía del Producto (Supabase Storage)</span>
+              </label>
+
+              <input
+                #imageFileInput
+                type="file"
+                accept="image/png, image/jpeg, image/webp"
+                (change)="onFileSelected($event)"
+                style="display: none"
+                aria-label="Seleccionar imagen de producto"
+              />
+
+              <div class="image-upload-container">
+                @if (imagePreviewUrl()) {
+                  <div class="image-preview-card">
+                    <div class="preview-img-wrapper">
+                      <img [src]="imagePreviewUrl()" alt="Previsualización de producto" class="preview-thumbnail" />
+                    </div>
+                    <div class="preview-info">
+                      <div class="preview-title">Imagen Asociada al Catálogo</div>
+                      <div class="preview-subtitle">Almacenada en bucket 'product-images' con redundancia local</div>
+                      <div class="preview-actions">
+                        <button
+                          type="button"
+                          class="img-action-btn change-btn"
+                          (click)="imageFileInput.click()"
+                          [disabled]="isUploadingImage()"
+                        >
+                          <ion-icon name="cloud-upload-outline"></ion-icon>
+                          <span>Cambiar Foto</span>
+                        </button>
+                        <button
+                          type="button"
+                          class="img-action-btn delete-btn"
+                          (click)="removeImage()"
+                          [disabled]="isUploadingImage()"
+                        >
+                          <ion-icon name="trash-outline"></ion-icon>
+                          <span>Eliminar</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                } @else {
+                  <div
+                    class="image-dropzone-box"
+                    (click)="imageFileInput.click()"
+                    role="button"
+                    tabindex="0"
+                    (keydown.enter)="imageFileInput.click()"
+                    (keydown.space)="imageFileInput.click()"
+                  >
+                    @if (isUploadingImage()) {
+                      <div class="uploading-state">
+                        <ion-spinner name="crescent" color="primary"></ion-spinner>
+                        <span>Subiendo fotografía a Supabase Storage...</span>
+                      </div>
+                    } @else {
+                      <div class="dropzone-content">
+                        <div class="dropzone-icon">
+                          <ion-icon name="cloud-upload-outline"></ion-icon>
+                        </div>
+                        <div class="dropzone-texts">
+                          <span class="dropzone-primary">Haga clic para examinar y cargar fotografía</span>
+                          <span class="dropzone-secondary">Formatos soportados: JPG, PNG o WebP (Máx. 5 MB)</span>
+                        </div>
+                        <button type="button" class="dropzone-browse-btn">
+                          Examinar Archivo
+                        </button>
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- FILA 5: DESCRIPCIÓN DETALLADA -->
           <div class="form-grid-row single">
             <div class="field-item">
               <label class="field-label" for="desc-input">

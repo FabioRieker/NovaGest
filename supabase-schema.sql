@@ -18,9 +18,13 @@ CREATE TABLE IF NOT EXISTS public.products (
     status TEXT NOT NULL CHECK (status IN ('in_stock', 'low_stock', 'out_of_stock')),
     supplier_email TEXT NOT NULL,
     description TEXT,
+    image_url TEXT,
     created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
     updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
+
+-- Migración segura si la tabla ya existía previamente
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS image_url TEXT;
 
 -- Índices optimizados para búsquedas y agregaciones del Dashboard
 CREATE INDEX IF NOT EXISTS idx_products_sku ON public.products(sku);
@@ -109,3 +113,25 @@ VALUES
     ('usr-admin-001', 'admin@empresa.com', 'Roberto Gómez (Director IT)', 'admin'),
     ('usr-user-002', 'user@empresa.com', 'Laura Sánchez (Operaciones)', 'user')
 ON CONFLICT (id) DO NOTHING;
+
+-- 8. Configuración de Supabase Storage (Bucket para Fotos de Productos)
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('product-images', 'product-images', true)
+ON CONFLICT (id) DO NOTHING;
+
+CREATE POLICY "Lectura pública de imágenes de catálogo"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'product-images');
+
+CREATE POLICY "Subida de imágenes de catálogo"
+ON storage.objects FOR INSERT
+WITH CHECK (bucket_id = 'product-images');
+
+CREATE POLICY "Actualización y reemplazo de imágenes de catálogo"
+ON storage.objects FOR UPDATE
+USING (bucket_id = 'product-images');
+
+CREATE POLICY "Eliminación de imágenes de catálogo"
+ON storage.objects FOR DELETE
+USING (bucket_id = 'product-images');
+

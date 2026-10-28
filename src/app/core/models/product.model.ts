@@ -17,6 +17,7 @@ export interface Product {
   status: StockStatus;
   supplierEmail: string; // Validación de formato y comprobación
   description: string;
+  imageUrl?: string; // Fotografía en Supabase Storage Bucket
   createdAt: string;
   updatedAt: string;
 }

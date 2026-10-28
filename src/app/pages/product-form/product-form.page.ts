@@ -45,6 +45,7 @@ import { Observable, timer } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { AuthService } from '../../core/services/auth.service';
 import { SqlRestService } from '../../core/services/sql-rest.service';
+import { StorageService } from '../../core/services/storage.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { ProductCategory, StockStatus } from '../../core/models/product.model';
@@ -97,6 +98,7 @@ export function skuAsyncValidator(sqlService: SqlRestService, excludeId?: string
 export class ProductFormPage implements OnInit {
   private fb = inject(FormBuilder);
   private sqlService = inject(SqlRestService);
+  private storageService = inject(StorageService);
   private notificationService = inject(NotificationService);
   private realtimeService = inject(SupabaseRealtimeService);
   private authService = inject(AuthService);
@@ -107,6 +109,8 @@ export class ProductFormPage implements OnInit {
   public isEditMode = signal(false);
   public productId = signal<string | null>(null);
   public isSaving = signal(false);
+  public isUploadingImage = signal(false);
+  public imagePreviewUrl = signal<string | null>(null);
 
   public categories: ProductCategory[] = ['Hardware', 'Electrónica', 'Mobiliario', 'Servicios', 'Papelería'];
 
@@ -167,6 +171,7 @@ export class ProductFormPage implements OnInit {
       price: [null, [Validators.required, Validators.min(0.01), Validators.max(100000)]],
       stock: [0, [Validators.required, Validators.min(0), Validators.max(10000)]],
       supplierEmail: ['', [Validators.required, Validators.email]],
+      imageUrl: [''],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]]
     });
   }
@@ -181,14 +186,55 @@ export class ProductFormPage implements OnInit {
           price: product.price,
           stock: product.stock,
           supplierEmail: product.supplierEmail,
+          imageUrl: product.imageUrl || '',
           description: product.description
         });
+        if (product.imageUrl) {
+          this.imagePreviewUrl.set(product.imageUrl);
+        }
       },
       error: () => {
         this.notificationService.showToast('No se pudo encontrar el producto solicitado.', 'danger');
         this.router.navigate(['/products']);
       }
     });
+  }
+
+  public async onFileSelected(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+    const file = input.files[0];
+
+    if (!file.type.startsWith('image/')) {
+      this.notificationService.showToast('Por favor seleccione un archivo de imagen válido (JPG, PNG, WEBP).', 'warning');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      this.notificationService.showToast('La imagen no debe superar los 5 MB.', 'warning');
+      return;
+    }
+
+    this.isUploadingImage.set(true);
+    try {
+      const sku = this.productForm.get('sku')?.value || 'producto';
+      const uploadedUrl = await this.storageService.uploadProductImage(file, sku);
+      if (uploadedUrl) {
+        this.productForm.patchValue({ imageUrl: uploadedUrl });
+        this.imagePreviewUrl.set(uploadedUrl);
+        this.notificationService.showToast('Fotografía subida al bucket product-images.', 'success');
+      }
+    } catch (err: any) {
+      this.notificationService.showToast('Error al procesar la imagen: ' + (err.message || 'desconocido'), 'danger');
+    } finally {
+      this.isUploadingImage.set(false);
+      input.value = '';
+    }
+  }
+
+  public removeImage(): void {
+    this.productForm.patchValue({ imageUrl: '' });
+    this.imagePreviewUrl.set(null);
   }
 
   public onSubmit(): void {
@@ -216,6 +262,7 @@ export class ProductFormPage implements OnInit {
       stock: stockNumber,
       status: calculatedStatus,
       supplierEmail: formVal.supplierEmail.trim().toLowerCase(),
+      imageUrl: formVal.imageUrl ? formVal.imageUrl.trim() : undefined,
       description: formVal.description.trim()
     };
 
