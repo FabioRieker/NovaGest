@@ -186,6 +186,7 @@ interface CalendarDay {
 export class DashboardPage implements OnInit, OnDestroy {
   @ViewChild('timelineWaveChartCanvas') timelineWaveChartCanvas?: ElementRef<HTMLCanvasElement>;
   @ViewChild('categoryDoughnutChartCanvas') categoryDoughnutChartCanvas?: ElementRef<HTMLCanvasElement>;
+  private themeObserver?: MutationObserver;
 
   private sqlService = inject(SqlRestService);
   private realtimeService = inject(SupabaseRealtimeService);
@@ -575,6 +576,7 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadConsolidatedData();
+    this.setupThemeObserver();
 
     this.subscriptions.add(
       this.realtimeService.documents$.subscribe(docs => {
@@ -583,7 +585,19 @@ export class DashboardPage implements OnInit, OnDestroy {
     );
   }
 
+  private setupThemeObserver(): void {
+    if (typeof window !== 'undefined' && 'MutationObserver' in window) {
+      this.themeObserver = new MutationObserver(() => {
+        setTimeout(() => this.renderCharts(), 50);
+      });
+      this.themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    }
+  }
+
   ngOnDestroy(): void {
+    if (this.themeObserver) {
+      this.themeObserver.disconnect();
+    }
     this.destroyCharts();
     this.subscriptions.unsubscribe();
   }
@@ -1091,7 +1105,7 @@ export class DashboardPage implements OnInit, OnDestroy {
           legend: {
             position: 'top',
             labels: {
-              color: '#cbd5e1',
+              color: document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b',
               font: { family: 'inherit', size: 11, weight: 600 },
               usePointStyle: true,
               pointStyle: 'circle',
@@ -1099,9 +1113,9 @@ export class DashboardPage implements OnInit, OnDestroy {
             }
           },
           tooltip: {
-            backgroundColor: 'rgba(16, 11, 38, 0.95)',
+            backgroundColor: document.body.classList.contains('dark') ? 'rgba(16, 11, 38, 0.95)' : 'rgba(15, 23, 42, 0.95)',
             titleColor: '#ffffff',
-            bodyColor: '#e2e8f0',
+            bodyColor: document.body.classList.contains('dark') ? '#e2e8f0' : '#f8fafc',
             borderColor: 'rgba(255, 42, 109, 0.4)',
             borderWidth: 1,
             padding: 12,
@@ -1113,14 +1127,14 @@ export class DashboardPage implements OnInit, OnDestroy {
         },
         scales: {
           x: {
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-            ticks: { color: '#94a3b8', font: { family: 'inherit', size: 11 } }
+            grid: { color: document.body.classList.contains('dark') ? 'rgba(255, 255, 255, 0.05)' : 'rgba(15, 23, 42, 0.06)' },
+            ticks: { color: document.body.classList.contains('dark') ? '#94a3b8' : '#475569', font: { family: 'inherit', size: 11 } }
           },
           y: {
             beginAtZero: true,
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            grid: { color: document.body.classList.contains('dark') ? 'rgba(255, 255, 255, 0.05)' : 'rgba(15, 23, 42, 0.06)' },
             ticks: {
-              color: '#94a3b8',
+              color: document.body.classList.contains('dark') ? '#94a3b8' : '#475569',
               font: { family: 'inherit', size: 11 },
               callback: (val) => `${val} €`
             }
@@ -1167,7 +1181,7 @@ export class DashboardPage implements OnInit, OnDestroy {
           {
             data: dataValues,
             backgroundColor: sliceColors,
-            borderColor: 'rgba(21, 15, 46, 0.9)',
+            borderColor: document.body.classList.contains('dark') ? 'rgba(21, 15, 46, 0.9)' : '#ffffff',
             borderWidth: 3,
             hoverOffset: 8
           }
@@ -1184,7 +1198,7 @@ export class DashboardPage implements OnInit, OnDestroy {
           legend: {
             position: 'right',
             labels: {
-              color: '#f8fafc',
+              color: document.body.classList.contains('dark') ? '#f8fafc' : '#1e293b',
               font: { family: 'inherit', size: 11, weight: 600 },
               usePointStyle: true,
               pointStyle: 'rectRounded',
@@ -1192,9 +1206,9 @@ export class DashboardPage implements OnInit, OnDestroy {
             }
           },
           tooltip: {
-            backgroundColor: 'rgba(16, 11, 38, 0.95)',
+            backgroundColor: document.body.classList.contains('dark') ? 'rgba(16, 11, 38, 0.95)' : 'rgba(15, 23, 42, 0.95)',
             titleColor: '#ffffff',
-            bodyColor: '#e2e8f0',
+            bodyColor: document.body.classList.contains('dark') ? '#e2e8f0' : '#f8fafc',
             borderColor: 'rgba(255, 42, 109, 0.5)',
             borderWidth: 1,
             padding: 12,

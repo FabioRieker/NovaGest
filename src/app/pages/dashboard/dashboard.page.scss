@@ -1,7 +1,7 @@
 .dashboard-content {
-  --background: #0d0b1a;
-  background-color: #0d0b1a;
-  color: #f8fafc;
+  --background: var(--ambient-bg-color, #0d0b1a);
+  background-color: var(--ambient-bg-color, #0d0b1a);
+  color: var(--cyber-text-main, #f8fafc);
   position: relative;
   overflow-x: hidden;
 }
@@ -23,7 +23,7 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(100px);
-    opacity: 0.22;
+    opacity: var(--ambient-nebula-opacity, 0.22);
   }
 
   .glow-1 {
@@ -70,16 +70,18 @@
 
 /* Utilidad Glassmorphism Universal */
 .glass-window {
-  background: rgba(21, 15, 46, 0.78);
+  background: var(--glass-window-bg, rgba(21, 15, 46, 0.78));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.09));
+  box-shadow: var(--card-shadow-ambient, 0 15px 35px -5px rgba(0, 0, 0, 0.6));
+  color: var(--cyber-text-main, #f8fafc);
 }
 
 .glass-subcard {
-  background: rgba(26, 19, 56, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--glass-subcard-bg, rgba(26, 19, 56, 0.75));
+  border: 1px solid var(--glass-subcard-border, rgba(255, 255, 255, 0.07));
+  color: var(--cyber-text-main, #f8fafc);
 }
 
 /* ==========================================================================
@@ -2323,6 +2325,166 @@
         &:hover {
           box-shadow: 0 0 18px rgba(255, 42, 109, 0.6);
         }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   ADAPTACIÓN UNIVERSAL A MODO CLARO (LUMINOUS PEARL GLASS)
+   Garantiza paridad estética, contraste WCAG y máxima legibilidad
+   ========================================================================== */
+:host-context(body:not(.dark)) {
+  .cyber-grid-overlay {
+    background-image:
+      linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+  }
+
+  .cyber-top-bar {
+    box-shadow: 0 10px 30px -5px rgba(225, 29, 72, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.04) !important;
+
+    .dashboard-title {
+      color: var(--cyber-text-main) !important;
+    }
+  }
+
+  .cyber-search-pill, .cyber-user-pill, .action-icon-btn {
+    background: var(--cyber-pill-bg) !important;
+    border-color: var(--cyber-pill-border) !important;
+    color: var(--cyber-text-main) !important;
+
+    input {
+      color: var(--cyber-text-main) !important;
+      &::placeholder {
+        color: #94a3b8 !important;
+      }
+    }
+  }
+
+  .cyber-user-pill .user-info-text .user-name {
+    color: var(--cyber-text-main) !important;
+  }
+
+  .widget-box {
+    box-shadow: 0 10px 25px -4px rgba(225, 29, 72, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+
+    .widget-headline-title {
+      color: var(--cyber-text-main) !important;
+    }
+
+    .glass-subcard, .kpi-card-sub, .gauge-box, .activity-row-item, .header-period-chips {
+      background: var(--glass-subcard-bg) !important;
+      border-color: var(--glass-subcard-border) !important;
+    }
+
+    .header-period-chip {
+      color: var(--cyber-text-sub) !important;
+      &:hover { color: var(--cyber-text-main) !important; }
+      &.active { color: #ffffff !important; }
+    }
+
+    .kpi-val, .gauge-val, .act-action, .cal-day-cell:not(.empty-day), .stock-num, .item-title, .op-percentage {
+      color: var(--cyber-text-main) !important;
+    }
+
+    .kpi-lbl, .gauge-lbl, .act-time, .item-msg, .cal-header-day, .op-stat-label, .quick-label {
+      color: var(--cyber-text-sub) !important;
+    }
+
+    .critical-table {
+      th {
+        color: var(--cyber-text-sub) !important;
+        border-color: var(--glass-subcard-border) !important;
+      }
+      td {
+        color: var(--cyber-text-main) !important;
+        border-color: var(--glass-subcard-border) !important;
+      }
+      tr:hover {
+        background: rgba(225, 29, 72, 0.04) !important;
+      }
+    }
+
+    .progress-track {
+      background: rgba(15, 23, 42, 0.08) !important;
+    }
+
+    .quick-action-card {
+      background: var(--glass-subcard-bg) !important;
+      border-color: var(--glass-subcard-border) !important;
+
+      &:hover {
+        background: #ffffff !important;
+        border-color: var(--ion-color-primary) !important;
+      }
+    }
+  }
+
+  .notifications-dropdown {
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15) !important;
+
+    .notif-header {
+      border-color: rgba(15, 23, 42, 0.08) !important;
+      h4 {
+        color: var(--cyber-text-main) !important;
+      }
+    }
+
+    .notif-item {
+      background: var(--glass-subcard-bg) !important;
+      border-color: var(--glass-subcard-border) !important;
+
+      .item-title {
+        color: var(--cyber-text-main) !important;
+      }
+      .item-msg {
+        color: var(--cyber-text-sub) !important;
+      }
+    }
+  }
+
+  .catalog-drawer {
+    background: rgba(255, 255, 255, 0.96) !important;
+    border-left: 1px solid var(--glass-border) !important;
+    box-shadow: -15px 0 45px rgba(15, 23, 42, 0.15) !important;
+
+    .drawer-header {
+      border-color: rgba(15, 23, 42, 0.08) !important;
+      h3 { color: var(--cyber-text-main) !important; }
+      p { color: var(--cyber-text-sub) !important; }
+    }
+
+    .catalog-search-box input {
+      background: #ffffff !important;
+      border-color: rgba(225, 29, 72, 0.2) !important;
+      color: var(--cyber-text-main) !important;
+    }
+
+    .catalog-item-card {
+      background: var(--glass-subcard-bg) !important;
+      border-color: var(--glass-subcard-border) !important;
+
+      h4 { color: var(--cyber-text-main) !important; }
+      p { color: var(--cyber-text-sub) !important; }
+    }
+  }
+
+  .canvas-edit-ribbon {
+    box-shadow: 0 10px 30px rgba(225, 29, 72, 0.08) !important;
+
+    .ribbon-instruction, .templates-title {
+      color: var(--cyber-text-main) !important;
+    }
+
+    .tpl-pill-btn {
+      background: var(--glass-subcard-bg) !important;
+      border-color: var(--glass-subcard-border) !important;
+      color: var(--cyber-text-main) !important;
+
+      &:hover, &.active {
+        background: #e11d48 !important;
+        color: #ffffff !important;
       }
     }
   }

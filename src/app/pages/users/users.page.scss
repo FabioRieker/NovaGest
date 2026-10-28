@@ -652,3 +652,70 @@
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ==========================================================================
+   ADAPTACIÓN UNIVERSAL A MODO CLARO (GESTIÓN DE USUARIOS)
+   ========================================================================== */
+:host-context(body:not(.dark)) {
+  .users-content {
+    --background: var(--ambient-bg-color, #f8fafc);
+    background-color: var(--ambient-bg-color, #f8fafc);
+  }
+
+  .users-header-bar {
+    .page-title { color: var(--cyber-text-main) !important; }
+    .page-subtitle { color: var(--cyber-text-sub) !important; }
+  }
+
+  .cyber-segment {
+    background: var(--glass-subcard-bg) !important;
+    border-color: var(--glass-border) !important;
+
+    ion-segment-button {
+      --color: var(--cyber-text-sub);
+      --color-checked: #ffffff;
+    }
+  }
+
+  .kpi-card {
+    background: var(--glass-window-bg) !important;
+    border-color: var(--glass-border) !important;
+    box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+
+    .kpi-value { color: var(--cyber-text-main) !important; }
+    .kpi-title { color: var(--cyber-text-sub) !important; }
+  }
+
+  .cyber-form-card {
+    background: var(--glass-window-bg) !important;
+    border-color: var(--glass-border) !important;
+    box-shadow: 0 20px 40px -10px rgba(225, 29, 72, 0.08) !important;
+
+    ion-card-title { color: var(--cyber-text-main) !important; }
+    ion-card-subtitle { color: var(--cyber-text-sub) !important; }
+
+    .custom-cyber-input {
+      background: #ffffff !important;
+      border-color: rgba(225, 29, 72, 0.2) !important;
+      input { color: var(--cyber-text-main) !important; }
+    }
+
+    .custom-cyber-select {
+      background: #ffffff !important;
+      border-color: rgba(225, 29, 72, 0.2) !important;
+      ion-select { color: var(--cyber-text-main) !important; }
+    }
+
+    .field-label { color: var(--cyber-text-main) !important; }
+  }
+
+  .user-card {
+    background: var(--glass-window-bg) !important;
+    border-color: var(--glass-border) !important;
+    box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.05) !important;
+
+    .user-name { color: var(--cyber-text-main) !important; }
+    .user-email { color: var(--cyber-text-sub) !important; }
+    .user-detail-row { color: var(--cyber-text-sub) !important; }
+  }
+}
