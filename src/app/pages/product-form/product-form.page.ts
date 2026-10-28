@@ -17,17 +17,8 @@ import {
   IonButtons,
   IonBackButton,
   IonContent,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
-  IonItem,
-  IonLabel,
-  IonInput,
   IonSelect,
   IonSelectOption,
-  IonTextarea,
   IonButton,
   IonIcon,
   IonSpinner
@@ -41,7 +32,14 @@ import {
   mailOutline,
   checkmarkCircleOutline,
   alertCircleOutline,
-  logOutOutline
+  logOutOutline,
+  cashOutline,
+  layersOutline,
+  gridOutline,
+  documentTextOutline,
+  imageOutline,
+  cloudUploadOutline,
+  trashOutline
 } from 'ionicons/icons';
 import { Observable, timer } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
@@ -89,17 +87,8 @@ export function skuAsyncValidator(sqlService: SqlRestService, excludeId?: string
     IonButtons,
     IonBackButton,
     IonContent,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
-    IonItem,
-    IonLabel,
-    IonInput,
     IonSelect,
     IonSelectOption,
-    IonTextarea,
     IonButton,
     IonIcon,
     IonSpinner
@@ -130,7 +119,14 @@ export class ProductFormPage implements OnInit {
       mailOutline,
       checkmarkCircleOutline,
       alertCircleOutline,
-      logOutOutline
+      logOutOutline,
+      cashOutline,
+      layersOutline,
+      gridOutline,
+      documentTextOutline,
+      imageOutline,
+      cloudUploadOutline,
+      trashOutline
     });
   }
 
