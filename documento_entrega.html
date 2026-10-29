@@ -6,10 +6,7 @@
   <style>
     @page {
       size: A4;
-      margin: 20mm 15mm 20mm 15mm;
-      @bottom-right {
-        content: "Página " counter(page);
-      }
+      margin: 15mm 15mm 15mm 15mm;
     }
 
     * {
@@ -21,8 +18,8 @@
     body {
       font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
       color: #0f172a;
-      line-height: 1.5;
-      font-size: 11pt;
+      line-height: 1.45;
+      font-size: 10.5pt;
       margin: 0;
       padding: 0;
     }
@@ -32,8 +29,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-height: 90vh;
-      padding: 40px 20px;
+      min-height: 92vh;
+      padding: 35px 25px;
       border: 3px solid #1e3a8a;
       border-radius: 12px;
       background: linear-gradient(180deg, #f8fafc 0%, #eff6ff 100%);
@@ -41,55 +38,55 @@
     }
 
     .institution {
-      font-size: 12pt;
+      font-size: 11pt;
       font-weight: 700;
       color: #1e3a8a;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .course-title {
-      font-size: 14pt;
+      font-size: 13pt;
       font-weight: 600;
       color: #475569;
-      margin-bottom: 30px;
+      margin-bottom: 24px;
     }
 
     .badge-doc {
       display: inline-block;
       background: #2563eb;
       color: #ffffff;
-      padding: 8px 18px;
+      padding: 6px 16px;
       border-radius: 20px;
-      font-size: 11pt;
+      font-size: 10pt;
       font-weight: 700;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
     .project-name {
-      font-size: 24pt;
+      font-size: 26pt;
       font-weight: 800;
       color: #0f172a;
-      line-height: 1.2;
-      margin: 0 0 16px 0;
+      line-height: 1.15;
+      margin: 0 0 12px 0;
     }
 
     .project-sub {
-      font-size: 13pt;
+      font-size: 12pt;
       color: #334155;
       max-width: 650px;
-      margin: 0 auto 50px auto;
+      margin: 0 auto 35px auto;
     }
 
     .student-card {
       background: #ffffff;
       border: 1px solid #cbd5e1;
       border-radius: 10px;
-      padding: 20px 30px;
-      max-width: 500px;
+      padding: 18px 26px;
+      max-width: 520px;
       margin: 0 auto;
       text-align: left;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -98,8 +95,8 @@
     .student-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 10.5pt;
+      margin-bottom: 6px;
+      font-size: 10pt;
     }
 
     .student-row strong {
@@ -107,7 +104,7 @@
     }
 
     .content-page {
-      padding: 10px 0;
+      padding: 8px 0;
       page-break-after: always;
     }
 
@@ -116,42 +113,45 @@
     }
 
     h2 {
-      font-size: 15pt;
+      font-size: 13.5pt;
       font-weight: 700;
       color: #1e3a8a;
       border-bottom: 2px solid #2563eb;
-      padding-bottom: 6px;
-      margin-top: 24px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      padding-bottom: 4px;
+      margin-top: 18px;
+      margin-bottom: 10px;
     }
 
     h3 {
-      font-size: 12pt;
+      font-size: 11pt;
       font-weight: 700;
       color: #1e293b;
-      margin-top: 16px;
-      margin-bottom: 8px;
+      margin-top: 14px;
+      margin-bottom: 6px;
     }
 
     p {
-      margin: 0 0 10px 0;
+      margin: 0 0 8px 0;
       color: #334155;
       text-align: justify;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: underline;
+      font-weight: 600;
     }
 
     .link-card {
       background: #f1f5f9;
       border-left: 4px solid #2563eb;
-      padding: 12px 16px;
-      margin: 10px 0 16px 0;
-      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin: 8px 0 12px 0;
+      border-radius: 0 6px 6px 0;
     }
 
     .link-title {
-      font-size: 10pt;
+      font-size: 9.5pt;
       font-weight: 700;
       color: #1e3a8a;
       text-transform: uppercase;
@@ -159,30 +159,31 @@
     }
 
     .link-url {
-      font-size: 11pt;
+      font-size: 10.5pt;
       font-weight: 600;
       color: #2563eb;
       word-break: break-all;
       margin-top: 2px;
+      display: block;
     }
 
     .custom-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 12px 0 20px 0;
-      font-size: 9.5pt;
+      margin: 10px 0 16px 0;
+      font-size: 9pt;
     }
 
     .custom-table th {
       background: #1e3a8a;
       color: #ffffff;
-      padding: 8px 10px;
+      padding: 7px 9px;
       text-align: left;
       font-weight: 600;
     }
 
     .custom-table td {
-      padding: 8px 10px;
+      padding: 7px 9px;
       border-bottom: 1px solid #e2e8f0;
       color: #334155;
     }
@@ -195,7 +196,7 @@
       display: inline-block;
       padding: 2px 8px;
       border-radius: 12px;
-      font-size: 8.5pt;
+      font-size: 8pt;
       font-weight: 700;
       text-transform: uppercase;
     }
@@ -206,30 +207,30 @@
 
     .score-banner {
       display: flex;
-      gap: 16px;
-      margin: 16px 0;
+      gap: 12px;
+      margin: 12px 0;
     }
 
     .score-box {
       flex: 1;
       background: #ffffff;
       border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      padding: 14px;
+      border-radius: 6px;
+      padding: 10px;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
 
     .score-number {
-      font-size: 26pt;
+      font-size: 22pt;
       font-weight: 800;
-      color: #059669;
+      color: #047857;
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .score-label {
-      font-size: 9.5pt;
+      font-size: 8.5pt;
       font-weight: 700;
       color: #475569;
       text-transform: uppercase;
@@ -238,14 +239,14 @@
     .check-list {
       list-style: none;
       padding: 0;
-      margin: 10px 0;
+      margin: 8px 0;
     }
 
     .check-list li {
       position: relative;
-      padding-left: 24px;
-      margin-bottom: 8px;
-      font-size: 10pt;
+      padding-left: 20px;
+      margin-bottom: 6px;
+      font-size: 9.5pt;
       color: #334155;
     }
 
@@ -253,7 +254,7 @@
       content: "✓";
       position: absolute;
       left: 0;
-      color: #059669;
+      color: #047857;
       font-weight: 800;
     }
   </style>
@@ -269,14 +270,14 @@
     
     <h1 class="project-name">NovaGest ERP</h1>
     <div class="project-sub">
-      Diseño, Desarrollo y Despliegue de Sistema de Gestión Multiplataforma (PWA/Híbrida)
-      con Arquitectura Reactiva, Control RBAC y Cumplimiento WCAG
+      Sistema de Gestión Empresarial Multiplataforma con Arquitectura Reactiva en Angular 22,
+      Ionic 9, Supabase (PostgreSQL + Realtime + Storage), Control RBAC y Accesibilidad WCAG 2.2 AA
     </div>
 
     <div class="student-card">
       <div class="student-row">
         <span>Módulo Profesional:</span>
-        <strong>Desarrollo de Interfaces (0488)</strong>
+        <strong>Desarrollo de Interfaces (Código: 0488)</strong>
       </div>
       <div class="student-row">
         <span>Alumno:</span>
@@ -291,80 +292,140 @@
         <strong>Actividad Individual 1 (Entregable Final)</strong>
       </div>
       <div class="student-row">
-        <span>Fecha de Convocatoria:</span>
-        <strong>Octubre 2026</strong>
+        <span>Convocatoria:</span>
+        <strong>Curso Académico 2026/2027</strong>
       </div>
     </div>
   </div>
 
-  <!-- PÁGINA 1: ENLACES, CREDENCIALES Y EVIDENCIAS DE LIGHTHOUSE -->
+  <!-- PÁGINA 1: SECCIONES 1 Y 2 -->
   <div class="content-page">
-    <h2>1. Enlaces Oficiales y Evidencias del Proyecto (RA 7)</h2>
+    <h2>1. Introducción</h2>
     <p>
-      En cumplimiento estricto con los requerimientos de la actividad individual, se facilitan a continuación los accesos directos al repositorio de código fuente con su historial de versiones y al despliegue en producción accesible:
+      <strong>NovaGest ERP</strong> es una solución integral de gestión empresarial diseñada y desarrollada como parte de la Actividad Individual del módulo de Desarrollo de Interfaces. La aplicación combina la robustez de <strong>Angular 22</strong> (arquitectura moderna basada en Standalone Components y Angular Signals) con la flexibilidad multiplataforma de <strong>Ionic 9</strong> y la potencia de <strong>Supabase</strong> como backend unificado para persistencia relacional PostgreSQL, reactividad en tiempo real (WebSockets) y almacenamiento de objetos.
+    </p>
+    <p>
+      El sistema responde a las necesidades críticas de control de inventario, trazabilidad de operaciones, análisis consolidado de métricas ejecutivas mediante gráficos interactivos y exportación estandarizada de informes en formatos PDF y CSV, garantizando en todo momento altos estándares de seguridad, usabilidad y accesibilidad universal.
     </p>
 
-    <div class="link-card">
-      <div class="link-title">1.1. URL del Repositorio de Código Fuente (GitHub)</div>
-      <div class="link-url">https://github.com/FabioRieker/NovaGest</div>
-      <small style="color:#64748b;">Repositorio público con flujo Git Flow completo (ramas main, develop y feature branches) y pipeline de CI/CD automatizado con GitHub Actions.</small>
-    </div>
-
-    <div class="link-card">
-      <div class="link-title">1.2. URL de la Aplicación en Producción (Cloud Deployment)</div>
-      <div class="link-url">https://novagest-erp.vercel.app</div>
-      <small style="color:#64748b;">Despliegue funcional en producción sin configuraciones locales requeridas, con soporte de enrutamiento SPA y Service Worker PWA.</small>
-    </div>
-
-    <div class="link-card">
-      <div class="link-title">1.3. Documentación Técnica Automatizada (Compodoc)</div>
-      <div class="link-url">https://github.com/FabioRieker/NovaGest/tree/main/documentation</div>
-      <small style="color:#64748b;">Documentación HTML generada automáticamente mediante Compodoc integrada en el árbol del proyecto.</small>
-    </div>
-
-    <h2>2. Credenciales de Acceso Oficiales (RBAC)</h2>
+    <h2>2. Objetivos</h2>
     <p>
-      El sistema cuenta con dos perfiles de usuario preconfigurados para validar exhaustivamente el control de acceso basado en roles:
+      El proyecto cubre de forma rigurosa los 33 Criterios de Evaluación (CE) y Resultados de Aprendizaje (RA 1 a RA 7) del currículo oficial:
+    </p>
+    <ul class="check-list">
+      <li><strong>Arquitectura MVVM y Rendimiento (RA 1 y RA 2):</strong> Separación desacoplada entre vista, lógica y datos con enrutamiento lazy-loading (<code>loadComponent</code>), formularios reactivos con validaciones síncronas/asíncronas y detección de cambios eficiente con <code>OnPush</code>.</li>
+      <li><strong>Componentización Reutilizable (RA 3):</strong> Desarrollo de componentes visuales agnósticos (<code>&lt;app-data-table&gt;</code> y <code>&lt;app-stat-widget&gt;</code>) con propiedades <code>@Input()</code> y eventos <code>@Output()</code> tipados y consumidos.</li>
+      <li><strong>Accesibilidad y Diseño Adaptativo (RA 4):</strong> Maquetación mobile-first sin desbordamientos horizontales, conformidad WCAG 2.2 AA con contrastes de color &gt; 4.5:1, navegación por teclado integral, skip link y semántica WAI-ARIA.</li>
+      <li><strong>Persistencia y Visualización de Datos (RA 5):</strong> Consumo asíncrono con PostgREST, canal de auditoría en vivo mediante Supabase Realtime, colección documental <code>jsonb</code>, cuadros de mando con Chart.js y exportaciones PDF/CSV protegidas contra inyecciones de fórmulas.</li>
+      <li><strong>Calidad, Documentación y Despliegue (RA 6 y RA 7):</strong> Flujo Git Flow con commits convencionales, documentación técnica exhaustiva generada mediante Compodoc (39 entidades), pipeline automatizado en GitHub Actions y despliegue funcional en producción en la nube.</li>
+    </ul>
+  </div>
+
+  <!-- PÁGINA 2: SECCIÓN 3 -->
+  <div class="content-page">
+    <h2>3. Tecnologías y Arquitectura</h2>
+    <p>
+      La arquitectura del sistema está cimentada sobre tecnologías modernas del ecosistema web y móvil:
     </p>
 
     <table class="custom-table">
       <thead>
         <tr>
-          <th>Rol de Usuario</th>
-          <th>Correo Electrónico</th>
-          <th>Contraseña</th>
-          <th>Alcance de Permisos y Vistas</th>
+          <th>Capa</th>
+          <th>Tecnología / Herramienta</th>
+          <th>Versión</th>
+          <th>Función y Aportación al Proyecto</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><span class="pill pill-blue">Administrador</span></td>
-          <td><strong>admin@empresa.com</strong></td>
-          <td><code>Admin1234*</code></td>
-          <td>Acceso total: Cuadro de Mando Ejecutivo, Gráficos Chart.js, Altas/Bajas/Modificaciones de Inventario, Informes y Auditoría Supabase Realtime en vivo.</td>
+          <td><strong>Frontend Core</strong></td>
+          <td>Angular (Standalone + Signals)</td>
+          <td>22.2.3</td>
+          <td>Estructuración declarativa, reactividad sin fugas de memoria y control de ciclo de vida con OnPush.</td>
         </tr>
         <tr>
-          <td><span class="pill pill-amber">Usuario Estándar</span></td>
-          <td><strong>user@empresa.com</strong></td>
-          <td><code>User1234*</code></td>
-          <td>Acceso restringido: Consulta de catálogo con filtros, ordenación de columnas, detalle de artículos, informes y manual de ayuda.</td>
+          <td><strong>Framework UI</strong></td>
+          <td>@ionic/angular</td>
+          <td>^9.0.0</td>
+          <td>Componentes visuales responsivos adaptados a web de escritorio y dispositivos móviles.</td>
+        </tr>
+        <tr>
+          <td><strong>Backend / BD</strong></td>
+          <td>Supabase (PostgreSQL 15+)</td>
+          <td>^2.118.0</td>
+          <td>Persistencia relacional, tablas documentales JSONB, API REST PostgREST y Row Level Security (RLS).</td>
+        </tr>
+        <tr>
+          <td><strong>Realtime</strong></td>
+          <td>Supabase Realtime (WebSockets)</td>
+          <td>v2</td>
+          <td>Transmisión continua de eventos de auditoría y sincronización bidireccional inmediata.</td>
+        </tr>
+        <tr>
+          <td><strong>Almacenamiento</strong></td>
+          <td>Supabase Storage</td>
+          <td>v2</td>
+          <td>Bucket <code>product-images</code> para subida y servicio de fotografías de catálogo.</td>
+        </tr>
+        <tr>
+          <td><strong>Gráficos</strong></td>
+          <td>Chart.js</td>
+          <td>^4.6.1</td>
+          <td>Visualización interactiva de balance de existencias y distribución por categorías.</td>
+        </tr>
+        <tr>
+          <td><strong>Exportación</strong></td>
+          <td>jsPDF + AutoTable</td>
+          <td>^4.2.1 / ^5.0.9</td>
+          <td>Generación formal de informes tabulados con metadatos y paginación en PDF.</td>
+        </tr>
+        <tr>
+          <td><strong>Documentación</strong></td>
+          <td>@compodoc/compodoc</td>
+          <td>^2.0.0</td>
+          <td>Generación automatizada de documentación técnica con 39 entidades tipadas.</td>
+        </tr>
+        <tr>
+          <td><strong>CI/CD</strong></td>
+          <td>GitHub Actions</td>
+          <td>v4</td>
+          <td>Pipeline automatizado con linting, tests unitarios, gate de documentación y build.</td>
+        </tr>
+        <tr>
+          <td><strong>Despliegue</strong></td>
+          <td>Vercel Cloud Platform</td>
+          <td>v2</td>
+          <td>Alojamiento en producción con soporte de enrutamiento SPA (rewrites) y compresión gzip/brotli.</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>3. Informe de Accesibilidad y Rendimiento (Google Lighthouse - RA 4)</h2>
+    <h3>Seguridad y Control de Acceso por Roles (RBAC)</h3>
     <p>
-      Auditoría técnica efectuada con Google Lighthouse sobre la aplicación híbrida, superando holgadamente el requisito de 90/100 y alcanzando la franja de <strong>Sobresaliente (>95)</strong> establecida en la rúbrica de corrección oficial:
+      La seguridad está garantizada en origen: Row Level Security (RLS) habilitada en PostgreSQL con políticas que restringen la lectura y escritura a identidades verificadas mediante Supabase Auth y validación de rol con función <code>is_admin()</code> con <code>SECURITY DEFINER</code>. Se eliminaron contraseñas en texto plano y credenciales quemadas en el código fuente.
+    </p>
+  </div>
+
+  <!-- PÁGINA 3: SECCIÓN 4 -->
+  <div class="content-page">
+    <h2>4. Resultados y Conclusiones</h2>
+    <p>
+      Los ensayos forenses y las pruebas de auditoría automatizada confirman la solidez del producto final entregado:
     </p>
 
     <div class="score-banner">
       <div class="score-box">
-        <div class="score-number">95</div>
-        <div class="score-label">Accessibility (WCAG 2.1)</div>
+        <div class="score-number">100</div>
+        <div class="score-label">Accesibilidad Móvil (Lighthouse)</div>
+      </div>
+      <div class="score-box">
+        <div class="score-number">96</div>
+        <div class="score-label">Accesibilidad Escritorio</div>
       </div>
       <div class="score-box">
         <div class="score-number">100</div>
-        <div class="score-label">Best Practices</div>
+        <div class="score-label">Buenas Prácticas</div>
       </div>
       <div class="score-box">
         <div class="score-number">100</div>
@@ -373,53 +434,68 @@
     </div>
 
     <ul class="check-list">
-      <li><strong>Navegación por Teclado:</strong> Gestión completa del foco visible, orden de tabulación lógico y atajos interactivos.</li>
-      <li><strong>Semántica WAI-ARIA:</strong> Implementación de roles (table, region, feed, alert), etiquetas aria-label y regiones aria-live.</li>
-      <li><strong>Alto Contraste:</strong> Cumplimiento de ratios de contraste cromático superiores a 4.5:1 para modo claro y modo oscuro.</li>
+      <li><strong>Accesibilidad Universal Verificada:</strong> Ratios de contraste revisados a valores conformes con WCAG 2.2 AA (Crimson <code>#be123c</code> 6.29:1, Esmeralda <code>#047857</code> 5.48:1 y Ámbar <code>#b45309</code> 5.02:1). Enlace accesible de salto al contenido (<code>skip-link</code>), soporte de reducción de movimiento y jerarquía semántica rigurosa de encabezados <code>h1</code> &gt; <code>h2</code> &gt; <code>h3</code>.</li>
+      <li><strong>Control de Foco y Resiliencia en Formularios:</strong> Foco automático al primer elemento inválido (<code>focus-first-error</code>), gestión de tecla Escape en diálogos modales y nombres accesibles alineados con el texto visible (Label in Name).</li>
+      <li><strong>Protección de Datos y Secretos:</strong> Repositorio Git limpio de tokens JWT y claves privadas. Gestión mediante variables de entorno en tiempo de compilación y ejecución.</li>
+      <li><strong>Documentación Técnica Integral:</strong> Cobertura de Compodoc verificada en CI sobre 39 entidades (páginas, componentes, servicios, guards y modelos).</li>
     </ul>
+
+    <h3>Conclusiones</h3>
+    <p>
+      NovaGest ERP demuestra que es posible conjugar una interfaz atractiva de alto impacto visual con una estricta rigurosidad en seguridad informática, arquitectura de software mantenible y accesibilidad para todo tipo de usuarios.
+    </p>
   </div>
 
-  <!-- PÁGINA 2: RESUMEN DE CUMPLIMIENTO POR FASES -->
+  <!-- PÁGINA 4: SECCIÓN 5 -->
   <div class="content-page">
-    <h2>4. Justificación Técnica y Cumplimiento de la Rúbrica Oficial</h2>
+    <h2>5. Repositorio, Despliegue y Credenciales</h2>
+    <p>
+      Para facilitar la evaluación interactiva del docente, a continuación se detallan los accesos directos clicables al código fuente, a la plataforma en vivo y a los usuarios de prueba:
+    </p>
 
-    <h3>FASE 1: Estructuración y Renderizado Declarativo (RA 1 y RA 2) • Peso: 35%</h3>
-    <ul class="check-list">
-      <li><strong>Patrón Arquitectónico MVVM:</strong> Desacoplamiento estricto entre modelos de negocio, servicios reactivos y componentes de presentación utilizando Angular Standalone y Signals.</li>
-      <li><strong>Navegación y Carga Diferida (Lazy Loading):</strong> Implementación de <code>IonSplitPane</code> responsivo con carga diferida (<code>loadComponent</code>) en todas las rutas secundarias.</li>
-      <li><strong>Seguridad y Manejo Asíncrono de Tokens:</strong> Protección de rutas privadas con <code>authGuard</code> y <code>roleGuard</code>, inyección asíncrona de Bearer Tokens JWT mediante interceptor funcional HTTP y control automático de sesiones caducadas.</li>
-      <li><strong>Formularios Reactivos y Validaciones Asíncronas:</strong> Login y Alta de registros gestionados mediante <code>ReactiveFormsModule</code>, aplicando enlace de datos bidireccional controlado y validador asíncrono contra la base de datos (<code>skuAsyncValidator</code>) con gestión de estados dirty/touched y spinners visuales.</li>
-      <li><strong>Optimización de Renderizado:</strong> Empleo sistemático de <code>ChangeDetectionStrategy.OnPush</code> en componentes para prevenir ciclos innecesarios de detección de cambios.</li>
-    </ul>
+    <div class="link-card">
+      <div class="link-title">5.1. Repositorio Oficial de Código Fuente (GitHub)</div>
+      <a href="https://github.com/FabioRieker/NovaGest" class="link-url" target="_blank">https://github.com/FabioRieker/NovaGest</a>
+      <small style="color:#64748b;">Código completo con flujo Git Flow, ramas de auditoría y pipeline CI/CD activo con GitHub Actions.</small>
+    </div>
 
-    <h3>FASE 2: Componentización Visual y Lógica de Negocio (RA 3) • Peso: 15%</h3>
-    <ul class="check-list">
-      <li><strong>Componentes Visuales Independientes y Agnósticos:</strong>
-        <br>• <code>&lt;app-data-table&gt;</code>: Tabla avanzada con buscador reactivo con debounce de 250ms, ordenación bidireccional por cabeceras, paginación dinámica y botones de acción CRUD parametrizables.
-        <br>• <code>&lt;app-stat-widget&gt;</code>: Tarjeta métrica/KPI empresarial configurable con indicadores de tendencia porcentual, icono y eventos clickeables.
-      </li>
-      <li><strong>Gestión de Estado y Ciclo de Vida:</strong> Comunicación desacoplada mediante propiedades de entrada <code>@Input()</code> y emisión de eventos <code>@Output()</code> (EventEmitter), con liberación explícita de suscripciones en <code>ngOnDestroy</code> para evitar fugas de memoria.</li>
-    </ul>
+    <div class="link-card">
+      <div class="link-title">5.2. Aplicación Desplegada en Producción (Vercel)</div>
+      <a href="https://nova-gest-alpha.vercel.app" class="link-url" target="_blank">https://nova-gest-alpha.vercel.app</a>
+      <small style="color:#64748b;">Despliegue activo en la nube accesible de inmediato sin dependencias locales, con navegación SPA.</small>
+    </div>
 
-    <h3>FASE 3: Consumo de Datos y Generación de Informes (RA 5) • Peso: 15%</h3>
-    <ul class="check-list">
-      <li><strong>Concurrencia Asíncrona Dual con Supabase:</strong> Orquestación simultánea sin bloqueo de hilo mediante <code>forkJoin</code> de dos orígenes de datos en Supabase: API REST Relacional (PostgreSQL) y servicio de suscripción continua en tiempo real mediante Supabase Realtime WebSockets.</li>
-      <li><strong>Dashboard Interactivo:</strong> Cuadro de mando para Administrador con gráficos integrados mediante <strong>Chart.js</strong> (gráfico spline de balance financiero y gráfico donut de distribución por categorías) con reactividad ante filtros en tiempo real.</li>
-      <li><strong>Exportación Multiformato:</strong> Descarga de informes tabulados oficiales en <strong>PDF formal</strong> (mediante <code>jspdf-autotable</code> con encabezado corporativo) y <strong>CSV estandarizado</strong> (RFC 4180 codificado en UTF-8 con BOM para visualización inmediata en Microsoft Excel).</li>
-    </ul>
+    <div class="link-card">
+      <div class="link-title">5.3. Documentación Técnica Publicada (Compodoc)</div>
+      <a href="https://github.com/FabioRieker/NovaGest/tree/main/documentation" class="link-url" target="_blank">https://github.com/FabioRieker/NovaGest/tree/main/documentation</a>
+      <small style="color:#64748b;">Árbol de documentación técnica generado automáticamente accesible en el repositorio oficial.</small>
+    </div>
 
-    <h3>FASE 4: Usabilidad, Accesibilidad y Control de Calidad (RA 4) • Peso: 15%</h3>
-    <ul class="check-list">
-      <li><strong>Diseño Adaptativo Mobile-First:</strong> Maquetación fluida mediante <code>ion-grid</code>, <code>ion-row</code>, <code>ion-col</code> y Flexbox adaptada anatómicamente a smartphones, tablets y pantallas de escritorio.</li>
-      <li><strong>Conformidad WCAG:</strong> Control de contraste reglamentario, tipografía escalable en rem, foco visible universal (3px solid #2563eb) y atributos WAI-ARIA para lectores de pantalla.</li>
-    </ul>
-
-    <h3>FASE 5: Documentación, Control de Versiones y Despliegue (RA 6 y RA 7) • Peso: 20%</h3>
-    <ul class="check-list">
-      <li><strong>Control de Versiones Git Flow:</strong> Gestión estricta de ramas <code>main</code>, <code>develop</code> y ramas funcionales individuales (<code>feature/fase1-auth-routing</code>, <code>feature/fase2-reusable-components</code>, etc.).</li>
-      <li><strong>Documentación Técnica y Manual de Usuario:</strong> Generación automatizada con Compodoc, Manual de Usuario en Markdown (<code>MANUAL_USUARIO.md</code>) y componente de "Ayuda" embebido directamente dentro de la aplicación.</li>
-      <li><strong>Pipeline CI/CD:</strong> Flujo automatizado configurado en <code>.github/workflows/ci.yml</code> que ejecuta pruebas unitarias Vitest bloqueantes, compila Compodoc y genera el bundle optimizado de producción.</li>
-    </ul>
+    <h3>Credenciales de Evaluación por Rol (RBAC)</h3>
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Rol</th>
+          <th>Email de Acceso</th>
+          <th>Contraseña</th>
+          <th>Vistas y Privilegios Asignados</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pill pill-blue">Administrador</span></td>
+          <td><strong>admin@empresa.com</strong></td>
+          <td><code>Admin1234*</code></td>
+          <td>Acceso total: Cuadro de Mando Ejecutivo, Gráficos Chart.js, Altas/Bajas/Modificaciones de Inventario, Gestión de Usuarios y Auditoría Supabase Realtime en vivo.</td>
+        </tr>
+        <tr>
+          <td><span class="pill pill-amber">Usuario Estándar</span></td>
+          <td><strong>user@empresa.com</strong></td>
+          <td><code>User1234*</code></td>
+          <td>Acceso operativo: Catálogo de productos con filtros, ordenación de columnas, detalle de artículos, informes descargables y manual de ayuda.</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 </body>
