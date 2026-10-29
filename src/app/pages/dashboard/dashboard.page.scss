@@ -184,10 +184,11 @@
         transform: translateY(-2px);
       }
 
-      &.customize-btn {
-        width: auto;
+      &.customize-btn, &.edit-mode-btn, &.modules-btn {
+        width: auto !important;
         padding: 0 14px;
         gap: 6px;
+        white-space: nowrap;
         background: rgba(255, 42, 109, 0.12);
         border-color: rgba(255, 42, 109, 0.35);
         color: #ff2a6d;
@@ -196,6 +197,7 @@
           font-size: 0.78rem;
           font-weight: 800;
           letter-spacing: 0.03em;
+          white-space: nowrap;
         }
 
         &.active, &:hover {

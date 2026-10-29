@@ -85,6 +85,25 @@
   --chart-grid-color: rgba(15, 23, 42, 0.06);
   --chart-tick-color: #64748b;
   --chart-tooltip-bg: rgba(15, 23, 42, 0.95);
+
+  // Tokens de paridad interactiva en Modo Claro
+  --btn-action-bg: #ffffff;
+  --btn-action-border: rgba(15, 23, 42, 0.12);
+  --btn-action-color: #334155;
+  --btn-action-hover-bg: #f1f5f9;
+  --user-pill-bg: #ffffff;
+  --user-pill-border: rgba(15, 23, 42, 0.12);
+  --gauge-track-color: rgba(15, 23, 42, 0.08);
+  --toggle-group-bg: #f1f5f9;
+  --toggle-group-border: rgba(15, 23, 42, 0.08);
+  --toggle-btn-color: #475569;
+  --activity-bg: #f8fafc;
+  --activity-border: rgba(15, 23, 42, 0.06);
+  --meter-track-bg: #e2e8f0;
+  --cal-btn-bg: #f1f5f9;
+  --cal-btn-border: rgba(15, 23, 42, 0.1);
+  --dropdown-bg: #ffffff;
+  --dropdown-border: rgba(190, 18, 60, 0.2);
 }
 
 // Variables para Modo Oscuro Activado mediante clase .dark (Obsidian & Velvet Ruby con Máxima Legibilidad WCAG)
@@ -176,4 +195,23 @@ body.dark {
   --chart-grid-color: rgba(255, 255, 255, 0.08);
   --chart-tick-color: #94a3b8;
   --chart-tooltip-bg: rgba(18, 13, 40, 0.95);
+
+  // Tokens de paridad interactiva en Modo Oscuro
+  --btn-action-bg: #181236;
+  --btn-action-border: rgba(255, 255, 255, 0.1);
+  --btn-action-color: #cbd5e1;
+  --btn-action-hover-bg: #251b54;
+  --user-pill-bg: #181236;
+  --user-pill-border: rgba(255, 255, 255, 0.1);
+  --gauge-track-color: rgba(255, 255, 255, 0.1);
+  --toggle-group-bg: #181236;
+  --toggle-group-border: rgba(255, 255, 255, 0.1);
+  --toggle-btn-color: #94a3b8;
+  --activity-bg: #181236;
+  --activity-border: rgba(255, 255, 255, 0.08);
+  --meter-track-bg: #181236;
+  --cal-btn-bg: #181236;
+  --cal-btn-border: rgba(255, 255, 255, 0.1);
+  --dropdown-bg: #150f2e;
+  --dropdown-border: rgba(255, 42, 109, 0.35);
 }

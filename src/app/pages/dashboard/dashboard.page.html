@@ -274,13 +274,6 @@
                   <span class="widget-cat-tag">{{ widget.category }}</span>
                   <h3 class="widget-headline-title">{{ widget.title }}</h3>
                 </div>
-                @if (widget.id === 'timeline_wave') {
-                  <div class="header-period-chips">
-                    <button class="header-period-chip" [class.active]="filterPeriod() === '7d'" (click)="setPeriod('7d')">7D</button>
-                    <button class="header-period-chip" [class.active]="filterPeriod() === '30d'" (click)="setPeriod('30d')">30D</button>
-                    <button class="header-period-chip" [class.active]="filterPeriod() === 'year'" (click)="setPeriod('year')">2026</button>
-                  </div>
-                }
               </div>
             }
 

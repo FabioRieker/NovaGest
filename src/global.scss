@@ -369,6 +369,263 @@ body.dark {
   }
 }
 
+/* ==========================================================================
+   COHERENCIA VISUAL Y CONTRASTE EN MODO CLARO (WCAG AA)
+   ========================================================================== */
+body:not(.dark) {
+  // Cuadro de Mando en Modo Claro
+  .dashboard-content {
+    --background: #f8fafc !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+  }
+
+  .ambient-nebula-bg {
+    opacity: 0.08 !important;
+    .cyber-grid-overlay {
+      background-image:
+        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+    }
+  }
+
+  .glass-window {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(225, 29, 72, 0.12) !important;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+    color: #0f172a !important;
+  }
+
+  .glass-subcard {
+    background: #ffffff !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03) !important;
+    color: #0f172a !important;
+  }
+
+  .dashboard-title, .widget-headline-title {
+    color: #0f172a !important;
+  }
+
+  .breadcrumb-label, .widget-cat-tag {
+    color: #be123c !important;
+  }
+
+  .kpi-number {
+    color: #0f172a !important;
+  }
+
+  .kpi-label {
+    color: #475569 !important;
+    font-weight: 700 !important;
+  }
+
+  .kpi-footnote {
+    color: #64748b !important;
+  }
+
+  .gauge-title {
+    color: #0f172a !important;
+  }
+
+  .gauge-sub {
+    color: #475569 !important;
+  }
+
+  .gauge-val {
+    color: #0f172a !important;
+  }
+
+  .gauge-svg circle.gauge-bg {
+    stroke: rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .chart-subtitle-mini, .feed-sub {
+    color: #475569 !important;
+  }
+
+  // Actividades en vivo en Modo Claro (fondo limpio y texto legible)
+  .activities-scroll-feed .activity-row {
+    background: #f8fafc !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    border-left: 3px solid #0284c7 !important;
+
+    &.sev-warning { border-left-color: #b45309 !important; }
+    &.sev-critical { border-left-color: #be123c !important; }
+
+    .act-time-col {
+      color: #64748b !important;
+    }
+
+    .act-tag {
+      color: #be123c !important;
+    }
+
+    .act-entity {
+      color: #334155 !important;
+    }
+
+    .act-desc {
+      color: #0f172a !important;
+    }
+
+    .act-user {
+      color: #64748b !important;
+    }
+  }
+
+  // Capacidad operativa de almacenes en Modo Claro
+  .operations-content-inner {
+    .meter-name {
+      color: #0f172a !important;
+    }
+    .meter-detail {
+      color: #475569 !important;
+    }
+    .meter-track {
+      background: #e2e8f0 !important;
+    }
+    .meter-knob {
+      border: 2px solid #ffffff !important;
+    }
+  }
+
+  // Calendario en Modo Claro
+  .calendar-content-inner {
+    .cal-nav-btn {
+      background: #f1f5f9 !important;
+      border: 1px solid rgba(15, 23, 42, 0.1) !important;
+      color: #0f172a !important;
+
+      &:hover {
+        background: #be123c !important;
+        color: #ffffff !important;
+      }
+    }
+
+    .cal-month-title {
+      color: #0f172a !important;
+    }
+
+    .cal-weekdays {
+      color: #be123c !important;
+    }
+
+    .cal-day-cell {
+      color: #1e293b !important;
+
+      &:not(.empty-cell):hover {
+        background: #f1f5f9 !important;
+      }
+
+      &.selected-cell {
+        background: #be123c !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  // Barra de acciones y búsqueda en cabecera
+  .cyber-search-pill {
+    background: #ffffff !important;
+    border: 1px solid rgba(190, 18, 60, 0.25) !important;
+
+    input {
+      color: #0f172a !important;
+      &::placeholder {
+        color: #64748b !important;
+      }
+    }
+  }
+
+  .action-icon-btn {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.12) !important;
+    color: #334155 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04) !important;
+
+    &:hover {
+      background: #f1f5f9 !important;
+      color: #be123c !important;
+      border-color: #be123c !important;
+    }
+
+    &.edit-mode-btn, &.modules-btn {
+      background: rgba(190, 18, 60, 0.08) !important;
+      border: 1px solid rgba(190, 18, 60, 0.25) !important;
+      color: #be123c !important;
+
+      &.active, &:hover {
+        background: #be123c !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  .cyber-user-pill {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.12) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04) !important;
+
+    .user-name {
+      color: #0f172a !important;
+    }
+
+    .user-role {
+      color: #be123c !important;
+    }
+  }
+
+  .period-toggle-group {
+    background: #f1f5f9 !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+
+    .period-btn {
+      color: #475569 !important;
+
+      &.active {
+        background: #be123c !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  .quick-action-tile {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+
+    .tile-title {
+      color: #0f172a !important;
+    }
+    .tile-desc {
+      color: #64748b !important;
+    }
+  }
+
+  .notifications-dropdown {
+    background: #ffffff !important;
+    border: 1px solid rgba(190, 18, 60, 0.2) !important;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12) !important;
+
+    .notif-title-row h2, .notif-title-row h4 {
+      color: #0f172a !important;
+    }
+
+    .notif-item {
+      background: #f8fafc !important;
+      border: 1px solid rgba(15, 23, 42, 0.06) !important;
+
+      .notif-title {
+        color: #0f172a !important;
+      }
+
+      .notif-desc {
+        color: #475569 !important;
+      }
+    }
+  }
+}
+
 // Accesibilidad Universal (WCAG 2.2 AA)
 .skip-link {
   position: absolute;
