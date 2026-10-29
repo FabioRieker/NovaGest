@@ -49,6 +49,8 @@ import { StorageService } from '../../core/services/storage.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { ProductCategory, StockStatus } from '../../core/models/product.model';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 
 /**
  * Validador Asíncrono contra Servicio (FASE 1 - Paso 1.2 & RA 2).
@@ -92,7 +94,9 @@ export function skuAsyncValidator(sqlService: SqlRestService, excludeId?: string
     IonSelectOption,
     IonButton,
     IonIcon,
-    IonSpinner
+    IonSpinner,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class ProductFormPage implements OnInit {

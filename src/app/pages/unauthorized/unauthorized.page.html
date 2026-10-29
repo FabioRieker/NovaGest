@@ -3,7 +3,10 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Acceso Restringido</ion-title>
+    <ion-title>{{ 'UNAUTHORIZED.TITLE' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <app-lang-switcher [compact]="true"></app-lang-switcher>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -14,25 +17,25 @@
         <div class="lock-icon" aria-hidden="true">
           <ion-icon name="lock-closed-outline"></ion-icon>
         </div>
-        <ion-card-title>Permisos Insuficientes (403)</ion-card-title>
-        <ion-card-subtitle>Control de Acceso por Roles (RBAC) Activado</ion-card-subtitle>
+        <ion-card-title>{{ 'UNAUTHORIZED.CARD_TITLE' | translate }}</ion-card-title>
+        <ion-card-subtitle>{{ 'UNAUTHORIZED.CARD_SUBTITLE' | translate }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         <p>
-          Esta sección requiere permisos de <strong>Administrador</strong>. Su rol actual (Usuario Estándar)
-          no tiene autorización para acceder al Cuadro de Mando Ejecutivo ni a las operaciones administrativas.
+          {{ 'UNAUTHORIZED.DESC' | translate }}
         </p>
         <div class="unauthorized-actions">
           <ion-button fill="outline" color="primary" (click)="goBack()">
             <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
-            Volver a Productos
+            {{ 'UNAUTHORIZED.BACK_BTN' | translate }}
           </ion-button>
           <ion-button color="medium" (click)="switchAccount()">
             <ion-icon slot="start" name="log-out-outline"></ion-icon>
-            Cambiar de Cuenta
+            {{ 'UNAUTHORIZED.SWITCH_BTN' | translate }}
           </ion-button>
         </div>
       </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
+
