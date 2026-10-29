@@ -2,7 +2,7 @@
  * Global Stylesheet & WCAG Accessibility Configuration - NovaGest ERP
  */
 
-@import "./theme/variables.scss";
+@use "./theme/variables.scss" as *;
 
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
@@ -78,7 +78,7 @@ body {
 }
 
 /* ==========================================================================
-   OPTIMIZACIONES DE MÁXIMA LEGIBILIDAD EN MODO OSCURO (WCAG AA/AAA)
+   Estilos para Modo Oscuro
    ========================================================================== */
 body.dark {
   // 1. Cabecera y Barra Superior (Toolbar)
@@ -367,4 +367,463 @@ body.dark {
       color: #94a3b8 !important;
     }
   }
+
+  // Página de Bienvenida en Modo Oscuro
+  .welcome-content {
+    --background: #0d0b1a !important;
+    background-color: #0d0b1a !important;
+    color: #f8fafc !important;
+  }
+
+  .system-metrics-strip {
+    background: #150f2e !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5) !important;
+
+    .metric-item .metric-num {
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      color: #ffffff !important;
+    }
+    .metric-item .metric-label {
+      color: #ff2a6d !important;
+    }
+    .metric-divider {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+
+  .modules-section .module-card {
+    background: #150f2e !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4) !important;
+
+    .module-title {
+      color: #ffffff !important;
+    }
+    .module-text {
+      color: #cbd5e1 !important;
+    }
+  }
+
+  .demo-box-section .demo-card, .credential-demo-box {
+    background: #150f2e !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #f8fafc !important;
+  }
 }
+
+/* ==========================================================================
+   Estilos para Modo Claro
+   ========================================================================== */
+body:not(.dark) {
+  // Cuadro de Mando en Modo Claro
+  .dashboard-content {
+    --background: #f8fafc !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+  }
+
+  .ambient-nebula-bg {
+    opacity: 0.08 !important;
+    .cyber-grid-overlay {
+      background-image:
+        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+    }
+  }
+
+  .glass-window {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(225, 29, 72, 0.12) !important;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+    color: #0f172a !important;
+  }
+
+  .glass-subcard {
+    background: #ffffff !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03) !important;
+    color: #0f172a !important;
+  }
+
+  .dashboard-title, .widget-headline-title {
+    color: #0f172a !important;
+  }
+
+  .breadcrumb-label, .widget-cat-tag {
+    color: #be123c !important;
+  }
+
+  .kpi-number {
+    color: #0f172a !important;
+  }
+
+  .kpi-label {
+    color: #475569 !important;
+    font-weight: 700 !important;
+  }
+
+  .kpi-footnote {
+    color: #64748b !important;
+  }
+
+  .gauge-title {
+    color: #0f172a !important;
+  }
+
+  .gauge-sub {
+    color: #475569 !important;
+  }
+
+  .gauge-val {
+    color: #0f172a !important;
+  }
+
+  .gauge-svg circle.gauge-bg {
+    stroke: rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .chart-subtitle-mini, .feed-sub {
+    color: #475569 !important;
+  }
+
+  // Actividades en vivo en Modo Claro (fondo limpio y texto legible)
+  .activities-scroll-feed .activity-row {
+    background: #f8fafc !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    border-left: 3px solid #0284c7 !important;
+
+    &.sev-warning { border-left-color: #b45309 !important; }
+    &.sev-critical { border-left-color: #be123c !important; }
+
+    .act-time-col {
+      color: #64748b !important;
+    }
+
+    .act-tag {
+      color: #be123c !important;
+    }
+
+    .act-entity {
+      color: #334155 !important;
+    }
+
+    .act-desc {
+      color: #0f172a !important;
+    }
+
+    .act-user {
+      color: #64748b !important;
+    }
+  }
+
+  // Capacidad operativa de almacenes en Modo Claro
+  .operations-content-inner {
+    .meter-name {
+      color: #0f172a !important;
+    }
+    .meter-detail {
+      color: #475569 !important;
+    }
+    .meter-track {
+      background: #e2e8f0 !important;
+    }
+    .meter-knob {
+      border: 2px solid #ffffff !important;
+    }
+  }
+
+  // Calendario en Modo Claro
+  .calendar-content-inner {
+    .cal-nav-btn {
+      background: #f1f5f9 !important;
+      border: 1px solid rgba(15, 23, 42, 0.1) !important;
+      color: #0f172a !important;
+
+      &:hover {
+        background: #be123c !important;
+        color: #ffffff !important;
+      }
+    }
+
+    .cal-month-title {
+      color: #0f172a !important;
+    }
+
+    .cal-weekdays {
+      color: #be123c !important;
+    }
+
+    .cal-day-cell {
+      color: #1e293b !important;
+
+      &:not(.empty-cell):hover {
+        background: #f1f5f9 !important;
+      }
+
+      &.selected-cell {
+        background: #be123c !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  // Barra de acciones y búsqueda en cabecera
+  .cyber-search-pill {
+    background: #ffffff !important;
+    border: 1px solid rgba(190, 18, 60, 0.25) !important;
+
+    input {
+      color: #0f172a !important;
+      &::placeholder {
+        color: #64748b !important;
+      }
+    }
+  }
+
+  .action-icon-btn {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.12) !important;
+    color: #334155 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04) !important;
+
+    &:hover {
+      background: #f1f5f9 !important;
+      color: #be123c !important;
+      border-color: #be123c !important;
+    }
+
+    &.edit-mode-btn, &.modules-btn {
+      background: rgba(190, 18, 60, 0.08) !important;
+      border: 1px solid rgba(190, 18, 60, 0.25) !important;
+      color: #be123c !important;
+
+      &.active, &:hover {
+        background: #be123c !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  .cyber-user-pill {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.12) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04) !important;
+
+    .user-name {
+      color: #0f172a !important;
+    }
+
+    .user-role {
+      color: #be123c !important;
+    }
+  }
+
+  .period-toggle-group {
+    background: #f1f5f9 !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+
+    .period-btn {
+      color: #475569 !important;
+
+      &.active {
+        background: #be123c !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  .quick-action-tile {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+
+    .tile-title {
+      color: #0f172a !important;
+    }
+    .tile-desc {
+      color: #64748b !important;
+    }
+  }
+
+  .notifications-dropdown {
+    background: #ffffff !important;
+    border: 1px solid rgba(190, 18, 60, 0.2) !important;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12) !important;
+
+    .notif-title-row h2, .notif-title-row h4 {
+      color: #0f172a !important;
+    }
+
+    .notif-item {
+      background: #f8fafc !important;
+      border: 1px solid rgba(15, 23, 42, 0.06) !important;
+
+      .notif-title {
+        color: #0f172a !important;
+      }
+
+      .notif-desc {
+        color: #475569 !important;
+      }
+    }
+  }
+
+  // Gestión de Usuarios en Modo Claro
+  .cyber-input-item {
+    --background: #ffffff !important;
+    background-color: #ffffff !important;
+    --color: #0f172a !important;
+    --placeholder-color: #64748b !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+
+    &:hover {
+      border-color: #be123c !important;
+    }
+    &:focus-within {
+      border-color: #be123c !important;
+      box-shadow: 0 0 0 3px rgba(190, 18, 60, 0.15) !important;
+    }
+
+    ion-icon {
+      color: #be123c !important;
+    }
+
+    ion-input, ion-select {
+      --color: #0f172a !important;
+      color: #0f172a !important;
+    }
+  }
+
+  .section-label {
+    color: #475569 !important;
+  }
+
+  .role-card {
+    background: #ffffff !important;
+    border: 2px solid #e2e8f0 !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+
+    &:hover {
+      border-color: #be123c !important;
+    }
+
+    &.active {
+      border-color: #be123c !important;
+      background: rgba(190, 18, 60, 0.06) !important;
+      box-shadow: 0 4px 14px rgba(190, 18, 60, 0.12) !important;
+    }
+
+    .role-title {
+      color: #0f172a !important;
+    }
+    .role-desc {
+      color: #64748b !important;
+    }
+  }
+
+  .directory-filter-bar {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important;
+
+    .cyber-searchbar {
+      --background: #f8fafc !important;
+      background: #f8fafc !important;
+      --color: #0f172a !important;
+      --placeholder-color: #64748b !important;
+      --icon-color: #be123c !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
+    .role-filter-chips .chip-btn {
+      background: #f1f5f9 !important;
+      border: 1px solid rgba(15, 23, 42, 0.1) !important;
+      color: #475569 !important;
+
+      &:hover {
+        background: #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+
+      &.active {
+        background: #be123c !important;
+        border-color: #be123c !important;
+        color: #ffffff !important;
+      }
+
+      &.admin-chip.active {
+        background: #e11d48 !important;
+        border-color: #e11d48 !important;
+      }
+
+      &.standard-chip.active {
+        background: #0284c7 !important;
+        border-color: #0284c7 !important;
+      }
+    }
+  }
+
+  .user-profile-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 6px 20px -3px rgba(15, 23, 42, 0.05) !important;
+
+    &:hover {
+      border-color: rgba(190, 18, 60, 0.35) !important;
+    }
+
+    .user-avatar-wrap ion-icon {
+      color: #be123c !important;
+    }
+
+    .user-info {
+      .name { color: #0f172a !important; }
+      .email { color: #64748b !important; }
+    }
+
+    .detail-row {
+      color: #475569 !important;
+      ion-icon { color: #be123c !important; }
+    }
+
+    .protected-tag {
+      color: #64748b !important;
+    }
+  }
+}
+
+// Enlace de salto al contenido principal
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--ion-color-primary, #e11d48);
+  color: #ffffff !important;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-decoration: none;
+  z-index: 99999;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: top 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:focus {
+    top: 16px;
+    outline: 3px solid #38bdf8;
+    outline-offset: 2px;
+  }
+}
+
+// Reducción de movimiento para usuarios sensibles
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

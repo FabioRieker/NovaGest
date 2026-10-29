@@ -1,6 +1,6 @@
 /**
- * Modelo de Documento NoSQL para el servicio en tiempo real (tipo Firestore).
- * Representa logs de auditoría, trazabilidad y métricas del sistema.
+ * Modelo de Registro de Auditoría y Trazabilidad para Supabase Realtime (PostgreSQL) - RA 5.
+ * Representa eventos de auditoría, trazabilidad y telemetría transmitidos en tiempo real.
  */
 
 export type AuditAction = 'CREATE' | 'UPDATE' | 'DELETE' | 'LOGIN' | 'LOGOUT' | 'EXPORT' | 'ALERT';

@@ -1,0 +1,1940 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  WelcomePage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/pages/welcome/welcome.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-welcome</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+</div>
+                        <div>    <code>IonHeader</code>
+</div>
+                        <div>    <code>IonToolbar</code>
+</div>
+                        <div>    <code>IonTitle</code>
+</div>
+                        <div>    <code>IonButtons</code>
+</div>
+                        <div>    <code>IonMenuButton</code>
+</div>
+                        <div>    <code>IonButton</code>
+</div>
+                        <div>    <code>IonIcon</code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./welcome.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./welcome.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+                                </li>
+                                <li>
+                                        <code>IonHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonToolbar</code>
+                                </li>
+                                <li>
+                                        <code>IonTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonButtons</code>
+                                </li>
+                                <li>
+                                        <code>IonMenuButton</code>
+                                </li>
+                                <li>
+                                        <code>IonButton</code>
+                                </li>
+                                <li>
+                                        <code>IonIcon</code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#navigateToHelp" >navigateToHelp</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#navigateToLogin" >navigateToLogin</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#navigateToPrimaryAction" >navigateToPrimaryAction</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/welcome/welcome.page.ts:56</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToHelp"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>navigateToHelp</b></span>
+                        <a href="#navigateToHelp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>navigateToHelp()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/pages/welcome/welcome.page.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToLogin"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>navigateToLogin</b></span>
+                        <a href="#navigateToLogin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>navigateToLogin()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/pages/welcome/welcome.page.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToPrimaryAction"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>navigateToPrimaryAction</b></span>
+                        <a href="#navigateToPrimaryAction"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>navigateToPrimaryAction()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/pages/welcome/welcome.page.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/welcome/welcome.page.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/welcome/welcome.page.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Router, RouterLink } from &#x27;@angular/router&#x27;;
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonMenuButton,
+  IonButton,
+  IonIcon,
+  IonContent
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import {
+  businessOutline,
+  statsChartOutline,
+  cubeOutline,
+  pulseOutline,
+  shieldCheckmarkOutline,
+  documentTextOutline,
+  arrowForwardOutline,
+  logInOutline,
+  helpCircleOutline,
+  sparklesOutline,
+  peopleOutline,
+  hardwareChipOutline,
+  speedometerOutline,
+  lockClosedOutline,
+  checkmarkCircleOutline,
+  logoGithub
+} from &#x27;ionicons/icons&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+
+@Component({
+  selector: &#x27;app-welcome&#x27;,
+  templateUrl: &#x27;./welcome.page.html&#x27;,
+  styleUrls: [&#x27;./welcome.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterLink,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonMenuButton,
+    IonButton,
+    IonIcon,
+    IonContent
+  ]
+})
+export class WelcomePage {
+  public authService &#x3D; inject(AuthService);
+  private router &#x3D; inject(Router);
+
+  constructor() {
+    addIcons({
+      businessOutline,
+      statsChartOutline,
+      cubeOutline,
+      pulseOutline,
+      shieldCheckmarkOutline,
+      documentTextOutline,
+      arrowForwardOutline,
+      logInOutline,
+      helpCircleOutline,
+      sparklesOutline,
+      peopleOutline,
+      hardwareChipOutline,
+      speedometerOutline,
+      lockClosedOutline,
+      checkmarkCircleOutline,
+      logoGithub
+    });
+  }
+
+  public navigateToPrimaryAction(): void {
+    if (this.authService.isAuthenticatedSignal()) {
+      const user &#x3D; this.authService.currentUserSignal();
+      if (user?.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;) {
+        this.router.navigate([&#x27;/dashboard&#x27;]);
+      } else {
+        this.router.navigate([&#x27;/products&#x27;]);
+      }
+    } else {
+      this.router.navigate([&#x27;/login&#x27;]);
+    }
+  }
+
+  public navigateToLogin(): void {
+    this.router.navigate([&#x27;/login&#x27;]);
+  }
+
+  public navigateToHelp(): void {
+    this.router.navigate([&#x27;/help&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot;&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;ion-menu-button&gt;&lt;/ion-menu-button&gt;
+    &lt;/ion-buttons&gt;
+    &lt;div class&#x3D;&quot;header-brand-wrap&quot;&gt;
+      &lt;div class&#x3D;&quot;brand-icon-mini&quot;&gt;
+        &lt;ion-icon name&#x3D;&quot;business-outline&quot;&gt;&lt;/ion-icon&gt;
+      &lt;/div&gt;
+      &lt;ion-title&gt;NovaGest &lt;span class&#x3D;&quot;accent-title&quot;&gt;ERP&lt;/span&gt;&lt;/ion-title&gt;
+    &lt;/div&gt;
+    &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
+      @if (authService.isAuthenticatedSignal()) {
+        &lt;ion-button (click)&#x3D;&quot;navigateToPrimaryAction()&quot; color&#x3D;&quot;light&quot; class&#x3D;&quot;header-cta-btn&quot;&gt;
+          &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;stats-chart-outline&quot;&gt;&lt;/ion-icon&gt;
+          Ir al Panel
+        &lt;/ion-button&gt;
+      } @else {
+        &lt;ion-button (click)&#x3D;&quot;navigateToLogin()&quot; color&#x3D;&quot;light&quot; class&#x3D;&quot;header-cta-btn&quot;&gt;
+          &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;log-in-outline&quot;&gt;&lt;/ion-icon&gt;
+          Acceso Usuarios
+        &lt;/ion-button&gt;
+      }
+    &lt;/ion-buttons&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;welcome-content&quot;&gt;
+  &lt;div class&#x3D;&quot;welcome-container&quot;&gt;
+
+    &lt;!-- HERO SECTION --&gt;
+    &lt;section class&#x3D;&quot;hero-section&quot;&gt;
+      &lt;div class&#x3D;&quot;hero-badge&quot;&gt;
+        &lt;span class&#x3D;&quot;badge-dot&quot;&gt;&lt;/span&gt;
+        &lt;span&gt;SISTEMA DE GESTIÓN EMPRESARIAL &amp; STOCK • V1.0&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;h1 class&#x3D;&quot;hero-title&quot;&gt;
+        Gestión Inteligente en Tiempo Real con
+        &lt;span class&#x3D;&quot;gradient-headline&quot;&gt;NovaGest ERP&lt;/span&gt;
+      &lt;/h1&gt;
+
+      &lt;p class&#x3D;&quot;hero-subtitle&quot;&gt;
+        Plataforma multiplataforma de inventario corporativo, cuadro de mando ejecutivo,
+        auditoría reactiva Supabase Realtime y control de accesos RBAC de alto rendimiento.
+      &lt;/p&gt;
+
+      &lt;!-- Botones Principales de Acción (CTA) --&gt;
+      &lt;div class&#x3D;&quot;hero-cta-group&quot;&gt;
+        &lt;button class&#x3D;&quot;primary-cta-btn&quot; (click)&#x3D;&quot;navigateToPrimaryAction()&quot;&gt;
+          @if (authService.isAuthenticatedSignal()) {
+            &lt;ion-icon name&#x3D;&quot;speedometer-outline&quot;&gt;&lt;/ion-icon&gt;
+            &lt;span&gt;Continuar a mi Panel ({{ authService.currentUserSignal()?.name?.split(&#x27; &#x27;)?.[0] }})&lt;/span&gt;
+          } @else {
+            &lt;ion-icon name&#x3D;&quot;log-in-outline&quot;&gt;&lt;/ion-icon&gt;
+            &lt;span&gt;Iniciar Sesión en el Portal&lt;/span&gt;
+          }
+          &lt;ion-icon name&#x3D;&quot;arrow-forward-outline&quot; class&#x3D;&quot;btn-arrow&quot;&gt;&lt;/ion-icon&gt;
+        &lt;/button&gt;
+
+        &lt;button class&#x3D;&quot;secondary-cta-btn&quot; (click)&#x3D;&quot;navigateToHelp()&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;document-text-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;span&gt;Manual de Usuario &amp; Ayuda&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Notificación si ya hay sesión iniciada --&gt;
+      @if (authService.currentUserSignal(); as user) {
+        &lt;div class&#x3D;&quot;active-session-banner&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;checkmark-circle-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;span&gt;Sesión activa como &lt;strong&gt;{{ user.name }}&lt;/strong&gt; (Rol: {{ user.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27; ? &#x27;Administrador&#x27; : &#x27;Usuario Estándar&#x27; }})&lt;/span&gt;
+        &lt;/div&gt;
+      }
+    &lt;/section&gt;
+
+    &lt;!-- FRANJA DE MÉTRICAS DEL SISTEMA --&gt;
+    &lt;section class&#x3D;&quot;system-metrics-strip&quot;&gt;
+      &lt;div class&#x3D;&quot;metric-item&quot;&gt;
+        &lt;span class&#x3D;&quot;metric-num&quot;&gt;99.98%&lt;/span&gt;
+        &lt;span class&#x3D;&quot;metric-label&quot;&gt;Disponibilidad SLA&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;metric-divider&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;metric-item&quot;&gt;
+        &lt;span class&#x3D;&quot;metric-num&quot;&gt;&amp;lt; 20ms&lt;/span&gt;
+        &lt;span class&#x3D;&quot;metric-label&quot;&gt;Latencia con Signals&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;metric-divider&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;metric-item&quot;&gt;
+        &lt;span class&#x3D;&quot;metric-num&quot;&gt;Supabase&lt;/span&gt;
+        &lt;span class&#x3D;&quot;metric-label&quot;&gt;PostgreSQL &amp; Realtime&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;metric-divider&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;metric-item&quot;&gt;
+        &lt;span class&#x3D;&quot;metric-num&quot;&gt;RBAC + JWT&lt;/span&gt;
+        &lt;span class&#x3D;&quot;metric-label&quot;&gt;Seguridad de Acceso&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- SHOWCASE DE MÓDULOS PRINCIPALES --&gt;
+    &lt;section class&#x3D;&quot;modules-section&quot;&gt;
+      &lt;div class&#x3D;&quot;section-title-wrap&quot;&gt;
+        &lt;span class&#x3D;&quot;section-kicker&quot;&gt;CAPACIDADES DE LA APLICACIÓN&lt;/span&gt;
+        &lt;h2 class&#x3D;&quot;section-heading&quot;&gt;Arquitectura Modular &amp; Características Clave&lt;/h2&gt;
+        &lt;p class&#x3D;&quot;section-desc&quot;&gt;Diseñada bajo estándares de Desarrollo de Interfaces (DAM2) con Angular Standalone y Ionic Framework.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;modules-grid&quot;&gt;
+        &lt;!-- Módulo 1 --&gt;
+        &lt;div class&#x3D;&quot;module-card&quot;&gt;
+          &lt;div class&#x3D;&quot;module-icon-wrap icon-ruby&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;stats-chart-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;/div&gt;
+          &lt;h3 class&#x3D;&quot;module-title&quot;&gt;Cuadro de Mando Ejecutivo&lt;/h3&gt;
+          &lt;p class&#x3D;&quot;module-text&quot;&gt;
+            Métricas de inventario en tiempo real, gráficos de ondas financieras continuas (Spline Wave)
+            y medidores radiales circulares interactivos con soporte multidispositivo.
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;module-tags&quot;&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Chart.js&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Gauges SVG&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Filtro Temporal&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Módulo 2 --&gt;
+        &lt;div class&#x3D;&quot;module-card&quot;&gt;
+          &lt;div class&#x3D;&quot;module-icon-wrap icon-cyan&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;cube-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;/div&gt;
+          &lt;h3 class&#x3D;&quot;module-title&quot;&gt;Inventario &amp; Catálogo Físico&lt;/h3&gt;
+          &lt;p class&#x3D;&quot;module-text&quot;&gt;
+            Gestión completa del ciclo de vida de productos (CRUD), ordenación multicriterio, paginación reactiva,
+            búsqueda instantánea y alertas tempranas de stock mínimo.
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;module-tags&quot;&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;REST SQL&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Data-Table Reutilizable&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Stock Crítico&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Módulo 3 --&gt;
+        &lt;div class&#x3D;&quot;module-card&quot;&gt;
+          &lt;div class&#x3D;&quot;module-icon-wrap icon-purple&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;pulse-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;/div&gt;
+          &lt;h3 class&#x3D;&quot;module-title&quot;&gt;Auditoría Supabase Realtime&lt;/h3&gt;
+          &lt;p class&#x3D;&quot;module-text&quot;&gt;
+            Flujo reactivo asíncrono con Supabase Realtime WebSockets que emite y registra cada evento,
+            alta, borrado o inicio de sesión con trazabilidad completa.
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;module-tags&quot;&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Supabase Realtime&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;WebSockets&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Trazabilidad Total&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Módulo 4 --&gt;
+        &lt;div class&#x3D;&quot;module-card&quot;&gt;
+          &lt;div class&#x3D;&quot;module-icon-wrap icon-amber&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;people-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;/div&gt;
+          &lt;h3 class&#x3D;&quot;module-title&quot;&gt;Gestión de Cuentas &amp; Usuarios&lt;/h3&gt;
+          &lt;p class&#x3D;&quot;module-text&quot;&gt;
+            Aprovisionamiento dinámico de usuarios con selector visual de rol (Admin vs Estándar),
+            medidor de seguridad de contraseñas y validación de correo corporativo único.
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;module-tags&quot;&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;RBAC&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Formularios Reactivos&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;LocalStorage&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Módulo 5 --&gt;
+        &lt;div class&#x3D;&quot;module-card&quot;&gt;
+          &lt;div class&#x3D;&quot;module-icon-wrap icon-emerald&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;document-text-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;/div&gt;
+          &lt;h3 class&#x3D;&quot;module-title&quot;&gt;Informes &amp; Exportación Oficial&lt;/h3&gt;
+          &lt;p class&#x3D;&quot;module-text&quot;&gt;
+            Generación instantánea en el navegador de documentos PDF vectoriales maquetados y hojas de cálculo
+            CSV estructuradas para análisis contable y auditorías externas.
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;module-tags&quot;&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;jsPDF&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;autoTable&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Descarga CSV&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Módulo 6 --&gt;
+        &lt;div class&#x3D;&quot;module-card&quot;&gt;
+          &lt;div class&#x3D;&quot;module-icon-wrap icon-blue&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;shield-checkmark-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;/div&gt;
+          &lt;h3 class&#x3D;&quot;module-title&quot;&gt;Accesibilidad &amp; Modo Oscuro&lt;/h3&gt;
+          &lt;p class&#x3D;&quot;module-text&quot;&gt;
+            Cumplimiento riguroso de pautas WCAG AA/AAA con conmutador dinámico de modo oscuro,
+            contraste garantizado, foco visual asistido e interfaz intuitiva de alta legibilidad.
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;module-tags&quot;&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;WCAG 2.1&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Alto Contraste&lt;/span&gt;
+            &lt;span class&#x3D;&quot;tag&quot;&gt;Modo Oscuro Cyber&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- CAJA DE CREDENCIALES DE PRUEBA RÁPIDA --&gt;
+    &lt;section class&#x3D;&quot;demo-box-section&quot;&gt;
+      &lt;div class&#x3D;&quot;demo-card&quot;&gt;
+        &lt;div class&#x3D;&quot;demo-header&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;hardware-chip-outline&quot; class&#x3D;&quot;demo-icon&quot;&gt;&lt;/ion-icon&gt;
+          &lt;div&gt;
+            &lt;h3 class&#x3D;&quot;demo-title&quot;&gt;Acceso Rápido para Evaluación Docente&lt;/h3&gt;
+            &lt;p class&#x3D;&quot;demo-desc&quot;&gt;Puede utilizar las cuentas preconfiguradas o registrar una nueva en el módulo de usuarios:&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;credentials-table&quot;&gt;
+          &lt;div class&#x3D;&quot;cred-row&quot;&gt;
+            &lt;div class&#x3D;&quot;cred-role-col&quot;&gt;
+              &lt;span class&#x3D;&quot;role-badge badge-admin&quot;&gt;ADMINISTRADOR&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;cred-info-col&quot;&gt;
+              &lt;span class&#x3D;&quot;cred-email&quot;&gt;admin&amp;#64;empresa.com&lt;/span&gt;
+              &lt;span class&#x3D;&quot;cred-pass&quot;&gt;Clave: &lt;code&gt;Admin1234*&lt;/code&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;cred-action-col&quot;&gt;
+              &lt;button class&#x3D;&quot;try-btn&quot; (click)&#x3D;&quot;navigateToLogin()&quot;&gt;Probar como Admin&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;cred-row&quot;&gt;
+            &lt;div class&#x3D;&quot;cred-role-col&quot;&gt;
+              &lt;span class&#x3D;&quot;role-badge badge-user&quot;&gt;ESTÁNDAR&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;cred-info-col&quot;&gt;
+              &lt;span class&#x3D;&quot;cred-email&quot;&gt;user&amp;#64;empresa.com&lt;/span&gt;
+              &lt;span class&#x3D;&quot;cred-pass&quot;&gt;Clave: &lt;code&gt;User1234*&lt;/code&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;cred-action-col&quot;&gt;
+              &lt;button class&#x3D;&quot;try-btn secondary&quot; (click)&#x3D;&quot;navigateToLogin()&quot;&gt;Probar como Usuario&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- FOOTER INFORMATIVO --&gt;
+    &lt;footer class&#x3D;&quot;welcome-footer&quot;&gt;
+      &lt;div class&#x3D;&quot;footer-content&quot;&gt;
+        &lt;div class&#x3D;&quot;footer-brand&quot;&gt;
+          &lt;h4&gt;NovaGest ERP&lt;/h4&gt;
+          &lt;p&gt;Módulo de Desarrollo de Interfaces • DAM2 (Código: 0488)&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;footer-links&quot;&gt;
+          &lt;a routerLink&#x3D;&quot;/help&quot; class&#x3D;&quot;footer-link&quot;&gt;Manual de Usuario&lt;/a&gt;
+          &lt;a routerLink&#x3D;&quot;/login&quot; class&#x3D;&quot;footer-link&quot;&gt;Iniciar Sesión&lt;/a&gt;
+          &lt;a href&#x3D;&quot;https://github.com/FabioRieker/NovaGest&quot; target&#x3D;&quot;_blank&quot; rel&#x3D;&quot;noopener noreferrer&quot; class&#x3D;&quot;footer-link github-link&quot;&gt;
+            &lt;ion-icon name&#x3D;&quot;logo-github&quot;&gt;&lt;/ion-icon&gt; Repositorio GitHub
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;footer-bottom&quot;&gt;
+        &lt;span&gt;© 2026 NovaGest ERP. Todos los derechos reservados. Desarrollado por Fabio Rieker.&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/footer&gt;
+
+  &lt;/div&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./welcome.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   ESTILOS DE BIENVENIDA (ADAPTABLES A MODO CLARO Y OSCURO)
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+.welcome-content {
+  --background: var(--ambient-bg-color, #f8fafc);
+  background-color: var(--ambient-bg-color, #f8fafc);
+  color: var(--cyber-text-main, #0f172a);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+:host-context(body.dark) .welcome-content {
+  --background: #0d0b1a;
+  background-color: #0d0b1a;
+  color: #f8fafc;
+}
+
+.welcome-container {
+  padding: 30px 20px 50px 20px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.header-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .brand-icon-mini {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(190, 18, 60, 0.35);
+
+    ion-icon {
+      font-size: 1.15rem;
+    }
+  }
+
+  .accent-title {
+    color: #be123c;
+    font-weight: 800;
+  }
+}
+
+:host-context(body.dark) .header-brand-wrap {
+  .brand-icon-mini {
+    background: linear-gradient(135deg, #ff2a6d 0%, #be123c 100%);
+    box-shadow: 0 0 10px rgba(255, 42, 109, 0.4);
+  }
+  .accent-title {
+    color: #ff2a6d;
+  }
+}
+
+.header-cta-btn {
+  --border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   HERO SECTION
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+.hero-section {
+  text-align: center;
+  padding: 50px 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(190, 18, 60, 0.08);
+    border: 1px solid rgba(190, 18, 60, 0.25);
+    color: #be123c;
+    padding: 6px 16px;
+    border-radius: 9999px;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(190, 18, 60, 0.08);
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #be123c;
+      box-shadow: 0 0 6px rgba(190, 18, 60, 0.6);
+    }
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.15;
+    color: #0f172a;
+    max-width: 900px;
+    margin: 0 0 18px 0;
+    letter-spacing: -0.02em;
+
+    @media (max-width: 768px) {
+      font-size: 2.1rem;
+    }
+
+    .gradient-headline {
+      background: linear-gradient(135deg, #be123c 0%, #0284c7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+  }
+
+  .hero-subtitle {
+    font-size: 1.12rem;
+    color: #475569;
+    max-width: 720px;
+    line-height: 1.6;
+    margin: 0 0 32px 0;
+
+    @media (max-width: 768px) {
+      font-size: 0.98rem;
+    }
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    .primary-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+      color: #ffffff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(190, 18, 60, 0.3);
+      transition: all 0.25s ease;
+
+      &amp;:hover {
+        background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+        box-shadow: 0 12px 25px rgba(190, 18, 60, 0.45);
+        transform: translateY(-2px);
+      }
+
+      .btn-arrow {
+        font-size: 1.1rem;
+        transition: transform 0.2s ease;
+      }
+
+      &amp;:hover .btn-arrow {
+        transform: translateX(4px);
+      }
+    }
+
+    .secondary-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 42, 0.15);
+      color: #0f172a;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+
+      &amp;:hover {
+        background: #f1f5f9;
+        border-color: #be123c;
+        color: #be123c;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .active-session-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(4, 120, 87, 0.08);
+    border: 1px solid rgba(4, 120, 87, 0.25);
+    color: #047857;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-top: 10px;
+
+    ion-icon {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+:host-context(body.dark) .hero-section {
+  .hero-badge {
+    background: rgba(255, 42, 109, 0.12);
+    border-color: rgba(255, 42, 109, 0.35);
+    color: #ff2a6d;
+    box-shadow: 0 0 15px rgba(255, 42, 109, 0.2);
+
+    .badge-dot {
+      background: #ff2a6d;
+      box-shadow: 0 0 6px #ff2a6d;
+    }
+  }
+
+  .hero-title {
+    color: #ffffff;
+
+    .gradient-headline {
+      background: linear-gradient(135deg, #ff2a6d 0%, #00f0ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .hero-subtitle {
+    color: #94a3b8;
+  }
+
+  .hero-cta-group {
+    .primary-cta-btn {
+      background: linear-gradient(135deg, #ff2a6d 0%, #be123c 100%);
+      box-shadow: 0 0 25px rgba(255, 42, 109, 0.45);
+
+      &amp;:hover {
+        background: linear-gradient(135deg, #ff528a 0%, #e11d48 100%);
+        box-shadow: 0 0 35px rgba(255, 42, 109, 0.6);
+      }
+    }
+
+    .secondary-cta-btn {
+      background: #181236;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      box-shadow: none;
+
+      &amp;:hover {
+        background: #231b4e;
+        border-color: rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+      }
+    }
+  }
+
+  .active-session-banner {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #34d399;
+  }
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   METRICS STRIP
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+.system-metrics-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  padding: 24px 20px;
+  box-shadow: 0 6px 20px -3px rgba(15, 23, 42, 0.05);
+  margin-bottom: 50px;
+
+  .metric-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    .metric-num {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #0f172a;
+      background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .metric-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #be123c;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+  }
+
+  .metric-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(15, 23, 42, 0.08);
+
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
+}
+
+:host-context(body.dark) .system-metrics-strip {
+  background: #150f2e;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+
+  .metric-item {
+    .metric-num {
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .metric-label {
+      color: #ff2a6d;
+    }
+  }
+
+  .metric-divider {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   MODULES SHOWCASE
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+.modules-section {
+  margin-bottom: 50px;
+
+  .section-title-wrap {
+    text-align: center;
+    margin-bottom: 36px;
+
+    .section-kicker {
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #be123c;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .section-heading {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 10px 0;
+    }
+
+    .section-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .module-card {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.05);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+    &amp;:hover {
+      transform: translateY(-4px);
+      border-color: rgba(190, 18, 60, 0.35);
+      box-shadow: 0 14px 30px -6px rgba(190, 18, 60, 0.12);
+    }
+
+    .module-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+
+      &amp;.icon-ruby {
+        background: rgba(190, 18, 60, 0.12);
+        color: #be123c;
+      }
+      &amp;.icon-cyan {
+        background: rgba(2, 132, 199, 0.12);
+        color: #0284c7;
+      }
+      &amp;.icon-purple {
+        background: rgba(147, 51, 234, 0.12);
+        color: #9333ea;
+      }
+      &amp;.icon-amber {
+        background: rgba(217, 119, 6, 0.12);
+        color: #b45309;
+      }
+      &amp;.icon-emerald {
+        background: rgba(4, 120, 87, 0.12);
+        color: #047857;
+      }
+      &amp;.icon-blue {
+        background: rgba(37, 99, 235, 0.12);
+        color: #2563eb;
+      }
+    }
+
+    .module-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 10px 0;
+    }
+
+    .module-text {
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.5;
+      margin: 0 0 18px 0;
+      flex: 1;
+    }
+
+    .module-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      .tag {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #334155;
+        background: #f1f5f9;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        padding: 3px 8px;
+        border-radius: 6px;
+      }
+    }
+  }
+}
+
+:host-context(body.dark) .modules-section {
+  .section-title-wrap {
+    .section-kicker {
+      color: #00f0ff;
+    }
+    .section-heading {
+      color: #ffffff;
+    }
+    .section-desc {
+      color: #94a3b8;
+    }
+  }
+
+  .module-card {
+    background: #150f2e;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+
+    &amp;:hover {
+      border-color: rgba(255, 42, 109, 0.35);
+      box-shadow: 0 14px 30px -6px rgba(255, 42, 109, 0.2);
+    }
+
+    .module-icon-wrap {
+      &amp;.icon-ruby {
+        background: rgba(255, 42, 109, 0.15);
+        color: #ff2a6d;
+      }
+      &amp;.icon-cyan {
+        background: rgba(0, 240, 255, 0.15);
+        color: #00f0ff;
+      }
+      &amp;.icon-purple {
+        background: rgba(168, 85, 247, 0.15);
+        color: #a855f7;
+      }
+      &amp;.icon-amber {
+        background: rgba(245, 158, 11, 0.15);
+        color: #f59e0b;
+      }
+      &amp;.icon-emerald {
+        background: rgba(16, 185, 129, 0.15);
+        color: #34d399;
+      }
+      &amp;.icon-blue {
+        background: rgba(56, 189, 248, 0.15);
+        color: #38bdf8;
+      }
+    }
+
+    .module-title {
+      color: #ffffff;
+    }
+
+    .module-text {
+      color: #94a3b8;
+    }
+
+    .module-tags {
+      .tag {
+        color: #cbd5e1;
+        background: #1e1740;
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   DEMO CREDENTIALS BOX
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+.demo-box-section {
+  margin-bottom: 50px;
+
+  .demo-card {
+    background: #ffffff;
+    border: 1px solid rgba(190, 18, 60, 0.2);
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06);
+
+    .demo-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+
+      .demo-icon {
+        font-size: 2.2rem;
+        color: #be123c;
+        background: rgba(190, 18, 60, 0.08);
+        padding: 10px;
+        border-radius: 12px;
+      }
+
+      .demo-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 4px 0;
+      }
+
+      .demo-desc {
+        font-size: 0.86rem;
+        color: #475569;
+        margin: 0;
+      }
+    }
+
+    .credentials-table {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .cred-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        background: #f8fafc;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 12px;
+        padding: 14px 18px;
+
+        .role-badge {
+          font-size: 0.72rem;
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          padding: 4px 10px;
+          border-radius: 6px;
+
+          &amp;.badge-admin {
+            background: rgba(190, 18, 60, 0.1);
+            color: #be123c;
+            border: 1px solid rgba(190, 18, 60, 0.3);
+          }
+
+          &amp;.badge-user {
+            background: rgba(2, 132, 199, 0.1);
+            color: #0284c7;
+            border: 1px solid rgba(2, 132, 199, 0.3);
+          }
+        }
+
+        .cred-info-col {
+          display: flex;
+          gap: 16px;
+          flex-wrap: wrap;
+          font-size: 0.88rem;
+
+          .cred-email {
+            font-weight: 700;
+            color: #0f172a;
+          }
+
+          .cred-pass {
+            color: #475569;
+
+            code {
+              background: #e2e8f0;
+              color: #be123c;
+              padding: 2px 8px;
+              border-radius: 4px;
+              font-weight: 700;
+            }
+          }
+        }
+
+        .try-btn {
+          background: #be123c;
+          border: none;
+          color: #ffffff;
+          font-size: 0.82rem;
+          font-weight: 800;
+          padding: 8px 16px;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &amp;:hover {
+            background: #9f1239;
+            box-shadow: 0 4px 12px rgba(190, 18, 60, 0.4);
+          }
+
+          &amp;.secondary {
+            background: #0284c7;
+
+            &amp;:hover {
+              background: #0369a1;
+              box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+:host-context(body.dark) .demo-box-section {
+  .demo-card {
+    background: #150f2e;
+    border-color: rgba(0, 240, 255, 0.25);
+    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.05);
+
+    .demo-header {
+      .demo-icon {
+        color: #00f0ff;
+        background: rgba(0, 240, 255, 0.12);
+      }
+      .demo-title {
+        color: #ffffff;
+      }
+      .demo-desc {
+        color: #94a3b8;
+      }
+    }
+
+    .credentials-table {
+      .cred-row {
+        background: #1c153d;
+        border-color: rgba(255, 255, 255, 0.08);
+
+        .role-badge {
+          &amp;.badge-admin {
+            background: rgba(255, 42, 109, 0.2);
+            color: #ff2a6d;
+            border-color: rgba(255, 42, 109, 0.4);
+          }
+          &amp;.badge-user {
+            background: rgba(0, 240, 255, 0.15);
+            color: #00f0ff;
+            border-color: rgba(0, 240, 255, 0.4);
+          }
+        }
+
+        .cred-info-col {
+          .cred-email {
+            color: #ffffff;
+          }
+          .cred-pass {
+            color: #94a3b8;
+
+            code {
+              background: #120d29;
+              color: #ff2a6d;
+            }
+          }
+        }
+
+        .try-btn {
+          background: #ff2a6d;
+
+          &amp;:hover {
+            background: #ff528a;
+            box-shadow: 0 0 12px rgba(255, 42, 109, 0.5);
+          }
+
+          &amp;.secondary {
+            background: #0284c7;
+
+            &amp;:hover {
+              background: #0ea5e9;
+              box-shadow: 0 0 12px rgba(2, 132, 199, 0.5);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   FOOTER
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+.welcome-footer {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  padding-top: 30px;
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+
+    .footer-brand {
+      h4 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 4px 0;
+      }
+      p {
+        font-size: 0.82rem;
+        color: #64748b;
+        margin: 0;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      .footer-link {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #475569;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &amp;:hover {
+          color: #be123c;
+        }
+
+        &amp;.github-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          color: #0284c7;
+
+          &amp;:hover {
+            color: #0369a1;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.76rem;
+    color: #64748b;
+  }
+}
+
+:host-context(body.dark) .welcome-footer {
+  border-top-color: rgba(255, 255, 255, 0.08);
+
+  .footer-content {
+    .footer-brand {
+      h4 {
+        color: #ffffff;
+      }
+      p {
+        color: #94a3b8;
+      }
+    }
+
+    .footer-links {
+      .footer-link {
+        color: #cbd5e1;
+
+        &amp;:hover {
+          color: #ff2a6d;
+        }
+
+        &amp;.github-link {
+          color: #00f0ff;
+
+          &amp;:hover {
+            color: #55f5ff;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    color: #64748b;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button></ion-menu-button>    </ion-buttons>    <div class="header-brand-wrap">      <div class="brand-icon-mini">        <ion-icon name="business-outline"></ion-icon>      </div>      <ion-title>NovaGest <span class="accent-title">ERP</span></ion-title>    </div>    <ion-buttons slot="end">      @if (authService.isAuthenticatedSignal()) {        <ion-button (click)="navigateToPrimaryAction()" color="light" class="header-cta-btn">          <ion-icon slot="start" name="stats-chart-outline"></ion-icon>          Ir al Panel        </ion-button>      } @else {        <ion-button (click)="navigateToLogin()" color="light" class="header-cta-btn">          <ion-icon slot="start" name="log-in-outline"></ion-icon>          Acceso Usuarios        </ion-button>      }    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="welcome-content">  <div class="welcome-container">    <!-- HERO SECTION -->    <section class="hero-section">      <div class="hero-badge">        <span class="badge-dot"></span>        <span>SISTEMA DE GESTIÓN EMPRESARIAL & STOCK • V1.0</span>      </div>      <h1 class="hero-title">        Gestión Inteligente en Tiempo Real con        <span class="gradient-headline">NovaGest ERP</span>      </h1>      <p class="hero-subtitle">        Plataforma multiplataforma de inventario corporativo, cuadro de mando ejecutivo,        auditoría reactiva Supabase Realtime y control de accesos RBAC de alto rendimiento.      </p>      <!-- Botones Principales de Acción (CTA) -->      <div class="hero-cta-group">        <button class="primary-cta-btn" (click)="navigateToPrimaryAction()">          @if (authService.isAuthenticatedSignal()) {            <ion-icon name="speedometer-outline"></ion-icon>            <span>Continuar a mi Panel ({{ authService.currentUserSignal()?.name?.split(\' \')?.[0] }})</span>          } @else {            <ion-icon name="log-in-outline"></ion-icon>            <span>Iniciar Sesión en el Portal</span>          }          <ion-icon name="arrow-forward-outline" class="btn-arrow"></ion-icon>        </button>        <button class="secondary-cta-btn" (click)="navigateToHelp()">          <ion-icon name="document-text-outline"></ion-icon>          <span>Manual de Usuario & Ayuda</span>        </button>      </div>      <!-- Notificación si ya hay sesión iniciada -->      @if (authService.currentUserSignal(); as user) {        <div class="active-session-banner">          <ion-icon name="checkmark-circle-outline"></ion-icon>          <span>Sesión activa como <strong>{{ user.name }}</strong> (Rol: {{ user.role === \'admin\' ? \'Administrador\' : \'Usuario Estándar\' }})</span>        </div>      }    </section>    <!-- FRANJA DE MÉTRICAS DEL SISTEMA -->    <section class="system-metrics-strip">      <div class="metric-item">        <span class="metric-num">99.98%</span>        <span class="metric-label">Disponibilidad SLA</span>      </div>      <div class="metric-divider"></div>      <div class="metric-item">        <span class="metric-num">&lt; 20ms</span>        <span class="metric-label">Latencia con Signals</span>      </div>      <div class="metric-divider"></div>      <div class="metric-item">        <span class="metric-num">Supabase</span>        <span class="metric-label">PostgreSQL & Realtime</span>      </div>      <div class="metric-divider"></div>      <div class="metric-item">        <span class="metric-num">RBAC + JWT</span>        <span class="metric-label">Seguridad de Acceso</span>      </div>    </section>    <!-- SHOWCASE DE MÓDULOS PRINCIPALES -->    <section class="modules-section">      <div class="section-title-wrap">        <span class="section-kicker">CAPACIDADES DE LA APLICACIÓN</span>        <h2 class="section-heading">Arquitectura Modular & Características Clave</h2>        <p class="section-desc">Diseñada bajo estándares de Desarrollo de Interfaces (DAM2) con Angular Standalone y Ionic Framework.</p>      </div>      <div class="modules-grid">        <!-- Módulo 1 -->        <div class="module-card">          <div class="module-icon-wrap icon-ruby">            <ion-icon name="stats-chart-outline"></ion-icon>          </div>          <h3 class="module-title">Cuadro de Mando Ejecutivo</h3>          <p class="module-text">            Métricas de inventario en tiempo real, gráficos de ondas financieras continuas (Spline Wave)            y medidores radiales circulares interactivos con soporte multidispositivo.          </p>          <div class="module-tags">            <span class="tag">Chart.js</span>            <span class="tag">Gauges SVG</span>            <span class="tag">Filtro Temporal</span>          </div>        </div>        <!-- Módulo 2 -->        <div class="module-card">          <div class="module-icon-wrap icon-cyan">            <ion-icon name="cube-outline"></ion-icon>          </div>          <h3 class="module-title">Inventario & Catálogo Físico</h3>          <p class="module-text">            Gestión completa del ciclo de vida de productos (CRUD), ordenación multicriterio, paginación reactiva,            búsqueda instantánea y alertas tempranas de stock mínimo.          </p>          <div class="module-tags">            <span class="tag">REST SQL</span>            <span class="tag">Data-Table Reutilizable</span>            <span class="tag">Stock Crítico</span>          </div>        </div>        <!-- Módulo 3 -->        <div class="module-card">          <div class="module-icon-wrap icon-purple">            <ion-icon name="pulse-outline"></ion-icon>          </div>          <h3 class="module-title">Auditoría Supabase Realtime</h3>          <p class="module-text">            Flujo reactivo asíncrono con Supabase Realtime WebSockets que emite y registra cada evento,            alta, borrado o inicio de sesión con trazabilidad completa.          </p>          <div class="module-tags">            <span class="tag">Supabase Realtime</span>            <span class="tag">WebSockets</span>            <span class="tag">Trazabilidad Total</span>          </div>        </div>        <!-- Módulo 4 -->        <div class="module-card">          <div class="module-icon-wrap icon-amber">            <ion-icon name="people-outline"></ion-icon>          </div>          <h3 class="module-title">Gestión de Cuentas & Usuarios</h3>          <p class="module-text">            Aprovisionamiento dinámico de usuarios con selector visual de rol (Admin vs Estándar),            medidor de seguridad de contraseñas y validación de correo corporativo único.          </p>          <div class="module-tags">            <span class="tag">RBAC</span>            <span class="tag">Formularios Reactivos</span>            <span class="tag">LocalStorage</span>          </div>        </div>        <!-- Módulo 5 -->        <div class="module-card">          <div class="module-icon-wrap icon-emerald">            <ion-icon name="document-text-outline"></ion-icon>          </div>          <h3 class="module-title">Informes & Exportación Oficial</h3>          <p class="module-text">            Generación instantánea en el navegador de documentos PDF vectoriales maquetados y hojas de cálculo            CSV estructuradas para análisis contable y auditorías externas.          </p>          <div class="module-tags">            <span class="tag">jsPDF</span>            <span class="tag">autoTable</span>            <span class="tag">Descarga CSV</span>          </div>        </div>        <!-- Módulo 6 -->        <div class="module-card">          <div class="module-icon-wrap icon-blue">            <ion-icon name="shield-checkmark-outline"></ion-icon>          </div>          <h3 class="module-title">Accesibilidad & Modo Oscuro</h3>          <p class="module-text">            Cumplimiento riguroso de pautas WCAG AA/AAA con conmutador dinámico de modo oscuro,            contraste garantizado, foco visual asistido e interfaz intuitiva de alta legibilidad.          </p>          <div class="module-tags">            <span class="tag">WCAG 2.1</span>            <span class="tag">Alto Contraste</span>            <span class="tag">Modo Oscuro Cyber</span>          </div>        </div>      </div>    </section>    <!-- CAJA DE CREDENCIALES DE PRUEBA RÁPIDA -->    <section class="demo-box-section">      <div class="demo-card">        <div class="demo-header">          <ion-icon name="hardware-chip-outline" class="demo-icon"></ion-icon>          <div>            <h3 class="demo-title">Acceso Rápido para Evaluación Docente</h3>            <p class="demo-desc">Puede utilizar las cuentas preconfiguradas o registrar una nueva en el módulo de usuarios:</p>          </div>        </div>        <div class="credentials-table">          <div class="cred-row">            <div class="cred-role-col">              <span class="role-badge badge-admin">ADMINISTRADOR</span>            </div>            <div class="cred-info-col">              <span class="cred-email">admin&#64;empresa.com</span>              <span class="cred-pass">Clave: <code>Admin1234*</code></span>            </div>            <div class="cred-action-col">              <button class="try-btn" (click)="navigateToLogin()">Probar como Admin</button>            </div>          </div>          <div class="cred-row">            <div class="cred-role-col">              <span class="role-badge badge-user">ESTÁNDAR</span>            </div>            <div class="cred-info-col">              <span class="cred-email">user&#64;empresa.com</span>              <span class="cred-pass">Clave: <code>User1234*</code></span>            </div>            <div class="cred-action-col">              <button class="try-btn secondary" (click)="navigateToLogin()">Probar como Usuario</button>            </div>          </div>        </div>      </div>    </section>    <!-- FOOTER INFORMATIVO -->    <footer class="welcome-footer">      <div class="footer-content">        <div class="footer-brand">          <h4>NovaGest ERP</h4>          <p>Módulo de Desarrollo de Interfaces • DAM2 (Código: 0488)</p>        </div>        <div class="footer-links">          <a routerLink="/help" class="footer-link">Manual de Usuario</a>          <a routerLink="/login" class="footer-link">Iniciar Sesión</a>          <a href="https://github.com/FabioRieker/NovaGest" target="_blank" rel="noopener noreferrer" class="footer-link github-link">            <ion-icon name="logo-github"></ion-icon> Repositorio GitHub          </a>        </div>      </div>      <div class="footer-bottom">        <span>© 2026 NovaGest ERP. Todos los derechos reservados. Desarrollado por Fabio Rieker.</span>      </div>    </footer>  </div></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProductFormPage', 'selector': 'app-product-form'},{'name': 'ProductsPage', 'selector': 'app-products'},{'name': 'RealtimeAuditPage', 'selector': 'app-realtime-audit'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'UnauthorizedPage', 'selector': 'app-unauthorized'},{'name': 'UsersPage', 'selector': 'app-users'},{'name': 'WelcomePage', 'selector': 'app-welcome'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'WelcomePage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'WelcomePage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

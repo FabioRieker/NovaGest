@@ -54,8 +54,9 @@ import {
 } from 'ionicons/icons';
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
-import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
+import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { User, UserRole } from '../../core/models/user.model';
+import { StatWidgetComponent } from '../../shared/components/stat-widget/stat-widget.component';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password');
@@ -100,19 +101,25 @@ function passwordMatchValidator(control: AbstractControl): ValidationErrors | nu
     IonSearchbar,
     IonSegment,
     IonSegmentButton,
-    IonLabel
+    IonLabel,
+    StatWidgetComponent
   ]
 })
 export class UsersPage implements OnInit {
   private fb = inject(FormBuilder);
   public authService = inject(AuthService);
   private notificationService = inject(NotificationService);
-  private realtimeService = inject(RealtimeFirestoreService);
+  private realtimeService = inject(SupabaseRealtimeService);
   private alertCtrl = inject(AlertController);
 
   public userForm: FormGroup;
   public users = signal<User[]>([]);
   public isLoading = signal(false);
+
+  public onStatWidgetClick(role: 'ALL' | 'admin' | 'user'): void {
+    this.selectedTab.set('list');
+    this.filterRole.set(role);
+  }
   public isSubmitting = signal(false);
   public showPassword = signal(false);
   public showConfirmPassword = signal(false);
@@ -254,6 +261,10 @@ export class UsersPage implements OnInit {
   public onSubmit(): void {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
+      setTimeout(() => {
+        const firstInvalid = document.querySelector('.cyber-input-item.ion-invalid input, input.ng-invalid, [aria-invalid="true"]');
+        (firstInvalid as HTMLElement)?.focus?.();
+      }, 50);
       return;
     }
 
@@ -272,7 +283,7 @@ export class UsersPage implements OnInit {
         this.isSubmitting.set(false);
         this.notificationService.showToast(`¡Cuenta para ${createdUser.name} creada exitosamente!`, 'success');
 
-        // Registro de auditoría NoSQL en vivo
+        // Registro de auditoría Supabase Realtime en vivo
         this.realtimeService.logActivity(
           'CREATE',
           'AUTH',

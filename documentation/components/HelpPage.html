@@ -1,0 +1,1194 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  HelpPage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/pages/help/help.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Manual de Usuario Embebido y Sistema de Ayuda Contextual (RA 6 &amp; FASE 5).
+Proporciona documentación interactiva integrada en la propia PWA.</p>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-help</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>    <code>IonHeader</code>
+</div>
+                        <div>    <code>IonToolbar</code>
+</div>
+                        <div>    <code>IonTitle</code>
+</div>
+                        <div>    <code>IonButtons</code>
+</div>
+                        <div>    <code>IonMenuButton</code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                        <div>    <code>IonCard</code>
+</div>
+                        <div>    <code>IonCardHeader</code>
+</div>
+                        <div>    <code>IonCardTitle</code>
+</div>
+                        <div>    <code>IonCardSubtitle</code>
+</div>
+                        <div>    <code>IonCardContent</code>
+</div>
+                        <div>    <code>IonAccordionGroup</code>
+</div>
+                        <div>    <code>IonAccordion</code>
+</div>
+                        <div>    <code>IonItem</code>
+</div>
+                        <div>    <code>IonLabel</code>
+</div>
+                        <div>    <code>IonIcon</code>
+</div>
+                        <div>    <code>IonBadge</code>
+</div>
+                        <div>    <code>IonButton</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./help.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./help.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonToolbar</code>
+                                </li>
+                                <li>
+                                        <code>IonTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonButtons</code>
+                                </li>
+                                <li>
+                                        <code>IonMenuButton</code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                                <li>
+                                        <code>IonCard</code>
+                                </li>
+                                <li>
+                                        <code>IonCardHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonCardTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonCardSubtitle</code>
+                                </li>
+                                <li>
+                                        <code>IonCardContent</code>
+                                </li>
+                                <li>
+                                        <code>IonAccordionGroup</code>
+                                </li>
+                                <li>
+                                        <code>IonAccordion</code>
+                                </li>
+                                <li>
+                                        <code>IonItem</code>
+                                </li>
+                                <li>
+                                        <code>IonLabel</code>
+                                </li>
+                                <li>
+                                        <code>IonIcon</code>
+                                </li>
+                                <li>
+                                        <code>IonBadge</code>
+                                </li>
+                                <li>
+                                        <code>IonButton</code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#notificationService" >notificationService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#goToLogin" >goToLogin</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#logout" >logout</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/pages/help/help.page.ts:74</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goToLogin"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>goToLogin</b></span>
+                        <a href="#goToLogin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>goToLogin()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/pages/help/help.page.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/pages/help/help.page.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/pages/help/help.page.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="notificationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>notificationService</b></span>
+                        <a href="#notificationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(NotificationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/pages/help/help.page.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/pages/help/help.page.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ChangeDetectionStrategy, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonMenuButton,
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonAccordionGroup,
+  IonAccordion,
+  IonItem,
+  IonLabel,
+  IonIcon,
+  IonBadge,
+  IonButton
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import {
+  helpCircleOutline,
+  shieldCheckmarkOutline,
+  personOutline,
+  documentTextOutline,
+  keyOutline,
+  accessibilityOutline,
+  layersOutline,
+  logOutOutline,
+  logInOutline
+} from &#x27;ionicons/icons&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { NotificationService } from &#x27;../../core/services/notification.service&#x27;;
+
+/**
+ * Manual de Usuario Embebido y Sistema de Ayuda Contextual (RA 6 &amp; FASE 5).
+ * Proporciona documentación interactiva integrada en la propia PWA.
+ */
+@Component({
+  selector: &#x27;app-help&#x27;,
+  templateUrl: &#x27;./help.page.html&#x27;,
+  styleUrls: [&#x27;./help.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonMenuButton,
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonAccordionGroup,
+    IonAccordion,
+    IonItem,
+    IonLabel,
+    IonIcon,
+    IonBadge,
+    IonButton
+  ]
+})
+export class HelpPage {
+  public authService &#x3D; inject(AuthService);
+  private notificationService &#x3D; inject(NotificationService);
+  private router &#x3D; inject(Router);
+
+  constructor() {
+    addIcons({
+      helpCircleOutline,
+      shieldCheckmarkOutline,
+      personOutline,
+      documentTextOutline,
+      keyOutline,
+      accessibilityOutline,
+      layersOutline,
+      logOutOutline,
+      logInOutline
+    });
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast(&#x27;Sesión cerrada correctamente.&#x27;, &#x27;primary&#x27;);
+    this.router.navigate([&#x27;/login&#x27;]);
+  }
+
+  public goToLogin(): void {
+    this.router.navigate([&#x27;/login&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot;&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;ion-menu-button&gt;&lt;/ion-menu-button&gt;
+    &lt;/ion-buttons&gt;
+    &lt;ion-title&gt;Manual de Usuario &amp; Ayuda&lt;/ion-title&gt;
+    &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
+      @if (authService.isAuthenticatedSignal()) {
+        &lt;ion-button (click)&#x3D;&quot;logout()&quot; color&#x3D;&quot;light&quot; aria-label&#x3D;&quot;Salir de la sesión&quot;&gt;
+          &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;log-out-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+          Salir
+        &lt;/ion-button&gt;
+      } @else {
+        &lt;ion-button (click)&#x3D;&quot;goToLogin()&quot; color&#x3D;&quot;light&quot; aria-label&#x3D;&quot;Iniciar sesión&quot;&gt;
+          &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;log-in-outline&quot;&gt;&lt;/ion-icon&gt;
+          Entrar
+        &lt;/ion-button&gt;
+      }
+    &lt;/ion-buttons&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;help-content&quot;&gt;
+  &lt;div class&#x3D;&quot;help-container&quot;&gt;
+    &lt;div class&#x3D;&quot;help-header-bar&quot;&gt;
+      &lt;h1 class&#x3D;&quot;page-title&quot;&gt;Guía de Uso del Sistema NovaGest ERP&lt;/h1&gt;
+      &lt;p class&#x3D;&quot;page-subtitle&quot;&gt;Documentación de usuario embebida y accesible (RA 6 &amp; WCAG)&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Tarjeta de Credenciales de Acceso Oficiales --&gt;
+    &lt;ion-card class&#x3D;&quot;help-card credentials-card&quot;&gt;
+      &lt;ion-card-header&gt;
+        &lt;div class&#x3D;&quot;card-icon-title&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;key-outline&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-card-title&gt;Credenciales de Acceso de Prueba&lt;/ion-card-title&gt;
+        &lt;/div&gt;
+        &lt;ion-card-subtitle&gt;Usuarios preconfigurados según la especificación del proyecto&lt;/ion-card-subtitle&gt;
+      &lt;/ion-card-header&gt;
+      &lt;ion-card-content&gt;
+        &lt;div class&#x3D;&quot;credentials-table-wrapper&quot;&gt;
+          &lt;table class&#x3D;&quot;credentials-table&quot;&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;
+                &lt;th&gt;Rol&lt;/th&gt;
+                &lt;th&gt;Usuario / Email&lt;/th&gt;
+                &lt;th&gt;Contraseña&lt;/th&gt;
+                &lt;th&gt;Permisos&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+              &lt;tr&gt;
+                &lt;td&gt;&lt;ion-badge color&#x3D;&quot;primary&quot;&gt;Administrador&lt;/ion-badge&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;admin&amp;#64;empresa.com&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;code&gt;Admin1234*&lt;/code&gt;&lt;/td&gt;
+                &lt;td&gt;Acceso total: Cuadro de Mando, CRUD de Productos, Informes y Auditoría Supabase Realtime.&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;&lt;ion-badge color&#x3D;&quot;medium&quot;&gt;Estándar&lt;/ion-badge&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;user&amp;#64;empresa.com&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;code&gt;User1234*&lt;/code&gt;&lt;/td&gt;
+                &lt;td&gt;Consulta de catálogo, filtrado, ordenación, visualización de detalle y ayuda.&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;
+      &lt;/ion-card-content&gt;
+    &lt;/ion-card&gt;
+
+    &lt;!-- Acordeón Interactivo con Guía Paso a Paso --&gt;
+    &lt;ion-accordion-group class&#x3D;&quot;help-accordion&quot; expand&#x3D;&quot;inset&quot;&gt;
+      &lt;!-- Módulo 1: Navegación y Control de Acceso --&gt;
+      &lt;ion-accordion value&#x3D;&quot;auth&quot;&gt;
+        &lt;ion-item slot&#x3D;&quot;header&quot; color&#x3D;&quot;light&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;shield-checkmark-outline&quot; slot&#x3D;&quot;start&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-label&gt;1. Autenticación y Control de Acceso por Roles (RBAC)&lt;/ion-label&gt;
+        &lt;/ion-item&gt;
+        &lt;div class&#x3D;&quot;accordion-content&quot; slot&#x3D;&quot;content&quot;&gt;
+          &lt;p&gt;
+            El sistema implementa &lt;strong&gt;Guards de Enrutamiento&lt;/strong&gt; (&lt;code&gt;authGuard&lt;/code&gt; y &lt;code&gt;roleGuard&lt;/code&gt;)
+            que protegen las vistas privadas. Las rutas administrativas como el &lt;em&gt;Cuadro de Mando&lt;/em&gt; o la
+            creación de productos están estrictamente restringidas al rol &lt;code&gt;admin&lt;/code&gt;.
+          &lt;/p&gt;
+          &lt;p&gt;
+            Al iniciar sesión, se genera un token de sesión JWT simulado que se almacena de forma segura en el almacenamiento
+            local y se inyecta automáticamente mediante un interceptor HTTP en las peticiones salientes.
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/ion-accordion&gt;
+
+      &lt;!-- Módulo 2: Catálogo y Componentes Reutilizables --&gt;
+      &lt;ion-accordion value&#x3D;&quot;products&quot;&gt;
+        &lt;ion-item slot&#x3D;&quot;header&quot; color&#x3D;&quot;light&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;layers-outline&quot; slot&#x3D;&quot;start&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-label&gt;2. Gestión de Catálogo y Componente Tabla Avanzada&lt;/ion-label&gt;
+        &lt;/ion-item&gt;
+        &lt;div class&#x3D;&quot;accordion-content&quot; slot&#x3D;&quot;content&quot;&gt;
+          &lt;p&gt;
+            La vista de inventario utiliza el componente agnóstico reutilizable &lt;code&gt;&amp;lt;app-data-table&amp;gt;&lt;/code&gt;, el cual ofrece:
+          &lt;/p&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;strong&gt;Búsqueda en tiempo real&lt;/strong&gt;: Filtrado instantáneo por SKU, nombre o proveedor con debounce.&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Ordenación por columnas&lt;/strong&gt;: Haga clic en la cabecera de cualquier columna (o presione Enter con teclado) para alternar orden ascendente o descendente.&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Paginación configurable&lt;/strong&gt;: Control de registros por página y botones accesibles de avance/retroceso.&lt;/li&gt;
+            &lt;li&gt;&lt;strong&gt;Operaciones CRUD&lt;/strong&gt;: Creación, modificación y eliminación con confirmación modal accesible.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/ion-accordion&gt;
+
+      &lt;!-- Módulo 3: Validación Asíncrona --&gt;
+      &lt;ion-accordion value&#x3D;&quot;validation&quot;&gt;
+        &lt;ion-item slot&#x3D;&quot;header&quot; color&#x3D;&quot;light&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;document-text-outline&quot; slot&#x3D;&quot;start&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-label&gt;3. Formularios Reactivos y Validación Asíncrona&lt;/ion-label&gt;
+        &lt;/ion-item&gt;
+        &lt;div class&#x3D;&quot;accordion-content&quot; slot&#x3D;&quot;content&quot;&gt;
+          &lt;p&gt;
+            En el formulario de alta de productos, el campo &lt;strong&gt;Código SKU&lt;/strong&gt; cuenta con un validador asíncrono
+            (&lt;code&gt;skuAsyncValidator&lt;/code&gt;). Al escribir un código, el sistema consulta en segundo plano a la API SQL
+            con un spinner visual y anuncia el estado mediante &lt;code&gt;aria-live&#x3D;&quot;polite&quot;&lt;/code&gt;. Si el SKU ya existe,
+            el botón de guardar se bloquea automáticamente evitando duplicados.
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/ion-accordion&gt;
+
+      &lt;!-- Módulo 4: Cuadro de Mando e Informes --&gt;
+      &lt;ion-accordion value&#x3D;&quot;dashboard&quot;&gt;
+        &lt;ion-item slot&#x3D;&quot;header&quot; color&#x3D;&quot;light&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;accessibility-outline&quot; slot&#x3D;&quot;start&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-label&gt;4. Cuadro de Mando e Informes en PDF y CSV&lt;/ion-label&gt;
+        &lt;/ion-item&gt;
+        &lt;div class&#x3D;&quot;accordion-content&quot; slot&#x3D;&quot;content&quot;&gt;
+          &lt;p&gt;
+            El &lt;strong&gt;Cuadro de Mando&lt;/strong&gt; integra gráficos interactivos renderizados con &lt;strong&gt;Chart.js&lt;/strong&gt;
+            y widgets KPI estadísticos (&lt;code&gt;&amp;lt;app-stat-widget&amp;gt;&lt;/code&gt;). Se sincroniza de forma concurrente
+            (&lt;code&gt;forkJoin&lt;/code&gt;) con la API SQL de Supabase (PostgreSQL) y el canal WebSocket de Supabase Realtime.
+          &lt;/p&gt;
+          &lt;p&gt;
+            La exportación permite generar informes en &lt;strong&gt;PDF formal tabulado&lt;/strong&gt; (mediante &lt;code&gt;jspdf-autotable&lt;/code&gt;)
+            o en &lt;strong&gt;CSV compatible con Excel&lt;/strong&gt; con codificación UTF-8 BOM.
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/ion-accordion&gt;
+
+      &lt;!-- Módulo 5: Accesibilidad WCAG --&gt;
+      &lt;ion-accordion value&#x3D;&quot;wcag&quot;&gt;
+        &lt;ion-item slot&#x3D;&quot;header&quot; color&#x3D;&quot;light&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;accessibility-outline&quot; slot&#x3D;&quot;start&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-label&gt;5. Guía de Accesibilidad y Navegación por Teclado&lt;/ion-label&gt;
+        &lt;/ion-item&gt;
+        &lt;div class&#x3D;&quot;accordion-content&quot; slot&#x3D;&quot;content&quot;&gt;
+          &lt;p&gt;
+            La interfaz ha sido diseñada conforme a las pautas de accesibilidad &lt;strong&gt;WCAG 2.1 AA / AAA&lt;/strong&gt;:
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;keyboard-table-wrapper&quot;&gt;
+            &lt;table class&#x3D;&quot;keyboard-table&quot;&gt;
+              &lt;thead&gt;
+                &lt;tr&gt;
+                  &lt;th&gt;Tecla&lt;/th&gt;
+                  &lt;th&gt;Acción&lt;/th&gt;
+                &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;&lt;kbd&gt;Tab&lt;/kbd&gt;&lt;/td&gt;
+                  &lt;td&gt;Desplaza el foco al siguiente elemento interactivo (con anillo de enfoque visible).&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;&lt;kbd&gt;Shift + Tab&lt;/kbd&gt;&lt;/td&gt;
+                  &lt;td&gt;Desplaza el foco al elemento interactivo anterior.&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;&lt;kbd&gt;Enter&lt;/kbd&gt; / &lt;kbd&gt;Espacio&lt;/kbd&gt;&lt;/td&gt;
+                  &lt;td&gt;Activa botones, enlaces o alternar ordenación en las cabeceras de la tabla.&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;&lt;kbd&gt;Esc&lt;/kbd&gt;&lt;/td&gt;
+                  &lt;td&gt;Cierra menús desplegables y modales de confirmación.&lt;/td&gt;
+                &lt;/tr&gt;
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ion-accordion&gt;
+    &lt;/ion-accordion-group&gt;
+  &lt;/div&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./help.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.help-content {
+  --background: var(--ion-background-color, #f8fafc);
+}
+
+.help-container {
+  padding: 24px 16px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.help-header-bar {
+  margin-bottom: 28px;
+
+  .page-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--ion-text-color, #0f172a);
+    margin: 0 0 6px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 0.92rem;
+    color: var(--ion-color-medium, #64748b);
+    margin: 0;
+    font-weight: 500;
+  }
+}
+
+.help-card {
+  margin: 0 0 28px 0;
+  border-radius: 18px;
+  box-shadow: var(--card-shadow-ambient, 0 10px 30px -5px rgba(225, 29, 72, 0.08));
+  border: 1px solid var(--brand-glass-border, rgba(225, 29, 72, 0.12));
+  background: var(--ion-card-background, #ffffff);
+  position: relative;
+  overflow: hidden;
+
+  &amp;::before {
+    content: &#x27;&#x27;;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--brand-gradient);
+  }
+
+  .card-icon-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    ion-icon {
+      font-size: 1.6rem;
+      color: var(--ion-color-primary, #e11d48);
+    }
+
+    ion-card-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--ion-text-color, #0f172a);
+      letter-spacing: -0.01em;
+    }
+  }
+}
+
+.credentials-table-wrapper, .keyboard-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.credentials-table, .keyboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+  margin-top: 12px;
+
+  th {
+    padding: 12px 14px;
+    background: rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.05);
+    color: var(--ion-text-color, #0f172a);
+    font-weight: 700;
+    border-bottom: 2px solid rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.18);
+  }
+
+  td {
+    padding: 14px 14px;
+    border-bottom: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.15);
+    color: var(--ion-text-color, #334155);
+    font-weight: 500;
+
+    code, kbd {
+      background: rgba(var(--ion-color-light-rgb, 244, 245, 248), 1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.3);
+      font-weight: 600;
+      color: var(--ion-color-primary, #e11d48);
+    }
+  }
+}
+
+.help-accordion {
+  border-radius: 14px;
+  overflow: hidden;
+
+  ion-accordion {
+    border-bottom: 1px solid rgba(var(--ion-color-medium-rgb, 146, 148, 156), 0.15);
+
+    ion-item {
+      --background: var(--ion-card-background, #ffffff);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .accordion-content {
+      padding: 18px 24px;
+      background: var(--ion-card-background, #ffffff);
+      color: var(--ion-text-color, #334155);
+      line-height: 1.65;
+      font-size: 0.92rem;
+
+      p {
+        margin: 0 0 12px 0;
+      }
+
+      ul {
+        margin: 0 0 12px 0;
+        padding-left: 20px;
+
+        li {
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button></ion-menu-button>    </ion-buttons>    <ion-title>Manual de Usuario & Ayuda</ion-title>    <ion-buttons slot="end">      @if (authService.isAuthenticatedSignal()) {        <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">          <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>          Salir        </ion-button>      } @else {        <ion-button (click)="goToLogin()" color="light" aria-label="Iniciar sesión">          <ion-icon slot="start" name="log-in-outline"></ion-icon>          Entrar        </ion-button>      }    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="help-content">  <div class="help-container">    <div class="help-header-bar">      <h1 class="page-title">Guía de Uso del Sistema NovaGest ERP</h1>      <p class="page-subtitle">Documentación de usuario embebida y accesible (RA 6 & WCAG)</p>    </div>    <!-- Tarjeta de Credenciales de Acceso Oficiales -->    <ion-card class="help-card credentials-card">      <ion-card-header>        <div class="card-icon-title">          <ion-icon name="key-outline" color="primary"></ion-icon>          <ion-card-title>Credenciales de Acceso de Prueba</ion-card-title>        </div>        <ion-card-subtitle>Usuarios preconfigurados según la especificación del proyecto</ion-card-subtitle>      </ion-card-header>      <ion-card-content>        <div class="credentials-table-wrapper">          <table class="credentials-table">            <thead>              <tr>                <th>Rol</th>                <th>Usuario / Email</th>                <th>Contraseña</th>                <th>Permisos</th>              </tr>            </thead>            <tbody>              <tr>                <td><ion-badge color="primary">Administrador</ion-badge></td>                <td><strong>admin&#64;empresa.com</strong></td>                <td><code>Admin1234*</code></td>                <td>Acceso total: Cuadro de Mando, CRUD de Productos, Informes y Auditoría Supabase Realtime.</td>              </tr>              <tr>                <td><ion-badge color="medium">Estándar</ion-badge></td>                <td><strong>user&#64;empresa.com</strong></td>                <td><code>User1234*</code></td>                <td>Consulta de catálogo, filtrado, ordenación, visualización de detalle y ayuda.</td>              </tr>            </tbody>          </table>        </div>      </ion-card-content>    </ion-card>    <!-- Acordeón Interactivo con Guía Paso a Paso -->    <ion-accordion-group class="help-accordion" expand="inset">      <!-- Módulo 1: Navegación y Control de Acceso -->      <ion-accordion value="auth">        <ion-item slot="header" color="light">          <ion-icon name="shield-checkmark-outline" slot="start" color="primary"></ion-icon>          <ion-label>1. Autenticación y Control de Acceso por Roles (RBAC)</ion-label>        </ion-item>        <div class="accordion-content" slot="content">          <p>            El sistema implementa <strong>Guards de Enrutamiento</strong> (<code>authGuard</code> y <code>roleGuard</code>)            que protegen las vistas privadas. Las rutas administrativas como el <em>Cuadro de Mando</em> o la            creación de productos están estrictamente restringidas al rol <code>admin</code>.          </p>          <p>            Al iniciar sesión, se genera un token de sesión JWT simulado que se almacena de forma segura en el almacenamiento            local y se inyecta automáticamente mediante un interceptor HTTP en las peticiones salientes.          </p>        </div>      </ion-accordion>      <!-- Módulo 2: Catálogo y Componentes Reutilizables -->      <ion-accordion value="products">        <ion-item slot="header" color="light">          <ion-icon name="layers-outline" slot="start" color="primary"></ion-icon>          <ion-label>2. Gestión de Catálogo y Componente Tabla Avanzada</ion-label>        </ion-item>        <div class="accordion-content" slot="content">          <p>            La vista de inventario utiliza el componente agnóstico reutilizable <code>&lt;app-data-table&gt;</code>, el cual ofrece:          </p>          <ul>            <li><strong>Búsqueda en tiempo real</strong>: Filtrado instantáneo por SKU, nombre o proveedor con debounce.</li>            <li><strong>Ordenación por columnas</strong>: Haga clic en la cabecera de cualquier columna (o presione Enter con teclado) para alternar orden ascendente o descendente.</li>            <li><strong>Paginación configurable</strong>: Control de registros por página y botones accesibles de avance/retroceso.</li>            <li><strong>Operaciones CRUD</strong>: Creación, modificación y eliminación con confirmación modal accesible.</li>          </ul>        </div>      </ion-accordion>      <!-- Módulo 3: Validación Asíncrona -->      <ion-accordion value="validation">        <ion-item slot="header" color="light">          <ion-icon name="document-text-outline" slot="start" color="primary"></ion-icon>          <ion-label>3. Formularios Reactivos y Validación Asíncrona</ion-label>        </ion-item>        <div class="accordion-content" slot="content">          <p>            En el formulario de alta de productos, el campo <strong>Código SKU</strong> cuenta con un validador asíncrono            (<code>skuAsyncValidator</code>). Al escribir un código, el sistema consulta en segundo plano a la API SQL            con un spinner visual y anuncia el estado mediante <code>aria-live="polite"</code>. Si el SKU ya existe,            el botón de guardar se bloquea automáticamente evitando duplicados.          </p>        </div>      </ion-accordion>      <!-- Módulo 4: Cuadro de Mando e Informes -->      <ion-accordion value="dashboard">        <ion-item slot="header" color="light">          <ion-icon name="accessibility-outline" slot="start" color="primary"></ion-icon>          <ion-label>4. Cuadro de Mando e Informes en PDF y CSV</ion-label>        </ion-item>        <div class="accordion-content" slot="content">          <p>            El <strong>Cuadro de Mando</strong> integra gráficos interactivos renderizados con <strong>Chart.js</strong>            y widgets KPI estadísticos (<code>&lt;app-stat-widget&gt;</code>). Se sincroniza de forma concurrente            (<code>forkJoin</code>) con la API SQL de Supabase (PostgreSQL) y el canal WebSocket de Supabase Realtime.          </p>          <p>            La exportación permite generar informes en <strong>PDF formal tabulado</strong> (mediante <code>jspdf-autotable</code>)            o en <strong>CSV compatible con Excel</strong> con codificación UTF-8 BOM.          </p>        </div>      </ion-accordion>      <!-- Módulo 5: Accesibilidad WCAG -->      <ion-accordion value="wcag">        <ion-item slot="header" color="light">          <ion-icon name="accessibility-outline" slot="start" color="primary"></ion-icon>          <ion-label>5. Guía de Accesibilidad y Navegación por Teclado</ion-label>        </ion-item>        <div class="accordion-content" slot="content">          <p>            La interfaz ha sido diseñada conforme a las pautas de accesibilidad <strong>WCAG 2.1 AA / AAA</strong>:          </p>          <div class="keyboard-table-wrapper">            <table class="keyboard-table">              <thead>                <tr>                  <th>Tecla</th>                  <th>Acción</th>                </tr>              </thead>              <tbody>                <tr>                  <td><kbd>Tab</kbd></td>                  <td>Desplaza el foco al siguiente elemento interactivo (con anillo de enfoque visible).</td>                </tr>                <tr>                  <td><kbd>Shift + Tab</kbd></td>                  <td>Desplaza el foco al elemento interactivo anterior.</td>                </tr>                <tr>                  <td><kbd>Enter</kbd> / <kbd>Espacio</kbd></td>                  <td>Activa botones, enlaces o alternar ordenación en las cabeceras de la tabla.</td>                </tr>                <tr>                  <td><kbd>Esc</kbd></td>                  <td>Cierra menús desplegables y modales de confirmación.</td>                </tr>              </tbody>            </table>          </div>        </div>      </ion-accordion>    </ion-accordion-group>  </div></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProductFormPage', 'selector': 'app-product-form'},{'name': 'ProductsPage', 'selector': 'app-products'},{'name': 'RealtimeAuditPage', 'selector': 'app-realtime-audit'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'UnauthorizedPage', 'selector': 'app-unauthorized'},{'name': 'UsersPage', 'selector': 'app-users'},{'name': 'WelcomePage', 'selector': 'app-welcome'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'HelpPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'HelpPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

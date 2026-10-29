@@ -27,7 +27,7 @@ import {
 } from 'ionicons/icons';
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
-import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
+import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 
 /**
  * Página de Autenticación de Usuarios (FASE 1 - Paso 1.2).
@@ -60,7 +60,7 @@ export class LoginPage {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private notificationService = inject(NotificationService);
-  private realtimeService = inject(RealtimeFirestoreService);
+  private realtimeService = inject(SupabaseRealtimeService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
@@ -131,7 +131,11 @@ export class LoginPage {
         this.notificationService.showToast(`¡Bienvenido/a, ${user.name}!`, 'success');
 
         const returnUrl = this.route.snapshot.queryParams['returnUrl'];
-        if (returnUrl) {
+        const allowedRoutes = ['/dashboard', '/products', '/users', '/realtime-audit', '/reports', '/help', '/product-form'];
+        const isSafeReturnUrl = returnUrl && returnUrl.startsWith('/') && !returnUrl.startsWith('//')
+          && allowedRoutes.some(route => returnUrl === route || returnUrl.startsWith(`${route}/`) || returnUrl.startsWith(`${route}?`));
+
+        if (isSafeReturnUrl) {
           this.router.navigateByUrl(returnUrl);
         } else if (user.role === 'admin') {
           this.router.navigate(['/dashboard']);

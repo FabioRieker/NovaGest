@@ -34,6 +34,7 @@
           @for (col of columns; track col.key) {
             <th
               role="columnheader"
+              scope="col"
               [style.width]="col.width || 'auto'"
               [attr.aria-sort]="sortColumn === col.key ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'"
               [class.sortable]="col.sortable"
@@ -57,7 +58,7 @@
             </th>
           }
           @if (showActions) {
-            <th role="columnheader" class="actions-header">Acciones</th>
+            <th role="columnheader" scope="col" class="actions-header">Acciones</th>
           }
         </tr>
       </thead>
@@ -82,7 +83,27 @@
             >
               @for (col of columns; track col.key) {
                 <td role="cell" [attr.data-label]="col.label">
-                  @if (col.type === 'badge') {
+                  @if (col.type === 'image') {
+                    <div
+                      class="table-img-cell"
+                      (click)="openImagePreview(item[col.key], item.name || item.sku, $event)"
+                      [class.clickable]="!!item[col.key]"
+                      [title]="item[col.key] ? 'Clic para ampliar imagen' : 'Sin imagen registrada'"
+                    >
+                      @if (item[col.key]) {
+                        <img
+                          [src]="item[col.key]"
+                          [alt]="item.name || 'Miniatura'"
+                          loading="lazy"
+                          class="product-thumb-img"
+                        />
+                      } @else {
+                        <div class="no-thumb-box">
+                          <ion-icon name="image-outline"></ion-icon>
+                        </div>
+                      }
+                    </div>
+                  } @else if (col.type === 'badge') {
                     <ion-badge [color]="getBadgeColor(item[col.key])" class="status-badge">
                       {{ item[col.key] }}
                     </ion-badge>
@@ -167,5 +188,30 @@
         </ion-button>
       </div>
     </nav>
+  }
+
+  <!-- Lightbox Modal de Previsualización de Imagen -->
+  @if (previewModal(); as modal) {
+    <div
+      class="image-lightbox-overlay"
+      (click)="closeImagePreview()"
+      (keydown.escape)="closeImagePreview()"
+      tabindex="0"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Vista previa ampliada de imagen"
+    >
+      <div class="image-lightbox-card" (click)="$event.stopPropagation()">
+        <div class="lightbox-header">
+          <span class="lightbox-title">{{ modal.title }}</span>
+          <button type="button" class="lightbox-close-btn" (click)="closeImagePreview()" aria-label="Cerrar vista previa">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+        <div class="lightbox-body">
+          <img [src]="modal.url" [alt]="modal.title" class="lightbox-image" />
+        </div>
+      </div>
+    </div>
   }
 </div>

@@ -1,4 +1,4 @@
-# 📖 Manual de Usuario - NovaGest ERP
+# Manual de Usuario - NovaGest ERP
 
 **Módulo:** Desarrollo de Interfaces (Código: 0488)  
 **Ciclo Formativo:** Grado Superior en Desarrollo de Aplicaciones Multiplataforma (DAM2)  
@@ -7,29 +7,29 @@
 
 ---
 
-## 🏢 1. Introducción y Alcance del Sistema
+## 1. Introducción y Alcance del Sistema
 **NovaGest ERP** es un sistema de gestión empresarial multiplataforma (PWA/Híbrida) diseñado con el framework **Ionic** y **Angular**, estructurado bajo el patrón arquitectónico MVVM y orientado a la optimización de procesos de negocio, control de stock y auditoría de eventos en tiempo real.
 
-El sistema consume concurrentemente dos orígenes de datos:
-1. **API REST Relacional (SQL simulada)** con persistencia local y soporte para operaciones CRUD, indexación y agregaciones.
-2. **Servicio NoSQL en Tiempo Real (tipo Firestore)** con un flujo continuo de logs, trazabilidad y alertas automáticas.
+El sistema consume concurrentemente dos orígenes de datos en **Supabase**:
+1. **API REST Relacional (PostgreSQL en Supabase)** con persistencia estructurada y soporte para operaciones CRUD, indexación y agregaciones.
+2. **Servicio en Tiempo Real (Supabase Realtime)** con canales WebSocket para un flujo continuo de logs, trazabilidad y alertas automáticas.
 
 ---
 
-## 🔐 2. Credenciales de Acceso Oficiales
+## 2. Credenciales de Acceso Oficiales
 
 El sistema implementa **Control de Acceso Basado en Roles (RBAC)** con dos perfiles diferenciados:
 
 | Perfil | Correo Electrónico | Contraseña | Alcance y Permisos |
 | :--- | :--- | :--- | :--- |
-| **Administrador** | `admin@empresa.com` | `Admin1234*` | **Acceso total:** Cuadro de Mando Ejecutivo, Gráficos Interactivos, Altas/Bajas/Modificaciones de Inventario, Informes y Auditoría NoSQL en vivo. |
+| **Administrador** | `admin@empresa.com` | `Admin1234*` | **Acceso total:** Cuadro de Mando Ejecutivo, Gráficos Interactivos, Altas/Bajas/Modificaciones de Inventario, Informes y Auditoría Supabase Realtime en vivo. |
 | **Usuario Estándar** | `user@empresa.com` | `User1234*` | **Acceso limitado:** Consulta de catálogo con filtros, ordenación de columnas, detalle de artículos, informes y manual de ayuda. |
 
 > **Nota:** La pantalla de inicio de sesión dispone de botones de autorelleno para facilitar la evaluación rápida de ambos roles por parte del docente.
 
 ---
 
-## 🚀 3. Funcionalidades Principales
+## 3. Funcionalidades Principales
 
 ### 3.1. Navegación Global y Side Menu
 - **Menú Lateral Responsivo:** Emplea `IonSplitPane` para mostrar permanentemente la navegación en pantallas grandes (escritorio/tablets en horizontal) y como menú lateral desplegable en móviles.
@@ -58,9 +58,9 @@ El sistema implementa **Control de Acceso Basado en Roles (RBAC)** con dos perfi
   - Mientras valida, muestra un spinner accesible.
   - Si el código existe, muestra un mensaje de error y deshabilita el botón de guardado.
 
-### 3.5. Auditoría NoSQL en Tiempo Real
-- Conexión reactiva a la colección de eventos del sistema (altas, modificaciones, eliminaciones, accesos e incidencias de telemetría).
-- Emisión periódica de latidos (*heartbeat*) que evidencian la naturaleza en tiempo real del servicio sin bloquear el hilo principal.
+### 3.5. Auditoría en Tiempo Real (Supabase Realtime)
+- Conexión reactiva al canal WebSocket de Supabase Realtime para recibir eventos del sistema (altas, modificaciones, eliminaciones, accesos e incidencias de telemetría).
+- Emisión periódica de telemetría y sincronización bidireccional que evidencian la naturaleza en tiempo real del servicio sin bloquear el hilo principal.
 
 ### 3.6. Exportación de Informes
 - **PDF Oficial:** Documento formal con diseño profesional, cabecera corporativa, metadatos, tabla formateada mediante `jspdf-autotable` y paginación.
@@ -68,7 +68,7 @@ El sistema implementa **Control de Acceso Basado en Roles (RBAC)** con dos perfi
 
 ---
 
-## ♿ 4. Accesibilidad (WCAG 2.1 AA / AAA)
+## 4. Accesibilidad
 
 NovaGest ERP ha sido desarrollado con un compromiso estricto con la accesibilidad:
 - **Navegación Integral por Teclado:**

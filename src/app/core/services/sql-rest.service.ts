@@ -1,19 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, of, throwError, from } from 'rxjs';
 import { delay, map, tap } from 'rxjs/operators';
-import { Product, ProductFilterOptions, StockStatus } from '../models/product.model';
+import { Product, ProductCategory, ProductFilterOptions, StockStatus } from '../models/product.model';
+import { SupabaseService } from './supabase.service';
 
 const SQL_STORAGE_KEY = 'novagest_sql_products';
 
 /**
- * Servicio que simula el consumo de una API REST conectada a Base de Datos Relacional (SQL).
- * Incluye persistencia local estructurada, validaciones de integridad referencial,
- * filtrado por índices, cálculo de agregaciones y latencia asíncrona realista.
+ * Servicio de Consumo de Base de Datos Relacional (SQL) conectada a Supabase PostgreSQL (RA 5).
+ * Gestiona operaciones CRUD asíncronas sobre la tabla `products`, validaciones de integridad referencial,
+ * filtrado por índices, cálculo de agregaciones y resiliencia con caché local estructurada.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class SqlRestService {
+  private supabaseService = inject(SupabaseService);
 
   private readonly initialSeed: Product[] = [
     {
@@ -25,6 +27,7 @@ export class SqlRestService {
       stock: 8,
       status: 'in_stock',
       supplierEmail: 'dell.enterprise@proveedor.es',
+      imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80',
       description: 'Servidor 2U para virtualización de alta densidad con doble Intel Xeon.',
       createdAt: '2026-01-10T10:00:00Z',
       updatedAt: '2026-01-10T10:00:00Z'
@@ -38,6 +41,7 @@ export class SqlRestService {
       stock: 14,
       status: 'in_stock',
       supplierEmail: 'ventas@lenovobusiness.com',
+      imageUrl: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&q=80',
       description: 'Estación de trabajo portátil para ingenieros con GPU NVIDIA RTX 4080.',
       createdAt: '2026-01-12T11:20:00Z',
       updatedAt: '2026-01-12T11:20:00Z'
@@ -64,6 +68,7 @@ export class SqlRestService {
       stock: 3,
       status: 'low_stock',
       supplierEmail: 'contacto@ergodesign.es',
+      imageUrl: 'https://images.unsplash.com/photo-1580481077195-c2763297a73e?w=400&q=80',
       description: 'Silla ergonómica de oficina con soporte lumbar ajustable PostureFit SL.',
       createdAt: '2026-01-18T14:40:00Z',
       updatedAt: '2026-01-18T14:40:00Z'
@@ -90,6 +95,7 @@ export class SqlRestService {
       stock: 0,
       status: 'out_of_stock',
       supplierEmail: 'distribucion@lgdisplays.com',
+      imageUrl: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80',
       description: 'Panel IPS QHD+ con Thunderbolt 3 y cobertura DCI-P3 98%.',
       createdAt: '2026-01-22T08:30:00Z',
       updatedAt: '2026-01-22T08:30:00Z'
@@ -103,6 +109,7 @@ export class SqlRestService {
       stock: 22,
       status: 'in_stock',
       supplierEmail: 'pedidos@sonypro.es',
+      imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80',
       description: 'Cancelación activa de ruido líder en el mercado para conferencias y trabajo remoto.',
       createdAt: '2026-01-25T13:10:00Z',
       updatedAt: '2026-01-25T13:10:00Z'
@@ -129,6 +136,7 @@ export class SqlRestService {
       stock: 6,
       status: 'in_stock',
       supplierEmail: 'sales@ciscopartner.com',
+      imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&q=80',
       description: 'Conmutador PoE+ Gigabit con enlaces ascendentes 4x10G para red troncal.',
       createdAt: '2026-02-02T12:00:00Z',
       updatedAt: '2026-02-02T12:00:00Z'
@@ -150,11 +158,56 @@ export class SqlRestService {
 
   constructor() {
     this.ensureInitialized();
+    this.syncProductsWithSupabase();
   }
 
   private ensureInitialized(): void {
     if (!localStorage.getItem(SQL_STORAGE_KEY)) {
       localStorage.setItem(SQL_STORAGE_KEY, JSON.stringify(this.initialSeed));
+    }
+  }
+
+  /**
+   * Sincroniza el catálogo con la tabla 'products' de Supabase
+   */
+  public async syncProductsWithSupabase(): Promise<Product[] | null> {
+    const client = this.supabaseService.client;
+    if (!client || !this.supabaseService.isConfigured) return null;
+
+    try {
+      const { data, error } = await client
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.warn('Aviso sincronizando productos con Supabase:', error.message);
+        return null;
+      }
+
+      if (data && data.length > 0) {
+        const mapped: Product[] = data.map((item: any) => ({
+          id: item.id,
+          sku: item.sku,
+          name: item.name,
+          category: item.category as ProductCategory,
+          price: Number(item.price),
+          stock: Number(item.stock),
+          status: item.status as StockStatus,
+          supplierEmail: item.supplier_email,
+          description: item.description || '',
+          imageUrl: item.image_url || '',
+          createdAt: item.created_at,
+          updatedAt: item.updated_at
+        }));
+
+        this.saveProducts(mapped);
+        return mapped;
+      }
+      return null;
+    } catch (e) {
+      console.warn('Error al obtener productos de Supabase:', e);
+      return null;
     }
   }
 
@@ -175,8 +228,10 @@ export class SqlRestService {
    * Obtiene todos los productos con soporte para filtrado, búsqueda y ordenación
    */
   public getProducts(filters?: ProductFilterOptions): Observable<Product[]> {
-    return of(this.getStoredProducts()).pipe(
-      delay(350), // Latencia de consulta SQL
+    return from((async () => {
+      const live = await this.syncProductsWithSupabase();
+      return live || this.getStoredProducts();
+    })()).pipe(
       map(items => {
         let result = [...items];
 
@@ -233,83 +288,127 @@ export class SqlRestService {
   }
 
   /**
-   * Inserta un nuevo producto garantizando unicidad de SKU
+   * Inserta un nuevo producto en Supabase PostgreSQL garantizando unicidad de SKU
    */
   public createProduct(data: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>): Observable<Product> {
-    return of(null).pipe(
-      delay(450),
-      map(() => {
-        const items = this.getStoredProducts();
-        const skuExists = items.some(p => p.sku.toUpperCase() === data.sku.toUpperCase());
-        if (skuExists) {
-          throw new Error(`Error de restricción UNIQUE: El SKU '${data.sku}' ya está registrado.`);
+    return from((async () => {
+      const items = this.getStoredProducts();
+      const skuExists = items.some(p => p.sku.toUpperCase() === data.sku.toUpperCase());
+      if (skuExists) {
+        throw new Error(`Error de restricción UNIQUE: El SKU '${data.sku}' ya está registrado.`);
+      }
+
+      const newProduct: Product = {
+        ...data,
+        id: `prod-${Date.now().toString(36)}`,
+        sku: data.sku.toUpperCase().trim(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      const client = this.supabaseService.client;
+      if (client && this.supabaseService.isConfigured) {
+        const { error } = await client.from('products').insert({
+          id: newProduct.id,
+          sku: newProduct.sku,
+          name: newProduct.name,
+          category: newProduct.category,
+          price: newProduct.price,
+          stock: newProduct.stock,
+          status: newProduct.status,
+          supplier_email: newProduct.supplierEmail,
+          description: newProduct.description,
+          image_url: newProduct.imageUrl || null,
+          created_at: newProduct.createdAt,
+          updated_at: newProduct.updatedAt
+        });
+
+        if (error) {
+          console.error('Error insertando producto en Supabase:', error);
+          throw new Error(`Error en Supabase: ${error.message}`);
         }
+      }
 
-        const newProduct: Product = {
-          ...data,
-          id: `prod-${Date.now().toString(36)}`,
-          sku: data.sku.toUpperCase().trim(),
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        };
-
-        items.unshift(newProduct);
-        this.saveProducts(items);
-        return newProduct;
-      })
-    );
+      items.unshift(newProduct);
+      this.saveProducts(items);
+      return newProduct;
+    })());
   }
 
   /**
-   * Actualiza un producto existente
+   * Actualiza un producto existente en Supabase PostgreSQL
    */
   public updateProduct(id: string, changes: Partial<Product>): Observable<Product> {
-    return of(null).pipe(
-      delay(400),
-      map(() => {
-        const items = this.getStoredProducts();
-        const index = items.findIndex(p => p.id === id);
-        if (index === -1) {
-          throw new Error(`Error: Producto con ID ${id} no existe.`);
-        }
+    return from((async () => {
+      const items = this.getStoredProducts();
+      const index = items.findIndex(p => p.id === id);
+      if (index === -1) {
+        throw new Error(`Error: Producto con ID ${id} no existe.`);
+      }
 
-        if (changes.sku) {
-          const skuConflict = items.some(p => p.id !== id && p.sku.toUpperCase() === changes.sku!.toUpperCase());
-          if (skuConflict) {
-            throw new Error(`Error de integridad: El SKU '${changes.sku}' ya está en uso.`);
-          }
+      if (changes.sku) {
+        const skuConflict = items.some(p => p.id !== id && p.sku.toUpperCase() === changes.sku!.toUpperCase());
+        if (skuConflict) {
+          throw new Error(`Error de integridad: El SKU '${changes.sku}' ya está en uso.`);
         }
+      }
 
-        const updated: Product = {
-          ...items[index],
-          ...changes,
-          sku: changes.sku ? changes.sku.toUpperCase().trim() : items[index].sku,
-          updatedAt: new Date().toISOString()
+      const updated: Product = {
+        ...items[index],
+        ...changes,
+        sku: changes.sku ? changes.sku.toUpperCase().trim() : items[index].sku,
+        updatedAt: new Date().toISOString()
+      };
+
+      const client = this.supabaseService.client;
+      if (client && this.supabaseService.isConfigured) {
+        const payload: any = {
+          updated_at: updated.updatedAt
         };
+        if (changes.sku !== undefined) payload.sku = updated.sku;
+        if (changes.name !== undefined) payload.name = updated.name;
+        if (changes.category !== undefined) payload.category = updated.category;
+        if (changes.price !== undefined) payload.price = updated.price;
+        if (changes.stock !== undefined) payload.stock = updated.stock;
+        if (changes.status !== undefined) payload.status = updated.status;
+        if (changes.supplierEmail !== undefined) payload.supplier_email = updated.supplierEmail;
+        if (changes.description !== undefined) payload.description = updated.description;
+        if (changes.imageUrl !== undefined) payload.image_url = updated.imageUrl || null;
 
-        items[index] = updated;
-        this.saveProducts(items);
-        return updated;
-      })
-    );
+        const { error } = await client.from('products').update(payload).eq('id', id);
+        if (error) {
+          console.warn('Error actualizando producto en Supabase:', error.message);
+        }
+      }
+
+      items[index] = updated;
+      this.saveProducts(items);
+      return updated;
+    })());
   }
 
   /**
-   * Elimina un producto por su ID
+   * Elimina un producto por su ID en Supabase PostgreSQL
    */
   public deleteProduct(id: string): Observable<boolean> {
-    return of(null).pipe(
-      delay(350),
-      map(() => {
-        const items = this.getStoredProducts();
-        const filtered = items.filter(p => p.id !== id);
-        if (filtered.length === items.length) {
-          throw new Error(`Producto con ID ${id} no encontrado.`);
+    return from((async () => {
+      const items = this.getStoredProducts();
+      const filtered = items.filter(p => p.id !== id);
+      if (filtered.length === items.length) {
+        throw new Error(`Producto con ID ${id} no encontrado.`);
+      }
+
+      const client = this.supabaseService.client;
+      if (client && this.supabaseService.isConfigured) {
+        const { error } = await client.from('products').delete().eq('id', id);
+        if (error) {
+          console.warn('Error eliminando producto de Supabase:', error.message);
         }
-        this.saveProducts(filtered);
-        return true;
-      })
-    );
+      }
+
+      this.saveProducts(filtered);
+      return true;
+    })());
   }
 
   /**
