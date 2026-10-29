@@ -11,7 +11,8 @@ import {
   IonButton,
   IonIcon,
   IonSelect,
-  IonSelectOption
+  IonSelectOption,
+  IonSpinner
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
@@ -20,7 +21,15 @@ import {
   downloadOutline,
   documentTextOutline,
   filterOutline,
-  logOutOutline
+  logOutOutline,
+  gridOutline,
+  listOutline,
+  createOutline,
+  trashOutline,
+  eyeOutline,
+  imageOutline,
+  cubeOutline,
+  closeOutline
 } from 'ionicons/icons';
 import { SqlRestService } from '../../core/services/sql-rest.service';
 import { AuthService } from '../../core/services/auth.service';
@@ -28,7 +37,7 @@ import { NotificationService } from '../../core/services/notification.service';
 import { ExportService } from '../../core/services/export.service';
 import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { DataTableComponent, TableColumn, TableActionPayload } from '../../shared/components/data-table/data-table.component';
-import { Product } from '../../core/models/product.model';
+import { Product, StockStatus } from '../../core/models/product.model';
 
 /**
  * Vista de Gestión de Catálogo e Inventario (FASE 2 & FASE 3).
@@ -53,6 +62,7 @@ import { Product } from '../../core/models/product.model';
     IonIcon,
     IonSelect,
     IonSelectOption,
+    IonSpinner,
     DataTableComponent
   ]
 })
@@ -70,6 +80,8 @@ export class ProductsPage implements OnInit {
   public selectedStatus = signal<string>('ALL');
   public currentSort = signal<{ column: string; direction: 'asc' | 'desc' } | null>(null);
   public currentPage = signal<number>(1);
+  public viewMode = signal<'table' | 'cards'>('table');
+  public previewModalImage = signal<{ url: string; title: string } | null>(null);
 
   public onSortChange(sort: { column: string; direction: 'asc' | 'desc' }): void {
     this.currentSort.set(sort);
@@ -97,7 +109,15 @@ export class ProductsPage implements OnInit {
       downloadOutline,
       documentTextOutline,
       filterOutline,
-      logOutOutline
+      logOutOutline,
+      gridOutline,
+      listOutline,
+      createOutline,
+      trashOutline,
+      eyeOutline,
+      imageOutline,
+      cubeOutline,
+      closeOutline
     });
   }
 
@@ -151,7 +171,7 @@ export class ProductsPage implements OnInit {
     }
   }
 
-  private async confirmDelete(product: Product): Promise<void> {
+  public async confirmDelete(product: Product): Promise<void> {
     const confirmed = await this.notificationService.confirm(
       'Eliminar Producto',
       `¿Está seguro de que desea eliminar permanentemente '${product.name}' (SKU: ${product.sku})?`
@@ -175,6 +195,45 @@ export class ProductsPage implements OnInit {
         }
       });
     }
+  }
+
+  public getStatusLabel(status: string): string {
+    switch (status) {
+      case 'in_stock': return 'En Stock';
+      case 'low_stock': return 'Stock Bajo';
+      case 'out_of_stock': return 'Agotado';
+      default: return status;
+    }
+  }
+
+  public getBadgeColor(status: string): string {
+    switch (status) {
+      case 'in_stock': return 'success';
+      case 'low_stock': return 'warning';
+      case 'out_of_stock': return 'danger';
+      default: return 'medium';
+    }
+  }
+
+  public openImagePreview(url: string | undefined, title: string, event?: Event): void {
+    if (event) event.stopPropagation();
+    if (!url) return;
+    this.previewModalImage.set({ url, title });
+  }
+
+  public closeImagePreview(): void {
+    this.previewModalImage.set(null);
+  }
+
+  public navigateToEdit(id: string): void {
+    this.router.navigate(['/product-form', id]);
+  }
+
+  public openDetail(item: Product): void {
+    this.notificationService.showToast(
+      `Detalle: ${item.name} | SKU: ${item.sku} | Proveedor: ${item.supplierEmail} | Precio: ${item.price.toFixed(2)} €`,
+      'primary'
+    );
   }
 
   public exportPdf(): void {

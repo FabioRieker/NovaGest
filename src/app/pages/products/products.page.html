@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <!-- Filtros de Categoría y Estado -->
+    <!-- Filtros de Categoría y Estado y Toggle de Vista -->
     <div class="filters-bar">
       <div class="filter-group">
         <ion-icon name="filter-outline" aria-hidden="true"></ion-icon>
@@ -76,22 +76,157 @@
           <ion-select-option value="out_of_stock">Agotado</ion-select-option>
         </ion-select>
       </div>
+
+      <!-- Selector de Modo de Vista (Tabla vs Tarjetas) -->
+      <div class="view-mode-toggle" role="group" aria-label="Cambiar modo de vista">
+        <button
+          type="button"
+          class="toggle-mode-btn"
+          [class.active]="viewMode() === 'table'"
+          (click)="viewMode.set('table')"
+          aria-label="Ver en modo tabla"
+          title="Vista Tabla"
+        >
+          <ion-icon name="list-outline"></ion-icon>
+          <span>Tabla</span>
+        </button>
+        <button
+          type="button"
+          class="toggle-mode-btn"
+          [class.active]="viewMode() === 'cards'"
+          (click)="viewMode.set('cards')"
+          aria-label="Ver en modo tarjetas"
+          title="Vista Tarjetas"
+        >
+          <ion-icon name="grid-outline"></ion-icon>
+          <span>Tarjetas</span>
+        </button>
+      </div>
     </div>
 
-    <!-- Componente 1 Visual Reutilizable (RA 3) -->
-    <app-data-table
-      [columns]="tableColumns"
-      [data]="products()"
-      [pageSize]="6"
-      searchPlaceholder="Buscar por SKU, nombre o proveedor..."
-      [loading]="isLoading()"
-      [showActions]="true"
-      [canEdit]="authService.isAdminSignal()"
-      [canDelete]="authService.isAdminSignal()"
-      [canView]="true"
-      (actionClick)="onTableAction($event)"
-      (sortChange)="onSortChange($event)"
-      (pageChange)="onPageChange($event)"
-    ></app-data-table>
+    @if (viewMode() === 'table') {
+      <!-- Componente 1 Visual Reutilizable (RA 3) -->
+      <app-data-table
+        [columns]="tableColumns"
+        [data]="products()"
+        [pageSize]="6"
+        searchPlaceholder="Buscar por SKU, nombre o proveedor..."
+        [loading]="isLoading()"
+        [showActions]="true"
+        [canEdit]="authService.isAdminSignal()"
+        [canDelete]="authService.isAdminSignal()"
+        [canView]="true"
+        (actionClick)="onTableAction($event)"
+        (sortChange)="onSortChange($event)"
+        (pageChange)="onPageChange($event)"
+      ></app-data-table>
+    } @else {
+      <!-- Formato Tarjetas (Cards Grid View) -->
+      <div class="cards-view-wrapper">
+        @if (isLoading()) {
+          <div class="cards-loading-state">
+            <ion-spinner name="crescent" color="primary"></ion-spinner>
+            <span>Cargando productos en formato tarjetas...</span>
+          </div>
+        } @else if (products().length === 0) {
+          <div class="cards-empty-state">
+            <ion-icon name="cube-outline"></ion-icon>
+            <h3>No se encontraron productos</h3>
+            <p>Modifique los filtros seleccionados para ver más resultados.</p>
+          </div>
+        } @else {
+          <div class="product-cards-grid">
+            @for (item of products(); track item.id) {
+              <div class="product-card" (click)="openDetail(item)">
+                <div class="card-media-box" (click)="openImagePreview(item.imageUrl, item.name, $event)">
+                  @if (item.imageUrl) {
+                    <img [src]="item.imageUrl" [alt]="item.name" loading="lazy" class="card-product-img" />
+                    <div class="media-zoom-overlay">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                  } @else {
+                    <div class="card-no-img">
+                      <ion-icon name="image-outline"></ion-icon>
+                      <span>Sin imagen</span>
+                    </div>
+                  }
+                  <span class="card-status-badge" [class]="item.status">
+                    {{ getStatusLabel(item.status) }}
+                  </span>
+                  <span class="card-category-pill">{{ item.category }}</span>
+                </div>
+
+                <div class="card-content-box">
+                  <div class="card-sku-stock-row">
+                    <span class="sku-tag">{{ item.sku }}</span>
+                    <span class="stock-tag">Stock: <strong>{{ item.stock }} uds</strong></span>
+                  </div>
+
+                  <h3 class="card-title" [title]="item.name">{{ item.name }}</h3>
+                  <p class="card-desc">{{ item.description }}</p>
+
+                  <div class="card-footer-row">
+                    <div class="card-price-block">
+                      <span class="price-label">PVP</span>
+                      <strong class="price-val">{{ item.price | number:'1.2-2' }} €</strong>
+                    </div>
+
+                    <div class="card-actions-group" (click)="$event.stopPropagation()">
+                      <button
+                        type="button"
+                        class="card-action-btn view"
+                        (click)="openDetail(item)"
+                        title="Ver detalles"
+                        aria-label="Ver detalles"
+                      >
+                        <ion-icon name="eye-outline"></ion-icon>
+                      </button>
+
+                      @if (authService.isAdminSignal()) {
+                        <button
+                          type="button"
+                          class="card-action-btn edit"
+                          (click)="navigateToEdit(item.id)"
+                          title="Editar producto"
+                          aria-label="Editar producto"
+                        >
+                          <ion-icon name="create-outline"></ion-icon>
+                        </button>
+                        <button
+                          type="button"
+                          class="card-action-btn delete"
+                          (click)="confirmDelete(item)"
+                          title="Eliminar producto"
+                          aria-label="Eliminar producto"
+                        >
+                          <ion-icon name="trash-outline"></ion-icon>
+                        </button>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Modal Lightbox de Previsualización de Imagen -->
+    @if (previewModalImage()) {
+      <div class="image-lightbox-backdrop" (click)="closeImagePreview()" role="dialog" aria-modal="true">
+        <div class="lightbox-modal-card" (click)="$event.stopPropagation()">
+          <div class="lightbox-modal-header">
+            <h4>{{ previewModalImage()?.title }}</h4>
+            <button type="button" class="close-modal-btn" (click)="closeImagePreview()" aria-label="Cerrar vista previa">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+          <div class="lightbox-modal-body">
+            <img [src]="previewModalImage()?.url" [alt]="previewModalImage()?.title" class="lightbox-full-img" />
+          </div>
+        </div>
+      </div>
+    }
   </div>
 </ion-content>
