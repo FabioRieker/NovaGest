@@ -723,6 +723,76 @@ body:not(.dark) {
       color: #64748b !important;
     }
   }
+
+  .directory-filter-bar {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important;
+
+    .cyber-searchbar {
+      --background: #f8fafc !important;
+      background: #f8fafc !important;
+      --color: #0f172a !important;
+      --placeholder-color: #64748b !important;
+      --icon-color: #be123c !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
+    .role-filter-chips .chip-btn {
+      background: #f1f5f9 !important;
+      border: 1px solid rgba(15, 23, 42, 0.1) !important;
+      color: #475569 !important;
+
+      &:hover {
+        background: #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+
+      &.active {
+        background: #be123c !important;
+        border-color: #be123c !important;
+        color: #ffffff !important;
+      }
+
+      &.admin-chip.active {
+        background: #e11d48 !important;
+        border-color: #e11d48 !important;
+      }
+
+      &.standard-chip.active {
+        background: #0284c7 !important;
+        border-color: #0284c7 !important;
+      }
+    }
+  }
+
+  .user-profile-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 6px 20px -3px rgba(15, 23, 42, 0.05) !important;
+
+    &:hover {
+      border-color: rgba(190, 18, 60, 0.35) !important;
+    }
+
+    .user-avatar-wrap ion-icon {
+      color: #be123c !important;
+    }
+
+    .user-info {
+      .name { color: #0f172a !important; }
+      .email { color: #64748b !important; }
+    }
+
+    .detail-row {
+      color: #475569 !important;
+      ion-icon { color: #be123c !important; }
+    }
+
+    .protected-tag {
+      color: #64748b !important;
+    }
+  }
 }
 
 // Enlace de salto al contenido principal

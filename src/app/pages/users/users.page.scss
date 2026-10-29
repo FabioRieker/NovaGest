@@ -749,13 +749,109 @@
     }
   }
 
-  .user-card {
-    background: var(--glass-window-bg) !important;
-    border-color: var(--glass-border) !important;
-    box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.05) !important;
+  .directory-filter-bar {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important;
 
-    .user-name { color: var(--cyber-text-main) !important; }
-    .user-email { color: var(--cyber-text-sub) !important; }
-    .user-detail-row { color: var(--cyber-text-sub) !important; }
+    .cyber-searchbar {
+      --background: #f8fafc !important;
+      background: #f8fafc !important;
+      --color: #0f172a !important;
+      --placeholder-color: #64748b !important;
+      --icon-color: #be123c !important;
+      --clear-button-color: #64748b !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
+    .role-filter-chips .chip-btn {
+      background: #f1f5f9 !important;
+      border: 1px solid rgba(15, 23, 42, 0.1) !important;
+      color: #475569 !important;
+
+      &:hover {
+        background: #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+
+      &.active {
+        background: #be123c !important;
+        border-color: #be123c !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 8px rgba(190, 18, 60, 0.25) !important;
+      }
+
+      &.admin-chip.active {
+        background: #e11d48 !important;
+        border-color: #e11d48 !important;
+      }
+
+      &.standard-chip.active {
+        background: #0284c7 !important;
+        border-color: #0284c7 !important;
+      }
+    }
+  }
+
+  .user-profile-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 6px 20px -3px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
+
+    &:hover {
+      border-color: rgba(190, 18, 60, 0.35) !important;
+      box-shadow: 0 10px 25px -4px rgba(190, 18, 60, 0.1) !important;
+    }
+
+    .user-card-top {
+      .user-avatar-wrap ion-icon {
+        color: #be123c !important;
+      }
+      .online-indicator {
+        border-color: #ffffff !important;
+      }
+
+      .user-info {
+        .name { color: #0f172a !important; }
+        .email { color: #64748b !important; }
+      }
+
+      .badge-pill {
+        &.badge-admin {
+          background: rgba(190, 18, 60, 0.08) !important;
+          color: #be123c !important;
+          border-color: rgba(190, 18, 60, 0.25) !important;
+        }
+
+        &.badge-user {
+          background: rgba(2, 132, 199, 0.08) !important;
+          color: #0284c7 !important;
+          border-color: rgba(2, 132, 199, 0.25) !important;
+        }
+      }
+    }
+
+    .user-details-body {
+      border-top: 1px solid rgba(15, 23, 42, 0.06) !important;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.06) !important;
+
+      .detail-row {
+        color: #475569 !important;
+        ion-icon { color: #be123c !important; }
+      }
+    }
+
+    .user-card-actions {
+      .status-text { color: #047857 !important; }
+      .protected-tag { color: #64748b !important; }
+      .delete-user-btn { --color: #be123c !important; }
+    }
+  }
+
+  .empty-state-card {
+    background: #ffffff !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    h4 { color: #0f172a !important; }
+    p { color: #64748b !important; }
   }
 }
