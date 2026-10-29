@@ -25,11 +25,11 @@
       </div>
 
       <div class="action-buttons-group">
-        <ion-button fill="outline" color="primary" size="small" (click)="exportPdf()" aria-label="Exportar a PDF">
+        <ion-button fill="outline" color="primary" size="small" (click)="exportPdf()" [disabled]="isLoading()" [attr.aria-busy]="isLoading()" aria-label="Exportar a PDF">
           <ion-icon slot="start" name="download-outline"></ion-icon>
           PDF
         </ion-button>
-        <ion-button fill="outline" color="secondary" size="small" (click)="exportCsv()" aria-label="Exportar a CSV">
+        <ion-button fill="outline" color="secondary" size="small" (click)="exportCsv()" [disabled]="isLoading()" [attr.aria-busy]="isLoading()" aria-label="Exportar a CSV">
           <ion-icon slot="start" name="document-text-outline"></ion-icon>
           CSV
         </ion-button>

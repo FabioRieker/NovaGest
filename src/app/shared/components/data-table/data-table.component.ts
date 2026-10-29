@@ -70,7 +70,7 @@ export interface TableActionPayload<T = any> {
     IonBadge
   ]
 })
-export class DataTableComponent<T = any> implements OnInit, OnChanges, OnDestroy {
+export class DataTableComponent<T extends Record<string, any> = Record<string, any>> implements OnInit, OnChanges, OnDestroy {
   @Input() columns: TableColumn[] = [];
   @Input() data: readonly T[] = [];
   @Input() pageSize = 6;
