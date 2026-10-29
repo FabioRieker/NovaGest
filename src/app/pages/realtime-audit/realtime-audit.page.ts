@@ -30,6 +30,8 @@ import { AuthService } from '../../core/services/auth.service';
 import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { AuditLogDocument, AuditSeverity } from '../../core/models/audit-log.model';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 
 /**
  * Vista de Auditoría y Trazabilidad en Tiempo Real con Supabase Realtime (FASE 3 - Paso 3.1 & RA 5).
@@ -55,7 +57,9 @@ import { AuditLogDocument, AuditSeverity } from '../../core/models/audit-log.mod
     IonButton,
     IonIcon,
     IonSelect,
-    IonSelectOption
+    IonSelectOption,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class RealtimeAuditPage implements OnInit, OnDestroy {

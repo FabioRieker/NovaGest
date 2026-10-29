@@ -3,11 +3,12 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Informes & Exportación</ion-title>
+    <ion-title>{{ 'REPORTS.TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">
+      <app-lang-switcher [compact]="true"></app-lang-switcher>
+      <ion-button (click)="logout()" color="light" [attr.aria-label]="'NAV.LOGOUT' | translate">
         <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
-        Salir
+        {{ 'NAV.QUICK_LOGOUT' | translate }}
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -16,8 +17,8 @@
 <ion-content [fullscreen]="true" class="reports-content">
   <div class="reports-container">
     <div class="reports-header-bar">
-      <h1 class="page-title">Generación de Informes Oficiales</h1>
-      <p class="page-subtitle">Exportación estandarizada en formatos tabulados PDF y CSV (RA 5)</p>
+      <h1 class="page-title">{{ 'REPORTS.HEADING' | translate }}</h1>
+      <p class="page-subtitle">{{ 'REPORTS.SUBTITLE' | translate }}</p>
     </div>
 
     <div class="export-options-grid">
@@ -25,17 +26,16 @@
       <ion-card class="export-card pdf-card">
         <ion-card-header>
           <div class="format-badge pdf-badge">PDF</div>
-          <ion-card-title>Informe Formal en PDF</ion-card-title>
-          <ion-card-subtitle>Diseño con membrete corporativo, metadatos y tabla formateada</ion-card-subtitle>
+          <ion-card-title>{{ 'REPORTS.PDF_TITLE' | translate }}</ion-card-title>
+          <ion-card-subtitle>{{ 'REPORTS.PDF_SUBTITLE' | translate }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
           <p class="format-desc">
-            Genera un documento imprimible con encabezado institucional, fecha de emisión, usuario emisor,
-            paginación automática y resumen contable del valor del catálogo.
+            {{ 'REPORTS.PDF_DESC' | translate }}
           </p>
-          <ion-button expand="block" color="primary" (click)="exportPdf()" [disabled]="isLoading()" aria-label="Descargar informe en formato PDF">
+          <ion-button expand="block" color="primary" (click)="exportPdf()" [disabled]="isLoading()" [attr.aria-label]="'REPORTS.PDF_BTN' | translate">
             <ion-icon slot="start" name="download-outline"></ion-icon>
-            Descargar Documento PDF
+            {{ 'REPORTS.PDF_BTN' | translate }}
           </ion-button>
         </ion-card-content>
       </ion-card>
@@ -44,17 +44,16 @@
       <ion-card class="export-card csv-card">
         <ion-card-header>
           <div class="format-badge csv-badge">CSV</div>
-          <ion-card-title>Exportación de Datos CSV</ion-card-title>
-          <ion-card-subtitle>Formato plano estandarizado RFC 4180 con UTF-8 BOM</ion-card-subtitle>
+          <ion-card-title>{{ 'REPORTS.CSV_TITLE' | translate }}</ion-card-title>
+          <ion-card-subtitle>{{ 'REPORTS.CSV_SUBTITLE' | translate }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
           <p class="format-desc">
-            Descarga los registros tabulados listos para importación directa en hojas de cálculo (Microsoft Excel,
-            Google Sheets, LibreOffice Calc) preservando caracteres en español.
+            {{ 'REPORTS.CSV_DESC' | translate }}
           </p>
-          <ion-button expand="block" color="secondary" (click)="exportCsv()" [disabled]="isLoading()" aria-label="Descargar datos en formato CSV">
+          <ion-button expand="block" color="secondary" (click)="exportCsv()" [disabled]="isLoading()" [attr.aria-label]="'REPORTS.CSV_BTN' | translate">
             <ion-icon slot="start" name="document-text-outline"></ion-icon>
-            Descargar Archivo CSV
+            {{ 'REPORTS.CSV_BTN' | translate }}
           </ion-button>
         </ion-card-content>
       </ion-card>
@@ -63,27 +62,27 @@
     <!-- Vista previa de datos listos para exportar -->
     <ion-card class="preview-card">
       <ion-card-header>
-        <ion-card-title>Vista Previa del Conjunto de Datos</ion-card-title>
-        <ion-card-subtitle>Se exportarán {{ products().length }} registros consolidados</ion-card-subtitle>
+        <ion-card-title>{{ 'REPORTS.PREVIEW_TITLE' | translate }}</ion-card-title>
+        <ion-card-subtitle>{{ 'REPORTS.PREVIEW_SUBTITLE' | translate:{ count: products().length } }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         @if (isLoading()) {
           <div class="loading-state">
             <ion-spinner name="crescent" color="primary"></ion-spinner>
-            <span>Preparando registros para exportación...</span>
+            <span>{{ 'REPORTS.PREPARING' | translate }}</span>
           </div>
         } @else {
           <div class="preview-summary">
             <div class="summary-pill">
-              <span>Total Artículos:</span>
+              <span>{{ 'REPORTS.TOTAL_ITEMS' | translate }}:</span>
               <strong>{{ products().length }}</strong>
             </div>
             <div class="summary-pill">
-              <span>Formato de codificación:</span>
+              <span>{{ 'REPORTS.ENCODING' | translate }}:</span>
               <strong>UTF-8 con BOM</strong>
             </div>
             <div class="summary-pill">
-              <span>Resolución de exportación:</span>
+              <span>{{ 'REPORTS.RESOLUTION' | translate }}:</span>
               <strong>Vectorial A4</strong>
             </div>
           </div>
@@ -92,3 +91,4 @@
     </ion-card>
   </div>
 </ion-content>
+

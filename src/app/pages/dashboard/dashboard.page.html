@@ -3,19 +3,21 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Cuadro de Mando Ejecutivo</ion-title>
+    <ion-title>{{ 'DASHBOARD.TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
+      <!-- Selector de Idioma -->
+      <app-lang-switcher [compact]="true"></app-lang-switcher>
       <!-- Botón Personalizar Widgets -->
-      <ion-button (click)="toggleCustomizer()" aria-label="Personalizar diseño del cuadro de mando">
+      <ion-button (click)="toggleCustomizer()" [attr.aria-label]="'DASHBOARD.CUSTOMIZE_ARIA' | translate">
         <ion-icon slot="start" name="options-outline"></ion-icon>
-        <span class="toolbar-btn-text">Personalizar</span>
+        <span class="toolbar-btn-text">{{ 'DASHBOARD.CUSTOMIZE' | translate }}</span>
       </ion-button>
-      <ion-button (click)="loadConsolidatedData()" aria-label="Actualizar métricas">
+      <ion-button (click)="loadConsolidatedData()" [attr.aria-label]="'DASHBOARD.REFRESH_ARIA' | translate">
         <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">
+      <ion-button (click)="logout()" color="light" [attr.aria-label]="'NAV.LOGOUT' | translate">
         <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
-        Salir
+        <span class="toolbar-btn-text">{{ 'DASHBOARD.LOGOUT' | translate }}</span>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -35,8 +37,8 @@
     <!-- BARRA SUPERIOR CYBER: Búsqueda, Notificaciones, Personalizador y Perfil -->
     <div class="cyber-top-bar glass-window">
       <div class="breadcrumb-box">
-        <span class="breadcrumb-label">DASHBOARD / CUADRO DE MANDO</span>
-        <h1 class="dashboard-title">Panel Ejecutivo & Control de Activos</h1>
+        <span class="breadcrumb-label">{{ 'DASHBOARD.BREADCRUMB' | translate }}</span>
+        <h1 class="dashboard-title">{{ 'DASHBOARD.SUBTITLE' | translate }}</h1>
       </div>
 
       <!-- Barra de Búsqueda Estilo Píldora Luminosa -->
@@ -44,10 +46,10 @@
         <ion-icon name="search-outline"></ion-icon>
         <input
           type="text"
-          placeholder="Buscar métricas, catálogo, logs de auditoría..."
+          [placeholder]="'DASHBOARD.SEARCH_PLACEHOLDER' | translate"
           [value]="searchQuery()"
           (input)="searchQuery.set($any($event.target).value)"
-          aria-label="Buscar en el cuadro de mando"
+          [attr.aria-label]="'DASHBOARD.SEARCH_ARIA' | translate"
         />
       </div>
 
@@ -58,10 +60,10 @@
           class="action-icon-btn edit-mode-btn"
           [class.active]="isEditMode()"
           (click)="toggleEditMode()"
-          [title]="isEditMode() ? 'Finalizar personalización y guardar lienzo' : 'Personalizar lienzo (organizar, redimensionar, añadir)'"
+          [title]="isEditMode() ? ('DASHBOARD.CANVAS_DONE_TITLE' | translate) : ('DASHBOARD.CANVAS_EDIT_TITLE' | translate)"
         >
           <ion-icon [name]="isEditMode() ? 'checkmark-circle-outline' : 'color-wand-outline'"></ion-icon>
-          <span class="btn-text-badge">{{ isEditMode() ? 'Listo' : 'Editar Lienzo' }}</span>
+          <span class="btn-text-badge">{{ isEditMode() ? ('DASHBOARD.CANVAS_DONE' | translate) : ('DASHBOARD.EDIT_CANVAS' | translate) }}</span>
         </button>
 
         <!-- Botón Catálogo de Módulos (Bandeja Lateral) -->
@@ -69,19 +71,19 @@
           class="action-icon-btn modules-btn"
           [class.active]="isCatalogDrawerOpen()"
           (click)="toggleCatalogDrawer()"
-          title="Bandeja de módulos y catálogo de widgets"
+          [title]="'DASHBOARD.MODULES_TITLE' | translate"
         >
           <ion-icon name="grid-outline"></ion-icon>
-          <span class="btn-text-badge">Módulos</span>
+          <span class="btn-text-badge">{{ 'DASHBOARD.MODULES' | translate }}</span>
         </button>
 
         <!-- Botón Exportar PDF -->
-        <button class="action-icon-btn" (click)="exportPdfReport()" title="Exportar Informe PDF">
+        <button class="action-icon-btn" (click)="exportPdfReport()" [title]="'DASHBOARD.EXPORT_PDF' | translate">
           <ion-icon name="download-outline"></ion-icon>
         </button>
 
         <!-- Botón Exportar CSV -->
-        <button class="action-icon-btn" (click)="exportCsvReport()" title="Exportar Datos CSV">
+        <button class="action-icon-btn" (click)="exportCsvReport()" [title]="'DASHBOARD.EXPORT_CSV' | translate">
           <ion-icon name="document-text-outline"></ion-icon>
         </button>
 
@@ -91,8 +93,8 @@
             class="action-icon-btn notification-btn"
             [class.active]="isNotificationsOpen()"
             (click)="toggleNotifications()"
-            aria-label="Abrir centro de notificaciones"
-            title="Centro de Notificaciones"
+            [attr.aria-label]="'DASHBOARD.NOTIFICATIONS_ARIA' | translate"
+            [title]="'DASHBOARD.NOTIFICATIONS_TITLE' | translate"
           >
             <ion-icon name="notifications-outline"></ion-icon>
             @if (unreadNotificationsCount() > 0) {
@@ -103,23 +105,23 @@
           <!-- PANEL DESPLEGABLE DE NOTIFICACIONES (GLASSMORPHIC) -->
           @if (isNotificationsOpen()) {
             <div class="notif-click-away-backdrop" (click)="toggleNotifications()" aria-hidden="true"></div>
-            <div class="notifications-dropdown glass-window" role="dialog" aria-label="Notificaciones del Sistema">
+            <div class="notifications-dropdown glass-window" role="dialog" [attr.aria-label]="'DASHBOARD.NOTIFICATIONS_TITLE' | translate">
               <div class="notif-header">
                 <div class="notif-title-row">
                   <ion-icon name="notifications-outline" class="notif-icon-lead"></ion-icon>
-                  <h2 class="notif-title">Notificaciones del Sistema</h2>
+                  <h2 class="notif-title">{{ 'DASHBOARD.NOTIFICATIONS_TITLE' | translate }}</h2>
                   @if (unreadNotificationsCount() > 0) {
-                    <span class="unread-pill">{{ unreadNotificationsCount() }} nuevas</span>
+                    <span class="unread-pill">{{ 'DASHBOARD.NOTIFICATIONS_NEW' | translate:{ count: unreadNotificationsCount() } }}</span>
                   }
                 </div>
                 <div class="notif-header-actions">
-                  <button class="notif-action-link" (click)="markAllNotificationsAsRead()" title="Marcar todas como leídas">
-                    <ion-icon name="checkmark-done-outline"></ion-icon> Leídas
+                  <button class="notif-action-link" (click)="markAllNotificationsAsRead()" [title]="'DASHBOARD.NOTIFICATIONS_MARK_ALL' | translate">
+                    <ion-icon name="checkmark-done-outline"></ion-icon> {{ 'DASHBOARD.NOTIFICATIONS_READ_ALL' | translate }}
                   </button>
-                  <button class="notif-action-link danger" (click)="clearNotifications()" title="Limpiar lista">
+                  <button class="notif-action-link danger" (click)="clearNotifications()" [title]="'DASHBOARD.NOTIFICATIONS_CLEAR' | translate">
                     <ion-icon name="trash-outline"></ion-icon>
                   </button>
-                  <button class="notif-close-btn" (click)="toggleNotifications()" aria-label="Cerrar panel">
+                  <button class="notif-close-btn" (click)="toggleNotifications()" [attr.aria-label]="'DASHBOARD.NOTIFICATIONS_CLOSE' | translate">
                     <ion-icon name="close-outline"></ion-icon>
                   </button>
                 </div>
@@ -157,7 +159,7 @@
                 } @empty {
                   <div class="notif-empty-state">
                     <ion-icon name="notifications-off-outline"></ion-icon>
-                    <p>No tienes alertas pendientes</p>
+                    <p>{{ 'DASHBOARD.NOTIFICATIONS_EMPTY' | translate }}</p>
                   </div>
                 }
               </div>
@@ -184,10 +186,10 @@
       <div class="search-active-pill glass-window" role="status">
         <div class="search-pill-content">
           <ion-icon name="search-outline"></ion-icon>
-          <span>Filtrando módulos por "<strong>{{ searchQuery() }}</strong>" ({{ searchMatchCount() }} de {{ activeWidgets().length }} módulos coinciden)</span>
+          <span>{{ 'DASHBOARD.SEARCH_FILTERING_PRE' | translate }} "<strong>{{ searchQuery() }}</strong>" ({{ 'DASHBOARD.SEARCH_MATCH' | translate:{ match: searchMatchCount(), total: activeWidgets().length } }})</span>
         </div>
-        <button class="clear-search-btn" (click)="clearSearch()" title="Quitar filtro de búsqueda">
-          <ion-icon name="close-circle-outline"></ion-icon> Limpiar
+        <button class="clear-search-btn" (click)="clearSearch()" [title]="'DASHBOARD.SEARCH_CLEAR' | translate">
+          <ion-icon name="close-circle-outline"></ion-icon> {{ 'DASHBOARD.SEARCH_CLEAR' | translate }}
         </button>
       </div>
     }
@@ -198,14 +200,14 @@
         <div class="ribbon-headline">
           <div class="ribbon-badge">
             <span class="pulsing-neon-dot"></span>
-            <span>MODO EDICIÓN ACTIVO</span>
+            <span>{{ 'DASHBOARD.EDIT_MODE_ACTIVE' | translate }}</span>
           </div>
-          <p class="ribbon-instruction">Arrastra tarjetas para reordenar, pulsa en 1/3, 1/2, 2/3 o Full, o aplica una plantilla:</p>
+          <p class="ribbon-instruction">{{ 'DASHBOARD.EDIT_MODE_INSTRUCTION' | translate }}</p>
         </div>
 
         <!-- Selector de Plantillas Predefinidas (Presets) -->
         <div class="ribbon-templates-box">
-          <span class="templates-title">Plantillas predefinidas:</span>
+          <span class="templates-title">{{ 'DASHBOARD.PRESETS_TITLE' | translate }}</span>
           <div class="templates-pills">
             @for (tpl of templates; track tpl.id) {
               <button
@@ -223,14 +225,14 @@
 
         <!-- Acciones Rápidas del Modo Edición -->
         <div class="ribbon-actions">
-          <button class="ribbon-action-btn add-btn" (click)="toggleCatalogDrawer()" title="Abrir bandeja para añadir widgets">
-            <ion-icon name="add-outline"></ion-icon> + Añadir Módulos
+          <button class="ribbon-action-btn add-btn" (click)="toggleCatalogDrawer()" [title]="'DASHBOARD.FLOATING_ADD_TITLE' | translate">
+            <ion-icon name="add-outline"></ion-icon> {{ 'DASHBOARD.ADD_MODULES_BTN' | translate }}
           </button>
-          <button class="ribbon-action-btn reset-btn" (click)="resetDefaultLayout()" title="Restablecer diseño original de fábrica">
-            <ion-icon name="refresh-outline"></ion-icon> Restablecer
+          <button class="ribbon-action-btn reset-btn" (click)="resetDefaultLayout()" [title]="'DASHBOARD.RESET_LAYOUT_TITLE' | translate">
+            <ion-icon name="refresh-outline"></ion-icon> {{ 'DASHBOARD.RESET_LAYOUT' | translate }}
           </button>
-          <button class="ribbon-action-btn finish-btn" (click)="toggleEditMode()" title="Guardar cambios y salir del modo edición">
-            <ion-icon name="checkmark-done-outline"></ion-icon> Salir de Edición
+          <button class="ribbon-action-btn finish-btn" (click)="toggleEditMode()" [title]="'DASHBOARD.EXIT_EDIT_MODE_TITLE' | translate">
+            <ion-icon name="checkmark-done-outline"></ion-icon> {{ 'DASHBOARD.EXIT_EDIT_MODE' | translate }}
           </button>
         </div>
       </div>
@@ -240,7 +242,7 @@
     @if (isLoading()) {
       <div class="loading-overlay glass-window" role="status" aria-live="polite">
         <ion-spinner name="crescent"></ion-spinner>
-        <span>Sincronizando fuentes asíncronas concurrentes Supabase (SQL & Realtime)...</span>
+        <span>{{ 'DASHBOARD.LOADING_SOURCES' | translate }}</span>
       </div>
     }
 
@@ -271,8 +273,8 @@
             @if (!isEditMode()) {
               <div class="widget-window-header view-mode">
                 <div class="widget-headline-group">
-                  <span class="widget-cat-tag">{{ widget.category }}</span>
-                  <h3 class="widget-headline-title">{{ widget.title }}</h3>
+                  <span class="widget-cat-tag">{{ ('DASHBOARD.WIDGETS.' + widget.id + '.CAT') | translate }}</span>
+                  <h3 class="widget-headline-title">{{ ('DASHBOARD.WIDGETS.' + widget.id + '.TITLE') | translate }}</h3>
                 </div>
               </div>
             }
@@ -280,23 +282,23 @@
             <!-- CABECERA EN MODO EDICIÓN (DRAG HANDLE, ANCHURAS 12-COL, MOVER Y QUITAR) -->
             @if (isEditMode()) {
               <div class="widget-window-header edit-mode">
-                <div class="drag-handle-wrap" title="Arrastra este módulo para recolocarlo en la rejilla">
+                <div class="drag-handle-wrap" [title]="'DASHBOARD.DRAG_HINT' | translate">
                   <ion-icon name="move-outline" class="drag-icon"></ion-icon>
-                  <span class="drag-label">Arrastrar</span>
+                  <span class="drag-label">{{ 'DASHBOARD.DRAG_HANDLE' | translate }}</span>
                   <div class="widget-headline-group">
-                    <span class="widget-cat-tag">{{ widget.category }}</span>
-                    <h3 class="widget-headline-title">{{ widget.title }}</h3>
+                    <span class="widget-cat-tag">{{ ('DASHBOARD.WIDGETS.' + widget.id + '.CAT') | translate }}</span>
+                    <h3 class="widget-headline-title">{{ ('DASHBOARD.WIDGETS.' + widget.id + '.TITLE') | translate }}</h3>
                   </div>
                 </div>
 
                 <div class="window-controls">
                   <!-- Botones de ancho de rejilla 12 columnas: 1/3, 1/2, 2/3, Full -->
-                  <div class="quick-size-pills" title="Ajustar ancho en la rejilla de 12 columnas">
+                  <div class="quick-size-pills" [title]="'DASHBOARD.SIZE_HINT' | translate">
                     <button
                       class="size-mini-btn"
                       [class.active]="widget.width === 'col-4'"
                       (click)="setWidgetWidth(widget.id, 'col-4')"
-                      title="1/3 de pantalla (4 columnas)"
+                      title="1/3"
                     >
                       1/3
                     </button>
@@ -304,7 +306,7 @@
                       class="size-mini-btn"
                       [class.active]="widget.width === 'col-6'"
                       (click)="setWidgetWidth(widget.id, 'col-6')"
-                      title="1/2 de pantalla (6 columnas)"
+                      title="1/2"
                     >
                       1/2
                     </button>
@@ -312,7 +314,7 @@
                       class="size-mini-btn"
                       [class.active]="widget.width === 'col-8'"
                       (click)="setWidgetWidth(widget.id, 'col-8')"
-                      title="2/3 de pantalla (8 columnas)"
+                      title="2/3"
                     >
                       2/3
                     </button>
@@ -320,19 +322,19 @@
                       class="size-mini-btn"
                       [class.active]="widget.width === 'col-12'"
                       (click)="setWidgetWidth(widget.id, 'col-12')"
-                      title="Ancho completo (12 columnas)"
+                      title="Full"
                     >
                       Full
                     </button>
                   </div>
 
-                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, 'up')" title="Mover antes">
+                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, 'up')" [title]="'DASHBOARD.MOVE_UP' | translate">
                     <ion-icon name="arrow-up-outline"></ion-icon>
                   </button>
-                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, 'down')" title="Mover después">
+                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, 'down')" [title]="'DASHBOARD.MOVE_DOWN' | translate">
                     <ion-icon name="arrow-down-outline"></ion-icon>
                   </button>
-                  <button class="win-ctrl-btn close-action" (click)="removeWidget(widget.id)" title="Quitar módulo del lienzo">
+                  <button class="win-ctrl-btn close-action" (click)="removeWidget(widget.id)" [title]="'DASHBOARD.REMOVE_MODULE' | translate">
                     <ion-icon name="close-outline"></ion-icon>
                   </button>
                 </div>
@@ -377,7 +379,7 @@
                 <div class="kpi-cards-grid">
                   <div class="kpi-box box-ruby glass-subcard">
                     <div class="kpi-top">
-                      <span class="kpi-label">Valor del Inventario</span>
+                      <span class="kpi-label">{{ 'DASHBOARD.INVENTORY_VALUE' | translate }}</span>
                       <span class="trend-badge trend-up">
                         <ion-icon name="trending-up-outline"></ion-icon> +12.4%
                       </span>
@@ -388,14 +390,14 @@
                         <ion-icon name="cash-outline"></ion-icon>
                       </div>
                     </div>
-                    <span class="kpi-footnote">Basado en existencias físicas en almacén</span>
+                    <span class="kpi-footnote">{{ 'DASHBOARD.INVENTORY_VALUE_SUB' | translate }}</span>
                   </div>
 
                   <div class="kpi-box box-cyan glass-subcard">
                     <div class="kpi-top">
-                      <span class="kpi-label">Artículos en Catálogo</span>
+                      <span class="kpi-label">{{ 'DASHBOARD.CATALOG_ITEMS' | translate }}</span>
                       <span class="trend-badge trend-neutral">
-                        <ion-icon name="remove-outline"></ion-icon> 5 Categorías
+                        <ion-icon name="remove-outline"></ion-icon> {{ 'DASHBOARD.FIVE_CATEGORIES' | translate }}
                       </span>
                     </div>
                     <div class="kpi-value-row">
@@ -404,14 +406,14 @@
                         <ion-icon name="cube-outline"></ion-icon>
                       </div>
                     </div>
-                    <span class="kpi-footnote">Referencias SKU activas registradas</span>
+                    <span class="kpi-footnote">{{ 'DASHBOARD.ACTIVE_SKUS' | translate }}</span>
                   </div>
 
                   <div class="kpi-box box-amber glass-subcard">
                     <div class="kpi-top">
-                      <span class="kpi-label">Stock Crítico / Bajo</span>
+                      <span class="kpi-label">{{ 'DASHBOARD.CRITICAL_STOCK_LABEL' | translate }}</span>
                       <span class="trend-badge trend-warning">
-                        <ion-icon name="alert-circle-outline"></ion-icon> Atención
+                        <ion-icon name="alert-circle-outline"></ion-icon> {{ 'DASHBOARD.ATTENTION' | translate }}
                       </span>
                     </div>
                     <div class="kpi-value-row">
@@ -420,14 +422,14 @@
                         <ion-icon name="alert-circle-outline"></ion-icon>
                       </div>
                     </div>
-                    <span class="kpi-footnote">Menos de 5 unidades disponibles</span>
+                    <span class="kpi-footnote">{{ 'DASHBOARD.LESS_THAN_5' | translate }}</span>
                   </div>
 
                   <div class="kpi-box box-purple glass-subcard">
                     <div class="kpi-top">
-                      <span class="kpi-label">Artículos Agotados</span>
+                      <span class="kpi-label">{{ 'DASHBOARD.OUT_OF_STOCK_LABEL' | translate }}</span>
                       <span class="trend-badge trend-danger">
-                        <ion-icon name="flash-outline"></ion-icon> Urgente
+                        <ion-icon name="flash-outline"></ion-icon> {{ 'DASHBOARD.URGENT' | translate }}
                       </span>
                     </div>
                     <div class="kpi-value-row">
@@ -436,7 +438,7 @@
                         <ion-icon name="sparkles-outline"></ion-icon>
                       </div>
                     </div>
-                    <span class="kpi-footnote">Requieren reposición inmediata</span>
+                    <span class="kpi-footnote">{{ 'DASHBOARD.IMMEDIATE_REPLENISHMENT' | translate }}</span>
                   </div>
                 </div>
               }
@@ -445,7 +447,7 @@
               @if (widget.id === 'timeline_wave') {
                 <div class="chart-content-inner">
                   <div class="period-toggle-row">
-                    <span class="chart-subtitle-mini">Flujo continuo de ingresos netos vs costes operativos</span>
+                    <span class="chart-subtitle-mini">{{ 'DASHBOARD.TIMELINE_SUBTITLE' | translate }}</span>
                     <div class="period-toggle-group">
                       <button class="period-btn" [class.active]="filterPeriod() === '7d'" (click)="setPeriod('7d')">7D</button>
                       <button class="period-btn" [class.active]="filterPeriod() === '30d'" (click)="setPeriod('30d')">30D</button>
@@ -453,7 +455,7 @@
                     </div>
                   </div>
                   <div class="canvas-responsive-wrap">
-                    <canvas #timelineWaveChartCanvas role="img" aria-label="Gráfico de líneas con curvas suaves"></canvas>
+                    <canvas #timelineWaveChartCanvas role="img" aria-label="Chart"></canvas>
                   </div>
                 </div>
               }
@@ -461,9 +463,9 @@
               <!-- 4. GRÁFICA CIRCULAR DE DISTRIBUCIÓN DE ACTIVOS (DOUGHNUT) -->
               @if (widget.id === 'category_doughnut') {
                 <div class="doughnut-content-inner">
-                  <p class="chart-subtitle-mini">Valoración económica distribuida por categoría de producto</p>
+                  <p class="chart-subtitle-mini">{{ 'DASHBOARD.DOUGHNUT_SUBTITLE' | translate }}</p>
                   <div class="canvas-responsive-wrap doughnut-wrap">
-                    <canvas #categoryDoughnutChartCanvas role="img" aria-label="Gráfica circular de distribución de activos"></canvas>
+                    <canvas #categoryDoughnutChartCanvas role="img" aria-label="Doughnut Chart"></canvas>
                   </div>
                 </div>
               }
@@ -472,11 +474,11 @@
               @if (widget.id === 'mini_calendar') {
                 <div class="calendar-content-inner">
                   <div class="calendar-nav-bar">
-                    <button class="cal-nav-btn" (click)="prevMonth()" aria-label="Mes anterior">
+                    <button class="cal-nav-btn" (click)="prevMonth()" [attr.aria-label]="'DASHBOARD.PREV_MONTH' | translate">
                       <ion-icon name="chevron-back-outline"></ion-icon>
                     </button>
                     <span class="cal-month-title">{{ calendarMonthTitle() }}</span>
-                    <button class="cal-nav-btn" (click)="nextMonth()" aria-label="Mes siguiente">
+                    <button class="cal-nav-btn" (click)="nextMonth()" [attr.aria-label]="'DASHBOARD.NEXT_MONTH' | translate">
                       <ion-icon name="chevron-forward-outline"></ion-icon>
                     </button>
                   </div>
@@ -508,9 +510,9 @@
               @if (widget.id === 'live_activities') {
                 <div class="activities-content-inner">
                   <div class="activities-status-bar">
-                    <span class="feed-sub">Flujo de trazabilidad reactivo</span>
+                    <span class="feed-sub">{{ 'DASHBOARD.FEED_SUBTITLE' | translate }}</span>
                     <div class="live-pill">
-                      <span class="live-blink-dot"></span> EN VIVO
+                      <span class="live-blink-dot"></span> {{ 'DASHBOARD.LIVE_BADGE' | translate }}
                     </div>
                   </div>
                   <div class="activities-scroll-feed">
@@ -529,7 +531,7 @@
                             <span class="act-entity">{{ log.entity }}</span>
                           </div>
                           <p class="act-desc">{{ log.details }}</p>
-                          <span class="act-user">Por: {{ log.userEmail }}</span>
+                          <span class="act-user">{{ 'DASHBOARD.BY_USER' | translate }} {{ log.userEmail }}</span>
                         </div>
                       </div>
                     }
@@ -577,8 +579,8 @@
                         <ion-icon name="create-outline"></ion-icon>
                       </div>
                       <div class="tile-texts">
-                        <span class="tile-title">Nuevo Producto</span>
-                        <span class="tile-sub">Alta en inventario SQL</span>
+                        <span class="tile-title">{{ 'DASHBOARD.QA_NEW_PROD_TITLE' | translate }}</span>
+                        <span class="tile-sub">{{ 'DASHBOARD.QA_NEW_PROD_SUB' | translate }}</span>
                       </div>
                     </button>
 
@@ -587,8 +589,8 @@
                         <ion-icon name="cube-outline"></ion-icon>
                       </div>
                       <div class="tile-texts">
-                        <span class="tile-title">Catálogo Completo</span>
-                        <span class="tile-sub">Consultar referencias</span>
+                        <span class="tile-title">{{ 'DASHBOARD.QA_CATALOG_TITLE' | translate }}</span>
+                        <span class="tile-sub">{{ 'DASHBOARD.QA_CATALOG_SUB' | translate }}</span>
                       </div>
                     </button>
 
@@ -597,8 +599,8 @@
                         <ion-icon name="stats-chart-outline"></ion-icon>
                       </div>
                       <div class="tile-texts">
-                        <span class="tile-title">Informes & Reportes</span>
-                        <span class="tile-sub">Métricas operativas</span>
+                        <span class="tile-title">{{ 'DASHBOARD.QA_REPORTS_TITLE' | translate }}</span>
+                        <span class="tile-sub">{{ 'DASHBOARD.QA_REPORTS_SUB' | translate }}</span>
                       </div>
                     </button>
 
@@ -607,8 +609,8 @@
                         <ion-icon name="pulse-outline"></ion-icon>
                       </div>
                       <div class="tile-texts">
-                        <span class="tile-title">Auditoría en Vivo</span>
-                        <span class="tile-sub">Supabase Realtime</span>
+                        <span class="tile-title">{{ 'DASHBOARD.QA_AUDIT_TITLE' | translate }}</span>
+                        <span class="tile-sub">{{ 'DASHBOARD.QA_AUDIT_SUB' | translate }}</span>
                       </div>
                     </button>
 
@@ -617,8 +619,8 @@
                         <ion-icon name="download-outline"></ion-icon>
                       </div>
                       <div class="tile-texts">
-                        <span class="tile-title">Exportar PDF</span>
-                        <span class="tile-sub">Informe ejecutivo</span>
+                        <span class="tile-title">{{ 'DASHBOARD.QA_PDF_TITLE' | translate }}</span>
+                        <span class="tile-sub">{{ 'DASHBOARD.QA_PDF_SUB' | translate }}</span>
                       </div>
                     </button>
 
@@ -627,8 +629,8 @@
                         <ion-icon name="document-text-outline"></ion-icon>
                       </div>
                       <div class="tile-texts">
-                        <span class="tile-title">Descargar CSV</span>
-                        <span class="tile-sub">Datos tabulados</span>
+                        <span class="tile-title">{{ 'DASHBOARD.QA_CSV_TITLE' | translate }}</span>
+                        <span class="tile-sub">{{ 'DASHBOARD.QA_CSV_SUB' | translate }}</span>
                       </div>
                     </button>
                   </div>
@@ -642,11 +644,11 @@
                     <table class="critical-stock-table">
                       <thead>
                         <tr>
-                          <th>Artículo / Ref</th>
-                          <th>Categoría</th>
-                          <th>Stock</th>
-                          <th>PVP</th>
-                          <th>Acción</th>
+                          <th>{{ 'DASHBOARD.TH_PRODUCT' | translate }}</th>
+                          <th>{{ 'DASHBOARD.TH_CATEGORY' | translate }}</th>
+                          <th>{{ 'DASHBOARD.TH_STOCK' | translate }}</th>
+                          <th>{{ 'DASHBOARD.TH_PRICE' | translate }}</th>
+                          <th>{{ 'DASHBOARD.TH_ACTION' | translate }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -663,20 +665,20 @@
                             </td>
                             <td>
                               <span class="stock-pill" [class.out-of-stock]="item.stock === 0">
-                                {{ item.stock === 0 ? 'AGOTADO' : item.stock + ' uds' }}
+                                {{ item.stock === 0 ? ('STATUS.out_of_stock' | translate) : item.stock + ' ' + ('PRODUCTS.UNITS' | translate) }}
                               </span>
                             </td>
                             <td class="price-cell">{{ item.price | number:'1.2-2' }} €</td>
                             <td>
-                              <button class="table-action-btn" (click)="navigateToProduct(item.id)" title="Gestionar existencias">
-                                <ion-icon name="create-outline"></ion-icon> Gestionar
+                              <button class="table-action-btn" (click)="navigateToProduct(item.id)" [title]="'DASHBOARD.MANAGE_TITLE' | translate">
+                                <ion-icon name="create-outline"></ion-icon> {{ 'DASHBOARD.MANAGE_BTN' | translate }}
                               </button>
                             </td>
                           </tr>
                         } @empty {
                           <tr>
                             <td colspan="5" class="empty-stock-td">
-                              <ion-icon name="shield-checkmark-outline"></ion-icon> Todas las referencias tienen stock suficiente.
+                              <ion-icon name="shield-checkmark-outline"></ion-icon> {{ 'DASHBOARD.ALL_GOOD_STOCK' | translate }}
                             </td>
                           </tr>
                         }
@@ -691,11 +693,11 @@
                 <div class="smart-reorder-inner">
                   <div class="reorder-summary-strip">
                     <div class="reorder-stat-pill">
-                      <span class="stat-tag">Artículos a reponer:</span>
-                      <strong class="stat-val">{{ criticalProducts().length }} referencias</strong>
+                      <span class="stat-tag">{{ 'DASHBOARD.REORDER_ITEMS_TO_ORDER' | translate }}</span>
+                      <strong class="stat-val">{{ 'DASHBOARD.REORDER_REFERENCES' | translate:{ count: criticalProducts().length } }}</strong>
                     </div>
                     <div class="reorder-stat-pill">
-                      <span class="stat-tag">Inversión estimada:</span>
+                      <span class="stat-tag">{{ 'DASHBOARD.REORDER_ESTIMATED_INVESTMENT' | translate }}</span>
                       <strong class="stat-val text-ruby">{{ estimatedReorderCost() }} €</strong>
                     </div>
                   </div>
@@ -706,19 +708,19 @@
                         <div class="reorder-item-info">
                           <span class="reorder-sku">#{{ item.id }} · {{ item.category }}</span>
                           <h4 class="reorder-title">{{ item.name }}</h4>
-                          <span class="reorder-meta">Stock: <strong [class.text-danger]="item.stock === 0">{{ item.stock }} uds</strong> | Sugerido: <strong>+{{ 20 - item.stock }} uds</strong></span>
+                          <span class="reorder-meta">{{ 'PRODUCTS.STOCK_LABEL' | translate }}: <strong [class.text-danger]="item.stock === 0">{{ item.stock }} {{ 'PRODUCTS.UNITS' | translate }}</strong> | {{ 'DASHBOARD.REORDER_SUGGESTED' | translate }} <strong>+{{ 20 - item.stock }} {{ 'PRODUCTS.UNITS' | translate }}</strong></span>
                         </div>
                         <div class="reorder-item-actions">
                           <span class="reorder-cost">{{ ((20 - item.stock) * item.price * 0.7) | number:'1.2-2' }} €</span>
-                          <button class="reorder-btn" (click)="createReorderPO(item)" title="Generar orden de compra">
-                            <ion-icon name="cart-outline"></ion-icon> Pedir
+                          <button class="reorder-btn" (click)="createReorderPO(item)" [title]="'DASHBOARD.REORDER_ORDER_TITLE' | translate">
+                            <ion-icon name="cart-outline"></ion-icon> {{ 'DASHBOARD.REORDER_ORDER_BTN' | translate }}
                           </button>
                         </div>
                       </div>
                     } @empty {
                       <div class="reorder-empty-state">
                         <ion-icon name="checkmark-circle-outline"></ion-icon>
-                        <span>El inventario está abastecido. No se requieren órdenes de compra urgentes.</span>
+                        <span>{{ 'DASHBOARD.REORDER_STOCKED' | translate }}</span>
                       </div>
                     }
                   </div>
@@ -731,49 +733,49 @@
                   <div class="telemetry-grid">
                     <div class="telemetry-card">
                       <div class="telemetry-card-header">
-                        <span class="telemetry-label">Canal WebSocket</span>
+                        <span class="telemetry-label">{{ 'DASHBOARD.WEBSOCKET_CHANNEL' | translate }}</span>
                         <span class="telemetry-status-badge online">
-                          <span class="status-pulse-dot"></span> EN VIVO
+                          <span class="status-pulse-dot"></span> {{ 'DASHBOARD.LIVE_BADGE' | translate }}
                         </span>
                       </div>
                       <div class="telemetry-val">Supabase Realtime</div>
-                      <div class="telemetry-foot">Escuchando audit_logs & documents</div>
+                      <div class="telemetry-foot">{{ 'DASHBOARD.LISTENING_LOGS' | translate }}</div>
                     </div>
 
                     <div class="telemetry-card">
                       <div class="telemetry-card-header">
-                        <span class="telemetry-label">Latencia de Red</span>
+                        <span class="telemetry-label">{{ 'DASHBOARD.NETWORK_LATENCY' | translate }}</span>
                         <span class="telemetry-status-badge optimal">&lt; {{ telemetryLatency() }} ms</span>
                       </div>
                       <div class="telemetry-val">{{ telemetryLatency() }} ms</div>
-                      <div class="telemetry-foot">Tiempo de respuesta HTTP PostgREST</div>
+                      <div class="telemetry-foot">{{ 'DASHBOARD.HTTP_TIME' | translate }}</div>
                     </div>
 
                     <div class="telemetry-card">
                       <div class="telemetry-card-header">
-                        <span class="telemetry-label">Políticas RLS</span>
-                        <span class="telemetry-status-badge secure">PROTEGIDO</span>
+                        <span class="telemetry-label">{{ 'DASHBOARD.RLS_POLICIES' | translate }}</span>
+                        <span class="telemetry-status-badge secure">{{ 'DASHBOARD.PROTECTED' | translate }}</span>
                       </div>
-                      <div class="telemetry-val">100% Tablas Activas</div>
+                      <div class="telemetry-val">{{ 'DASHBOARD.ACTIVE_TABLES' | translate }}</div>
                       <div class="telemetry-foot">profiles, products, audit_logs</div>
                     </div>
 
                     <div class="telemetry-card">
                       <div class="telemetry-card-header">
-                        <span class="telemetry-label">Seguridad de Sesión</span>
+                        <span class="telemetry-label">{{ 'DASHBOARD.SESSION_SECURITY' | translate }}</span>
                         <span class="telemetry-status-badge auth">RBAC</span>
                       </div>
-                      <div class="telemetry-val">{{ authService.currentUserSignal()?.role === 'admin' ? 'Administrador' : 'Usuario' }}</div>
-                      <div class="telemetry-foot">JWT con Claims verificados</div>
+                      <div class="telemetry-val">{{ authService.currentUserSignal()?.role === 'admin' ? ('NAV.ADMIN_ROLE' | translate) : ('NAV.USER_ROLE' | translate) }}</div>
+                      <div class="telemetry-foot">{{ 'DASHBOARD.VERIFIED_JWT' | translate }}</div>
                     </div>
                   </div>
 
                   <div class="telemetry-actions-bar">
                     <button class="ping-btn" (click)="pingTelemetry()" [disabled]="isPingingTelemetry()">
                       <ion-icon name="refresh-outline" [class.spinning]="isPingingTelemetry()"></ion-icon>
-                      {{ isPingingTelemetry() ? 'Midiendo Latencia...' : 'Probar Latencia Ahora' }}
+                      {{ isPingingTelemetry() ? ('DASHBOARD.MEASURING_LATENCY' | translate) : ('DASHBOARD.TEST_LATENCY' | translate) }}
                     </button>
-                    <span class="telemetry-timestamp">Monitorización activa</span>
+                    <span class="telemetry-timestamp">{{ 'DASHBOARD.ACTIVE_MONITORING' | translate }}</span>
                   </div>
                 </div>
               }
@@ -785,7 +787,7 @@
               <div
                 class="corner-resize-indicator"
                 (click)="cycleWidgetWidth(widget.id)"
-                title="Cambiar tamaño del widget (Clic para ciclar: 1/3 → 1/2 → 2/3 → Full)"
+                title="Resize"
               >
                 <span class="resize-pill-indicator">{{ widget.width === 'col-12' ? 'Full' : widget.width === 'col-8' ? '2/3' : widget.width === 'col-6' ? '1/2' : '1/3' }}</span>
                 <svg viewBox="0 0 10 10" class="resize-grip-icon" aria-hidden="true">
@@ -803,14 +805,14 @@
           <div class="empty-icon-wrap">
             <ion-icon name="layers-outline"></ion-icon>
           </div>
-          <h3>El Cuadro de Mando está vacío</h3>
-          <p>Has quitado todos los widgets activos de tu pantalla. Puedes volver a añadirlos fácilmente desde la bandeja de módulos o restablecer la vista inicial.</p>
+          <h3>{{ 'DASHBOARD.EMPTY_CANVAS_TITLE' | translate }}</h3>
+          <p>{{ 'DASHBOARD.EMPTY_CANVAS_DESC' | translate }}</p>
           <div class="empty-actions">
             <button class="btn-add-primary" (click)="toggleCatalogDrawer()">
-              <ion-icon name="add-outline"></ion-icon> Abrir Bandeja de Módulos
+              <ion-icon name="add-outline"></ion-icon> {{ 'DASHBOARD.OPEN_DRAWER_BTN' | translate }}
             </button>
             <button class="btn-restore-sec" (click)="resetDefaultLayout()">
-              <ion-icon name="refresh-outline"></ion-icon> Restablecer Predeterminados
+              <ion-icon name="refresh-outline"></ion-icon> {{ 'DASHBOARD.RESTORE_DEFAULT_BTN' | translate }}
             </button>
           </div>
         </div>
@@ -819,124 +821,124 @@
     </div>
 
     <!-- BOTÓN CONTEXTUAL FLOTANTE (+) EN EL LIENZO -->
-    <div class="canvas-floating-dock" role="complementary" aria-label="Añadir módulos disponibles">
+    <div class="canvas-floating-dock" role="complementary" [attr.aria-label]="'DASHBOARD.FLOATING_ADD_TITLE' | translate">
       <button
         class="canvas-fab-btn"
         [class.is-editing]="isEditMode()"
         (click)="toggleCatalogDrawer()"
-        title="Añadir o gestionar módulos disponibles (+)"
+        [title]="'DASHBOARD.FLOATING_ADD_TITLE' | translate"
       >
         <span class="fab-pulse-effect" aria-hidden="true"></span>
         <ion-icon name="add-outline" class="fab-main-icon"></ion-icon>
-        <span class="fab-text">Añadir Módulos</span>
+        <span class="fab-text">{{ 'DASHBOARD.FLOATING_ADD_TEXT' | translate }}</span>
         <span class="fab-badge">{{ activeWidgets().length }}/{{ catalogWidgets.length }}</span>
       </button>
     </div>
 
-    <!-- BANDEJA / DRAWER LATERAL DE CATÁLOGO DE WIDGETS -->
-    @if (isCatalogDrawerOpen()) {
-      <div class="drawer-backdrop" (click)="closeCatalogDrawer()" aria-hidden="true"></div>
-      <aside class="catalog-drawer glass-window" role="dialog" aria-modal="true" aria-label="Bandeja de módulos disponibles">
-        <div class="drawer-header">
-          <div class="drawer-title-group">
-            <div class="drawer-icon-wrap">
-              <ion-icon name="grid-outline"></ion-icon>
-            </div>
-            <div>
-              <h3>Bandeja de Módulos</h3>
-              <p>Personaliza tu cuadro de mando activando o retirando widgets</p>
-            </div>
-          </div>
-          <button class="drawer-close-btn" (click)="closeCatalogDrawer()" aria-label="Cerrar bandeja">
-            <ion-icon name="close-outline"></ion-icon>
-          </button>
-        </div>
-
-        <!-- Buscador y Filtros por Categoría en la Bandeja -->
-        <div class="drawer-filter-bar">
-          <div class="drawer-search-box">
-            <ion-icon name="search-outline"></ion-icon>
-            <input
-              type="text"
-              placeholder="Buscar módulo en catálogo..."
-              [value]="catalogSearch()"
-              (input)="catalogSearch.set($any($event.target).value)"
-            />
-            @if (catalogSearch()) {
-              <button class="clear-drawer-search" (click)="catalogSearch.set('')">
-                <ion-icon name="close-circle-outline"></ion-icon>
-              </button>
-            }
-          </div>
-
-          <div class="category-chips-row">
-            @for (cat of catalogCategories(); track cat) {
-              <button
-                class="cat-chip-btn"
-                [class.active]="catalogFilterCategory() === cat"
-                (click)="catalogFilterCategory.set(cat)"
-              >
-                {{ cat === 'all' ? 'Todos' : cat }}
-              </button>
-            }
-          </div>
-        </div>
-
-        <!-- Lista de Widgets Disponibles -->
-        <div class="drawer-cards-list">
-          @for (item of filteredCatalogWidgets(); track item.id) {
-            <div class="drawer-item-card" [class.is-active]="isWidgetVisible(item.id)">
-              <div class="card-icon-col">
-                <ion-icon [name]="item.icon"></ion-icon>
-              </div>
-              <div class="card-info-col">
-                <div class="card-meta-top">
-                  <span class="cat-pill">{{ item.category }}</span>
-                  <span class="size-hint">Base: {{ item.defaultWidth === 'col-12' ? 'Full' : item.defaultWidth === 'col-8' ? '2/3' : item.defaultWidth === 'col-6' ? '1/2' : '1/3' }}</span>
-                </div>
-                <h4 class="card-title">{{ item.title }}</h4>
-                <p class="card-desc">{{ item.description }}</p>
-              </div>
-              <div class="card-actions-col">
-                @if (isWidgetVisible(item.id)) {
-                  <span class="in-canvas-tag">
-                    <ion-icon name="checkmark-circle-outline"></ion-icon> En Lienzo
-                  </span>
-                  <button class="drawer-action-link danger" (click)="removeWidget(item.id)" title="Quitar del lienzo">
-                    Quitar
-                  </button>
-                } @else {
-                  <button class="drawer-add-pill-btn" (click)="addWidget(item.id)" title="Añadir a mi lienzo">
-                    <ion-icon name="add-outline"></ion-icon> Añadir
-                  </button>
-                }
-              </div>
-            </div>
-          } @empty {
-            <div class="drawer-empty-state">
-              <ion-icon name="search-outline"></ion-icon>
-              <p>No se encontraron módulos coincidentes con el filtro.</p>
-            </div>
-          }
-        </div>
-
-        <!-- Pie de Bandeja -->
-        <div class="drawer-footer">
-          <div class="status-summary">
-            <span class="num">{{ activeWidgets().length }} de {{ catalogWidgets.length }}</span>
-            <span class="lbl">módulos en lienzo</span>
-          </div>
-          <div class="footer-btns">
-            <button class="btn-sec" (click)="resetDefaultLayout()" title="Restablecer diseño inicial">
-              <ion-icon name="refresh-outline"></ion-icon> Restablecer
-            </button>
-            <button class="btn-pri" (click)="closeCatalogDrawer()">
-              <ion-icon name="checkmark-outline"></ion-icon> Listo
-            </button>
-          </div>
-        </div>
-      </aside>
-    }
-
   </div>
 </ion-content>
+
+<!-- BANDEJA / DRAWER LATERAL DE CATÁLOGO DE WIDGETS (FUERA DE ION-CONTENT PARA EVITAR CONFLICTOS DE APILAMIENTO) -->
+@if (isCatalogDrawerOpen()) {
+  <div class="drawer-backdrop" (click)="closeCatalogDrawer()" aria-hidden="true"></div>
+  <aside class="catalog-drawer glass-window" role="dialog" aria-modal="true" [attr.aria-label]="'DASHBOARD.DRAWER_TITLE' | translate">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <div class="drawer-icon-wrap">
+          <ion-icon name="grid-outline"></ion-icon>
+        </div>
+        <div>
+          <h3>{{ 'DASHBOARD.DRAWER_TITLE' | translate }}</h3>
+          <p>{{ 'DASHBOARD.DRAWER_SUBTITLE' | translate }}</p>
+        </div>
+      </div>
+      <button class="drawer-close-btn" (click)="closeCatalogDrawer()" [attr.aria-label]="'DASHBOARD.DRAWER_CLOSE' | translate">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+
+    <!-- Buscador y Filtros por Categoría en la Bandeja -->
+    <div class="drawer-filter-bar">
+      <div class="drawer-search-box">
+        <ion-icon name="search-outline"></ion-icon>
+        <input
+          type="text"
+          [placeholder]="'DASHBOARD.DRAWER_SEARCH' | translate"
+          [value]="catalogSearch()"
+          (input)="catalogSearch.set($any($event.target).value)"
+        />
+        @if (catalogSearch()) {
+          <button class="clear-drawer-search" (click)="catalogSearch.set('')">
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </button>
+        }
+      </div>
+
+      <div class="category-chips-row">
+        @for (cat of catalogCategories(); track cat) {
+          <button
+            class="cat-chip-btn"
+            [class.active]="catalogFilterCategory() === cat"
+            (click)="catalogFilterCategory.set(cat)"
+          >
+            {{ cat === 'all' ? ('COMMON.ALL' | translate) : cat }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Lista de Widgets Disponibles -->
+    <div class="drawer-cards-list">
+      @for (item of filteredCatalogWidgets(); track item.id) {
+        <div class="drawer-item-card" [class.is-active]="isWidgetVisible(item.id)">
+          <div class="card-icon-col">
+            <ion-icon [name]="item.icon"></ion-icon>
+          </div>
+          <div class="card-info-col">
+            <div class="card-meta-top">
+              <span class="cat-pill">{{ ('DASHBOARD.WIDGETS.' + item.id + '.CAT') | translate }}</span>
+              <span class="size-hint">Base: {{ item.defaultWidth === 'col-12' ? 'Full' : item.defaultWidth === 'col-8' ? '2/3' : item.defaultWidth === 'col-6' ? '1/2' : '1/3' }}</span>
+            </div>
+            <h4 class="card-title">{{ ('DASHBOARD.WIDGETS.' + item.id + '.TITLE') | translate }}</h4>
+            <p class="card-desc">{{ item.description }}</p>
+          </div>
+          <div class="card-actions-col">
+            @if (isWidgetVisible(item.id)) {
+              <span class="in-canvas-tag">
+                <ion-icon name="checkmark-circle-outline"></ion-icon> {{ 'DASHBOARD.IN_CANVAS' | translate }}
+              </span>
+              <button class="drawer-action-link danger" (click)="removeWidget(item.id)" [title]="'DASHBOARD.REMOVE_MODULE' | translate">
+                {{ 'DASHBOARD.REMOVE_FROM_CANVAS' | translate }}
+              </button>
+            } @else {
+              <button class="drawer-add-pill-btn" (click)="addWidget(item.id)" [title]="'DASHBOARD.ADD_TO_CANVAS' | translate">
+                <ion-icon name="add-outline"></ion-icon> {{ 'DASHBOARD.ADD_TO_CANVAS' | translate }}
+              </button>
+            }
+          </div>
+        </div>
+      } @empty {
+        <div class="drawer-empty-state">
+          <ion-icon name="search-outline"></ion-icon>
+          <p>{{ 'DASHBOARD.NO_MODULES_MATCH' | translate }}</p>
+        </div>
+      }
+    </div>
+
+    <!-- Pie de Bandeja -->
+    <div class="drawer-footer">
+      <div class="status-summary">
+        <span class="num">{{ activeWidgets().length }} {{ 'DASHBOARD.OF_MODULES' | translate }} {{ catalogWidgets.length }}</span>
+        <span class="lbl">{{ 'DASHBOARD.MODULES_IN_CANVAS' | translate }}</span>
+      </div>
+      <div class="footer-btns">
+        <button class="btn-sec" (click)="resetDefaultLayout()" [title]="'DASHBOARD.RESET_LAYOUT_TITLE' | translate">
+          <ion-icon name="refresh-outline"></ion-icon> {{ 'DASHBOARD.RESET_LAYOUT' | translate }}
+        </button>
+        <button class="btn-pri" (click)="closeCatalogDrawer()">
+          <ion-icon name="checkmark-outline"></ion-icon> {{ 'DASHBOARD.CANVAS_DONE' | translate }}
+        </button>
+      </div>
+    </div>
+  </aside>
+}

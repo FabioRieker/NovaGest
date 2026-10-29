@@ -12,7 +12,7 @@
     </div>
     <div class="toolbar-stats" aria-live="polite">
       <span class="count-badge">
-        Mostrando {{ paginatedData.length }} de {{ filteredData.length }} registros
+        {{ 'TABLE.SHOWING' | translate }} {{ paginatedData.length }} {{ 'TABLE.OF' | translate }} {{ filteredData.length }}
       </span>
     </div>
   </div>
@@ -21,7 +21,7 @@
   @if (loading) {
     <div class="table-loading-state" role="status" aria-live="polite">
       <ion-spinner name="crescent" color="primary"></ion-spinner>
-      <span>Cargando datos del servidor...</span>
+      <span>{{ 'COMMON.LOADING' | translate }}</span>
     </div>
   }
 
@@ -58,7 +58,7 @@
             </th>
           }
           @if (showActions) {
-            <th role="columnheader" scope="col" class="actions-header">Acciones</th>
+            <th role="columnheader" scope="col" class="actions-header">{{ 'TABLE.COLUMN_ACTIONS' | translate }}</th>
           }
         </tr>
       </thead>
@@ -67,7 +67,7 @@
           <tr role="row">
             <td [attr.colspan]="columns.length + (showActions ? 1 : 0)" class="empty-cell">
               <div class="empty-state">
-                <p>{{ emptyMessage }}</p>
+                <p>{{ emptyMessage || ('TABLE.EMPTY' | translate) }}</p>
               </div>
             </td>
           </tr>
@@ -88,7 +88,7 @@
                       class="table-img-cell"
                       (click)="openImagePreview(item[col.key], item.name || item.sku, $event)"
                       [class.clickable]="!!item[col.key]"
-                      [title]="item[col.key] ? 'Clic para ampliar imagen' : 'Sin imagen registrada'"
+                      [title]="item[col.key] ? 'Clic para ampliar imagen' : ('PRODUCTS.NO_IMAGE' | translate)"
                     >
                       @if (item[col.key]) {
                         <img
@@ -105,7 +105,7 @@
                     </div>
                   } @else if (col.type === 'badge') {
                     <ion-badge [color]="getBadgeColor(item[col.key])" class="status-badge">
-                      {{ item[col.key] }}
+                      {{ getBadgeLabel(item[col.key]) }}
                     </ion-badge>
                   } @else {
                     <span>{{ formatCellValue(item, col) }}</span>
@@ -162,7 +162,7 @@
   @if (totalPages > 1) {
     <nav class="table-pagination" aria-label="Navegación por páginas de la tabla">
       <div class="page-info">
-        Página <strong>{{ currentPage }}</strong> de <strong>{{ totalPages }}</strong>
+        {{ 'TABLE.PAGE' | translate }} <strong>{{ currentPage }}</strong> {{ 'TABLE.OF' | translate }} <strong>{{ totalPages }}</strong>
       </div>
       <div class="pagination-buttons">
         <ion-button

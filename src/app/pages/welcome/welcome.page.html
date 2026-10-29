@@ -10,15 +10,18 @@
       <ion-title>NovaGest <span class="accent-title">ERP</span></ion-title>
     </div>
     <ion-buttons slot="end">
+      <!-- Selector de idioma compacto -->
+      <app-lang-switcher [compact]="true"></app-lang-switcher>
+
       @if (authService.isAuthenticatedSignal()) {
         <ion-button (click)="navigateToPrimaryAction()" color="light" class="header-cta-btn">
           <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
-          Ir al Panel
+          {{ 'WELCOME.PANEL_BTN' | translate }}
         </ion-button>
       } @else {
         <ion-button (click)="navigateToLogin()" color="light" class="header-cta-btn">
           <ion-icon slot="start" name="log-in-outline"></ion-icon>
-          Acceso Usuarios
+          {{ 'WELCOME.LOGIN_BTN' | translate }}
         </ion-button>
       }
     </ion-buttons>
@@ -32,17 +35,16 @@
     <section class="hero-section">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        <span>SISTEMA DE GESTIÓN EMPRESARIAL & STOCK • V1.0</span>
+        <span>{{ 'WELCOME.HERO_BADGE' | translate }}</span>
       </div>
 
       <h1 class="hero-title">
-        Gestión Inteligente en Tiempo Real con
+        {{ 'WELCOME.HERO_TITLE_PRE' | translate }}
         <span class="gradient-headline">NovaGest ERP</span>
       </h1>
 
       <p class="hero-subtitle">
-        Plataforma multiplataforma de inventario corporativo, cuadro de mando ejecutivo,
-        auditoría reactiva Supabase Realtime y control de accesos RBAC de alto rendimiento.
+        {{ 'WELCOME.HERO_SUBTITLE' | translate }}
       </p>
 
       <!-- Botones Principales de Acción (CTA) -->
@@ -50,17 +52,17 @@
         <button class="primary-cta-btn" (click)="navigateToPrimaryAction()">
           @if (authService.isAuthenticatedSignal()) {
             <ion-icon name="speedometer-outline"></ion-icon>
-            <span>Continuar a mi Panel ({{ authService.currentUserSignal()?.name?.split(' ')?.[0] }})</span>
+            <span>{{ 'WELCOME.CONTINUE_PANEL' | translate }} ({{ authService.currentUserSignal()?.name?.split(' ')?.[0] }})</span>
           } @else {
             <ion-icon name="log-in-outline"></ion-icon>
-            <span>Iniciar Sesión en el Portal</span>
+            <span>{{ 'WELCOME.LOGIN_PORTAL' | translate }}</span>
           }
           <ion-icon name="arrow-forward-outline" class="btn-arrow"></ion-icon>
         </button>
 
         <button class="secondary-cta-btn" (click)="navigateToHelp()">
           <ion-icon name="document-text-outline"></ion-icon>
-          <span>Manual de Usuario & Ayuda</span>
+          <span>{{ 'WELCOME.USER_GUIDE_BTN' | translate }}</span>
         </button>
       </div>
 
@@ -68,7 +70,7 @@
       @if (authService.currentUserSignal(); as user) {
         <div class="active-session-banner">
           <ion-icon name="checkmark-circle-outline"></ion-icon>
-          <span>Sesión activa como <strong>{{ user.name }}</strong> (Rol: {{ user.role === 'admin' ? 'Administrador' : 'Usuario Estándar' }})</span>
+          <span>{{ 'WELCOME.ACTIVE_SESSION_PRE' | translate }} <strong>{{ user.name }}</strong> ({{ 'WELCOME.ROLE_LABEL' | translate }}: {{ user.role === 'admin' ? ('NAV.ADMIN_ROLE' | translate) : ('NAV.USER_ROLE' | translate) }})</span>
         </div>
       }
     </section>
@@ -77,12 +79,12 @@
     <section class="system-metrics-strip">
       <div class="metric-item">
         <span class="metric-num">99.98%</span>
-        <span class="metric-label">Disponibilidad SLA</span>
+        <span class="metric-label">{{ 'WELCOME.METRIC_SLA' | translate }}</span>
       </div>
       <div class="metric-divider"></div>
       <div class="metric-item">
         <span class="metric-num">&lt; 20ms</span>
-        <span class="metric-label">Latencia con Signals</span>
+        <span class="metric-label">{{ 'WELCOME.METRIC_SIGNALS' | translate }}</span>
       </div>
       <div class="metric-divider"></div>
       <div class="metric-item">
@@ -92,16 +94,16 @@
       <div class="metric-divider"></div>
       <div class="metric-item">
         <span class="metric-num">RBAC + JWT</span>
-        <span class="metric-label">Seguridad de Acceso</span>
+        <span class="metric-label">{{ 'WELCOME.METRIC_SECURITY' | translate }}</span>
       </div>
     </section>
 
     <!-- SHOWCASE DE MÓDULOS PRINCIPALES -->
     <section class="modules-section">
       <div class="section-title-wrap">
-        <span class="section-kicker">CAPACIDADES DE LA APLICACIÓN</span>
-        <h2 class="section-heading">Arquitectura Modular & Características Clave</h2>
-        <p class="section-desc">Diseñada bajo estándares de Desarrollo de Interfaces (DAM2) con Angular Standalone y Ionic Framework.</p>
+        <span class="section-kicker">{{ 'WELCOME.MODULES_KICKER' | translate }}</span>
+        <h2 class="section-heading">{{ 'WELCOME.MODULES_TITLE' | translate }}</h2>
+        <p class="section-desc">{{ 'WELCOME.MODULES_DESC' | translate }}</p>
       </div>
 
       <div class="modules-grid">
@@ -110,10 +112,9 @@
           <div class="module-icon-wrap icon-ruby">
             <ion-icon name="stats-chart-outline"></ion-icon>
           </div>
-          <h3 class="module-title">Cuadro de Mando Ejecutivo</h3>
+          <h3 class="module-title">{{ 'WELCOME.CARD_DASHBOARD_TITLE' | translate }}</h3>
           <p class="module-text">
-            Métricas de inventario en tiempo real, gráficos de ondas financieras continuas (Spline Wave)
-            y medidores radiales circulares interactivos con soporte multidispositivo.
+            {{ 'WELCOME.CARD_DASHBOARD_DESC' | translate }}
           </p>
           <div class="module-tags">
             <span class="tag">Chart.js</span>
@@ -127,15 +128,14 @@
           <div class="module-icon-wrap icon-cyan">
             <ion-icon name="cube-outline"></ion-icon>
           </div>
-          <h3 class="module-title">Inventario & Catálogo Físico</h3>
+          <h3 class="module-title">{{ 'WELCOME.CARD_INVENTORY_TITLE' | translate }}</h3>
           <p class="module-text">
-            Gestión completa del ciclo de vida de productos (CRUD), ordenación multicriterio, paginación reactiva,
-            búsqueda instantánea y alertas tempranas de stock mínimo.
+            {{ 'WELCOME.CARD_INVENTORY_DESC' | translate }}
           </p>
           <div class="module-tags">
             <span class="tag">REST SQL</span>
-            <span class="tag">Data-Table Reutilizable</span>
-            <span class="tag">Stock Crítico</span>
+            <span class="tag">Data-Table</span>
+            <span class="tag">Cards Grid</span>
           </div>
         </div>
 
@@ -144,10 +144,9 @@
           <div class="module-icon-wrap icon-purple">
             <ion-icon name="pulse-outline"></ion-icon>
           </div>
-          <h3 class="module-title">Auditoría Supabase Realtime</h3>
+          <h3 class="module-title">{{ 'WELCOME.CARD_AUDIT_TITLE' | translate }}</h3>
           <p class="module-text">
-            Flujo reactivo asíncrono con Supabase Realtime WebSockets que emite y registra cada evento,
-            alta, borrado o inicio de sesión con trazabilidad completa.
+            {{ 'WELCOME.CARD_AUDIT_DESC' | translate }}
           </p>
           <div class="module-tags">
             <span class="tag">Supabase Realtime</span>
@@ -161,10 +160,9 @@
           <div class="module-icon-wrap icon-amber">
             <ion-icon name="people-outline"></ion-icon>
           </div>
-          <h3 class="module-title">Gestión de Cuentas & Usuarios</h3>
+          <h3 class="module-title">{{ 'WELCOME.CARD_USERS_TITLE' | translate }}</h3>
           <p class="module-text">
-            Aprovisionamiento dinámico de usuarios con selector visual de rol (Admin vs Estándar),
-            medidor de seguridad de contraseñas y validación de correo corporativo único.
+            {{ 'WELCOME.CARD_USERS_DESC' | translate }}
           </p>
           <div class="module-tags">
             <span class="tag">RBAC</span>
@@ -178,10 +176,9 @@
           <div class="module-icon-wrap icon-emerald">
             <ion-icon name="document-text-outline"></ion-icon>
           </div>
-          <h3 class="module-title">Informes & Exportación Oficial</h3>
+          <h3 class="module-title">{{ 'WELCOME.CARD_REPORTS_TITLE' | translate }}</h3>
           <p class="module-text">
-            Generación instantánea en el navegador de documentos PDF vectoriales maquetados y hojas de cálculo
-            CSV estructuradas para análisis contable y auditorías externas.
+            {{ 'WELCOME.CARD_REPORTS_DESC' | translate }}
           </p>
           <div class="module-tags">
             <span class="tag">jsPDF</span>
@@ -195,15 +192,14 @@
           <div class="module-icon-wrap icon-blue">
             <ion-icon name="shield-checkmark-outline"></ion-icon>
           </div>
-          <h3 class="module-title">Accesibilidad & Modo Oscuro</h3>
+          <h3 class="module-title">{{ 'WELCOME.CARD_ACCESSIBILITY_TITLE' | translate }}</h3>
           <p class="module-text">
-            Cumplimiento riguroso de pautas WCAG AA/AAA con conmutador dinámico de modo oscuro,
-            contraste garantizado, foco visual asistido e interfaz intuitiva de alta legibilidad.
+            {{ 'WELCOME.CARD_ACCESSIBILITY_DESC' | translate }}
           </p>
           <div class="module-tags">
             <span class="tag">WCAG 2.1</span>
             <span class="tag">Alto Contraste</span>
-            <span class="tag">Modo Oscuro Cyber</span>
+            <span class="tag">i18n ES/EN</span>
           </div>
         </div>
       </div>
@@ -215,35 +211,35 @@
         <div class="demo-header">
           <ion-icon name="hardware-chip-outline" class="demo-icon"></ion-icon>
           <div>
-            <h3 class="demo-title">Acceso Rápido para Evaluación Docente</h3>
-            <p class="demo-desc">Puede utilizar las cuentas preconfiguradas o registrar una nueva en el módulo de usuarios:</p>
+            <h3 class="demo-title">{{ 'WELCOME.DEMO_TITLE' | translate }}</h3>
+            <p class="demo-desc">{{ 'WELCOME.DEMO_DESC' | translate }}</p>
           </div>
         </div>
 
         <div class="credentials-table">
           <div class="cred-row">
             <div class="cred-role-col">
-              <span class="role-badge badge-admin">ADMINISTRADOR</span>
+              <span class="role-badge badge-admin">{{ 'WELCOME.ROLE_ADMIN' | translate }}</span>
             </div>
             <div class="cred-info-col">
               <span class="cred-email">admin&#64;empresa.com</span>
-              <span class="cred-pass">Clave: <code>Admin1234*</code></span>
+              <span class="cred-pass">{{ 'WELCOME.PASS_LABEL' | translate }}: <code>Admin1234*</code></span>
             </div>
             <div class="cred-action-col">
-              <button class="try-btn" (click)="navigateToLogin()">Probar como Admin</button>
+              <button class="try-btn" (click)="navigateToLogin()">{{ 'WELCOME.TRY_ADMIN' | translate }}</button>
             </div>
           </div>
 
           <div class="cred-row">
             <div class="cred-role-col">
-              <span class="role-badge badge-user">ESTÁNDAR</span>
+              <span class="role-badge badge-user">{{ 'WELCOME.ROLE_USER' | translate }}</span>
             </div>
             <div class="cred-info-col">
               <span class="cred-email">user&#64;empresa.com</span>
-              <span class="cred-pass">Clave: <code>User1234*</code></span>
+              <span class="cred-pass">{{ 'WELCOME.PASS_LABEL' | translate }}: <code>User1234*</code></span>
             </div>
             <div class="cred-action-col">
-              <button class="try-btn secondary" (click)="navigateToLogin()">Probar como Usuario</button>
+              <button class="try-btn secondary" (click)="navigateToLogin()">{{ 'WELCOME.TRY_USER' | translate }}</button>
             </div>
           </div>
         </div>
@@ -255,20 +251,21 @@
       <div class="footer-content">
         <div class="footer-brand">
           <h4>NovaGest ERP</h4>
-          <p>Módulo de Desarrollo de Interfaces • DAM2 (Código: 0488)</p>
+          <p>{{ 'WELCOME.FOOTER_SUBTITLE' | translate }}</p>
         </div>
         <div class="footer-links">
-          <a routerLink="/help" class="footer-link">Manual de Usuario</a>
-          <a routerLink="/login" class="footer-link">Iniciar Sesión</a>
+          <a routerLink="/help" class="footer-link">{{ 'NAV.HELP' | translate }}</a>
+          <a routerLink="/login" class="footer-link">{{ 'NAV.LOGIN' | translate }}</a>
           <a href="https://github.com/FabioRieker/NovaGest" target="_blank" rel="noopener noreferrer" class="footer-link github-link">
-            <ion-icon name="logo-github"></ion-icon> Repositorio GitHub
+            <ion-icon name="logo-github"></ion-icon> {{ 'WELCOME.GITHUB_REPO' | translate }}
           </a>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 NovaGest ERP. Todos los derechos reservados. Desarrollado por Fabio Rieker.</span>
+        <span>{{ 'WELCOME.FOOTER_COPYRIGHT' | translate }}</span>
       </div>
     </footer>
 
   </div>
 </ion-content>
+

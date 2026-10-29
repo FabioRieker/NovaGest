@@ -55,6 +55,7 @@ export class SqlRestService {
       stock: 45,
       status: 'in_stock',
       supplierEmail: 'cloud.sales@novagest-saas.com',
+      imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=80',
       description: 'Suscripción corporativa para gestión de inventarios y contabilidad distribuida.',
       createdAt: '2026-01-15T09:15:00Z',
       updatedAt: '2026-01-15T09:15:00Z'
@@ -68,7 +69,7 @@ export class SqlRestService {
       stock: 3,
       status: 'low_stock',
       supplierEmail: 'contacto@ergodesign.es',
-      imageUrl: 'https://images.unsplash.com/photo-1580481077195-c2763297a73e?w=400&q=80',
+      imageUrl: 'https://images.unsplash.com/photo-1505797149-43b0069ec26b?w=600&auto=format&fit=crop&q=80',
       description: 'Silla ergonómica de oficina con soporte lumbar ajustable PostureFit SL.',
       createdAt: '2026-01-18T14:40:00Z',
       updatedAt: '2026-01-18T14:40:00Z'
@@ -82,6 +83,7 @@ export class SqlRestService {
       stock: 12,
       status: 'in_stock',
       supplierEmail: 'info@standingdesk.pro',
+      imageUrl: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600&auto=format&fit=crop&q=80',
       description: 'Mesa sit-stand con memorias de altura y estructura reforzada de acero.',
       createdAt: '2026-01-20T16:00:00Z',
       updatedAt: '2026-01-20T16:00:00Z'
@@ -123,6 +125,7 @@ export class SqlRestService {
       stock: 4,
       status: 'low_stock',
       supplierEmail: 'pedidos@ecopaper.org',
+      imageUrl: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=600&auto=format&fit=crop&q=80',
       description: 'Kit de 50 cuadernos de bambú y bolígrafos reciclados con sello FSC.',
       createdAt: '2026-01-28T10:00:00Z',
       updatedAt: '2026-01-28T10:00:00Z'
@@ -150,6 +153,7 @@ export class SqlRestService {
       stock: 10,
       status: 'in_stock',
       supplierEmail: 'soporte@infrastructurecare.es',
+      imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80',
       description: 'SLA de respuesta en menos de 2 horas con sustitución de piezas críticas.',
       createdAt: '2026-02-05T15:30:00Z',
       updatedAt: '2026-02-05T15:30:00Z'

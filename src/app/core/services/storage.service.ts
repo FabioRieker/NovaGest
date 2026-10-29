@@ -91,4 +91,53 @@ export class StorageService {
     }
     return true;
   }
+
+  /**
+   * Obtiene el listado de archivos multimedia alojados en el bucket de Supabase Storage.
+   */
+  public async listBucketFiles(): Promise<Array<{ name: string; url: string; size?: number; updated_at?: string }>> {
+    const client = this.supabaseService.client;
+    if (client && this.supabaseService.isConfigured) {
+      try {
+        const { data, error } = await client.storage.from(this.bucketName).list('', {
+          limit: 50,
+          sortBy: { column: 'created_at', order: 'desc' }
+        });
+
+        if (error) {
+          console.warn('Aviso al listar bucket product-images:', error.message);
+          return [];
+        }
+
+        if (data && data.length > 0) {
+          return data
+            .filter((item) => item.name && !item.name.startsWith('.'))
+            .map((item) => {
+              const { data: pubData } = client.storage.from(this.bucketName).getPublicUrl(item.name);
+              return {
+                name: item.name,
+                url: pubData?.publicUrl || '',
+                size: (item.metadata as any)?.size || 0,
+                updated_at: item.updated_at || item.created_at || undefined
+              };
+            });
+        }
+      } catch (err) {
+        console.warn('Excepción al conectar con Supabase Storage para listado:', err);
+      }
+    }
+    return [];
+  }
+
+  /**
+   * Sube directamente un archivo de imagen al bucket sin asociarlo previamente a un formulario.
+   */
+  public async uploadDirectImage(file: File, namePrefix = 'asset'): Promise<{ name: string; url: string } | null> {
+    const url = await this.uploadProductImage(file, namePrefix);
+    if (!url) return null;
+    const parts = url.split('/');
+    const name = parts[parts.length - 1] || file.name;
+    return { name, url };
+  }
 }
+

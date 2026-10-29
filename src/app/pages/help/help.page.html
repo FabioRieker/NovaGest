@@ -3,17 +3,19 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Manual de Usuario & Ayuda</ion-title>
+    <ion-title>{{ 'HELP.TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
+      <app-lang-switcher [compact]="true"></app-lang-switcher>
+
       @if (authService.isAuthenticatedSignal()) {
-        <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">
+        <ion-button (click)="logout()" color="light" [attr.aria-label]="'NAV.LOGOUT' | translate">
           <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
-          Salir
+          {{ 'NAV.QUICK_LOGOUT' | translate }}
         </ion-button>
       } @else {
-        <ion-button (click)="goToLogin()" color="light" aria-label="Iniciar sesión">
+        <ion-button (click)="goToLogin()" color="light" [attr.aria-label]="'NAV.LOGIN' | translate">
           <ion-icon slot="start" name="log-in-outline"></ion-icon>
-          Entrar
+          {{ 'NAV.LOGIN' | translate }}
         </ion-button>
       }
     </ion-buttons>
@@ -23,8 +25,8 @@
 <ion-content [fullscreen]="true" class="help-content">
   <div class="help-container">
     <div class="help-header-bar">
-      <h1 class="page-title">Guía de Uso del Sistema NovaGest ERP</h1>
-      <p class="page-subtitle">Documentación de usuario embebida y accesible (RA 6 & WCAG)</p>
+      <h1 class="page-title">{{ 'HELP.PAGE_TITLE' | translate }}</h1>
+      <p class="page-subtitle">{{ 'HELP.PAGE_SUBTITLE' | translate }}</p>
     </div>
 
     <!-- Tarjeta de Credenciales de Acceso Oficiales -->
@@ -32,33 +34,33 @@
       <ion-card-header>
         <div class="card-icon-title">
           <ion-icon name="key-outline" color="primary"></ion-icon>
-          <ion-card-title>Credenciales de Acceso de Prueba</ion-card-title>
+          <ion-card-title>{{ 'HELP.CREDENTIALS_TITLE' | translate }}</ion-card-title>
         </div>
-        <ion-card-subtitle>Usuarios preconfigurados según la especificación del proyecto</ion-card-subtitle>
+        <ion-card-subtitle>{{ 'HELP.CREDENTIALS_SUBTITLE' | translate }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         <div class="credentials-table-wrapper">
           <table class="credentials-table">
             <thead>
               <tr>
-                <th>Rol</th>
-                <th>Usuario / Email</th>
-                <th>Contraseña</th>
-                <th>Permisos</th>
+                <th>{{ 'HELP.COL_ROLE' | translate }}</th>
+                <th>{{ 'HELP.COL_USER' | translate }}</th>
+                <th>{{ 'HELP.COL_PASS' | translate }}</th>
+                <th>{{ 'HELP.COL_PERMS' | translate }}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><ion-badge color="primary">Administrador</ion-badge></td>
+                <td><ion-badge color="primary">{{ 'NAV.ADMIN_ROLE' | translate }}</ion-badge></td>
                 <td><strong>admin&#64;empresa.com</strong></td>
                 <td><code>Admin1234*</code></td>
-                <td>Acceso total: Cuadro de Mando, CRUD de Productos, Informes y Auditoría Supabase Realtime.</td>
+                <td>{{ 'HELP.ADMIN_PERMS' | translate }}</td>
               </tr>
               <tr>
-                <td><ion-badge color="medium">Estándar</ion-badge></td>
+                <td><ion-badge color="medium">{{ 'NAV.USER_ROLE' | translate }}</ion-badge></td>
                 <td><strong>user&#64;empresa.com</strong></td>
                 <td><code>User1234*</code></td>
-                <td>Consulta de catálogo, filtrado, ordenación, visualización de detalle y ayuda.</td>
+                <td>{{ 'HELP.USER_PERMS' | translate }}</td>
               </tr>
             </tbody>
           </table>
@@ -72,18 +74,11 @@
       <ion-accordion value="auth">
         <ion-item slot="header" color="light">
           <ion-icon name="shield-checkmark-outline" slot="start" color="primary"></ion-icon>
-          <ion-label>1. Autenticación y Control de Acceso por Roles (RBAC)</ion-label>
+          <ion-label>{{ 'HELP.SEC1_TITLE' | translate }}</ion-label>
         </ion-item>
         <div class="accordion-content" slot="content">
-          <p>
-            El sistema implementa <strong>Guards de Enrutamiento</strong> (<code>authGuard</code> y <code>roleGuard</code>)
-            que protegen las vistas privadas. Las rutas administrativas como el <em>Cuadro de Mando</em> o la
-            creación de productos están estrictamente restringidas al rol <code>admin</code>.
-          </p>
-          <p>
-            Al iniciar sesión, se genera un token de sesión JWT simulado que se almacena de forma segura en el almacenamiento
-            local y se inyecta automáticamente mediante un interceptor HTTP en las peticiones salientes.
-          </p>
+          <p>{{ 'HELP.SEC1_P1' | translate }}</p>
+          <p>{{ 'HELP.SEC1_P2' | translate }}</p>
         </div>
       </ion-accordion>
 
@@ -91,96 +86,35 @@
       <ion-accordion value="products">
         <ion-item slot="header" color="light">
           <ion-icon name="layers-outline" slot="start" color="primary"></ion-icon>
-          <ion-label>2. Gestión de Catálogo y Componente Tabla Avanzada</ion-label>
+          <ion-label>{{ 'HELP.SEC2_TITLE' | translate }}</ion-label>
         </ion-item>
         <div class="accordion-content" slot="content">
-          <p>
-            La vista de inventario utiliza el componente agnóstico reutilizable <code>&lt;app-data-table&gt;</code>, el cual ofrece:
-          </p>
-          <ul>
-            <li><strong>Búsqueda en tiempo real</strong>: Filtrado instantáneo por SKU, nombre o proveedor con debounce.</li>
-            <li><strong>Ordenación por columnas</strong>: Haga clic en la cabecera de cualquier columna (o presione Enter con teclado) para alternar orden ascendente o descendente.</li>
-            <li><strong>Paginación configurable</strong>: Control de registros por página y botones accesibles de avance/retroceso.</li>
-            <li><strong>Operaciones CRUD</strong>: Creación, modificación y eliminación con confirmación modal accesible.</li>
-          </ul>
+          <p>{{ 'HELP.SEC2_P1' | translate }}</p>
         </div>
       </ion-accordion>
 
-      <!-- Módulo 3: Validación Asíncrona -->
-      <ion-accordion value="validation">
+      <!-- Módulo 3: Auditoría en Tiempo Real -->
+      <ion-accordion value="audit">
         <ion-item slot="header" color="light">
-          <ion-icon name="document-text-outline" slot="start" color="primary"></ion-icon>
-          <ion-label>3. Formularios Reactivos y Validación Asíncrona</ion-label>
+          <ion-icon name="pulse-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>{{ 'HELP.SEC3_TITLE' | translate }}</ion-label>
         </ion-item>
         <div class="accordion-content" slot="content">
-          <p>
-            En el formulario de alta de productos, el campo <strong>Código SKU</strong> cuenta con un validador asíncrono
-            (<code>skuAsyncValidator</code>). Al escribir un código, el sistema consulta en segundo plano a la API SQL
-            con un spinner visual y anuncia el estado mediante <code>aria-live="polite"</code>. Si el SKU ya existe,
-            el botón de guardar se bloquea automáticamente evitando duplicados.
-          </p>
+          <p>{{ 'HELP.SEC3_P1' | translate }}</p>
         </div>
       </ion-accordion>
 
-      <!-- Módulo 4: Cuadro de Mando e Informes -->
-      <ion-accordion value="dashboard">
+      <!-- Módulo 4: Accesibilidad y Modo Oscuro -->
+      <ion-accordion value="accessibility">
         <ion-item slot="header" color="light">
           <ion-icon name="accessibility-outline" slot="start" color="primary"></ion-icon>
-          <ion-label>4. Cuadro de Mando e Informes en PDF y CSV</ion-label>
+          <ion-label>{{ 'HELP.SEC4_TITLE' | translate }}</ion-label>
         </ion-item>
         <div class="accordion-content" slot="content">
-          <p>
-            El <strong>Cuadro de Mando</strong> integra gráficos interactivos renderizados con <strong>Chart.js</strong>
-            y widgets KPI estadísticos (<code>&lt;app-stat-widget&gt;</code>). Se sincroniza de forma concurrente
-            (<code>forkJoin</code>) con la API SQL de Supabase (PostgreSQL) y el canal WebSocket de Supabase Realtime.
-          </p>
-          <p>
-            La exportación permite generar informes en <strong>PDF formal tabulado</strong> (mediante <code>jspdf-autotable</code>)
-            o en <strong>CSV compatible con Excel</strong> con codificación UTF-8 BOM.
-          </p>
-        </div>
-      </ion-accordion>
-
-      <!-- Módulo 5: Accesibilidad WCAG -->
-      <ion-accordion value="wcag">
-        <ion-item slot="header" color="light">
-          <ion-icon name="accessibility-outline" slot="start" color="primary"></ion-icon>
-          <ion-label>5. Guía de Accesibilidad y Navegación por Teclado</ion-label>
-        </ion-item>
-        <div class="accordion-content" slot="content">
-          <p>
-            La interfaz ha sido diseñada conforme a las pautas de accesibilidad <strong>WCAG 2.1 AA / AAA</strong>:
-          </p>
-          <div class="keyboard-table-wrapper">
-            <table class="keyboard-table">
-              <thead>
-                <tr>
-                  <th>Tecla</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><kbd>Tab</kbd></td>
-                  <td>Desplaza el foco al siguiente elemento interactivo (con anillo de enfoque visible).</td>
-                </tr>
-                <tr>
-                  <td><kbd>Shift + Tab</kbd></td>
-                  <td>Desplaza el foco al elemento interactivo anterior.</td>
-                </tr>
-                <tr>
-                  <td><kbd>Enter</kbd> / <kbd>Espacio</kbd></td>
-                  <td>Activa botones, enlaces o alternar ordenación en las cabeceras de la tabla.</td>
-                </tr>
-                <tr>
-                  <td><kbd>Esc</kbd></td>
-                  <td>Cierra menús desplegables y modales de confirmación.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <p>{{ 'HELP.SEC4_P1' | translate }}</p>
         </div>
       </ion-accordion>
     </ion-accordion-group>
   </div>
 </ion-content>
+

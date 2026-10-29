@@ -100,6 +100,8 @@ import { NotificationService } from '../../core/services/notification.service';
 import { Router } from '@angular/router';
 import { Product } from '../../core/models/product.model';
 import { AuditLogDocument } from '../../core/models/audit-log.model';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 
 // Registrar componentes de Chart.js optimizados (Tree-shaking para máximo rendimiento)
 Chart.register(
@@ -182,7 +184,9 @@ interface CalendarDay {
     IonContent,
     IonButton,
     IonIcon,
-    IonSpinner
+    IonSpinner,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class DashboardPage implements OnInit, OnDestroy {
@@ -823,7 +827,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   public toggleCustomizer(): void {
-    this.isCustomizerOpen.update(v => !v);
+    this.toggleCatalogDrawer();
   }
 
   /**

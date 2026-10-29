@@ -28,6 +28,8 @@ import {
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 
 /**
  * Página de Autenticación de Usuarios (FASE 1 - Paso 1.2).
@@ -53,7 +55,9 @@ import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.s
     IonInput,
     IonButton,
     IonIcon,
-    IonSpinner
+    IonSpinner,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class LoginPage {
