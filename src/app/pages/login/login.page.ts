@@ -131,7 +131,7 @@ export class LoginPage {
         this.notificationService.showToast(`¡Bienvenido/a, ${user.name}!`, 'success');
 
         const returnUrl = this.route.snapshot.queryParams['returnUrl'];
-        if (returnUrl) {
+        if (returnUrl && returnUrl.startsWith('/') && !returnUrl.startsWith('//')) {
           this.router.navigateByUrl(returnUrl);
         } else if (user.role === 'admin') {
           this.router.navigate(['/dashboard']);

@@ -96,5 +96,37 @@ export class SupabaseService {
   public get client(): SupabaseClient | null {
     return this.supabaseClient;
   }
+
+  /**
+   * Inicia sesión con credenciales en Supabase Auth
+   */
+  public async signInWithPassword(credentials: { email: string; password: string }) {
+    if (!this.supabaseClient) throw new Error('Cliente Supabase no inicializado.');
+    return await this.supabaseClient.auth.signInWithPassword(credentials);
+  }
+
+  /**
+   * Cierra la sesión activa en Supabase Auth
+   */
+  public async signOut() {
+    if (!this.supabaseClient) return;
+    return await this.supabaseClient.auth.signOut();
+  }
+
+  /**
+   * Obtiene la sesión actual desde Supabase Auth
+   */
+  public async getSession() {
+    if (!this.supabaseClient) return { data: { session: null }, error: null };
+    return await this.supabaseClient.auth.getSession();
+  }
+
+  /**
+   * Suscribe a cambios en el estado de autenticación de Supabase Auth
+   */
+  public onAuthStateChange(callback: (event: any, session: any) => void) {
+    if (!this.supabaseClient) return { data: { subscription: { unsubscribe: () => {} } } };
+    return this.supabaseClient.auth.onAuthStateChange(callback);
+  }
 }
 
