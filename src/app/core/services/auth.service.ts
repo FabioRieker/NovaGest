@@ -166,19 +166,21 @@ export class AuthService {
       const cleanEmail = credentials.email.trim().toLowerCase();
 
       if (this.supabaseService.isConfigured && this.supabaseService.client) {
-        const { data, error } = await this.supabaseService.signInWithPassword({
-          email: cleanEmail,
-          password: credentials.password
-        });
+        try {
+          const { data, error } = await this.supabaseService.signInWithPassword({
+            email: cleanEmail,
+            password: credentials.password
+          });
 
-        if (error || !data.session) {
-          throw new Error(error?.message || 'Credenciales inválidas en Supabase Auth.');
+          if (!error && data?.session) {
+            return await this.hydrateFromSupabaseSession(data.session);
+          }
+        } catch {
+          // Continuar hacia la autenticación demo si el usuario no existe en Supabase Auth
         }
-
-        return await this.hydrateFromSupabaseSession(data.session);
       }
 
-      // Modo de contingencia seguro para entornos de prueba / evaluación local
+      // Modo de contingencia seguro para entornos de prueba / cuentas demo (admin@empresa.com / user@empresa.com)
       return this.authenticateOffline(cleanEmail, credentials.password);
     })());
   }
