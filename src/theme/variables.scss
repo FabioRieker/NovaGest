@@ -28,21 +28,21 @@
   --ion-color-tertiary-shade: #e11d48;
   --ion-color-tertiary-tint: #fb7185;
 
-  // Éxito / En Stock (Esmeralda Cálido)
-  --ion-color-success: #059669;
-  --ion-color-success-rgb: 5, 150, 105;
+  // Éxito / En Stock (Esmeralda Cálido con ratio AA > 5.4:1)
+  --ion-color-success: #047857;
+  --ion-color-success-rgb: 4, 120, 87;
   --ion-color-success-contrast: #ffffff;
   --ion-color-success-contrast-rgb: 255, 255, 255;
-  --ion-color-success-shade: #047857;
-  --ion-color-success-tint: #10b981;
+  --ion-color-success-shade: #065f46;
+  --ion-color-success-tint: #059669;
 
-  // Advertencia / Stock Bajo (Ámbar Dorado)
-  --ion-color-warning: #d97706;
-  --ion-color-warning-rgb: 217, 119, 6;
+  // Advertencia / Stock Bajo (Ámbar Dorado con ratio AA > 5.0:1)
+  --ion-color-warning: #b45309;
+  --ion-color-warning-rgb: 180, 83, 9;
   --ion-color-warning-contrast: #ffffff;
   --ion-color-warning-contrast-rgb: 255, 255, 255;
-  --ion-color-warning-shade: #b45309;
-  --ion-color-warning-tint: #f59e0b;
+  --ion-color-warning-shade: #92400e;
+  --ion-color-warning-tint: #d97706;
 
   // Peligro / Agotado / Alertas Críticas (Garnet Intenso / Borgoña)
   --ion-color-danger: #9f1239;
@@ -89,13 +89,13 @@
 
 // Variables para Modo Oscuro Activado mediante clase .dark (Obsidian & Velvet Ruby con Máxima Legibilidad WCAG)
 body.dark {
-  // Primario: Ruby vibrante con contraste blanco puro (NUNCA texto oscuro)
-  --ion-color-primary: #fb7185;
-  --ion-color-primary-rgb: 251, 113, 133;
+  // Primario: Ruby accesible con contraste blanco 6.29:1 (WCAG AA/AAA)
+  --ion-color-primary: #be123c;
+  --ion-color-primary-rgb: 190, 18, 60;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #f43f5e;
-  --ion-color-primary-tint: #fda4af;
+  --ion-color-primary-shade: #9f1239;
+  --ion-color-primary-tint: #e11d48;
 
   // Secundario: Sky / Platino de alta legibilidad
   --ion-color-secondary: #38bdf8;
