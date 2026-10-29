@@ -103,7 +103,7 @@ export class AppComponent {
     { title: 'Cuadro de Mando', url: '/dashboard', icon: 'stats-chart', adminOnly: true },
     { title: 'Inventario & Catálogo', url: '/products', icon: 'cube' },
     { title: 'Alta de Producto', url: '/product-form', icon: 'add-circle', adminOnly: true },
-    { title: 'Auditoría NoSQL en Vivo', url: '/realtime-audit', icon: 'pulse', adminOnly: true },
+    { title: 'Auditoría en Tiempo Real', url: '/realtime-audit', icon: 'pulse', adminOnly: true },
     { title: 'Gestión de Usuarios', url: '/users', icon: 'people', adminOnly: true },
     { title: 'Informes & Exportación', url: '/reports', icon: 'document-text' },
     { title: 'Manual de Usuario', url: '/help', icon: 'help-circle' }

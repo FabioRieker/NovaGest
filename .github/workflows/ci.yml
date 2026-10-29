@@ -24,11 +24,24 @@ jobs:
       - name: Instalar Dependencias
         run: npm ci
 
+      - name: Lint de Código (Bloqueante)
+        run: npm run lint
+
       - name: Ejecutar Tests Unitarios (Bloqueante)
         run: npm test -- --watch=false
 
       - name: Generar Documentación Técnica (Compodoc)
         run: npm run doc:build
+
+      - name: Verificar Cobertura de Documentación
+        run: test "$(grep -c 'data-type="entity-link"' documentation/js/menu-wc.js)" -gt 0
+
+      - name: Subir Documentación Técnica Compodoc
+        uses: actions/upload-artifact@v4
+        with:
+          name: compodoc-documentation
+          path: documentation/
+          retention-days: 7
 
   build:
     name: Compilación de Artefacto de Producción (PWA)

@@ -26,7 +26,7 @@ import { SqlRestService } from '../../core/services/sql-rest.service';
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { ExportService } from '../../core/services/export.service';
-import { RealtimeFirestoreService } from '../../core/services/nosql-realtime.service';
+import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { DataTableComponent, TableColumn, TableActionPayload } from '../../shared/components/data-table/data-table.component';
 import { Product } from '../../core/models/product.model';
 
@@ -61,16 +61,27 @@ export class ProductsPage implements OnInit {
   public authService = inject(AuthService);
   private notificationService = inject(NotificationService);
   private exportService = inject(ExportService);
-  private realtimeService = inject(RealtimeFirestoreService);
+  private realtimeService = inject(SupabaseRealtimeService);
   private router = inject(Router);
 
   public products = signal<Product[]>([]);
   public isLoading = signal(false);
   public selectedCategory = signal<string>('ALL');
   public selectedStatus = signal<string>('ALL');
+  public currentSort = signal<{ column: string; direction: 'asc' | 'desc' } | null>(null);
+  public currentPage = signal<number>(1);
+
+  public onSortChange(sort: { column: string; direction: 'asc' | 'desc' }): void {
+    this.currentSort.set(sort);
+  }
+
+  public onPageChange(page: number): void {
+    this.currentPage.set(page);
+  }
 
   // Configuración de columnas para <app-data-table>
   public tableColumns: TableColumn[] = [
+    { key: 'imageUrl', label: 'Foto', sortable: false, type: 'image', width: '70px' },
     { key: 'sku', label: 'SKU / Código', sortable: true, width: '130px' },
     { key: 'name', label: 'Nombre de Artículo', sortable: true },
     { key: 'category', label: 'Categoría', sortable: true, width: '130px' },

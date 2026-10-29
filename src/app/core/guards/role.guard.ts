@@ -5,13 +5,14 @@ import { UserRole } from '../models/user.model';
 
 /**
  * Guard para control de acceso basado en roles (RBAC).
- * Verifica que el usuario cuente con los permisos necesarios según la metadata de la ruta.
+ * Verifica que el usuario cuente con los permisos necesarios validados por Supabase.
  */
-export const roleGuard: CanActivateFn = (route, state) => {
+export const roleGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (!authService.isAuthenticatedSignal()) {
+  const isAuthenticated = await authService.ensureAuthenticated();
+  if (!isAuthenticated) {
     return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
   }
 

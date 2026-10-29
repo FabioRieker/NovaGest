@@ -8,8 +8,8 @@
       <ion-button (click)="fetchProducts()" aria-label="Actualizar listado de productos">
         <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logout()" color="light" aria-label="Cerrar sesión">
-        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">
+        <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
         Salir
       </ion-button>
     </ion-buttons>
@@ -25,11 +25,11 @@
       </div>
 
       <div class="action-buttons-group">
-        <ion-button fill="outline" color="primary" size="small" (click)="exportPdf()" aria-label="Exportar a PDF">
+        <ion-button fill="outline" color="primary" size="small" (click)="exportPdf()" [disabled]="isLoading()" [attr.aria-busy]="isLoading()" aria-label="Exportar a PDF">
           <ion-icon slot="start" name="download-outline"></ion-icon>
           PDF
         </ion-button>
-        <ion-button fill="outline" color="secondary" size="small" (click)="exportCsv()" aria-label="Exportar a CSV">
+        <ion-button fill="outline" color="secondary" size="small" (click)="exportCsv()" [disabled]="isLoading()" [attr.aria-busy]="isLoading()" aria-label="Exportar a CSV">
           <ion-icon slot="start" name="document-text-outline"></ion-icon>
           CSV
         </ion-button>
@@ -90,6 +90,8 @@
       [canDelete]="authService.isAdminSignal()"
       [canView]="true"
       (actionClick)="onTableAction($event)"
+      (sortChange)="onSortChange($event)"
+      (pageChange)="onPageChange($event)"
     ></app-data-table>
   </div>
 </ion-content>

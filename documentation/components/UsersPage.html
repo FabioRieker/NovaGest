@@ -1,0 +1,3572 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  UsersPage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/pages/users/users.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-users</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                        <div>    <code>IonHeader</code>
+</div>
+                        <div>    <code>IonToolbar</code>
+</div>
+                        <div>    <code>IonTitle</code>
+</div>
+                        <div>    <code>IonButtons</code>
+</div>
+                        <div>    <code>IonMenuButton</code>
+</div>
+                        <div>    <code>IonButton</code>
+</div>
+                        <div>    <code>IonIcon</code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                        <div>    <code>IonGrid</code>
+</div>
+                        <div>    <code>IonRow</code>
+</div>
+                        <div>    <code>IonCol</code>
+</div>
+                        <div>    <code>IonCard</code>
+</div>
+                        <div>    <code>IonCardHeader</code>
+</div>
+                        <div>    <code>IonCardTitle</code>
+</div>
+                        <div>    <code>IonCardSubtitle</code>
+</div>
+                        <div>    <code>IonCardContent</code>
+</div>
+                        <div>    <code>IonItem</code>
+</div>
+                        <div>    <code>IonInput</code>
+</div>
+                        <div>    <code>IonSelect</code>
+</div>
+                        <div>    <code>IonSelectOption</code>
+</div>
+                        <div>    <code>IonSpinner</code>
+</div>
+                        <div>    <code>IonSearchbar</code>
+</div>
+                        <div>    <code>IonSegment</code>
+</div>
+                        <div>    <code>IonSegmentButton</code>
+</div>
+                        <div>    <code>IonLabel</code>
+</div>
+                        <div>        <code><a href="../components/StatWidgetComponent.html" target="_self" >StatWidgetComponent</a></code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./users.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./users.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonToolbar</code>
+                                </li>
+                                <li>
+                                        <code>IonTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonButtons</code>
+                                </li>
+                                <li>
+                                        <code>IonMenuButton</code>
+                                </li>
+                                <li>
+                                        <code>IonButton</code>
+                                </li>
+                                <li>
+                                        <code>IonIcon</code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                                <li>
+                                        <code>IonGrid</code>
+                                </li>
+                                <li>
+                                        <code>IonRow</code>
+                                </li>
+                                <li>
+                                        <code>IonCol</code>
+                                </li>
+                                <li>
+                                        <code>IonCard</code>
+                                </li>
+                                <li>
+                                        <code>IonCardHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonCardTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonCardSubtitle</code>
+                                </li>
+                                <li>
+                                        <code>IonCardContent</code>
+                                </li>
+                                <li>
+                                        <code>IonItem</code>
+                                </li>
+                                <li>
+                                        <code>IonInput</code>
+                                </li>
+                                <li>
+                                        <code>IonSelect</code>
+                                </li>
+                                <li>
+                                        <code>IonSelectOption</code>
+                                </li>
+                                <li>
+                                        <code>IonSpinner</code>
+                                </li>
+                                <li>
+                                        <code>IonSearchbar</code>
+                                </li>
+                                <li>
+                                        <code>IonSegment</code>
+                                </li>
+                                <li>
+                                        <code>IonSegmentButton</code>
+                                </li>
+                                <li>
+                                        <code>IonLabel</code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/StatWidgetComponent.html" target="_self" >StatWidgetComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#adminCount" >adminCount</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#alertCtrl" >alertCtrl</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#departmentsCount" >departmentsCount</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#filteredUsers" >filteredUsers</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#filterRole" >filterRole</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isSubmitting" >isSubmitting</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#notificationService" >notificationService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#passwordStrength" >passwordStrength</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#realtimeService" >realtimeService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#searchQuery" >searchQuery</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#selectedTab" >selectedTab</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#showConfirmPassword" >showConfirmPassword</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#showPassword" >showPassword</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#standardCount" >standardCount</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#totalUsersCount" >totalUsersCount</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#userForm" >userForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#users" >users</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#confirmDelete" >confirmDelete</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#deleteUser" >deleteUser</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#evaluatePasswordStrength" >evaluatePasswordStrength</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#loadUsers" >loadUsers</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#onStatWidgetClick" >onStatWidgetClick</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#onTabChange" >onTabChange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#selectRole" >selectRole</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#toggleConfirmPassword" >toggleConfirmPassword</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#togglePassword" >togglePassword</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/pages/users/users.page.ts:160</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmDelete"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>confirmDelete</b></span>
+                        <a href="#confirmDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>confirmDelete(user: <a href="../interfaces/User.html" target="_self">User</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="311"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:311</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteUser"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>deleteUser</b></span>
+                        <a href="#deleteUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteUser(user: <a href="../interfaces/User.html" target="_self">User</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="334"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:334</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="evaluatePasswordStrength"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>evaluatePasswordStrength</b></span>
+                        <a href="#evaluatePasswordStrength"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>evaluatePasswordStrength(pass: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>pass</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadUsers"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>loadUsers</b></span>
+                        <a href="#loadUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadUsers()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:206</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:202</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onStatWidgetClick"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>onStatWidgetClick</b></span>
+                        <a href="#onStatWidgetClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onStatWidgetClick(role: "ALL" | "admin" | "user")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>role</td>
+                                            <td>
+                                                        <code>&quot;ALL&quot; | &quot;admin&quot; | &quot;user&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="261"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:261</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onTabChange"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>onTabChange</b></span>
+                        <a href="#onTabChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onTabChange(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="254"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:254</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectRole"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>selectRole</b></span>
+                        <a href="#selectRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>selectRole(role: <a href="../miscellaneous/typealiases.html#UserRole" target="_self">UserRole</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="250"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:250</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>role</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#UserRole" target="_self" >UserRole</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleConfirmPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>toggleConfirmPassword</b></span>
+                        <a href="#toggleConfirmPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toggleConfirmPassword()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:246</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="togglePassword"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>togglePassword</b></span>
+                        <a href="#togglePassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>togglePassword()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="242"
+                                    class="link-to-prism">src/app/pages/users/users.page.ts:242</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="adminCount"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>adminCount</b></span>
+                        <a href="#adminCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.users().filter(u &#x3D;&gt; u.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;).length)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/app/pages/users/users.page.ts:133</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="alertCtrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>alertCtrl</b></span>
+                        <a href="#alertCtrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AlertController)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/pages/users/users.page.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/pages/users/users.page.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="departmentsCount"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>departmentsCount</b></span>
+                        <a href="#departmentsCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const deps &#x3D; new Set(this.users().map(u &#x3D;&gt; u.department).filter(Boolean));
+    return deps.size;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/pages/users/users.page.ts:135</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/pages/users/users.page.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredUsers"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>filteredUsers</b></span>
+                        <a href="#filteredUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const q &#x3D; this.searchQuery().trim().toLowerCase();
+    const role &#x3D; this.filterRole();
+
+    return this.users().filter(u &#x3D;&gt; {
+      const matchRole &#x3D; role &#x3D;&#x3D;&#x3D; &#x27;ALL&#x27; || u.role &#x3D;&#x3D;&#x3D; role;
+      const matchQuery &#x3D; !q ||
+        u.name.toLowerCase().includes(q) ||
+        u.email.toLowerCase().includes(q) ||
+        (u.department &amp;&amp; u.department.toLowerCase().includes(q));
+      return matchRole &amp;&amp; matchQuery;
+    });
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/pages/users/users.page.ts:141</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterRole"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>filterRole</b></span>
+                        <a href="#filterRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;&#x27;ALL&#x27; | &#x27;admin&#x27; | &#x27;user&#x27;&gt;(&#x27;ALL&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/app/pages/users/users.page.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/pages/users/users.page.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitting"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isSubmitting</b></span>
+                        <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/pages/users/users.page.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="notificationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>notificationService</b></span>
+                        <a href="#notificationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(NotificationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/pages/users/users.page.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="passwordStrength"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>passwordStrength</b></span>
+                        <a href="#passwordStrength"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;{ score: number; label: string; color: string }&gt;({
+    score: 0,
+    label: &#x27;Sin ingresar&#x27;,
+    color: &#x27;medium&#x27;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/pages/users/users.page.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="realtimeService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>realtimeService</b></span>
+                        <a href="#realtimeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseRealtimeService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/pages/users/users.page.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchQuery"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>searchQuery</b></span>
+                        <a href="#searchQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/pages/users/users.page.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedTab"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>selectedTab</b></span>
+                        <a href="#selectedTab"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;&#x27;create&#x27; | &#x27;list&#x27;&gt;(&#x27;create&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/pages/users/users.page.ts:126</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showConfirmPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showConfirmPassword</b></span>
+                        <a href="#showConfirmPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/pages/users/users.page.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>showPassword</b></span>
+                        <a href="#showPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/pages/users/users.page.ts:124</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="standardCount"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>standardCount</b></span>
+                        <a href="#standardCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.users().filter(u &#x3D;&gt; u.role &#x3D;&#x3D;&#x3D; &#x27;user&#x27;).length)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/pages/users/users.page.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalUsersCount"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>totalUsersCount</b></span>
+                        <a href="#totalUsersCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.users().length)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/pages/users/users.page.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userForm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>userForm</b></span>
+                        <a href="#userForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/pages/users/users.page.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="users"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>users</b></span>
+                        <a href="#users"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;User[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/pages/users/users.page.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal, computed, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from &#x27;@angular/forms&#x27;;
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonMenuButton,
+  IonButton,
+  IonIcon,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonItem,
+  IonInput,
+  IonSelect,
+  IonSelectOption,
+  IonSpinner,
+  IonSearchbar,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel,
+  AlertController
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import {
+  personAddOutline,
+  personAddSharp,
+  peopleOutline,
+  peopleSharp,
+  shieldCheckmarkOutline,
+  shieldCheckmarkSharp,
+  personOutline,
+  personSharp,
+  mailOutline,
+  lockClosedOutline,
+  callOutline,
+  businessOutline,
+  trashOutline,
+  checkmarkCircleOutline,
+  alertCircleOutline,
+  refreshOutline,
+  eyeOutline,
+  eyeOffOutline,
+  keyOutline,
+  filterOutline
+} from &#x27;ionicons/icons&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { NotificationService } from &#x27;../../core/services/notification.service&#x27;;
+import { SupabaseRealtimeService } from &#x27;../../core/services/supabase-realtime.service&#x27;;
+import { User, UserRole } from &#x27;../../core/models/user.model&#x27;;
+import { StatWidgetComponent } from &#x27;../../shared/components/stat-widget/stat-widget.component&#x27;;
+
+function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  const password &#x3D; control.get(&#x27;password&#x27;);
+  const confirmPassword &#x3D; control.get(&#x27;confirmPassword&#x27;);
+  if (password &amp;&amp; confirmPassword &amp;&amp; password.value !&#x3D;&#x3D; confirmPassword.value) {
+    confirmPassword.setErrors({ passwordMismatch: true });
+    return { passwordMismatch: true };
+  }
+  return null;
+}
+
+@Component({
+  selector: &#x27;app-users&#x27;,
+  templateUrl: &#x27;./users.page.html&#x27;,
+  styleUrls: [&#x27;./users.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonMenuButton,
+    IonButton,
+    IonIcon,
+    IonContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonItem,
+    IonInput,
+    IonSelect,
+    IonSelectOption,
+    IonSpinner,
+    IonSearchbar,
+    IonSegment,
+    IonSegmentButton,
+    IonLabel,
+    StatWidgetComponent
+  ]
+})
+export class UsersPage implements OnInit {
+  private fb &#x3D; inject(FormBuilder);
+  public authService &#x3D; inject(AuthService);
+  private notificationService &#x3D; inject(NotificationService);
+  private realtimeService &#x3D; inject(SupabaseRealtimeService);
+  private alertCtrl &#x3D; inject(AlertController);
+
+  public userForm: FormGroup;
+  public users &#x3D; signal&lt;User[]&gt;([]);
+  public isLoading &#x3D; signal(false);
+
+  public onStatWidgetClick(role: &#x27;ALL&#x27; | &#x27;admin&#x27; | &#x27;user&#x27;): void {
+    this.selectedTab.set(&#x27;list&#x27;);
+    this.filterRole.set(role);
+  }
+  public isSubmitting &#x3D; signal(false);
+  public showPassword &#x3D; signal(false);
+  public showConfirmPassword &#x3D; signal(false);
+  public selectedTab &#x3D; signal&lt;&#x27;create&#x27; | &#x27;list&#x27;&gt;(&#x27;create&#x27;);
+
+  public searchQuery &#x3D; signal(&#x27;&#x27;);
+  public filterRole &#x3D; signal&lt;&#x27;ALL&#x27; | &#x27;admin&#x27; | &#x27;user&#x27;&gt;(&#x27;ALL&#x27;);
+
+  // Métricas calculadas
+  public totalUsersCount &#x3D; computed(() &#x3D;&gt; this.users().length);
+  public adminCount &#x3D; computed(() &#x3D;&gt; this.users().filter(u &#x3D;&gt; u.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;).length);
+  public standardCount &#x3D; computed(() &#x3D;&gt; this.users().filter(u &#x3D;&gt; u.role &#x3D;&#x3D;&#x3D; &#x27;user&#x27;).length);
+  public departmentsCount &#x3D; computed(() &#x3D;&gt; {
+    const deps &#x3D; new Set(this.users().map(u &#x3D;&gt; u.department).filter(Boolean));
+    return deps.size;
+  });
+
+  // Lista filtrada de usuarios
+  public filteredUsers &#x3D; computed(() &#x3D;&gt; {
+    const q &#x3D; this.searchQuery().trim().toLowerCase();
+    const role &#x3D; this.filterRole();
+
+    return this.users().filter(u &#x3D;&gt; {
+      const matchRole &#x3D; role &#x3D;&#x3D;&#x3D; &#x27;ALL&#x27; || u.role &#x3D;&#x3D;&#x3D; role;
+      const matchQuery &#x3D; !q ||
+        u.name.toLowerCase().includes(q) ||
+        u.email.toLowerCase().includes(q) ||
+        (u.department &amp;&amp; u.department.toLowerCase().includes(q));
+      return matchRole &amp;&amp; matchQuery;
+    });
+  });
+
+  // Medidor dinámico de seguridad de contraseña
+  public passwordStrength &#x3D; signal&lt;{ score: number; label: string; color: string }&gt;({
+    score: 0,
+    label: &#x27;Sin ingresar&#x27;,
+    color: &#x27;medium&#x27;
+  });
+
+  constructor() {
+    addIcons({
+      personAddOutline,
+      personAddSharp,
+      peopleOutline,
+      peopleSharp,
+      shieldCheckmarkOutline,
+      shieldCheckmarkSharp,
+      personOutline,
+      personSharp,
+      mailOutline,
+      lockClosedOutline,
+      callOutline,
+      businessOutline,
+      trashOutline,
+      checkmarkCircleOutline,
+      alertCircleOutline,
+      refreshOutline,
+      eyeOutline,
+      eyeOffOutline,
+      keyOutline,
+      filterOutline
+    });
+
+    this.userForm &#x3D; this.fb.group({
+      name: [&#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
+      email: [&#x27;&#x27;, [Validators.required, Validators.email]],
+      role: [&#x27;user&#x27;, [Validators.required]],
+      department: [&#x27;Operaciones &amp; Logística&#x27;, [Validators.required]],
+      phone: [&#x27;&#x27;],
+      password: [&#x27;&#x27;, [Validators.required, Validators.minLength(6)]],
+      confirmPassword: [&#x27;&#x27;, [Validators.required]]
+    }, { validators: passwordMatchValidator });
+
+    // Escuchar cambios de contraseña para evaluar fuerza
+    this.userForm.get(&#x27;password&#x27;)?.valueChanges.subscribe(val &#x3D;&gt; {
+      this.evaluatePasswordStrength(val || &#x27;&#x27;);
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  public loadUsers(): void {
+    this.isLoading.set(true);
+    this.authService.getUsers().subscribe({
+      next: (data) &#x3D;&gt; {
+        this.users.set(data);
+        this.isLoading.set(false);
+      },
+      error: (err) &#x3D;&gt; {
+        console.error(&#x27;Error cargando usuarios:&#x27;, err);
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  private evaluatePasswordStrength(pass: string): void {
+    if (!pass) {
+      this.passwordStrength.set({ score: 0, label: &#x27;Sin ingresar&#x27;, color: &#x27;medium&#x27; });
+      return;
+    }
+
+    let score &#x3D; 0;
+    if (pass.length &gt;&#x3D; 6) score++;
+    if (pass.length &gt;&#x3D; 8) score++;
+    if (/[A-Z]/.test(pass)) score++;
+    if (/[0-9]/.test(pass)) score++;
+    if (/[^A-Za-z0-9]/.test(pass)) score++;
+
+    if (score &lt;&#x3D; 2) {
+      this.passwordStrength.set({ score: 25, label: &#x27;Débil&#x27;, color: &#x27;danger&#x27; });
+    } else if (score &lt;&#x3D; 3) {
+      this.passwordStrength.set({ score: 60, label: &#x27;Media&#x27;, color: &#x27;warning&#x27; });
+    } else {
+      this.passwordStrength.set({ score: 100, label: &#x27;Robusta&#x27;, color: &#x27;success&#x27; });
+    }
+  }
+
+  public togglePassword(): void {
+    this.showPassword.update(v &#x3D;&gt; !v);
+  }
+
+  public toggleConfirmPassword(): void {
+    this.showConfirmPassword.update(v &#x3D;&gt; !v);
+  }
+
+  public selectRole(role: UserRole): void {
+    this.userForm.patchValue({ role });
+  }
+
+  public onTabChange(event: any): void {
+    const val &#x3D; event?.detail?.value;
+    if (val &#x3D;&#x3D;&#x3D; &#x27;create&#x27; || val &#x3D;&#x3D;&#x3D; &#x27;list&#x27;) {
+      this.selectedTab.set(val);
+    }
+  }
+
+  public onSubmit(): void {
+    if (this.userForm.invalid) {
+      this.userForm.markAllAsTouched();
+      setTimeout(() &#x3D;&gt; {
+        const firstInvalid &#x3D; document.querySelector(&#x27;.cyber-input-item.ion-invalid input, input.ng-invalid, [aria-invalid&#x3D;&quot;true&quot;]&#x27;);
+        (firstInvalid as HTMLElement)?.focus?.();
+      }, 50);
+      return;
+    }
+
+    this.isSubmitting.set(true);
+    const formVal &#x3D; this.userForm.value;
+
+    this.authService.createUser({
+      name: formVal.name,
+      email: formVal.email,
+      password: formVal.password,
+      role: formVal.role,
+      department: formVal.department,
+      phone: formVal.phone
+    }).subscribe({
+      next: (createdUser) &#x3D;&gt; {
+        this.isSubmitting.set(false);
+        this.notificationService.showToast(&#x60;¡Cuenta para ${createdUser.name} creada exitosamente!&#x60;, &#x27;success&#x27;);
+
+        // Registro de auditoría Supabase Realtime en vivo
+        this.realtimeService.logActivity(
+          &#x27;CREATE&#x27;,
+          &#x27;AUTH&#x27;,
+          &#x60;Alta de usuario: ${createdUser.name} (${createdUser.email}) con rol [${createdUser.role.toUpperCase()}]&#x60;,
+          &#x27;info&#x27;
+        );
+
+        this.userForm.reset({
+          role: &#x27;user&#x27;,
+          department: &#x27;Operaciones &amp; Logística&#x27;
+        });
+        this.passwordStrength.set({ score: 0, label: &#x27;Sin ingresar&#x27;, color: &#x27;medium&#x27; });
+
+        this.loadUsers();
+        this.selectedTab.set(&#x27;list&#x27;);
+      },
+      error: (err) &#x3D;&gt; {
+        this.isSubmitting.set(false);
+        const msg &#x3D; err.message || &#x27;No se pudo crear el usuario.&#x27;;
+        this.notificationService.showToast(msg, &#x27;danger&#x27;);
+      }
+    });
+  }
+
+  public async confirmDelete(user: User): Promise&lt;void&gt; {
+    const alert &#x3D; await this.alertCtrl.create({
+      header: &#x27;Confirmar Eliminación&#x27;,
+      subHeader: &#x60;¿Desea eliminar la cuenta de ${user.name}?&#x60;,
+      message: &#x27;Esta acción revocará de forma permanente el acceso al sistema.&#x27;,
+      buttons: [
+        {
+          text: &#x27;Cancelar&#x27;,
+          role: &#x27;cancel&#x27;
+        },
+        {
+          text: &#x27;Eliminar&#x27;,
+          role: &#x27;destructive&#x27;,
+          handler: () &#x3D;&gt; {
+            this.deleteUser(user);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  private deleteUser(user: User): void {
+    this.authService.deleteUser(user.id).subscribe({
+      next: () &#x3D;&gt; {
+        this.notificationService.showToast(&#x60;Cuenta de ${user.name} eliminada.&#x60;, &#x27;success&#x27;);
+        this.realtimeService.logActivity(
+          &#x27;DELETE&#x27;,
+          &#x27;AUTH&#x27;,
+          &#x60;Eliminación de cuenta de usuario: ${user.email}&#x60;,
+          &#x27;warning&#x27;
+        );
+        this.loadUsers();
+      },
+      error: (err) &#x3D;&gt; {
+        const msg &#x3D; err.message || &#x27;Error al eliminar el usuario.&#x27;;
+        this.notificationService.showToast(msg, &#x27;danger&#x27;);
+      }
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot;&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;ion-menu-button&gt;&lt;/ion-menu-button&gt;
+    &lt;/ion-buttons&gt;
+    &lt;ion-title&gt;Gestión de Cuentas &amp; Usuarios&lt;/ion-title&gt;
+    &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
+      &lt;ion-button (click)&#x3D;&quot;loadUsers()&quot; aria-label&#x3D;&quot;Actualizar lista de usuarios&quot;&gt;
+        &lt;ion-icon slot&#x3D;&quot;icon-only&quot; name&#x3D;&quot;refresh-outline&quot;&gt;&lt;/ion-icon&gt;
+      &lt;/ion-button&gt;
+    &lt;/ion-buttons&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;users-content&quot;&gt;
+  &lt;div class&#x3D;&quot;users-container&quot;&gt;
+    &lt;!-- Breadcrumb &amp; Cabecera --&gt;
+    &lt;div class&#x3D;&quot;users-header-bar&quot;&gt;
+      &lt;div&gt;
+        &lt;div class&#x3D;&quot;breadcrumb-tag&quot;&gt;SISTEMA / SEGURIDAD &amp; RBAC&lt;/div&gt;
+        &lt;h1 class&#x3D;&quot;page-title&quot;&gt;Administración de Cuentas de Usuario&lt;/h1&gt;
+        &lt;p class&#x3D;&quot;page-subtitle&quot;&gt;Control de identidades, asignación de roles y aprovisionamiento de accesos&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Segment Selector de Pestañas --&gt;
+      &lt;ion-segment
+        [value]&#x3D;&quot;selectedTab()&quot;
+        (ionChange)&#x3D;&quot;onTabChange($event)&quot;
+        class&#x3D;&quot;cyber-segment&quot;
+      &gt;
+        &lt;ion-segment-button value&#x3D;&quot;create&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;person-add-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-label&gt;Crear Cuenta&lt;/ion-label&gt;
+        &lt;/ion-segment-button&gt;
+        &lt;ion-segment-button value&#x3D;&quot;list&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;people-outline&quot;&gt;&lt;/ion-icon&gt;
+          &lt;ion-label&gt;Directorio ({{ totalUsersCount() }})&lt;/ion-label&gt;
+        &lt;/ion-segment-button&gt;
+      &lt;/ion-segment&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Widgets KPI de Resumen --&gt;
+    &lt;ion-grid class&#x3D;&quot;stats-grid&quot;&gt;
+      &lt;ion-row&gt;
+        &lt;ion-col size&#x3D;&quot;12&quot; size-sm&#x3D;&quot;6&quot; size-lg&#x3D;&quot;3&quot;&gt;
+          &lt;app-stat-widget
+            title&#x3D;&quot;Total Usuarios&quot;
+            [value]&#x3D;&quot;totalUsersCount()&quot;
+            subtitle&#x3D;&quot;Cuentas activas en sistema&quot;
+            icon&#x3D;&quot;people-outline&quot;
+            color&#x3D;&quot;primary&quot;
+            [clickable]&#x3D;&quot;true&quot;
+            (widgetClick)&#x3D;&quot;onStatWidgetClick(&#x27;ALL&#x27;)&quot;
+          &gt;&lt;/app-stat-widget&gt;
+        &lt;/ion-col&gt;
+
+        &lt;ion-col size&#x3D;&quot;12&quot; size-sm&#x3D;&quot;6&quot; size-lg&#x3D;&quot;3&quot;&gt;
+          &lt;app-stat-widget
+            title&#x3D;&quot;Administradores&quot;
+            [value]&#x3D;&quot;adminCount()&quot;
+            subtitle&#x3D;&quot;Privilegios totales RBAC&quot;
+            icon&#x3D;&quot;shield-checkmark-outline&quot;
+            color&#x3D;&quot;danger&quot;
+            [clickable]&#x3D;&quot;true&quot;
+            (widgetClick)&#x3D;&quot;onStatWidgetClick(&#x27;admin&#x27;)&quot;
+          &gt;&lt;/app-stat-widget&gt;
+        &lt;/ion-col&gt;
+
+        &lt;ion-col size&#x3D;&quot;12&quot; size-sm&#x3D;&quot;6&quot; size-lg&#x3D;&quot;3&quot;&gt;
+          &lt;app-stat-widget
+            title&#x3D;&quot;Usuarios Estándar&quot;
+            [value]&#x3D;&quot;standardCount()&quot;
+            subtitle&#x3D;&quot;Operaciones y reportes&quot;
+            icon&#x3D;&quot;person-outline&quot;
+            color&#x3D;&quot;secondary&quot;
+            [clickable]&#x3D;&quot;true&quot;
+            (widgetClick)&#x3D;&quot;onStatWidgetClick(&#x27;user&#x27;)&quot;
+          &gt;&lt;/app-stat-widget&gt;
+        &lt;/ion-col&gt;
+
+        &lt;ion-col size&#x3D;&quot;12&quot; size-sm&#x3D;&quot;6&quot; size-lg&#x3D;&quot;3&quot;&gt;
+          &lt;app-stat-widget
+            title&#x3D;&quot;Departamentos&quot;
+            [value]&#x3D;&quot;departmentsCount()&quot;
+            subtitle&#x3D;&quot;Áreas corporativas activas&quot;
+            icon&#x3D;&quot;business-outline&quot;
+            color&#x3D;&quot;success&quot;
+            [clickable]&#x3D;&quot;false&quot;
+          &gt;&lt;/app-stat-widget&gt;
+        &lt;/ion-col&gt;
+      &lt;/ion-row&gt;
+    &lt;/ion-grid&gt;
+
+    &lt;!-- VISTA 1: CREAR CUENTA DE USUARIO --&gt;
+    @if (selectedTab() &#x3D;&#x3D;&#x3D; &#x27;create&#x27;) {
+      &lt;div class&#x3D;&quot;create-card-wrapper&quot;&gt;
+        &lt;ion-card class&#x3D;&quot;cyber-form-card&quot;&gt;
+          &lt;ion-card-header&gt;
+            &lt;div class&#x3D;&quot;card-badge&quot;&gt;APROVISIONAMIENTO RÁPIDO&lt;/div&gt;
+            &lt;ion-card-title&gt;Alta de Nueva Cuenta de Usuario&lt;/ion-card-title&gt;
+            &lt;ion-card-subtitle&gt;
+              Registre un nuevo colaborador. El usuario podrá iniciar sesión inmediatamente con sus credenciales.
+            &lt;/ion-card-subtitle&gt;
+          &lt;/ion-card-header&gt;
+
+          &lt;ion-card-content&gt;
+            &lt;form [formGroup]&#x3D;&quot;userForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; novalidate&gt;
+              &lt;ion-grid&gt;
+                &lt;ion-row&gt;
+                  &lt;!-- Nombre y Apellidos --&gt;
+                  &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot;&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                      &lt;ion-item lines&#x3D;&quot;none&quot; class&#x3D;&quot;cyber-input-item&quot;&gt;
+                        &lt;ion-icon name&#x3D;&quot;person-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;ion-input
+                          label&#x3D;&quot;Nombre Completo&quot;
+                          labelPlacement&#x3D;&quot;floating&quot;
+                          placeholder&#x3D;&quot;Ej. Carmen Navarro Sánchez&quot;
+                          formControlName&#x3D;&quot;name&quot;
+                          autocomplete&#x3D;&quot;name&quot;
+                          [attr.aria-invalid]&#x3D;&quot;userForm.get(&#x27;name&#x27;)?.touched &amp;&amp; userForm.get(&#x27;name&#x27;)?.invalid&quot;
+                        &gt;&lt;/ion-input&gt;
+                      &lt;/ion-item&gt;
+                      @if (userForm.get(&#x27;name&#x27;)?.touched &amp;&amp; userForm.get(&#x27;name&#x27;)?.invalid) {
+                        &lt;span class&#x3D;&quot;field-error&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;El nombre debe tener al menos 3 caracteres.&lt;/span&gt;
+                      }
+                    &lt;/div&gt;
+                  &lt;/ion-col&gt;
+
+                  &lt;!-- Correo Electrónico --&gt;
+                  &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot;&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                      &lt;ion-item lines&#x3D;&quot;none&quot; class&#x3D;&quot;cyber-input-item&quot;&gt;
+                        &lt;ion-icon name&#x3D;&quot;mail-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;ion-input
+                          label&#x3D;&quot;Correo Corporativo&quot;
+                          labelPlacement&#x3D;&quot;floating&quot;
+                          type&#x3D;&quot;email&quot;
+                          placeholder&#x3D;&quot;usuario@empresa.com&quot;
+                          formControlName&#x3D;&quot;email&quot;
+                          autocomplete&#x3D;&quot;email&quot;
+                          [attr.aria-invalid]&#x3D;&quot;userForm.get(&#x27;email&#x27;)?.touched &amp;&amp; userForm.get(&#x27;email&#x27;)?.invalid&quot;
+                        &gt;&lt;/ion-input&gt;
+                      &lt;/ion-item&gt;
+                      @if (userForm.get(&#x27;email&#x27;)?.touched &amp;&amp; userForm.get(&#x27;email&#x27;)?.invalid) {
+                        &lt;span class&#x3D;&quot;field-error&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;Ingrese un correo electrónico válido.&lt;/span&gt;
+                      }
+                    &lt;/div&gt;
+                  &lt;/ion-col&gt;
+
+                  &lt;!-- Departamento --&gt;
+                  &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot;&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                      &lt;ion-item lines&#x3D;&quot;none&quot; class&#x3D;&quot;cyber-input-item&quot;&gt;
+                        &lt;ion-icon name&#x3D;&quot;business-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;ion-select
+                          label&#x3D;&quot;Departamento&quot;
+                          labelPlacement&#x3D;&quot;floating&quot;
+                          formControlName&#x3D;&quot;department&quot;
+                          interface&#x3D;&quot;popover&quot;
+                        &gt;
+                          &lt;ion-select-option value&#x3D;&quot;Dirección General &amp; TI&quot;&gt;Dirección General &amp; TI&lt;/ion-select-option&gt;
+                          &lt;ion-select-option value&#x3D;&quot;Operaciones &amp; Logística&quot;&gt;Operaciones &amp; Logística&lt;/ion-select-option&gt;
+                          &lt;ion-select-option value&#x3D;&quot;Finanzas &amp; Contabilidad&quot;&gt;Finanzas &amp; Contabilidad&lt;/ion-select-option&gt;
+                          &lt;ion-select-option value&#x3D;&quot;Ventas &amp; Fidelización&quot;&gt;Ventas &amp; Fidelización&lt;/ion-select-option&gt;
+                          &lt;ion-select-option value&#x3D;&quot;Almacén Central &amp; Stock&quot;&gt;Almacén Central &amp; Stock&lt;/ion-select-option&gt;
+                        &lt;/ion-select&gt;
+                      &lt;/ion-item&gt;
+                    &lt;/div&gt;
+                  &lt;/ion-col&gt;
+
+                  &lt;!-- Teléfono --&gt;
+                  &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot;&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                      &lt;ion-item lines&#x3D;&quot;none&quot; class&#x3D;&quot;cyber-input-item&quot;&gt;
+                        &lt;ion-icon name&#x3D;&quot;call-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;ion-input
+                          label&#x3D;&quot;Teléfono Móvil (Opcional)&quot;
+                          labelPlacement&#x3D;&quot;floating&quot;
+                          placeholder&#x3D;&quot;+34 600 000 000&quot;
+                          formControlName&#x3D;&quot;phone&quot;
+                          type&#x3D;&quot;tel&quot;
+                        &gt;&lt;/ion-input&gt;
+                      &lt;/ion-item&gt;
+                    &lt;/div&gt;
+                  &lt;/ion-col&gt;
+
+                  &lt;!-- Selector Visual de Rol RBAC --&gt;
+                  &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                    &lt;label class&#x3D;&quot;section-label&quot;&gt;Rol y Privilegios en NovaGest (RBAC):&lt;/label&gt;
+                    &lt;div class&#x3D;&quot;roles-grid&quot;&gt;
+                      &lt;!-- Tarjeta Rol Usuario Estándar --&gt;
+                      &lt;div
+                        class&#x3D;&quot;role-card&quot;
+                        [class.active]&#x3D;&quot;userForm.get(&#x27;role&#x27;)?.value &#x3D;&#x3D;&#x3D; &#x27;user&#x27;&quot;
+                        (click)&#x3D;&quot;selectRole(&#x27;user&#x27;)&quot;
+                        tabindex&#x3D;&quot;0&quot;
+                        role&#x3D;&quot;button&quot;
+                      &gt;
+                        &lt;div class&#x3D;&quot;role-card-header&quot;&gt;
+                          &lt;ion-icon name&#x3D;&quot;person-outline&quot; class&#x3D;&quot;role-icon&quot;&gt;&lt;/ion-icon&gt;
+                          &lt;div&gt;
+                            &lt;h4 class&#x3D;&quot;role-title&quot;&gt;Usuario Estándar&lt;/h4&gt;
+                            &lt;span class&#x3D;&quot;role-tag standard-tag&quot;&gt;Acceso Operativo&lt;/span&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;p class&#x3D;&quot;role-desc&quot;&gt;
+                          Consulta de catálogo, filtros avanzados, alertas de stock e informes descargables en PDF/CSV.
+                        &lt;/p&gt;
+                      &lt;/div&gt;
+
+                      &lt;!-- Tarjeta Rol Administrador --&gt;
+                      &lt;div
+                        class&#x3D;&quot;role-card&quot;
+                        [class.active]&#x3D;&quot;userForm.get(&#x27;role&#x27;)?.value &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;&quot;
+                        (click)&#x3D;&quot;selectRole(&#x27;admin&#x27;)&quot;
+                        tabindex&#x3D;&quot;0&quot;
+                        role&#x3D;&quot;button&quot;
+                      &gt;
+                        &lt;div class&#x3D;&quot;role-card-header&quot;&gt;
+                          &lt;ion-icon name&#x3D;&quot;shield-checkmark-outline&quot; class&#x3D;&quot;role-icon admin-icon&quot;&gt;&lt;/ion-icon&gt;
+                          &lt;div&gt;
+                            &lt;h4 class&#x3D;&quot;role-title&quot;&gt;Administrador&lt;/h4&gt;
+                            &lt;span class&#x3D;&quot;role-tag admin-tag&quot;&gt;Control Total&lt;/span&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;p class&#x3D;&quot;role-desc&quot;&gt;
+                          Acceso a Cuadro de Mando Ejecutivo, alta/edición de catálogo, auditoría Supabase Realtime en vivo y gestión de usuarios.
+                        &lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/ion-col&gt;
+
+                  &lt;!-- Contraseña --&gt;
+                  &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot;&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                      &lt;ion-item lines&#x3D;&quot;none&quot; class&#x3D;&quot;cyber-input-item&quot;&gt;
+                        &lt;ion-icon name&#x3D;&quot;lock-closed-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;ion-input
+                          label&#x3D;&quot;Contraseña&quot;
+                          labelPlacement&#x3D;&quot;floating&quot;
+                          [type]&#x3D;&quot;showPassword() ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+                          placeholder&#x3D;&quot;Mínimo 6 caracteres&quot;
+                          formControlName&#x3D;&quot;password&quot;
+                          autocomplete&#x3D;&quot;new-password&quot;
+                          [attr.aria-invalid]&#x3D;&quot;userForm.get(&#x27;password&#x27;)?.touched &amp;&amp; userForm.get(&#x27;password&#x27;)?.invalid&quot;
+                        &gt;&lt;/ion-input&gt;
+                        &lt;ion-button fill&#x3D;&quot;clear&quot; slot&#x3D;&quot;end&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;togglePassword()&quot;&gt;
+                          &lt;ion-icon slot&#x3D;&quot;icon-only&quot; [name]&#x3D;&quot;showPassword() ? &#x27;eye-off-outline&#x27; : &#x27;eye-outline&#x27;&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;/ion-button&gt;
+                      &lt;/ion-item&gt;
+
+                      &lt;!-- Medidor de Fuerza de Contraseña --&gt;
+                      &lt;div class&#x3D;&quot;strength-meter&quot;&gt;
+                        &lt;div class&#x3D;&quot;meter-bar&quot;&gt;
+                          &lt;div
+                            class&#x3D;&quot;meter-fill&quot;
+                            [style.width.%]&#x3D;&quot;passwordStrength().score&quot;
+                            [style.background]&#x3D;&quot;passwordStrength().color &#x3D;&#x3D;&#x3D; &#x27;success&#x27; ? &#x27;#10b981&#x27; : (passwordStrength().color &#x3D;&#x3D;&#x3D; &#x27;warning&#x27; ? &#x27;#f59e0b&#x27; : &#x27;#ef4444&#x27;)&quot;
+                          &gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class&#x3D;&quot;meter-meta&quot;&gt;
+                          &lt;span&gt;Seguridad:&lt;/span&gt;
+                          &lt;strong [style.color]&#x3D;&quot;passwordStrength().color &#x3D;&#x3D;&#x3D; &#x27;success&#x27; ? &#x27;#10b981&#x27; : (passwordStrength().color &#x3D;&#x3D;&#x3D; &#x27;warning&#x27; ? &#x27;#f59e0b&#x27; : &#x27;#ef4444&#x27;)&quot;&gt;
+                            {{ passwordStrength().label }}
+                          &lt;/strong&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/ion-col&gt;
+
+                  &lt;!-- Confirmar Contraseña --&gt;
+                  &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot;&gt;
+                    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+                      &lt;ion-item lines&#x3D;&quot;none&quot; class&#x3D;&quot;cyber-input-item&quot;&gt;
+                        &lt;ion-icon name&#x3D;&quot;key-outline&quot; slot&#x3D;&quot;start&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;ion-input
+                          label&#x3D;&quot;Confirmar Contraseña&quot;
+                          labelPlacement&#x3D;&quot;floating&quot;
+                          [type]&#x3D;&quot;showConfirmPassword() ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+                          placeholder&#x3D;&quot;Repita la contraseña&quot;
+                          formControlName&#x3D;&quot;confirmPassword&quot;
+                          autocomplete&#x3D;&quot;new-password&quot;
+                          [attr.aria-invalid]&#x3D;&quot;userForm.get(&#x27;confirmPassword&#x27;)?.touched &amp;&amp; userForm.get(&#x27;confirmPassword&#x27;)?.invalid&quot;
+                        &gt;&lt;/ion-input&gt;
+                        &lt;ion-button fill&#x3D;&quot;clear&quot; slot&#x3D;&quot;end&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;toggleConfirmPassword()&quot;&gt;
+                          &lt;ion-icon slot&#x3D;&quot;icon-only&quot; [name]&#x3D;&quot;showConfirmPassword() ? &#x27;eye-off-outline&#x27; : &#x27;eye-outline&#x27;&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;/ion-button&gt;
+                      &lt;/ion-item&gt;
+                      @if (userForm.get(&#x27;confirmPassword&#x27;)?.touched &amp;&amp; userForm.get(&#x27;confirmPassword&#x27;)?.hasError(&#x27;passwordMismatch&#x27;)) {
+                        &lt;span class&#x3D;&quot;field-error&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;Las contraseñas no coinciden.&lt;/span&gt;
+                      }
+                    &lt;/div&gt;
+                  &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+              &lt;/ion-grid&gt;
+
+              &lt;!-- Botón de Envío --&gt;
+              &lt;div class&#x3D;&quot;form-actions-row&quot;&gt;
+                &lt;ion-button
+                  type&#x3D;&quot;submit&quot;
+                  class&#x3D;&quot;cyber-submit-btn&quot;
+                  [disabled]&#x3D;&quot;isSubmitting() || userForm.invalid&quot;
+                &gt;
+                  @if (isSubmitting()) {
+                    &lt;ion-spinner name&#x3D;&quot;crescent&quot; slot&#x3D;&quot;start&quot;&gt;&lt;/ion-spinner&gt;
+                    &lt;span&gt;Creando cuenta de usuario...&lt;/span&gt;
+                  } @else {
+                    &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;person-add-outline&quot;&gt;&lt;/ion-icon&gt;
+                    &lt;span&gt;Crear y Registrar Cuenta&lt;/span&gt;
+                  }
+                &lt;/ion-button&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+          &lt;/ion-card-content&gt;
+        &lt;/ion-card&gt;
+      &lt;/div&gt;
+    }
+
+    &lt;!-- VISTA 2: DIRECTORIO DE USUARIOS --&gt;
+    @if (selectedTab() &#x3D;&#x3D;&#x3D; &#x27;list&#x27;) {
+      &lt;div class&#x3D;&quot;list-card-wrapper&quot;&gt;
+        &lt;!-- Barra de Búsqueda y Filtro de Rol --&gt;
+        &lt;div class&#x3D;&quot;directory-filter-bar&quot;&gt;
+          &lt;ion-searchbar
+            placeholder&#x3D;&quot;Buscar por nombre, correo o departamento...&quot;
+            [value]&#x3D;&quot;searchQuery()&quot;
+            (ionInput)&#x3D;&quot;searchQuery.set($event.detail.value || &#x27;&#x27;)&quot;
+            class&#x3D;&quot;cyber-searchbar&quot;
+          &gt;&lt;/ion-searchbar&gt;
+
+          &lt;div class&#x3D;&quot;role-filter-chips&quot;&gt;
+            &lt;button
+              class&#x3D;&quot;chip-btn&quot;
+              [class.active]&#x3D;&quot;filterRole() &#x3D;&#x3D;&#x3D; &#x27;ALL&#x27;&quot;
+              (click)&#x3D;&quot;filterRole.set(&#x27;ALL&#x27;)&quot;
+            &gt;
+              Todos ({{ totalUsersCount() }})
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;chip-btn admin-chip&quot;
+              [class.active]&#x3D;&quot;filterRole() &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;&quot;
+              (click)&#x3D;&quot;filterRole.set(&#x27;admin&#x27;)&quot;
+            &gt;
+              Admins ({{ adminCount() }})
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;chip-btn standard-chip&quot;
+              [class.active]&#x3D;&quot;filterRole() &#x3D;&#x3D;&#x3D; &#x27;user&#x27;&quot;
+              (click)&#x3D;&quot;filterRole.set(&#x27;user&#x27;)&quot;
+            &gt;
+              Estándar ({{ standardCount() }})
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Grid de Tarjetas de Usuarios --&gt;
+        &lt;div class&#x3D;&quot;users-grid&quot;&gt;
+          @for (u of filteredUsers(); track u.id) {
+            &lt;div class&#x3D;&quot;user-profile-card&quot;&gt;
+              &lt;div class&#x3D;&quot;user-card-top&quot;&gt;
+                &lt;div class&#x3D;&quot;user-avatar-wrap&quot;&gt;
+                  &lt;ion-icon name&#x3D;&quot;person-circle-outline&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;span class&#x3D;&quot;online-indicator&quot; title&#x3D;&quot;Estado activo&quot;&gt;&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;user-info&quot;&gt;
+                  &lt;h3 class&#x3D;&quot;name&quot;&gt;{{ u.name }}&lt;/h3&gt;
+                  &lt;span class&#x3D;&quot;email&quot;&gt;{{ u.email }}&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;user-badge-wrap&quot;&gt;
+                  &lt;span
+                    class&#x3D;&quot;badge-pill&quot;
+                    [class.badge-admin]&#x3D;&quot;u.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;&quot;
+                    [class.badge-user]&#x3D;&quot;u.role &#x3D;&#x3D;&#x3D; &#x27;user&#x27;&quot;
+                  &gt;
+                    {{ u.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27; ? &#x27;ADMINISTRADOR&#x27; : &#x27;ESTÁNDAR&#x27; }}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;user-details-body&quot;&gt;
+                &lt;div class&#x3D;&quot;detail-row&quot;&gt;
+                  &lt;ion-icon name&#x3D;&quot;business-outline&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;span&gt;{{ u.department || &#x27;Operaciones&#x27; }}&lt;/span&gt;
+                &lt;/div&gt;
+                @if (u.phone) {
+                  &lt;div class&#x3D;&quot;detail-row&quot;&gt;
+                    &lt;ion-icon name&#x3D;&quot;call-outline&quot;&gt;&lt;/ion-icon&gt;
+                    &lt;span&gt;{{ u.phone }}&lt;/span&gt;
+                  &lt;/div&gt;
+                }
+                &lt;div class&#x3D;&quot;detail-row&quot;&gt;
+                  &lt;ion-icon name&#x3D;&quot;shield-checkmark-outline&quot;&gt;&lt;/ion-icon&gt;
+                  &lt;span&gt;Alta: {{ u.createdAt | date:&#x27;dd/MM/yyyy&#x27; }}&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;user-card-actions&quot;&gt;
+                &lt;span class&#x3D;&quot;status-text&quot;&gt;
+                  &lt;span class&#x3D;&quot;status-dot&quot;&gt;&lt;/span&gt; Activo
+                &lt;/span&gt;
+
+                @if (u.email !&#x3D;&#x3D; &#x27;admin@empresa.com&#x27; &amp;&amp; u.id !&#x3D;&#x3D; authService.currentUserSignal()?.id) {
+                  &lt;ion-button
+                    fill&#x3D;&quot;clear&quot;
+                    color&#x3D;&quot;danger&quot;
+                    size&#x3D;&quot;small&quot;
+                    (click)&#x3D;&quot;confirmDelete(u)&quot;
+                    aria-label&#x3D;&quot;Eliminar cuenta de usuario&quot;
+                    class&#x3D;&quot;delete-user-btn&quot;
+                  &gt;
+                    &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;trash-outline&quot;&gt;&lt;/ion-icon&gt;
+                    Eliminar
+                  &lt;/ion-button&gt;
+                } @else {
+                  &lt;span class&#x3D;&quot;protected-tag&quot;&gt;Cuenta Principal&lt;/span&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+          } @empty {
+            &lt;div class&#x3D;&quot;empty-state-card&quot;&gt;
+              &lt;ion-icon name&#x3D;&quot;people-outline&quot;&gt;&lt;/ion-icon&gt;
+              &lt;h4&gt;No se encontraron usuarios&lt;/h4&gt;
+              &lt;p&gt;Modifique los criterios de búsqueda o cree una nueva cuenta.&lt;/p&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      &lt;/div&gt;
+    }
+  &lt;/div&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./users.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.users-content {
+  --background: #0b0819;
+  background-color: #0b0819;
+  color: #f8fafc;
+}
+
+.users-container {
+  padding: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.users-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  .breadcrumb-tag {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #fb7185;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    letter-spacing: -0.01em;
+  }
+
+  .page-subtitle {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+}
+
+.cyber-segment {
+  background: #140d2d;
+  border: 1px solid rgba(251, 113, 133, 0.25);
+  border-radius: 12px;
+  padding: 4px;
+  max-width: 380px;
+
+  ion-segment-button {
+    --color: #94a3b8;
+    --color-checked: #ffffff;
+    --indicator-color: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+    --indicator-box-shadow: 0 0 15px rgba(225, 29, 72, 0.5);
+    font-weight: 700;
+    font-size: 0.84rem;
+    border-radius: 8px;
+    min-height: 40px;
+
+    ion-icon {
+      margin-right: 6px;
+    }
+  }
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   WIDGETS KPI
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+.stats-grid {
+  padding: 0;
+  margin-bottom: 24px;
+
+  ion-col {
+    padding: 8px;
+  }
+}
+
+.kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #140f2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+
+  &amp;::before {
+    content: &#x27;&#x27;;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+  }
+
+  &amp;:hover {
+    transform: translateY(-2px);
+  }
+
+  &amp;.kpi-primary {
+    border-color: rgba(225, 29, 72, 0.3);
+    &amp;::before { background: #e11d48; box-shadow: 0 0 12px #e11d48; }
+    .kpi-icon-box { background: rgba(225, 29, 72, 0.15); color: #fb7185; }
+  }
+
+  &amp;.kpi-danger {
+    border-color: rgba(244, 63, 94, 0.3);
+    &amp;::before { background: #f43f5e; box-shadow: 0 0 12px #f43f5e; }
+    .kpi-icon-box { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
+  }
+
+  &amp;.kpi-secondary {
+    border-color: rgba(56, 189, 248, 0.3);
+    &amp;::before { background: #38bdf8; box-shadow: 0 0 12px #38bdf8; }
+    .kpi-icon-box { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+  }
+
+  &amp;.kpi-success {
+    border-color: rgba(16, 185, 129, 0.3);
+    &amp;::before { background: #10b981; box-shadow: 0 0 12px #10b981; }
+    .kpi-icon-box { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+  }
+
+  .kpi-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .kpi-data {
+    display: flex;
+    flex-direction: column;
+
+    .kpi-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi-value {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.2;
+      margin: 2px 0;
+    }
+
+    .kpi-meta {
+      font-size: 0.72rem;
+      color: #64748b;
+    }
+  }
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   FORMULARIO CREAR CUENTA
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+.create-card-wrapper {
+  animation: fadeIn 0.3s ease;
+}
+
+.cyber-form-card {
+  margin: 0;
+  background: #140f2e;
+  border: 1px solid rgba(251, 113, 133, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(225, 29, 72, 0.05);
+  position: relative;
+  overflow: hidden;
+
+  &amp;::before {
+    content: &#x27;&#x27;;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #e11d48, #38bdf8, #a855f7);
+  }
+
+  ion-card-header {
+    padding: 24px 28px 16px 28px;
+
+    .card-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #fb7185;
+      background: rgba(251, 113, 133, 0.12);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    ion-card-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    ion-card-subtitle {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+  }
+
+  ion-card-content {
+    padding: 12px 28px 28px 28px;
+  }
+}
+
+.form-group {
+  margin-bottom: 12px;
+
+  .field-error {
+    display: block;
+    color: #f87171;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 4px;
+    padding-left: 8px;
+  }
+}
+
+.cyber-input-item {
+  --background: #1c153d;
+  --color: #ffffff;
+  --placeholder-color: #64748b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 4px 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &amp;:hover {
+    border-color: rgba(251, 113, 133, 0.4);
+  }
+
+  &amp;:focus-within {
+    border-color: #fb7185;
+    box-shadow: 0 0 15px rgba(251, 113, 133, 0.2);
+  }
+
+  ion-icon {
+    color: #fb7185;
+    font-size: 1.2rem;
+    margin-right: 8px;
+  }
+
+  ion-input, ion-select {
+    --color: #ffffff;
+    font-weight: 600;
+  }
+}
+
+.section-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 12px 0 8px 4px;
+}
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.role-card {
+  background: #1a133a;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &amp;:hover {
+    border-color: rgba(251, 113, 133, 0.4);
+    transform: translateY(-2px);
+  }
+
+  &amp;.active {
+    border-color: #e11d48;
+    background: rgba(225, 29, 72, 0.08);
+    box-shadow: 0 0 20px rgba(225, 29, 72, 0.2);
+  }
+
+  .role-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+
+    .role-icon {
+      font-size: 1.8rem;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      padding: 8px;
+      border-radius: 10px;
+
+      &amp;.admin-icon {
+        color: #fb7185;
+        background: rgba(225, 29, 72, 0.15);
+      }
+    }
+
+    .role-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .role-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 2px;
+
+      &amp;.standard-tag {
+        background: rgba(56, 189, 248, 0.15);
+        color: #38bdf8;
+      }
+
+      &amp;.admin-tag {
+        background: rgba(225, 29, 72, 0.2);
+        color: #fb7185;
+      }
+    }
+  }
+
+  .role-desc {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+.strength-meter {
+  margin-top: 6px;
+  padding: 4px 8px;
+
+  .meter-bar {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 4px;
+
+    .meter-fill {
+      height: 100%;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+  }
+
+  .meter-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: #94a3b8;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+}
+
+.form-actions-row {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+
+  .cyber-submit-btn {
+    --background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+    --box-shadow: 0 0 20px rgba(225, 29, 72, 0.4);
+    --border-radius: 12px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    height: 48px;
+    min-width: 260px;
+    letter-spacing: 0.02em;
+
+    &amp;:hover {
+      --background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+    }
+  }
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   DIRECTORIO DE USUARIOS
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+.list-card-wrapper {
+  animation: fadeIn 0.3s ease;
+}
+
+.directory-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #140f2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+
+  .cyber-searchbar {
+    --background: #1c153d;
+    --color: #ffffff;
+    --placeholder-color: #64748b;
+    --icon-color: #fb7185;
+    --clear-button-color: #cbd5e1;
+    border-radius: 12px;
+    max-width: 480px;
+    padding: 0;
+  }
+
+  .role-filter-chips {
+    display: flex;
+    gap: 8px;
+
+    .chip-btn {
+      background: #1c153d;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &amp;:hover {
+        background: #231b4d;
+        color: #ffffff;
+      }
+
+      &amp;.active {
+        background: #e11d48;
+        border-color: #e11d48;
+        color: #ffffff;
+        box-shadow: 0 0 12px rgba(225, 29, 72, 0.4);
+      }
+
+      &amp;.admin-chip.active {
+        background: #f43f5e;
+        border-color: #f43f5e;
+      }
+
+      &amp;.standard-chip.active {
+        background: #0284c7;
+        border-color: #0284c7;
+      }
+    }
+  }
+}
+
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.user-profile-card {
+  background: #140f2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+
+  &amp;:hover {
+    transform: translateY(-2px);
+    border-color: rgba(251, 113, 133, 0.35);
+  }
+
+  .user-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+
+    .user-avatar-wrap {
+      position: relative;
+
+      ion-icon {
+        font-size: 2.8rem;
+        color: #fb7185;
+      }
+
+      .online-indicator {
+        position: absolute;
+        bottom: 4px;
+        right: 4px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #10b981;
+        border: 2px solid #140f2e;
+        box-shadow: 0 0 8px #10b981;
+      }
+    }
+
+    .user-info {
+      flex: 1;
+
+      .name {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0;
+      }
+
+      .email {
+        font-size: 0.78rem;
+        color: #94a3b8;
+      }
+    }
+
+    .badge-pill {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 4px 8px;
+      border-radius: 6px;
+
+      &amp;.badge-admin {
+        background: rgba(225, 29, 72, 0.2);
+        color: #fb7185;
+        border: 1px solid rgba(225, 29, 72, 0.4);
+      }
+
+      &amp;.badge-user {
+        background: rgba(56, 189, 248, 0.15);
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.4);
+      }
+    }
+  }
+
+  .user-details-body {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 10px 0;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+
+      ion-icon {
+        color: #fb7185;
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  .user-card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .status-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #34d399;
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #10b981;
+        box-shadow: 0 0 6px #10b981;
+      }
+    }
+
+    .delete-user-btn {
+      --color: #f87171;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .protected-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #64748b;
+      font-style: italic;
+    }
+  }
+}
+
+.empty-state-card {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  background: #140f2e;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+
+  ion-icon {
+    font-size: 3rem;
+    color: #64748b;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+  }
+
+  p {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+   ADAPTACIÓN UNIVERSAL A MODO CLARO (GESTIÓN DE USUARIOS)
+   &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+:host-context(body:not(.dark)) {
+  .users-content {
+    --background: var(--ambient-bg-color, #f8fafc);
+    background-color: var(--ambient-bg-color, #f8fafc);
+  }
+
+  .users-header-bar {
+    .page-title { color: var(--cyber-text-main) !important; }
+    .page-subtitle { color: var(--cyber-text-sub) !important; }
+  }
+
+  .cyber-segment {
+    background: var(--glass-subcard-bg) !important;
+    border-color: var(--glass-border) !important;
+
+    ion-segment-button {
+      --color: var(--cyber-text-sub);
+      --color-checked: #ffffff;
+    }
+  }
+
+  .kpi-card {
+    background: var(--glass-window-bg) !important;
+    border-color: var(--glass-border) !important;
+    box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+
+    .kpi-value { color: var(--cyber-text-main) !important; }
+    .kpi-title { color: var(--cyber-text-sub) !important; }
+  }
+
+  .cyber-form-card {
+    background: var(--glass-window-bg) !important;
+    border-color: var(--glass-border) !important;
+    box-shadow: 0 20px 40px -10px rgba(225, 29, 72, 0.08) !important;
+
+    ion-card-title { color: var(--cyber-text-main) !important; }
+    ion-card-subtitle { color: var(--cyber-text-sub) !important; }
+
+    .cyber-input-item {
+      --background: #ffffff !important;
+      background-color: #ffffff !important;
+      --color: #0f172a !important;
+      --placeholder-color: #64748b !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+
+      &amp;:hover {
+        border-color: #be123c !important;
+      }
+
+      &amp;:focus-within {
+        border-color: #be123c !important;
+        box-shadow: 0 0 0 3px rgba(190, 18, 60, 0.15) !important;
+      }
+
+      ion-icon {
+        color: #be123c !important;
+      }
+
+      ion-input, ion-select {
+        --color: #0f172a !important;
+        color: #0f172a !important;
+      }
+    }
+
+    .field-label { color: var(--cyber-text-main) !important; }
+    .section-label { color: #475569 !important; }
+
+    .role-card {
+      background: #ffffff !important;
+      border: 2px solid #e2e8f0 !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+
+      &amp;:hover {
+        border-color: #be123c !important;
+      }
+
+      &amp;.active {
+        border-color: #be123c !important;
+        background: rgba(190, 18, 60, 0.06) !important;
+        box-shadow: 0 4px 14px rgba(190, 18, 60, 0.12) !important;
+      }
+
+      .role-title {
+        color: #0f172a !important;
+      }
+
+      .role-desc {
+        color: #64748b !important;
+      }
+    }
+  }
+
+  .user-card {
+    background: var(--glass-window-bg) !important;
+    border-color: var(--glass-border) !important;
+    box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.05) !important;
+
+    .user-name { color: var(--cyber-text-main) !important; }
+    .user-email { color: var(--cyber-text-sub) !important; }
+    .user-detail-row { color: var(--cyber-text-sub) !important; }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button></ion-menu-button>    </ion-buttons>    <ion-title>Gestión de Cuentas & Usuarios</ion-title>    <ion-buttons slot="end">      <ion-button (click)="loadUsers()" aria-label="Actualizar lista de usuarios">        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="users-content">  <div class="users-container">    <!-- Breadcrumb & Cabecera -->    <div class="users-header-bar">      <div>        <div class="breadcrumb-tag">SISTEMA / SEGURIDAD & RBAC</div>        <h1 class="page-title">Administración de Cuentas de Usuario</h1>        <p class="page-subtitle">Control de identidades, asignación de roles y aprovisionamiento de accesos</p>      </div>      <!-- Segment Selector de Pestañas -->      <ion-segment        [value]="selectedTab()"        (ionChange)="onTabChange($event)"        class="cyber-segment"      >        <ion-segment-button value="create">          <ion-icon name="person-add-outline"></ion-icon>          <ion-label>Crear Cuenta</ion-label>        </ion-segment-button>        <ion-segment-button value="list">          <ion-icon name="people-outline"></ion-icon>          <ion-label>Directorio ({{ totalUsersCount() }})</ion-label>        </ion-segment-button>      </ion-segment>    </div>    <!-- Widgets KPI de Resumen -->    <ion-grid class="stats-grid">      <ion-row>        <ion-col size="12" size-sm="6" size-lg="3">          <app-stat-widget            title="Total Usuarios"            [value]="totalUsersCount()"            subtitle="Cuentas activas en sistema"            icon="people-outline"            color="primary"            [clickable]="true"            (widgetClick)="onStatWidgetClick(\'ALL\')"          ></app-stat-widget>        </ion-col>        <ion-col size="12" size-sm="6" size-lg="3">          <app-stat-widget            title="Administradores"            [value]="adminCount()"            subtitle="Privilegios totales RBAC"            icon="shield-checkmark-outline"            color="danger"            [clickable]="true"            (widgetClick)="onStatWidgetClick(\'admin\')"          ></app-stat-widget>        </ion-col>        <ion-col size="12" size-sm="6" size-lg="3">          <app-stat-widget            title="Usuarios Estándar"            [value]="standardCount()"            subtitle="Operaciones y reportes"            icon="person-outline"            color="secondary"            [clickable]="true"            (widgetClick)="onStatWidgetClick(\'user\')"          ></app-stat-widget>        </ion-col>        <ion-col size="12" size-sm="6" size-lg="3">          <app-stat-widget            title="Departamentos"            [value]="departmentsCount()"            subtitle="Áreas corporativas activas"            icon="business-outline"            color="success"            [clickable]="false"          ></app-stat-widget>        </ion-col>      </ion-row>    </ion-grid>    <!-- VISTA 1: CREAR CUENTA DE USUARIO -->    @if (selectedTab() === \'create\') {      <div class="create-card-wrapper">        <ion-card class="cyber-form-card">          <ion-card-header>            <div class="card-badge">APROVISIONAMIENTO RÁPIDO</div>            <ion-card-title>Alta de Nueva Cuenta de Usuario</ion-card-title>            <ion-card-subtitle>              Registre un nuevo colaborador. El usuario podrá iniciar sesión inmediatamente con sus credenciales.            </ion-card-subtitle>          </ion-card-header>          <ion-card-content>            <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>              <ion-grid>                <ion-row>                  <!-- Nombre y Apellidos -->                  <ion-col size="12" size-md="6">                    <div class="form-group">                      <ion-item lines="none" class="cyber-input-item">                        <ion-icon name="person-outline" slot="start" aria-hidden="true"></ion-icon>                        <ion-input                          label="Nombre Completo"                          labelPlacement="floating"                          placeholder="Ej. Carmen Navarro Sánchez"                          formControlName="name"                          autocomplete="name"                          [attr.aria-invalid]="userForm.get(\'name\')?.touched && userForm.get(\'name\')?.invalid"                        ></ion-input>                      </ion-item>                      @if (userForm.get(\'name\')?.touched && userForm.get(\'name\')?.invalid) {                        <span class="field-error" role="alert" aria-live="polite">El nombre debe tener al menos 3 caracteres.</span>                      }                    </div>                  </ion-col>                  <!-- Correo Electrónico -->                  <ion-col size="12" size-md="6">                    <div class="form-group">                      <ion-item lines="none" class="cyber-input-item">                        <ion-icon name="mail-outline" slot="start" aria-hidden="true"></ion-icon>                        <ion-input                          label="Correo Corporativo"                          labelPlacement="floating"                          type="email"                          placeholder="usuario@empresa.com"                          formControlName="email"                          autocomplete="email"                          [attr.aria-invalid]="userForm.get(\'email\')?.touched && userForm.get(\'email\')?.invalid"                        ></ion-input>                      </ion-item>                      @if (userForm.get(\'email\')?.touched && userForm.get(\'email\')?.invalid) {                        <span class="field-error" role="alert" aria-live="polite">Ingrese un correo electrónico válido.</span>                      }                    </div>                  </ion-col>                  <!-- Departamento -->                  <ion-col size="12" size-md="6">                    <div class="form-group">                      <ion-item lines="none" class="cyber-input-item">                        <ion-icon name="business-outline" slot="start" aria-hidden="true"></ion-icon>                        <ion-select                          label="Departamento"                          labelPlacement="floating"                          formControlName="department"                          interface="popover"                        >                          <ion-select-option value="Dirección General & TI">Dirección General & TI</ion-select-option>                          <ion-select-option value="Operaciones & Logística">Operaciones & Logística</ion-select-option>                          <ion-select-option value="Finanzas & Contabilidad">Finanzas & Contabilidad</ion-select-option>                          <ion-select-option value="Ventas & Fidelización">Ventas & Fidelización</ion-select-option>                          <ion-select-option value="Almacén Central & Stock">Almacén Central & Stock</ion-select-option>                        </ion-select>                      </ion-item>                    </div>                  </ion-col>                  <!-- Teléfono -->                  <ion-col size="12" size-md="6">                    <div class="form-group">                      <ion-item lines="none" class="cyber-input-item">                        <ion-icon name="call-outline" slot="start" aria-hidden="true"></ion-icon>                        <ion-input                          label="Teléfono Móvil (Opcional)"                          labelPlacement="floating"                          placeholder="+34 600 000 000"                          formControlName="phone"                          type="tel"                        ></ion-input>                      </ion-item>                    </div>                  </ion-col>                  <!-- Selector Visual de Rol RBAC -->                  <ion-col size="12">                    <label class="section-label">Rol y Privilegios en NovaGest (RBAC):</label>                    <div class="roles-grid">                      <!-- Tarjeta Rol Usuario Estándar -->                      <div                        class="role-card"                        [class.active]="userForm.get(\'role\')?.value === \'user\'"                        (click)="selectRole(\'user\')"                        tabindex="0"                        role="button"                      >                        <div class="role-card-header">                          <ion-icon name="person-outline" class="role-icon"></ion-icon>                          <div>                            <h4 class="role-title">Usuario Estándar</h4>                            <span class="role-tag standard-tag">Acceso Operativo</span>                          </div>                        </div>                        <p class="role-desc">                          Consulta de catálogo, filtros avanzados, alertas de stock e informes descargables en PDF/CSV.                        </p>                      </div>                      <!-- Tarjeta Rol Administrador -->                      <div                        class="role-card"                        [class.active]="userForm.get(\'role\')?.value === \'admin\'"                        (click)="selectRole(\'admin\')"                        tabindex="0"                        role="button"                      >                        <div class="role-card-header">                          <ion-icon name="shield-checkmark-outline" class="role-icon admin-icon"></ion-icon>                          <div>                            <h4 class="role-title">Administrador</h4>                            <span class="role-tag admin-tag">Control Total</span>                          </div>                        </div>                        <p class="role-desc">                          Acceso a Cuadro de Mando Ejecutivo, alta/edición de catálogo, auditoría Supabase Realtime en vivo y gestión de usuarios.                        </p>                      </div>                    </div>                  </ion-col>                  <!-- Contraseña -->                  <ion-col size="12" size-md="6">                    <div class="form-group">                      <ion-item lines="none" class="cyber-input-item">                        <ion-icon name="lock-closed-outline" slot="start" aria-hidden="true"></ion-icon>                        <ion-input                          label="Contraseña"                          labelPlacement="floating"                          [type]="showPassword() ? \'text\' : \'password\'"                          placeholder="Mínimo 6 caracteres"                          formControlName="password"                          autocomplete="new-password"                          [attr.aria-invalid]="userForm.get(\'password\')?.touched && userForm.get(\'password\')?.invalid"                        ></ion-input>                        <ion-button fill="clear" slot="end" type="button" (click)="togglePassword()">                          <ion-icon slot="icon-only" [name]="showPassword() ? \'eye-off-outline\' : \'eye-outline\'"></ion-icon>                        </ion-button>                      </ion-item>                      <!-- Medidor de Fuerza de Contraseña -->                      <div class="strength-meter">                        <div class="meter-bar">                          <div                            class="meter-fill"                            [style.width.%]="passwordStrength().score"                            [style.background]="passwordStrength().color === \'success\' ? \'#10b981\' : (passwordStrength().color === \'warning\' ? \'#f59e0b\' : \'#ef4444\')"                          ></div>                        </div>                        <div class="meter-meta">                          <span>Seguridad:</span>                          <strong [style.color]="passwordStrength().color === \'success\' ? \'#10b981\' : (passwordStrength().color === \'warning\' ? \'#f59e0b\' : \'#ef4444\')">                            {{ passwordStrength().label }}                          </strong>                        </div>                      </div>                    </div>                  </ion-col>                  <!-- Confirmar Contraseña -->                  <ion-col size="12" size-md="6">                    <div class="form-group">                      <ion-item lines="none" class="cyber-input-item">                        <ion-icon name="key-outline" slot="start" aria-hidden="true"></ion-icon>                        <ion-input                          label="Confirmar Contraseña"                          labelPlacement="floating"                          [type]="showConfirmPassword() ? \'text\' : \'password\'"                          placeholder="Repita la contraseña"                          formControlName="confirmPassword"                          autocomplete="new-password"                          [attr.aria-invalid]="userForm.get(\'confirmPassword\')?.touched && userForm.get(\'confirmPassword\')?.invalid"                        ></ion-input>                        <ion-button fill="clear" slot="end" type="button" (click)="toggleConfirmPassword()">                          <ion-icon slot="icon-only" [name]="showConfirmPassword() ? \'eye-off-outline\' : \'eye-outline\'"></ion-icon>                        </ion-button>                      </ion-item>                      @if (userForm.get(\'confirmPassword\')?.touched && userForm.get(\'confirmPassword\')?.hasError(\'passwordMismatch\')) {                        <span class="field-error" role="alert" aria-live="polite">Las contraseñas no coinciden.</span>                      }                    </div>                  </ion-col>                </ion-row>              </ion-grid>              <!-- Botón de Envío -->              <div class="form-actions-row">                <ion-button                  type="submit"                  class="cyber-submit-btn"                  [disabled]="isSubmitting() || userForm.invalid"                >                  @if (isSubmitting()) {                    <ion-spinner name="crescent" slot="start"></ion-spinner>                    <span>Creando cuenta de usuario...</span>                  } @else {                    <ion-icon slot="start" name="person-add-outline"></ion-icon>                    <span>Crear y Registrar Cuenta</span>                  }                </ion-button>              </div>            </form>          </ion-card-content>        </ion-card>      </div>    }    <!-- VISTA 2: DIRECTORIO DE USUARIOS -->    @if (selectedTab() === \'list\') {      <div class="list-card-wrapper">        <!-- Barra de Búsqueda y Filtro de Rol -->        <div class="directory-filter-bar">          <ion-searchbar            placeholder="Buscar por nombre, correo o departamento..."            [value]="searchQuery()"            (ionInput)="searchQuery.set($event.detail.value || \'\')"            class="cyber-searchbar"          ></ion-searchbar>          <div class="role-filter-chips">            <button              class="chip-btn"              [class.active]="filterRole() === \'ALL\'"              (click)="filterRole.set(\'ALL\')"            >              Todos ({{ totalUsersCount() }})            </button>            <button              class="chip-btn admin-chip"              [class.active]="filterRole() === \'admin\'"              (click)="filterRole.set(\'admin\')"            >              Admins ({{ adminCount() }})            </button>            <button              class="chip-btn standard-chip"              [class.active]="filterRole() === \'user\'"              (click)="filterRole.set(\'user\')"            >              Estándar ({{ standardCount() }})            </button>          </div>        </div>        <!-- Grid de Tarjetas de Usuarios -->        <div class="users-grid">          @for (u of filteredUsers(); track u.id) {            <div class="user-profile-card">              <div class="user-card-top">                <div class="user-avatar-wrap">                  <ion-icon name="person-circle-outline"></ion-icon>                  <span class="online-indicator" title="Estado activo"></span>                </div>                <div class="user-info">                  <h3 class="name">{{ u.name }}</h3>                  <span class="email">{{ u.email }}</span>                </div>                <div class="user-badge-wrap">                  <span                    class="badge-pill"                    [class.badge-admin]="u.role === \'admin\'"                    [class.badge-user]="u.role === \'user\'"                  >                    {{ u.role === \'admin\' ? \'ADMINISTRADOR\' : \'ESTÁNDAR\' }}                  </span>                </div>              </div>              <div class="user-details-body">                <div class="detail-row">                  <ion-icon name="business-outline"></ion-icon>                  <span>{{ u.department || \'Operaciones\' }}</span>                </div>                @if (u.phone) {                  <div class="detail-row">                    <ion-icon name="call-outline"></ion-icon>                    <span>{{ u.phone }}</span>                  </div>                }                <div class="detail-row">                  <ion-icon name="shield-checkmark-outline"></ion-icon>                  <span>Alta: {{ u.createdAt | date:\'dd/MM/yyyy\' }}</span>                </div>              </div>              <div class="user-card-actions">                <span class="status-text">                  <span class="status-dot"></span> Activo                </span>                @if (u.email !== \'admin@empresa.com\' && u.id !== authService.currentUserSignal()?.id) {                  <ion-button                    fill="clear"                    color="danger"                    size="small"                    (click)="confirmDelete(u)"                    aria-label="Eliminar cuenta de usuario"                    class="delete-user-btn"                  >                    <ion-icon slot="start" name="trash-outline"></ion-icon>                    Eliminar                  </ion-button>                } @else {                  <span class="protected-tag">Cuenta Principal</span>                }              </div>            </div>          } @empty {            <div class="empty-state-card">              <ion-icon name="people-outline"></ion-icon>              <h4>No se encontraron usuarios</h4>              <p>Modifique los criterios de búsqueda o cree una nueva cuenta.</p>            </div>          }        </div>      </div>    }  </div></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProductFormPage', 'selector': 'app-product-form'},{'name': 'ProductsPage', 'selector': 'app-products'},{'name': 'RealtimeAuditPage', 'selector': 'app-realtime-audit'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'UnauthorizedPage', 'selector': 'app-unauthorized'},{'name': 'UsersPage', 'selector': 'app-users'},{'name': 'WelcomePage', 'selector': 'app-welcome'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'UsersPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'UsersPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
