@@ -47,45 +47,88 @@ CREATE TABLE IF NOT EXISTS public.audit_logs (
 CREATE INDEX IF NOT EXISTS idx_audit_logs_timestamp ON public.audit_logs(timestamp DESC);
 CREATE INDEX IF NOT EXISTS idx_audit_logs_severity ON public.audit_logs(severity);
 
--- 4. Tabla de Cuentas de Usuario y Control de Acceso (RBAC)
-CREATE TABLE IF NOT EXISTS public.users (
-    id TEXT PRIMARY KEY,
-    email TEXT UNIQUE NOT NULL,
-    name TEXT NOT NULL,
-    role TEXT NOT NULL CHECK (role IN ('admin', 'user')),
+-- 4. Tabla de Perfiles ligada a auth.users (Supabase Auth & RBAC)
+CREATE TABLE IF NOT EXISTS public.profiles (
+    user_id    UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+    email      TEXT NOT NULL,
+    name       TEXT NOT NULL,
+    role       TEXT NOT NULL DEFAULT 'user' CHECK (role IN ('admin', 'user')),
     created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
--- 5. Habilitación de Supabase Realtime para transmisión WebSocket continua
+-- Helper seguro de validación de rol Administrador (SECURITY DEFINER)
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS BOOLEAN
+LANGUAGE sql
+STABLE
+SECURITY DEFINER
+SET search_path = public
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM public.profiles p
+    WHERE p.user_id = auth.uid() AND p.role = 'admin'
+  );
+$$;
+
+-- 5. Tabla Documental JSONB (Segunda fuente de datos / Almacén NoSQL para RA5-b)
+CREATE TABLE IF NOT EXISTS public.documents (
+    id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    collection TEXT NOT NULL,
+    doc        JSONB NOT NULL,
+    owner_id   UUID REFERENCES auth.users(id),
+    created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_documents_doc_gin ON public.documents USING gin (doc jsonb_path_ops);
+
+-- 6. Habilitación de Supabase Realtime para transmisión WebSocket continua
 ALTER PUBLICATION supabase_realtime ADD TABLE public.audit_logs;
 ALTER PUBLICATION supabase_realtime ADD TABLE public.products;
+ALTER PUBLICATION supabase_realtime ADD TABLE public.documents;
 
--- 6. Configuración de Seguridad por Filas (Row Level Security - RLS)
-ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
+-- 7. Configuración de Seguridad por Filas Estricta (Row Level Security - RLS)
+ALTER TABLE public.products   ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.audit_logs ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.profiles   ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.documents  ENABLE ROW LEVEL SECURITY;
 
--- Políticas permisivas para la evaluación académica de la API
-CREATE POLICY "Lectura pública de catálogo" ON public.products
-    FOR SELECT USING (true);
+-- Políticas de control de acceso por rol:
+-- PRODUCTOS: Lectura autenticada, escritura reservada a administradores
+CREATE POLICY products_read ON public.products
+    FOR SELECT TO authenticated USING (true);
 
-CREATE POLICY "Modificación de productos" ON public.products
-    FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY products_write ON public.products
+    FOR ALL TO authenticated
+    USING (public.is_admin())
+    WITH CHECK (public.is_admin());
 
-CREATE POLICY "Lectura pública de auditoría en vivo" ON public.audit_logs
-    FOR SELECT USING (true);
+-- PERFILES: Cada usuario consulta su perfil; el administrador consulta y gestiona todos
+CREATE POLICY profiles_self ON public.profiles
+    FOR SELECT TO authenticated
+    USING (user_id = auth.uid() OR public.is_admin());
 
-CREATE POLICY "Inserción de eventos de auditoría" ON public.audit_logs
-    FOR INSERT WITH CHECK (true);
+CREATE POLICY profiles_admin ON public.profiles
+    FOR UPDATE TO authenticated
+    USING (public.is_admin())
+    WITH CHECK (public.is_admin());
 
-CREATE POLICY "Lectura de usuarios" ON public.users
-    FOR SELECT USING (true);
+CREATE POLICY profiles_insert ON public.profiles
+    FOR INSERT TO authenticated
+    WITH CHECK (user_id = auth.uid() OR public.is_admin());
 
-CREATE POLICY "Inserción de usuarios" ON public.users
-    FOR INSERT WITH CHECK (true);
+-- AUDITORÍA: Trazabilidad inmutable; inserción ligada a identidad verificada
+CREATE POLICY audit_read ON public.audit_logs
+    FOR SELECT TO authenticated USING (true);
 
-CREATE POLICY "Modificación de usuarios" ON public.users
-    FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY audit_insert ON public.audit_logs
+    FOR INSERT TO authenticated
+    WITH CHECK (auth.uid() IS NOT NULL);
+
+-- DOCUMENTOS: Acceso al propietario o administrador
+CREATE POLICY documents_rw ON public.documents
+    FOR ALL TO authenticated
+    USING (owner_id = auth.uid() OR public.is_admin())
+    WITH CHECK (owner_id = auth.uid() OR public.is_admin());
 
 -- 7. Datos Iniciales de Prueba (Seed Data)
 INSERT INTO public.products (id, sku, name, category, price, stock, status, supplier_email, description)
