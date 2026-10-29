@@ -827,7 +827,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   public toggleCustomizer(): void {
-    this.isCustomizerOpen.update(v => !v);
+    this.toggleCatalogDrawer();
   }
 
   /**

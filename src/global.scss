@@ -933,3 +933,11 @@ body:not(.dark) {
   }
 }
 
+// Responsividad para barras de herramientas en pantallas móviles pequeñas
+@media (max-width: 640px) {
+  .toolbar-btn-text {
+    display: none !important;
+  }
+}
+
+

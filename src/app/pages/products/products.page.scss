@@ -505,3 +505,64 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+@media (max-width: 640px) {
+  .products-container {
+    padding: 14px 12px;
+  }
+
+  .page-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    .page-title {
+      font-size: 1.35rem;
+    }
+
+    .action-buttons-group {
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      ion-button {
+        flex: 1 1 auto;
+      }
+    }
+  }
+
+  .filters-bar {
+    padding: 12px;
+    gap: 10px;
+
+    .filter-controls {
+      width: 100%;
+      gap: 8px;
+
+      ion-select {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 130px;
+        font-size: 0.82rem;
+        padding: 6px 10px;
+      }
+    }
+
+    .view-mode-toggle {
+      margin-left: 0;
+      width: 100%;
+      justify-content: stretch;
+
+      .toggle-mode-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 7px 12px;
+      }
+    }
+  }
+
+  .product-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+

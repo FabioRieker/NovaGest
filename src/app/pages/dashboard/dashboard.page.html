@@ -17,7 +17,7 @@
       </ion-button>
       <ion-button (click)="logout()" color="light" [attr.aria-label]="'NAV.LOGOUT' | translate">
         <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
-        {{ 'DASHBOARD.LOGOUT' | translate }}
+        <span class="toolbar-btn-text">{{ 'DASHBOARD.LOGOUT' | translate }}</span>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -835,110 +835,110 @@
       </button>
     </div>
 
-    <!-- BANDEJA / DRAWER LATERAL DE CATÁLOGO DE WIDGETS -->
-    @if (isCatalogDrawerOpen()) {
-      <div class="drawer-backdrop" (click)="closeCatalogDrawer()" aria-hidden="true"></div>
-      <aside class="catalog-drawer glass-window" role="dialog" aria-modal="true" [attr.aria-label]="'DASHBOARD.DRAWER_TITLE' | translate">
-        <div class="drawer-header">
-          <div class="drawer-title-group">
-            <div class="drawer-icon-wrap">
-              <ion-icon name="grid-outline"></ion-icon>
-            </div>
-            <div>
-              <h3>{{ 'DASHBOARD.DRAWER_TITLE' | translate }}</h3>
-              <p>{{ 'DASHBOARD.DRAWER_SUBTITLE' | translate }}</p>
-            </div>
-          </div>
-          <button class="drawer-close-btn" (click)="closeCatalogDrawer()" [attr.aria-label]="'DASHBOARD.DRAWER_CLOSE' | translate">
-            <ion-icon name="close-outline"></ion-icon>
-          </button>
-        </div>
-
-        <!-- Buscador y Filtros por Categoría en la Bandeja -->
-        <div class="drawer-filter-bar">
-          <div class="drawer-search-box">
-            <ion-icon name="search-outline"></ion-icon>
-            <input
-              type="text"
-              [placeholder]="'DASHBOARD.DRAWER_SEARCH' | translate"
-              [value]="catalogSearch()"
-              (input)="catalogSearch.set($any($event.target).value)"
-            />
-            @if (catalogSearch()) {
-              <button class="clear-drawer-search" (click)="catalogSearch.set('')">
-                <ion-icon name="close-circle-outline"></ion-icon>
-              </button>
-            }
-          </div>
-
-          <div class="category-chips-row">
-            @for (cat of catalogCategories(); track cat) {
-              <button
-                class="cat-chip-btn"
-                [class.active]="catalogFilterCategory() === cat"
-                (click)="catalogFilterCategory.set(cat)"
-              >
-                {{ cat === 'all' ? ('COMMON.ALL' | translate) : cat }}
-              </button>
-            }
-          </div>
-        </div>
-
-        <!-- Lista de Widgets Disponibles -->
-        <div class="drawer-cards-list">
-          @for (item of filteredCatalogWidgets(); track item.id) {
-            <div class="drawer-item-card" [class.is-active]="isWidgetVisible(item.id)">
-              <div class="card-icon-col">
-                <ion-icon [name]="item.icon"></ion-icon>
-              </div>
-              <div class="card-info-col">
-                <div class="card-meta-top">
-                  <span class="cat-pill">{{ ('DASHBOARD.WIDGETS.' + item.id + '.CAT') | translate }}</span>
-                  <span class="size-hint">Base: {{ item.defaultWidth === 'col-12' ? 'Full' : item.defaultWidth === 'col-8' ? '2/3' : item.defaultWidth === 'col-6' ? '1/2' : '1/3' }}</span>
-                </div>
-                <h4 class="card-title">{{ ('DASHBOARD.WIDGETS.' + item.id + '.TITLE') | translate }}</h4>
-                <p class="card-desc">{{ item.description }}</p>
-              </div>
-              <div class="card-actions-col">
-                @if (isWidgetVisible(item.id)) {
-                  <span class="in-canvas-tag">
-                    <ion-icon name="checkmark-circle-outline"></ion-icon> {{ 'DASHBOARD.IN_CANVAS' | translate }}
-                  </span>
-                  <button class="drawer-action-link danger" (click)="removeWidget(item.id)" [title]="'DASHBOARD.REMOVE_MODULE' | translate">
-                    {{ 'DASHBOARD.REMOVE_FROM_CANVAS' | translate }}
-                  </button>
-                } @else {
-                  <button class="drawer-add-pill-btn" (click)="addWidget(item.id)" [title]="'DASHBOARD.ADD_TO_CANVAS' | translate">
-                    <ion-icon name="add-outline"></ion-icon> {{ 'DASHBOARD.ADD_TO_CANVAS' | translate }}
-                  </button>
-                }
-              </div>
-            </div>
-          } @empty {
-            <div class="drawer-empty-state">
-              <ion-icon name="search-outline"></ion-icon>
-              <p>{{ 'DASHBOARD.NO_MODULES_MATCH' | translate }}</p>
-            </div>
-          }
-        </div>
-
-        <!-- Pie de Bandeja -->
-        <div class="drawer-footer">
-          <div class="status-summary">
-            <span class="num">{{ activeWidgets().length }} {{ 'DASHBOARD.OF_MODULES' | translate }} {{ catalogWidgets.length }}</span>
-            <span class="lbl">{{ 'DASHBOARD.MODULES_IN_CANVAS' | translate }}</span>
-          </div>
-          <div class="footer-btns">
-            <button class="btn-sec" (click)="resetDefaultLayout()" [title]="'DASHBOARD.RESET_LAYOUT_TITLE' | translate">
-              <ion-icon name="refresh-outline"></ion-icon> {{ 'DASHBOARD.RESET_LAYOUT' | translate }}
-            </button>
-            <button class="btn-pri" (click)="closeCatalogDrawer()">
-              <ion-icon name="checkmark-outline"></ion-icon> {{ 'DASHBOARD.CANVAS_DONE' | translate }}
-            </button>
-          </div>
-        </div>
-      </aside>
-    }
-
   </div>
 </ion-content>
+
+<!-- BANDEJA / DRAWER LATERAL DE CATÁLOGO DE WIDGETS (FUERA DE ION-CONTENT PARA EVITAR CONFLICTOS DE APILAMIENTO) -->
+@if (isCatalogDrawerOpen()) {
+  <div class="drawer-backdrop" (click)="closeCatalogDrawer()" aria-hidden="true"></div>
+  <aside class="catalog-drawer glass-window" role="dialog" aria-modal="true" [attr.aria-label]="'DASHBOARD.DRAWER_TITLE' | translate">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <div class="drawer-icon-wrap">
+          <ion-icon name="grid-outline"></ion-icon>
+        </div>
+        <div>
+          <h3>{{ 'DASHBOARD.DRAWER_TITLE' | translate }}</h3>
+          <p>{{ 'DASHBOARD.DRAWER_SUBTITLE' | translate }}</p>
+        </div>
+      </div>
+      <button class="drawer-close-btn" (click)="closeCatalogDrawer()" [attr.aria-label]="'DASHBOARD.DRAWER_CLOSE' | translate">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+
+    <!-- Buscador y Filtros por Categoría en la Bandeja -->
+    <div class="drawer-filter-bar">
+      <div class="drawer-search-box">
+        <ion-icon name="search-outline"></ion-icon>
+        <input
+          type="text"
+          [placeholder]="'DASHBOARD.DRAWER_SEARCH' | translate"
+          [value]="catalogSearch()"
+          (input)="catalogSearch.set($any($event.target).value)"
+        />
+        @if (catalogSearch()) {
+          <button class="clear-drawer-search" (click)="catalogSearch.set('')">
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </button>
+        }
+      </div>
+
+      <div class="category-chips-row">
+        @for (cat of catalogCategories(); track cat) {
+          <button
+            class="cat-chip-btn"
+            [class.active]="catalogFilterCategory() === cat"
+            (click)="catalogFilterCategory.set(cat)"
+          >
+            {{ cat === 'all' ? ('COMMON.ALL' | translate) : cat }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Lista de Widgets Disponibles -->
+    <div class="drawer-cards-list">
+      @for (item of filteredCatalogWidgets(); track item.id) {
+        <div class="drawer-item-card" [class.is-active]="isWidgetVisible(item.id)">
+          <div class="card-icon-col">
+            <ion-icon [name]="item.icon"></ion-icon>
+          </div>
+          <div class="card-info-col">
+            <div class="card-meta-top">
+              <span class="cat-pill">{{ ('DASHBOARD.WIDGETS.' + item.id + '.CAT') | translate }}</span>
+              <span class="size-hint">Base: {{ item.defaultWidth === 'col-12' ? 'Full' : item.defaultWidth === 'col-8' ? '2/3' : item.defaultWidth === 'col-6' ? '1/2' : '1/3' }}</span>
+            </div>
+            <h4 class="card-title">{{ ('DASHBOARD.WIDGETS.' + item.id + '.TITLE') | translate }}</h4>
+            <p class="card-desc">{{ item.description }}</p>
+          </div>
+          <div class="card-actions-col">
+            @if (isWidgetVisible(item.id)) {
+              <span class="in-canvas-tag">
+                <ion-icon name="checkmark-circle-outline"></ion-icon> {{ 'DASHBOARD.IN_CANVAS' | translate }}
+              </span>
+              <button class="drawer-action-link danger" (click)="removeWidget(item.id)" [title]="'DASHBOARD.REMOVE_MODULE' | translate">
+                {{ 'DASHBOARD.REMOVE_FROM_CANVAS' | translate }}
+              </button>
+            } @else {
+              <button class="drawer-add-pill-btn" (click)="addWidget(item.id)" [title]="'DASHBOARD.ADD_TO_CANVAS' | translate">
+                <ion-icon name="add-outline"></ion-icon> {{ 'DASHBOARD.ADD_TO_CANVAS' | translate }}
+              </button>
+            }
+          </div>
+        </div>
+      } @empty {
+        <div class="drawer-empty-state">
+          <ion-icon name="search-outline"></ion-icon>
+          <p>{{ 'DASHBOARD.NO_MODULES_MATCH' | translate }}</p>
+        </div>
+      }
+    </div>
+
+    <!-- Pie de Bandeja -->
+    <div class="drawer-footer">
+      <div class="status-summary">
+        <span class="num">{{ activeWidgets().length }} {{ 'DASHBOARD.OF_MODULES' | translate }} {{ catalogWidgets.length }}</span>
+        <span class="lbl">{{ 'DASHBOARD.MODULES_IN_CANVAS' | translate }}</span>
+      </div>
+      <div class="footer-btns">
+        <button class="btn-sec" (click)="resetDefaultLayout()" [title]="'DASHBOARD.RESET_LAYOUT_TITLE' | translate">
+          <ion-icon name="refresh-outline"></ion-icon> {{ 'DASHBOARD.RESET_LAYOUT' | translate }}
+        </button>
+        <button class="btn-pri" (click)="closeCatalogDrawer()">
+          <ion-icon name="checkmark-outline"></ion-icon> {{ 'DASHBOARD.CANVAS_DONE' | translate }}
+        </button>
+      </div>
+    </div>
+  </aside>
+}
