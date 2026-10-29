@@ -31,6 +31,8 @@ import {
   logoGithub
 } from 'ionicons/icons';
 import { AuthService } from '../../core/services/auth.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 
 @Component({
   selector: 'app-welcome',
@@ -48,7 +50,9 @@ import { AuthService } from '../../core/services/auth.service';
     IonMenuButton,
     IonButton,
     IonIcon,
-    IonContent
+    IonContent,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class WelcomePage {

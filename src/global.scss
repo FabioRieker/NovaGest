@@ -418,6 +418,44 @@ body.dark {
    Estilos para Modo Claro
    ========================================================================== */
 body:not(.dark) {
+  // Barra superior principal en Modo Claro (estilo SaaS limpio y armónico)
+  ion-toolbar[color="primary"] {
+    --background: #ffffff !important;
+    --color: #0f172a !important;
+    --border-color: rgba(15, 23, 42, 0.08) !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03) !important;
+
+    ion-title {
+      color: #0f172a !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.01em;
+    }
+
+    ion-menu-button {
+      color: #0f172a !important;
+    }
+
+    ion-button {
+      --color: #334155 !important;
+      color: #334155 !important;
+
+      &[aria-label*="Personalizar"] {
+        --color: #be123c !important;
+        color: #be123c !important;
+        background: rgba(190, 18, 60, 0.06) !important;
+        border: 1px solid rgba(190, 18, 60, 0.22) !important;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+
+      &[aria-label*="Salir"] {
+        --color: #be123c !important;
+        color: #be123c !important;
+      }
+    }
+  }
+
   // Cuadro de Mando en Modo Claro
   .dashboard-content {
     --background: #f8fafc !important;
@@ -426,25 +464,38 @@ body:not(.dark) {
   }
 
   .ambient-nebula-bg {
-    opacity: 0.08 !important;
+    opacity: 0.04 !important;
     .cyber-grid-overlay {
       background-image:
-        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+        linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px) !important;
+    }
+  }
+
+  .widget-box {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03) !important;
+
+    &::before {
+      background: linear-gradient(90deg, #be123c 0%, #e11d48 100%) !important;
+      height: 3px !important;
+      box-shadow: none !important;
+      border-radius: 20px 20px 0 0;
     }
   }
 
   .glass-window {
-    background: rgba(255, 255, 255, 0.95) !important;
-    border-color: rgba(225, 29, 72, 0.12) !important;
-    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03) !important;
+    background: #ffffff !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03) !important;
     color: #0f172a !important;
   }
 
   .glass-subcard {
-    background: #ffffff !important;
+    background: #f8fafc !important;
     border-color: rgba(15, 23, 42, 0.08) !important;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03) !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02) !important;
     color: #0f172a !important;
   }
 
@@ -454,6 +505,37 @@ body:not(.dark) {
 
   .breadcrumb-label, .widget-cat-tag {
     color: #be123c !important;
+  }
+
+  // Tarjetas KPI en Modo Claro
+  .kpi-cards-grid .kpi-box {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02) !important;
+
+    &::before {
+      display: none !important;
+    }
+
+    &.box-ruby {
+      .kpi-icon-bubble { background: #ffe4e6 !important; color: #be123c !important; }
+    }
+    &.box-cyan {
+      .kpi-icon-bubble { background: #e0f2fe !important; color: #0284c7 !important; }
+    }
+    &.box-amber {
+      .kpi-icon-bubble { background: #fef3c7 !important; color: #b45309 !important; }
+    }
+    &.box-purple {
+      .kpi-icon-bubble { background: #f3e8ff !important; color: #7e22ce !important; }
+    }
+
+    .trend-badge {
+      &.trend-up { background: #dcfce7 !important; color: #15803d !important; }
+      &.trend-neutral { background: #e0f2fe !important; color: #0369a1 !important; }
+      &.trend-warning { background: #fef3c7 !important; color: #b45309 !important; }
+      &.trend-danger { background: #ffe4e6 !important; color: #be123c !important; }
+    }
   }
 
   .kpi-number {
@@ -467,6 +549,13 @@ body:not(.dark) {
 
   .kpi-footnote {
     color: #64748b !important;
+  }
+
+  // Medidores Radiales en Modo Claro
+  .radial-dials-grid .dial-box {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02) !important;
   }
 
   .gauge-title {
@@ -670,6 +759,23 @@ body:not(.dark) {
     }
   }
 
+  // Botón flotante Añadir Módulos en Modo Claro
+  .canvas-floating-dock {
+    bottom: 24px !important;
+    right: 24px !important;
+
+    .canvas-fab-btn {
+      background: #be123c !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 16px rgba(190, 18, 60, 0.35) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+
+      .fab-pulse-effect {
+        display: none !important;
+      }
+    }
+  }
+
   // Gestión de Usuarios en Modo Claro
   .cyber-input-item {
     --background: #ffffff !important;
@@ -826,4 +932,12 @@ body:not(.dark) {
     scroll-behavior: auto !important;
   }
 }
+
+// Responsividad para barras de herramientas en pantallas móviles pequeñas
+@media (max-width: 640px) {
+  .toolbar-btn-text {
+    display: none !important;
+  }
+}
+
 

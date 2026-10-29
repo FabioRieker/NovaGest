@@ -19,6 +19,8 @@ import {
 import { addIcons } from 'ionicons';
 import { lockClosedOutline, arrowBackOutline, logOutOutline } from 'ionicons/icons';
 import { AuthService } from '../../core/services/auth.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 
 /**
  * Página de Acceso Denegado (RBAC Guard fallback).
@@ -42,7 +44,9 @@ import { AuthService } from '../../core/services/auth.service';
     IonCardSubtitle,
     IonCardContent,
     IonButton,
-    IonIcon
+    IonIcon,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class UnauthorizedPage {

@@ -35,6 +35,8 @@ import {
 } from 'ionicons/icons';
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 
 /**
  * Manual de Usuario Embebido y Sistema de Ayuda Contextual (RA 6 & FASE 5).
@@ -65,7 +67,9 @@ import { NotificationService } from '../../core/services/notification.service';
     IonLabel,
     IonIcon,
     IonBadge,
-    IonButton
+    IonButton,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class HelpPage {

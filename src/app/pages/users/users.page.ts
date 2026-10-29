@@ -57,6 +57,8 @@ import { NotificationService } from '../../core/services/notification.service';
 import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { User, UserRole } from '../../core/models/user.model';
 import { StatWidgetComponent } from '../../shared/components/stat-widget/stat-widget.component';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password');
@@ -102,7 +104,9 @@ function passwordMatchValidator(control: AbstractControl): ValidationErrors | nu
     IonSegment,
     IonSegmentButton,
     IonLabel,
-    StatWidgetComponent
+    StatWidgetComponent,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class UsersPage implements OnInit {
@@ -155,7 +159,7 @@ export class UsersPage implements OnInit {
   // Medidor dinámico de seguridad de contraseña
   public passwordStrength = signal<{ score: number; label: string; color: string }>({
     score: 0,
-    label: 'Sin ingresar',
+    label: 'USERS.STRENGTH_NONE',
     color: 'medium'
   });
 
@@ -219,7 +223,7 @@ export class UsersPage implements OnInit {
 
   private evaluatePasswordStrength(pass: string): void {
     if (!pass) {
-      this.passwordStrength.set({ score: 0, label: 'Sin ingresar', color: 'medium' });
+      this.passwordStrength.set({ score: 0, label: 'USERS.STRENGTH_NONE', color: 'medium' });
       return;
     }
 
@@ -231,11 +235,11 @@ export class UsersPage implements OnInit {
     if (/[^A-Za-z0-9]/.test(pass)) score++;
 
     if (score <= 2) {
-      this.passwordStrength.set({ score: 25, label: 'Débil', color: 'danger' });
+      this.passwordStrength.set({ score: 25, label: 'USERS.STRENGTH_WEAK', color: 'danger' });
     } else if (score <= 3) {
-      this.passwordStrength.set({ score: 60, label: 'Media', color: 'warning' });
+      this.passwordStrength.set({ score: 60, label: 'USERS.STRENGTH_MEDIUM', color: 'warning' });
     } else {
-      this.passwordStrength.set({ score: 100, label: 'Robusta', color: 'success' });
+      this.passwordStrength.set({ score: 100, label: 'USERS.STRENGTH_STRONG', color: 'success' });
     }
   }
 
@@ -295,7 +299,7 @@ export class UsersPage implements OnInit {
           role: 'user',
           department: 'Operaciones & Logística'
         });
-        this.passwordStrength.set({ score: 0, label: 'Sin ingresar', color: 'medium' });
+        this.passwordStrength.set({ score: 0, label: 'USERS.STRENGTH_NONE', color: 'medium' });
 
         this.loadUsers();
         this.selectedTab.set('list');

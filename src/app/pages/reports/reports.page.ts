@@ -31,6 +31,8 @@ import { NotificationService } from '../../core/services/notification.service';
 import { SqlRestService } from '../../core/services/sql-rest.service';
 import { ExportService } from '../../core/services/export.service';
 import { Product } from '../../core/models/product.model';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 
 /**
  * Vista de Generación y Exportación de Informes (FASE 3 - Paso 3.3 & RA 5).
@@ -57,7 +59,9 @@ import { Product } from '../../core/models/product.model';
     IonCardContent,
     IonButton,
     IonIcon,
-    IonSpinner
+    IonSpinner,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class ReportsPage implements OnInit {

@@ -1,6 +1,6 @@
 <ion-app>
   <!-- Enlace accesible de salto al contenido principal (WCAG 2.4.1) -->
-  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  <a href="#main-content" class="skip-link">{{ 'APP.SKIP_LINK' | translate }}</a>
 
   <ion-split-pane contentId="main-content" when="md">
     <ion-menu contentId="main-content" type="overlay">
@@ -13,7 +13,7 @@
             </div>
             <div>
               <h2 class="app-name">NovaGest <span class="accent-text">ERP</span></h2>
-              <span class="app-version">v1.0 • Aplicación Empresarial</span>
+              <span class="app-version">{{ 'APP.VERSION' | translate }}</span>
             </div>
           </div>
 
@@ -29,24 +29,24 @@
               <div class="user-role-badge">
                 <ion-badge [color]="user.role === 'admin' ? 'primary' : 'medium'">
                   <ion-icon name="shield-checkmark-outline" aria-hidden="true"></ion-icon>
-                  {{ user.role === 'admin' ? 'Administrador' : 'Usuario Estándar' }}
+                  {{ user.role === 'admin' ? ('NAV.ADMIN_ROLE' | translate) : ('NAV.USER_ROLE' | translate) }}
                 </ion-badge>
-                <ion-button fill="clear" size="small" color="danger" (click)="logout()" class="quick-logout-btn" aria-label="Salir de la sesión">
+                <ion-button fill="clear" size="small" color="danger" (click)="logout()" class="quick-logout-btn" [attr.aria-label]="'NAV.LOGOUT' | translate">
                   <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
-                  Salir
+                  {{ 'NAV.QUICK_LOGOUT' | translate }}
                 </ion-button>
               </div>
             </div>
           } @else {
             <div class="guest-box">
-              <p>Sesión no iniciada</p>
+              <p>{{ 'NAV.NO_SESSION' | translate }}</p>
             </div>
           }
         </div>
 
         <!-- Lista de Navegación Global (Side Menu) -->
         <ion-list id="navigation-list" lines="none">
-          <ion-list-header>Navegación Principal</ion-list-header>
+          <ion-list-header>{{ 'NAV.PRINCIPAL' | translate }}</ion-list-header>
 
           @for (p of visiblePages(); track p.url) {
             <ion-menu-toggle auto-hide="false">
@@ -68,11 +68,20 @@
 
         <!-- Sección de Preferencias y Sesión -->
         <div class="menu-bottom-section">
+          <!-- Selector de Idioma (i18n) -->
+          <div class="lang-toggle-row">
+            <div class="lang-label">
+              <ion-icon name="globe-outline" aria-hidden="true"></ion-icon>
+              <span>{{ 'NAV.LANGUAGE' | translate }}</span>
+            </div>
+            <app-lang-switcher></app-lang-switcher>
+          </div>
+
           <!-- Conmutador de Modo Oscuro / Claro -->
           <div class="theme-toggle-row">
             <div class="theme-label">
               <ion-icon [name]="isDarkMode ? 'moon-outline' : 'sunny-outline'" aria-hidden="true"></ion-icon>
-              <span>Modo Oscuro</span>
+              <span>{{ 'NAV.DARK_MODE' | translate }}</span>
             </div>
             <ion-toggle
               [checked]="isDarkMode"
@@ -85,7 +94,7 @@
             <ion-menu-toggle auto-hide="false">
               <ion-button expand="block" fill="outline" color="danger" size="small" (click)="logout()" class="logout-btn">
                 <ion-icon slot="start" name="log-out-outline"></ion-icon>
-                Cerrar Sesión
+                {{ 'NAV.LOGOUT' | translate }}
               </ion-button>
             </ion-menu-toggle>
           }

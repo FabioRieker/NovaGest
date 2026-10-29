@@ -3,11 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/products"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ isEditMode() ? 'Editar Producto' : 'Alta de Nuevo Producto' }}</ion-title>
+    <ion-title>{{ isEditMode() ? ('PRODUCT_FORM.TITLE_EDIT' | translate) : ('PRODUCT_FORM.TITLE_NEW' | translate) }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">
+      <app-lang-switcher [compact]="true"></app-lang-switcher>
+      <ion-button (click)="logout()" color="light" [attr.aria-label]="'NAV.LOGOUT' | translate">
         <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
-        Salir
+        {{ 'NAV.QUICK_LOGOUT' | translate }}
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -17,8 +18,8 @@
   <div class="form-page-container">
     <div class="form-header-intro">
       <div class="badge-tag">INVENTARIO / REGISTRO DE ACTIVOS</div>
-      <h1 class="page-title">{{ isEditMode() ? 'Modificar Registro de Catálogo' : 'Crear Registro de Inventario' }}</h1>
-      <p class="page-subtitle">Formulario empresarial estructurado con validaciones asíncronas de unicidad y control de stock</p>
+      <h1 class="page-title">{{ isEditMode() ? ('PRODUCT_FORM.HEADING_EDIT' | translate) : ('PRODUCT_FORM.HEADING_NEW' | translate) }}</h1>
+      <p class="page-subtitle">{{ 'PRODUCT_FORM.SUBTITLE' | translate }}</p>
     </div>
 
     <div class="form-card glass-panel">
@@ -27,8 +28,8 @@
           <ion-icon name="cube-outline"></ion-icon>
         </div>
         <div>
-          <h2 class="card-main-title">Ficha Técnica & Comercial</h2>
-          <p class="card-sub-title">Complete los campos requeridos marcados con asterisco (*)</p>
+          <h2 class="card-main-title">{{ 'PRODUCT_FORM.CARD_TITLE' | translate }}</h2>
+          <p class="card-sub-title">{{ 'PRODUCT_FORM.CARD_SUBTITLE' | translate }}</p>
         </div>
       </div>
 
@@ -41,7 +42,7 @@
             <div class="field-item">
               <label class="field-label" for="sku-input">
                 <ion-icon name="pricetag-outline"></ion-icon>
-                <span>Código SKU Único *</span>
+                <span>{{ 'PRODUCT_FORM.SKU_LABEL' | translate }}</span>
               </label>
               <div
                 class="input-box-wrapper"
@@ -66,16 +67,16 @@
               </div>
               <div id="sku-feedback" class="field-feedback" role="alert" aria-live="polite">
                 @if (productForm.get('sku')?.pending) {
-                  <span class="pending-msg">Comprobando unicidad del SKU en la base de datos...</span>
+                  <span class="pending-msg">{{ 'PRODUCT_FORM.SKU_CHECKING' | translate }}</span>
                 }
                 @if (productForm.get('sku')?.touched && productForm.get('sku')?.hasError('required')) {
-                  <span class="error-msg">El SKU es obligatorio.</span>
+                  <span class="error-msg">{{ 'PRODUCT_FORM.SKU_REQUIRED' | translate }}</span>
                 }
                 @if (productForm.get('sku')?.touched && productForm.get('sku')?.hasError('pattern')) {
-                  <span class="error-msg">Formato inválido (solo mayúsculas, números y guiones).</span>
+                  <span class="error-msg">{{ 'PRODUCT_FORM.SKU_PATTERN' | translate }}</span>
                 }
                 @if (productForm.get('sku')?.hasError('skuExists')) {
-                  <span class="error-msg">Este SKU ya existe en la base de datos. Elija otro código.</span>
+                  <span class="error-msg">{{ 'PRODUCT_FORM.SKU_EXISTS' | translate }}</span>
                 }
               </div>
             </div>
@@ -84,7 +85,7 @@
             <div class="field-item">
               <label class="field-label" for="name-input">
                 <ion-icon name="cube-outline"></ion-icon>
-                <span>Nombre del Producto / Activo *</span>
+                <span>{{ 'PRODUCT_FORM.NAME_LABEL' | translate }}</span>
               </label>
               <div
                 class="input-box-wrapper"
@@ -103,10 +104,10 @@
               </div>
               <div id="name-feedback" class="field-feedback" role="alert" aria-live="polite">
                 @if (productForm.get('name')?.touched && productForm.get('name')?.hasError('required')) {
-                  <span class="error-msg">El nombre es requerido.</span>
+                  <span class="error-msg">{{ 'PRODUCT_FORM.NAME_REQUIRED' | translate }}</span>
                 }
                 @if (productForm.get('name')?.touched && productForm.get('name')?.hasError('minlength')) {
-                  <span class="error-msg">Debe tener al menos 4 caracteres.</span>
+                  <span class="error-msg">{{ 'PRODUCT_FORM.NAME_MIN' | translate }}</span>
                 }
               </div>
             </div>
@@ -118,14 +119,14 @@
             <div class="field-item">
               <label class="field-label">
                 <ion-icon name="grid-outline"></ion-icon>
-                <span>Categoría Empresarial *</span>
+                <span>{{ 'PRODUCT_FORM.CATEGORY_LABEL' | translate }}</span>
               </label>
               <div class="input-box-wrapper select-box">
                 <ion-select
                   formControlName="category"
                   interface="popover"
                   aria-label="Seleccionar categoría"
-                  placeholder="Seleccione categoría"
+                  [placeholder]="'PRODUCT_FORM.CATEGORY_PLACEHOLDER' | translate"
                   class="clean-ion-select"
                 >
                   @for (cat of categories; track cat) {
@@ -140,7 +141,7 @@
             <div class="field-item">
               <label class="field-label" for="email-input">
                 <ion-icon name="mail-outline"></ion-icon>
-                <span>Correo de Contacto del Proveedor *</span>
+                <span>{{ 'PRODUCT_FORM.SUPPLIER_LABEL' | translate }}</span>
               </label>
               <div
                 class="input-box-wrapper"
@@ -159,7 +160,7 @@
               </div>
               <div id="email-feedback" class="field-feedback" role="alert" aria-live="polite">
                 @if (productForm.get('supplierEmail')?.touched && productForm.get('supplierEmail')?.errors) {
-                  <span class="error-msg">Introduzca un correo electrónico válido (ej. contacto&#64;proveedor.com).</span>
+                  <span class="error-msg">{{ 'PRODUCT_FORM.SUPPLIER_INVALID' | translate }}</span>
                 }
               </div>
             </div>
@@ -171,7 +172,7 @@
             <div class="field-item">
               <label class="field-label" for="price-input">
                 <ion-icon name="cash-outline"></ion-icon>
-                <span>Precio Unitario (€) *</span>
+                <span>{{ 'PRODUCT_FORM.PRICE_LABEL' | translate }}</span>
               </label>
               <div
                 class="input-box-wrapper"
@@ -193,7 +194,7 @@
               </div>
               <div id="price-feedback" class="field-feedback" role="alert" aria-live="polite">
                 @if (productForm.get('price')?.touched && productForm.get('price')?.errors) {
-                  <span class="error-msg">El precio debe ser un número positivo mayor a 0.</span>
+                  <span class="error-msg">{{ 'PRODUCT_FORM.PRICE_INVALID' | translate }}</span>
                 }
               </div>
             </div>
@@ -202,7 +203,7 @@
             <div class="field-item">
               <label class="field-label" for="stock-input">
                 <ion-icon name="layers-outline"></ion-icon>
-                <span>Unidades en Stock *</span>
+                <span>{{ 'PRODUCT_FORM.STOCK_LABEL' | translate }}</span>
               </label>
               <div
                 class="input-box-wrapper"
@@ -220,11 +221,11 @@
                   [attr.aria-invalid]="productForm.get('stock')?.touched && productForm.get('stock')?.invalid"
                   aria-describedby="stock-feedback"
                 />
-                <span class="input-unit-badge">Uds</span>
+                <span class="input-unit-badge">{{ 'PRODUCTS.UNITS' | translate }}</span>
               </div>
               <div id="stock-feedback" class="field-feedback" role="alert" aria-live="polite">
                 @if (productForm.get('stock')?.touched && productForm.get('stock')?.errors) {
-                  <span class="error-msg">El stock no puede ser un valor negativo.</span>
+                  <span class="error-msg">{{ 'PRODUCT_FORM.STOCK_INVALID' | translate }}</span>
                 }
               </div>
             </div>
@@ -235,7 +236,7 @@
             <div class="field-item">
               <label class="field-label">
                 <ion-icon name="image-outline"></ion-icon>
-                <span>Fotografía del Producto (Supabase Storage)</span>
+                <span>{{ 'PRODUCT_FORM.IMAGE_LABEL' | translate }}</span>
               </label>
 
               <input
@@ -254,8 +255,8 @@
                       <img [src]="imagePreviewUrl()" alt="Previsualización de producto" class="preview-thumbnail" />
                     </div>
                     <div class="preview-info">
-                      <div class="preview-title">Imagen Asociada al Catálogo</div>
-                      <div class="preview-subtitle">Almacenada en bucket 'product-images' con redundancia local</div>
+                      <div class="preview-title">{{ 'PRODUCT_FORM.IMAGE_ATTACHED' | translate }}</div>
+                      <div class="preview-subtitle">{{ 'PRODUCT_FORM.IMAGE_STORAGE_INFO' | translate }}</div>
                       <div class="preview-actions">
                         <button
                           type="button"
@@ -264,7 +265,7 @@
                           [disabled]="isUploadingImage()"
                         >
                           <ion-icon name="cloud-upload-outline"></ion-icon>
-                          <span>Cambiar Foto</span>
+                          <span>{{ 'PRODUCT_FORM.CHANGE_PHOTO' | translate }}</span>
                         </button>
                         <button
                           type="button"
@@ -273,7 +274,7 @@
                           [disabled]="isUploadingImage()"
                         >
                           <ion-icon name="trash-outline"></ion-icon>
-                          <span>Eliminar</span>
+                          <span>{{ 'COMMON.DELETE' | translate }}</span>
                         </button>
                       </div>
                     </div>
@@ -290,7 +291,7 @@
                     @if (isUploadingImage()) {
                       <div class="uploading-state">
                         <ion-spinner name="crescent" color="primary"></ion-spinner>
-                        <span>Subiendo fotografía a Supabase Storage...</span>
+                        <span>{{ 'PRODUCT_FORM.UPLOADING_IMAGE' | translate }}</span>
                       </div>
                     } @else {
                       <div class="dropzone-content">
@@ -298,11 +299,11 @@
                           <ion-icon name="cloud-upload-outline"></ion-icon>
                         </div>
                         <div class="dropzone-texts">
-                          <span class="dropzone-primary">Haga clic para examinar y cargar fotografía</span>
-                          <span class="dropzone-secondary">Formatos soportados: JPG, PNG o WebP (Máx. 5 MB)</span>
+                          <span class="dropzone-primary">{{ 'PRODUCT_FORM.DROPZONE_PRIMARY' | translate }}</span>
+                          <span class="dropzone-secondary">{{ 'PRODUCT_FORM.DROPZONE_SECONDARY' | translate }}</span>
                         </div>
                         <button type="button" class="dropzone-browse-btn">
-                          Examinar Archivo
+                          {{ 'PRODUCT_FORM.BROWSE_FILE' | translate }}
                         </button>
                       </div>
                     }
@@ -317,7 +318,7 @@
             <div class="field-item">
               <label class="field-label" for="desc-input">
                 <ion-icon name="document-text-outline"></ion-icon>
-                <span>Descripción Detallada *</span>
+                <span>{{ 'PRODUCT_FORM.DESC_LABEL' | translate }}</span>
               </label>
               <div
                 class="input-box-wrapper textarea-box"
@@ -328,7 +329,7 @@
                   id="desc-input"
                   rows="3"
                   formControlName="description"
-                  placeholder="Especifique características técnicas, compatibilidad, ubicación o notas de gestión..."
+                  [placeholder]="'PRODUCT_FORM.DESC_PLACEHOLDER' | translate"
                   class="clean-native-textarea"
                   [attr.aria-invalid]="productForm.get('description')?.touched && productForm.get('description')?.invalid"
                   aria-describedby="desc-feedback"
@@ -336,7 +337,7 @@
               </div>
               <div id="desc-feedback" class="field-feedback" role="alert" aria-live="polite">
                 @if (productForm.get('description')?.touched && productForm.get('description')?.errors) {
-                  <span class="error-msg">La descripción debe tener entre 10 y 500 caracteres.</span>
+                  <span class="error-msg">{{ 'PRODUCT_FORM.DESC_INVALID' | translate }}</span>
                 }
               </div>
             </div>
@@ -346,7 +347,7 @@
           <div class="form-actions-bar">
             <button type="button" class="form-btn cancel-btn" (click)="cancel()">
               <ion-icon name="close-outline"></ion-icon>
-              <span>Cancelar</span>
+              <span>{{ 'COMMON.CANCEL' | translate }}</span>
             </button>
 
             <button
@@ -357,10 +358,10 @@
             >
               @if (isSaving()) {
                 <ion-spinner name="crescent" class="btn-spinner"></ion-spinner>
-                <span>Guardando en SQL...</span>
+                <span>{{ 'PRODUCT_FORM.SAVING' | translate }}</span>
               } @else {
                 <ion-icon name="save-outline"></ion-icon>
-                <span>{{ isEditMode() ? 'Actualizar Producto' : 'Registrar Producto' }}</span>
+                <span>{{ isEditMode() ? ('PRODUCT_FORM.BTN_UPDATE' | translate) : ('PRODUCT_FORM.BTN_CREATE' | translate) }}</span>
               }
             </button>
           </div>

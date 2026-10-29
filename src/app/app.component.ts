@@ -48,13 +48,18 @@ import {
   personAddOutline,
   personAddSharp,
   homeOutline,
-  homeSharp
+  homeSharp,
+  globeOutline,
+  globeSharp
 } from 'ionicons/icons';
 import { AuthService } from './core/services/auth.service';
 import { NotificationService } from './core/services/notification.service';
+import { TranslationService } from './core/services/translation.service';
+import { TranslatePipe } from './shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from './shared/components/lang-switcher/lang-switcher.component';
 
 interface NavPage {
-  title: string;
+  key: string;
   url: string;
   icon: string;
   adminOnly?: boolean;
@@ -63,7 +68,7 @@ interface NavPage {
 /**
  * Componente Raíz de la Aplicación (FASE 1 - Paso 1.1).
  * Implementa el sistema de navegación global mediante Side Menu responsivo con IonSplitPane.
- * Adapta dinámicamente las opciones del menú según el rol autenticado (RBAC).
+ * Adapta dinámicamente las opciones del menú según el rol autenticado (RBAC) e idioma seleccionado (i18n).
  */
 @Component({
   selector: 'app-root',
@@ -88,43 +93,49 @@ interface NavPage {
     IonRouterOutlet,
     IonBadge,
     IonButton,
-    IonToggle
+    IonToggle,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class AppComponent {
   public authService = inject(AuthService);
+  public translationService = inject(TranslationService);
   private notificationService = inject(NotificationService);
   private router = inject(Router);
 
   public isDarkMode = false;
 
   private readonly allPages: NavPage[] = [
-    { title: 'Inicio & Bienvenida', url: '/', icon: 'home' },
-    { title: 'Cuadro de Mando', url: '/dashboard', icon: 'stats-chart', adminOnly: true },
-    { title: 'Inventario & Catálogo', url: '/products', icon: 'cube' },
-    { title: 'Alta de Producto', url: '/product-form', icon: 'add-circle', adminOnly: true },
-    { title: 'Auditoría en Tiempo Real', url: '/realtime-audit', icon: 'pulse', adminOnly: true },
-    { title: 'Gestión de Usuarios', url: '/users', icon: 'people', adminOnly: true },
-    { title: 'Informes & Exportación', url: '/reports', icon: 'document-text' },
-    { title: 'Manual de Usuario', url: '/help', icon: 'help-circle' }
+    { key: 'NAV.HOME', url: '/', icon: 'home' },
+    { key: 'NAV.DASHBOARD', url: '/dashboard', icon: 'stats-chart', adminOnly: true },
+    { key: 'NAV.PRODUCTS', url: '/products', icon: 'cube' },
+    { key: 'NAV.NEW_PRODUCT', url: '/product-form', icon: 'add-circle', adminOnly: true },
+    { key: 'NAV.REALTIME_AUDIT', url: '/realtime-audit', icon: 'pulse', adminOnly: true },
+    { key: 'NAV.USERS', url: '/users', icon: 'people', adminOnly: true },
+    { key: 'NAV.REPORTS', url: '/reports', icon: 'document-text' },
+    { key: 'NAV.HELP', url: '/help', icon: 'help-circle' }
   ];
 
-  // Páginas visibles filtradas reactivamente según sesión y rol
+  // Páginas visibles filtradas reactivamente según sesión, rol e idioma
   public visiblePages = computed(() => {
+    // Suscripción al signal de idioma para recálculo instantáneo
+    this.translationService.currentLang();
     const user = this.authService.currentUserSignal();
-    if (!user) {
-      return [
-        { title: 'Inicio & Bienvenida', url: '/', icon: 'home' },
-        { title: 'Iniciar Sesión', url: '/login', icon: 'log-in' },
-        { title: 'Manual de Usuario', url: '/help', icon: 'help-circle' }
-      ];
-    }
 
-    if (user.role === 'admin') {
-      return this.allPages;
-    }
+    const pagesToMap = !user
+      ? [
+          { key: 'NAV.HOME', url: '/', icon: 'home' },
+          { key: 'NAV.LOGIN', url: '/login', icon: 'log-in' },
+          { key: 'NAV.HELP', url: '/help', icon: 'help-circle' }
+        ]
+      : (user.role === 'admin' ? this.allPages : this.allPages.filter(p => !p.adminOnly));
 
-    return this.allPages.filter(p => !p.adminOnly);
+    return pagesToMap.map(p => ({
+      title: this.translationService.t(p.key),
+      url: p.url,
+      icon: p.icon
+    }));
   });
 
   constructor() {
@@ -157,7 +168,9 @@ export class AppComponent {
       personAddOutline,
       personAddSharp,
       homeOutline,
-      homeSharp
+      homeSharp,
+      globeOutline,
+      globeSharp
     });
 
     this.checkInitialTheme();

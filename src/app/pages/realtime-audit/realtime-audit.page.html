@@ -3,14 +3,15 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Auditoría en Tiempo Real (Supabase Realtime)</ion-title>
+    <ion-title>{{ 'REALTIME_AUDIT.TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="simulatePing()" aria-label="Emitir evento de prueba">
+      <app-lang-switcher [compact]="true"></app-lang-switcher>
+      <ion-button (click)="simulatePing()" [attr.aria-label]="'REALTIME_AUDIT.EMIT_BTN' | translate">
         <ion-icon slot="icon-only" name="radio-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">
+      <ion-button (click)="logout()" color="light" [attr.aria-label]="'NAV.LOGOUT' | translate">
         <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
-        Salir
+        {{ 'NAV.QUICK_LOGOUT' | translate }}
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -20,18 +21,18 @@
   <div class="audit-container">
     <div class="page-top-bar">
       <div>
-        <h1 class="page-title">Flujo Reactivo de Eventos (Supabase Realtime)</h1>
-        <p class="page-subtitle">Suscripción WebSocket continua a eventos de base de datos sin bloqueo del hilo principal (RA 5)</p>
+        <h1 class="page-title">{{ 'REALTIME_AUDIT.PAGE_TITLE' | translate }}</h1>
+        <p class="page-subtitle">{{ 'REALTIME_AUDIT.PAGE_SUBTITLE' | translate }}</p>
       </div>
 
       <div class="action-buttons-group">
         <ion-button fill="outline" color="secondary" size="small" (click)="simulatePing()">
           <ion-icon slot="start" name="radio-outline"></ion-icon>
-          Emitir Evento
+          {{ 'REALTIME_AUDIT.EMIT_BTN' | translate }}
         </ion-button>
         <ion-button fill="outline" color="danger" size="small" (click)="clearAudit()">
           <ion-icon slot="start" name="trash-outline"></ion-icon>
-          Limpiar Historial
+          {{ 'REALTIME_AUDIT.CLEAR_BTN' | translate }}
         </ion-button>
       </div>
     </div>
@@ -39,23 +40,23 @@
     <!-- Barra de Filtro de Severidad -->
     <div class="filter-card">
       <div class="filter-item">
-        <span class="filter-label">Severidad:</span>
+        <span class="filter-label">{{ 'REALTIME_AUDIT.SEVERITY_LABEL' | translate }}:</span>
         <ion-select
           interface="popover"
           [value]="severityFilter()"
           (ionChange)="severityFilter.set($event.detail.value); onFilterChange()"
           aria-label="Filtrar por severidad"
         >
-          <ion-select-option value="ALL">Todos los Niveles</ion-select-option>
-          <ion-select-option value="critical">Crítico</ion-select-option>
-          <ion-select-option value="warning">Advertencia</ion-select-option>
-          <ion-select-option value="success">Éxito</ion-select-option>
-          <ion-select-option value="info">Informativo</ion-select-option>
+          <ion-select-option value="ALL">{{ 'REALTIME_AUDIT.ALL_LEVELS' | translate }}</ion-select-option>
+          <ion-select-option value="critical">{{ 'REALTIME_AUDIT.CRITICAL' | translate }}</ion-select-option>
+          <ion-select-option value="warning">{{ 'REALTIME_AUDIT.WARNING' | translate }}</ion-select-option>
+          <ion-select-option value="success">{{ 'REALTIME_AUDIT.SUCCESS' | translate }}</ion-select-option>
+          <ion-select-option value="info">{{ 'REALTIME_AUDIT.INFO' | translate }}</ion-select-option>
         </ion-select>
       </div>
 
       <div class="stats-counter" aria-live="polite">
-        <span>Mostrando <strong>{{ filteredLogs().length }}</strong> eventos</span>
+        <span>{{ 'REALTIME_AUDIT.SHOWING_EVENTS' | translate:{ count: filteredLogs().length } }}</span>
       </div>
     </div>
 
@@ -63,7 +64,7 @@
     <div class="logs-feed" role="feed" aria-label="Lista de eventos de auditoría">
       @if (filteredLogs().length === 0) {
         <div class="empty-state">
-          <p>No se encontraron eventos para el filtro seleccionado.</p>
+          <p>{{ 'REALTIME_AUDIT.NO_EVENTS' | translate }}</p>
         </div>
       } @else {
         @for (log of filteredLogs(); track log.id) {
@@ -90,8 +91,8 @@
             <div class="log-card-body">
               <p class="log-details">{{ log.details }}</p>
               <div class="log-footer">
-                <span class="log-user">Emitido por: <strong>{{ log.userEmail }}</strong></span>
-                <span class="log-id">ID Registro: {{ log.id }}</span>
+                <span class="log-user">{{ 'REALTIME_AUDIT.ISSUED_BY' | translate }}: <strong>{{ log.userEmail }}</strong></span>
+                <span class="log-id">{{ 'REALTIME_AUDIT.RECORD_ID' | translate }}: {{ log.id }}</span>
               </div>
             </div>
           </article>
