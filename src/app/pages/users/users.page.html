@@ -43,55 +43,50 @@
     <ion-grid class="stats-grid">
       <ion-row>
         <ion-col size="12" size-sm="6" size-lg="3">
-          <div class="kpi-card kpi-primary">
-            <div class="kpi-icon-box">
-              <ion-icon name="people-outline"></ion-icon>
-            </div>
-            <div class="kpi-data">
-              <span class="kpi-title">Total Usuarios</span>
-              <span class="kpi-value">{{ totalUsersCount() }}</span>
-              <span class="kpi-meta">Cuentas activas en sistema</span>
-            </div>
-          </div>
+          <app-stat-widget
+            title="Total Usuarios"
+            [value]="totalUsersCount()"
+            subtitle="Cuentas activas en sistema"
+            icon="people-outline"
+            color="primary"
+            [clickable]="true"
+            (widgetClick)="onStatWidgetClick('ALL')"
+          ></app-stat-widget>
         </ion-col>
 
         <ion-col size="12" size-sm="6" size-lg="3">
-          <div class="kpi-card kpi-danger">
-            <div class="kpi-icon-box">
-              <ion-icon name="shield-checkmark-outline"></ion-icon>
-            </div>
-            <div class="kpi-data">
-              <span class="kpi-title">Administradores</span>
-              <span class="kpi-value">{{ adminCount() }}</span>
-              <span class="kpi-meta">Privilegios totales RBAC</span>
-            </div>
-          </div>
+          <app-stat-widget
+            title="Administradores"
+            [value]="adminCount()"
+            subtitle="Privilegios totales RBAC"
+            icon="shield-checkmark-outline"
+            color="danger"
+            [clickable]="true"
+            (widgetClick)="onStatWidgetClick('admin')"
+          ></app-stat-widget>
         </ion-col>
 
         <ion-col size="12" size-sm="6" size-lg="3">
-          <div class="kpi-card kpi-secondary">
-            <div class="kpi-icon-box">
-              <ion-icon name="person-outline"></ion-icon>
-            </div>
-            <div class="kpi-data">
-              <span class="kpi-title">Usuarios Estándar</span>
-              <span class="kpi-value">{{ standardCount() }}</span>
-              <span class="kpi-meta">Operaciones y reportes</span>
-            </div>
-          </div>
+          <app-stat-widget
+            title="Usuarios Estándar"
+            [value]="standardCount()"
+            subtitle="Operaciones y reportes"
+            icon="person-outline"
+            color="secondary"
+            [clickable]="true"
+            (widgetClick)="onStatWidgetClick('user')"
+          ></app-stat-widget>
         </ion-col>
 
         <ion-col size="12" size-sm="6" size-lg="3">
-          <div class="kpi-card kpi-success">
-            <div class="kpi-icon-box">
-              <ion-icon name="business-outline"></ion-icon>
-            </div>
-            <div class="kpi-data">
-              <span class="kpi-title">Departamentos</span>
-              <span class="kpi-value">{{ departmentsCount() }}</span>
-              <span class="kpi-meta">Áreas corporativas activas</span>
-            </div>
-          </div>
+          <app-stat-widget
+            title="Departamentos"
+            [value]="departmentsCount()"
+            subtitle="Áreas corporativas activas"
+            icon="business-outline"
+            color="success"
+            [clickable]="false"
+          ></app-stat-widget>
         </ion-col>
       </ion-row>
     </ion-grid>

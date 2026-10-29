@@ -90,6 +90,8 @@
       [canDelete]="authService.isAdminSignal()"
       [canView]="true"
       (actionClick)="onTableAction($event)"
+      (sortChange)="onSortChange($event)"
+      (pageChange)="onPageChange($event)"
     ></app-data-table>
   </div>
 </ion-content>

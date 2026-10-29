@@ -56,6 +56,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
 import { User, UserRole } from '../../core/models/user.model';
+import { StatWidgetComponent } from '../../shared/components/stat-widget/stat-widget.component';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password');
@@ -100,7 +101,8 @@ function passwordMatchValidator(control: AbstractControl): ValidationErrors | nu
     IonSearchbar,
     IonSegment,
     IonSegmentButton,
-    IonLabel
+    IonLabel,
+    StatWidgetComponent
   ]
 })
 export class UsersPage implements OnInit {
@@ -113,6 +115,11 @@ export class UsersPage implements OnInit {
   public userForm: FormGroup;
   public users = signal<User[]>([]);
   public isLoading = signal(false);
+
+  public onStatWidgetClick(role: 'ALL' | 'admin' | 'user'): void {
+    this.selectedTab.set('list');
+    this.filterRole.set(role);
+  }
   public isSubmitting = signal(false);
   public showPassword = signal(false);
   public showConfirmPassword = signal(false);

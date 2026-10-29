@@ -70,9 +70,9 @@ export interface TableActionPayload<T = any> {
     IonBadge
   ]
 })
-export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
+export class DataTableComponent<T = any> implements OnInit, OnChanges, OnDestroy {
   @Input() columns: TableColumn[] = [];
-  @Input() data: any[] = [];
+  @Input() data: readonly T[] = [];
   @Input() pageSize = 6;
   @Input() searchPlaceholder = 'Buscar registros...';
   @Input() loading = false;
@@ -81,9 +81,16 @@ export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() canEdit = true;
   @Input() canDelete = true;
   @Input() canView = true;
+  @Input() badgeColorMap: Record<string, string> = {
+    in_stock: 'success',
+    low_stock: 'warning',
+    out_of_stock: 'danger',
+    admin: 'primary',
+    user: 'medium'
+  };
 
-  @Output() rowClick = new EventEmitter<any>();
-  @Output() actionClick = new EventEmitter<TableActionPayload>();
+  @Output() rowClick = new EventEmitter<T>();
+  @Output() actionClick = new EventEmitter<TableActionPayload<T>>();
   @Output() sortChange = new EventEmitter<{ column: string; direction: 'asc' | 'desc' }>();
   @Output() pageChange = new EventEmitter<number>();
 
@@ -223,14 +230,7 @@ export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public getBadgeColor(status: string): string {
-    switch (status) {
-      case 'in_stock': return 'success';
-      case 'low_stock': return 'warning';
-      case 'out_of_stock': return 'danger';
-      case 'admin': return 'primary';
-      case 'user': return 'medium';
-      default: return 'secondary';
-    }
+    return this.badgeColorMap[status] || 'secondary';
   }
 
   public formatCellValue(item: any, col: TableColumn): string {

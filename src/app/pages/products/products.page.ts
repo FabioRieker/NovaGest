@@ -68,6 +68,16 @@ export class ProductsPage implements OnInit {
   public isLoading = signal(false);
   public selectedCategory = signal<string>('ALL');
   public selectedStatus = signal<string>('ALL');
+  public currentSort = signal<{ column: string; direction: 'asc' | 'desc' } | null>(null);
+  public currentPage = signal<number>(1);
+
+  public onSortChange(sort: { column: string; direction: 'asc' | 'desc' }): void {
+    this.currentSort.set(sort);
+  }
+
+  public onPageChange(page: number): void {
+    this.currentPage.set(page);
+  }
 
   // Configuración de columnas para <app-data-table>
   public tableColumns: TableColumn[] = [
