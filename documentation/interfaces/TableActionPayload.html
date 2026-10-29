@@ -345,9 +345,9 @@ export interface TableActionPayload&lt;T &#x3D; any&gt; {
     IonBadge
   ]
 })
-export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
+export class DataTableComponent&lt;T extends Record&lt;string, any&gt; &#x3D; Record&lt;string, any&gt;&gt; implements OnInit, OnChanges, OnDestroy {
   @Input() columns: TableColumn[] &#x3D; [];
-  @Input() data: any[] &#x3D; [];
+  @Input() data: readonly T[] &#x3D; [];
   @Input() pageSize &#x3D; 6;
   @Input() searchPlaceholder &#x3D; &#x27;Buscar registros...&#x27;;
   @Input() loading &#x3D; false;
@@ -356,9 +356,16 @@ export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() canEdit &#x3D; true;
   @Input() canDelete &#x3D; true;
   @Input() canView &#x3D; true;
+  @Input() badgeColorMap: Record&lt;string, string&gt; &#x3D; {
+    in_stock: &#x27;success&#x27;,
+    low_stock: &#x27;warning&#x27;,
+    out_of_stock: &#x27;danger&#x27;,
+    admin: &#x27;primary&#x27;,
+    user: &#x27;medium&#x27;
+  };
 
-  @Output() rowClick &#x3D; new EventEmitter&lt;any&gt;();
-  @Output() actionClick &#x3D; new EventEmitter&lt;TableActionPayload&gt;();
+  @Output() rowClick &#x3D; new EventEmitter&lt;T&gt;();
+  @Output() actionClick &#x3D; new EventEmitter&lt;TableActionPayload&lt;T&gt;&gt;();
   @Output() sortChange &#x3D; new EventEmitter&lt;{ column: string; direction: &#x27;asc&#x27; | &#x27;desc&#x27; }&gt;();
   @Output() pageChange &#x3D; new EventEmitter&lt;number&gt;();
 
@@ -498,14 +505,7 @@ export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public getBadgeColor(status: string): string {
-    switch (status) {
-      case &#x27;in_stock&#x27;: return &#x27;success&#x27;;
-      case &#x27;low_stock&#x27;: return &#x27;warning&#x27;;
-      case &#x27;out_of_stock&#x27;: return &#x27;danger&#x27;;
-      case &#x27;admin&#x27;: return &#x27;primary&#x27;;
-      case &#x27;user&#x27;: return &#x27;medium&#x27;;
-      default: return &#x27;secondary&#x27;;
-    }
+    return this.badgeColorMap[status] || &#x27;secondary&#x27;;
   }
 
   public formatCellValue(item: any, col: TableColumn): string {

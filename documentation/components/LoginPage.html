@@ -1051,7 +1051,11 @@ export class LoginPage {
         this.notificationService.showToast(&#x60;¡Bienvenido/a, ${user.name}!&#x60;, &#x27;success&#x27;);
 
         const returnUrl &#x3D; this.route.snapshot.queryParams[&#x27;returnUrl&#x27;];
-        if (returnUrl &amp;&amp; returnUrl.startsWith(&#x27;/&#x27;) &amp;&amp; !returnUrl.startsWith(&#x27;//&#x27;)) {
+        const allowedRoutes &#x3D; [&#x27;/dashboard&#x27;, &#x27;/products&#x27;, &#x27;/users&#x27;, &#x27;/realtime-audit&#x27;, &#x27;/reports&#x27;, &#x27;/help&#x27;, &#x27;/product-form&#x27;];
+        const isSafeReturnUrl &#x3D; returnUrl &amp;&amp; returnUrl.startsWith(&#x27;/&#x27;) &amp;&amp; !returnUrl.startsWith(&#x27;//&#x27;)
+          &amp;&amp; allowedRoutes.some(route &#x3D;&gt; returnUrl &#x3D;&#x3D;&#x3D; route || returnUrl.startsWith(&#x60;${route}/&#x60;) || returnUrl.startsWith(&#x60;${route}?&#x60;));
+
+        if (isSafeReturnUrl) {
           this.router.navigateByUrl(returnUrl);
         } else if (user.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;) {
           this.router.navigate([&#x27;/dashboard&#x27;]);

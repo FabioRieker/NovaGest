@@ -410,6 +410,11 @@
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#estimatedReorderCost" >estimatedReorderCost</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
                                 <a href="#exportService" >exportService</a>
                             </li>
@@ -452,6 +457,11 @@
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Public</span>
                                 <a href="#isNotificationsOpen" >isNotificationsOpen</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isPingingTelemetry" >isPingingTelemetry</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
@@ -527,6 +537,11 @@
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
                                 <a href="#subscriptions" >subscriptions</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#telemetryLatency" >telemetryLatency</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
@@ -609,6 +624,11 @@
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Public</span>
                                 <a href="#closeCatalogDrawer" >closeCatalogDrawer</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#createReorderPO" >createReorderPO</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
@@ -726,6 +746,11 @@
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Public</span>
+                                <a href="#pingTelemetry" >pingTelemetry</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
                                 <a href="#prevMonth" >prevMonth</a>
                             </li>
                             <li>
@@ -826,7 +851,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="521" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:521</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="585" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:585</a></div>
                             </td>
                         </tr>
 
@@ -865,8 +890,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="782"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:782</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="848"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:848</a></div>
                         </td>
                     </tr>
 
@@ -936,8 +961,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="719"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:719</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="785"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:785</a></div>
                         </td>
                     </tr>
 
@@ -1007,8 +1032,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="690"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:690</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="756"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:756</a></div>
                         </td>
                     </tr>
 
@@ -1046,8 +1071,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="755"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:755</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="821"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:821</a></div>
                         </td>
                     </tr>
 
@@ -1085,8 +1110,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="712"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:712</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="778"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:778</a></div>
                         </td>
                     </tr>
 
@@ -1098,6 +1123,75 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createReorderPO"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>createReorderPO</b></span>
+                        <a href="#createReorderPO"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createReorderPO(product: <a href="../interfaces/Product.html" target="_self">Product</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="567"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:567</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>product</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Product.html" target="_self" >Product</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1124,8 +1218,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="825"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:825</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="891"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:891</a></div>
                         </td>
                     </tr>
 
@@ -1196,8 +1290,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="606"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:606</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="672"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:672</a></div>
                         </td>
                     </tr>
 
@@ -1235,8 +1329,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="1229"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1229</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1295"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1295</a></div>
                         </td>
                     </tr>
 
@@ -1274,8 +1368,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="1225"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1225</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1291"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1291</a></div>
                         </td>
                     </tr>
 
@@ -1313,8 +1407,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="951"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:951</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1017"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1017</a></div>
                         </td>
                     </tr>
 
@@ -1382,8 +1476,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="747"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:747</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="813"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:813</a></div>
                         </td>
                     </tr>
 
@@ -1451,8 +1545,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="946"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:946</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1012"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1012</a></div>
                         </td>
                     </tr>
 
@@ -1520,8 +1614,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="644"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:644</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="710"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:710</a></div>
                         </td>
                     </tr>
 
@@ -1559,8 +1653,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="617"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:617</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="683"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:683</a></div>
                         </td>
                     </tr>
 
@@ -1598,8 +1692,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="1233"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1233</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1299"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1299</a></div>
                         </td>
                     </tr>
 
@@ -1637,8 +1731,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="685"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:685</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="751"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:751</a></div>
                         </td>
                     </tr>
 
@@ -1676,8 +1770,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="679"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:679</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="745"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:745</a></div>
                         </td>
                     </tr>
 
@@ -1745,8 +1839,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="840"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:840</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="906"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:906</a></div>
                         </td>
                     </tr>
 
@@ -1828,8 +1922,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="957"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:957</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1023"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1023</a></div>
                         </td>
                     </tr>
 
@@ -1897,8 +1991,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="961"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:961</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1027"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1027</a></div>
                         </td>
                     </tr>
 
@@ -1966,8 +2060,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="979"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:979</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1045"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1045</a></div>
                         </td>
                     </tr>
 
@@ -2003,8 +2097,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="598"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:598</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="664"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:664</a></div>
                         </td>
                     </tr>
 
@@ -2040,8 +2134,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="578"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:578</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="644"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:644</a></div>
                         </td>
                     </tr>
 
@@ -2079,8 +2173,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="910"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:910</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="976"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:976</a></div>
                         </td>
                     </tr>
 
@@ -2118,8 +2212,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="904"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:904</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="970"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:970</a></div>
                         </td>
                     </tr>
 
@@ -2199,8 +2293,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="893"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:893</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="959"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:959</a></div>
                         </td>
                     </tr>
 
@@ -2280,8 +2374,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="881"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:881</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="947"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:947</a></div>
                         </td>
                     </tr>
 
@@ -2361,8 +2455,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="915"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:915</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="981"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:981</a></div>
                         </td>
                     </tr>
 
@@ -2424,6 +2518,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="pingTelemetry"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>pingTelemetry</b></span>
+                        <a href="#pingTelemetry"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>pingTelemetry()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="550"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:550</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="prevMonth"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
@@ -2442,8 +2575,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="974"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:974</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1040"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1040</a></div>
                         </td>
                     </tr>
 
@@ -2481,8 +2614,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="766"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:766</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="832"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:832</a></div>
                         </td>
                     </tr>
 
@@ -2552,8 +2685,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="1152"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1152</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1218"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1218</a></div>
                         </td>
                     </tr>
 
@@ -2594,8 +2727,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="991"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:991</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1057"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1057</a></div>
                         </td>
                     </tr>
 
@@ -2633,8 +2766,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="1003"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1003</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1069"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1069</a></div>
                         </td>
                     </tr>
 
@@ -2674,8 +2807,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="873"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:873</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="939"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:939</a></div>
                         </td>
                     </tr>
 
@@ -2715,8 +2848,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="639"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:639</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="705"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:705</a></div>
                         </td>
                     </tr>
 
@@ -2784,8 +2917,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="984"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:984</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1050"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1050</a></div>
                         </td>
                     </tr>
 
@@ -2853,8 +2986,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="969"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:969</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1035"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:1035</a></div>
                         </td>
                     </tr>
 
@@ -2922,8 +3055,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="589"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:589</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="655"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:655</a></div>
                         </td>
                     </tr>
 
@@ -2961,8 +3094,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="813"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:813</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="879"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:879</a></div>
                         </td>
                     </tr>
 
@@ -3044,8 +3177,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="708"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:708</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="774"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:774</a></div>
                         </td>
                     </tr>
 
@@ -3083,8 +3216,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="759"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:759</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="825"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:825</a></div>
                         </td>
                     </tr>
 
@@ -3122,8 +3255,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="696"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:696</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="762"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:762</a></div>
                         </td>
                     </tr>
 
@@ -3161,8 +3294,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="675"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:675</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="741"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:741</a></div>
                         </td>
                     </tr>
 
@@ -3200,8 +3333,8 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="801"
-                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:801</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="867"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:867</a></div>
                         </td>
                     </tr>
 
@@ -3281,7 +3414,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="337" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:337</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="356" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:356</a></div>
                         </td>
                     </tr>
 
@@ -3315,7 +3448,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="417" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:417</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="436" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:436</a></div>
                         </td>
                     </tr>
 
@@ -3347,7 +3480,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="457" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:457</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="476" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:476</a></div>
                         </td>
                     </tr>
 
@@ -3379,7 +3512,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="195" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:195</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="196" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:196</a></div>
                         </td>
                     </tr>
 
@@ -3413,7 +3546,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="421" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:421</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="440" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:440</a></div>
                         </td>
                     </tr>
 
@@ -3467,7 +3600,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="473" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:473</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="492" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:492</a></div>
                         </td>
                     </tr>
 
@@ -3499,7 +3632,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="461" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:461</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="480" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:480</a></div>
                         </td>
                     </tr>
 
@@ -3538,7 +3671,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="464" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:464</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="483" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:483</a></div>
                         </td>
                     </tr>
 
@@ -3573,7 +3706,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="439" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:439</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="458" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:458</a></div>
                         </td>
                     </tr>
 
@@ -3605,7 +3738,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="341" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:341</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="360" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:360</a></div>
                         </td>
                     </tr>
 
@@ -3637,7 +3770,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="340" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:340</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="359" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:359</a></div>
                         </td>
                     </tr>
 
@@ -3737,13 +3870,29 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
       category: &#x27;Urgente&#x27;,
       description: &#x27;Tabla prioritaria de artículos con stock agotado o inferior al umbral de seguridad.&#x27;,
       defaultWidth: &#x27;col-6&#x27;
+    },
+    {
+      id: &#x27;smart_reorder&#x27;,
+      title: &#x27;Sugerencias de Reabastecimiento&#x27;,
+      icon: &#x27;cart-outline&#x27;,
+      category: &#x27;Compras&#x27;,
+      description: &#x27;Cálculo de reposición de artículos con stock por debajo del umbral mínimo y costes de pedido.&#x27;,
+      defaultWidth: &#x27;col-6&#x27;
+    },
+    {
+      id: &#x27;security_telemetry&#x27;,
+      title: &#x27;Telemetría &amp; Conectividad Supabase&#x27;,
+      icon: &#x27;shield-checkmark-outline&#x27;,
+      category: &#x27;Seguridad&#x27;,
+      description: &#x27;Estado de conexión en tiempo real, latencia de red, canales WebSocket y verificación RLS.&#x27;,
+      defaultWidth: &#x27;col-6&#x27;
     }
   ]</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="242" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:242</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="243" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:243</a></div>
                         </td>
                     </tr>
 
@@ -3780,7 +3929,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:189</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:190</a></div>
                         </td>
                     </tr>
 
@@ -3814,7 +3963,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="514" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:514</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="533" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:533</a></div>
                         </td>
                     </tr>
 
@@ -3846,7 +3995,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="409" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:409</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="428" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:428</a></div>
                         </td>
                     </tr>
 
@@ -3882,13 +4031,15 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
     { id: &#x27;live_activities&#x27;, title: &#x27;Actividades en Vivo (Supabase Realtime)&#x27;, icon: &#x27;pulse-outline&#x27;, category: &#x27;Auditoría&#x27;, visible: true, width: &#x27;col-4&#x27;, order: 6 },
     { id: &#x27;operations&#x27;, title: &#x27;Capacidad Operativa de Almacenes&#x27;, icon: &#x27;layers-outline&#x27;, category: &#x27;Logística&#x27;, visible: true, width: &#x27;col-4&#x27;, order: 7 },
     { id: &#x27;quick_actions&#x27;, title: &#x27;Acciones Rápidas &amp; Atajos&#x27;, icon: &#x27;flash-outline&#x27;, category: &#x27;Gestión&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 8 },
-    { id: &#x27;critical_stock_table&#x27;, title: &#x27;Alerta de Stock Crítico&#x27;, icon: &#x27;alert-circle-outline&#x27;, category: &#x27;Urgente&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 9 }
+    { id: &#x27;critical_stock_table&#x27;, title: &#x27;Alerta de Stock Crítico&#x27;, icon: &#x27;alert-circle-outline&#x27;, category: &#x27;Urgente&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 9 },
+    { id: &#x27;smart_reorder&#x27;, title: &#x27;Sugerencias de Reabastecimiento&#x27;, icon: &#x27;cart-outline&#x27;, category: &#x27;Compras&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 10 },
+    { id: &#x27;security_telemetry&#x27;, title: &#x27;Telemetría &amp; Conectividad Supabase&#x27;, icon: &#x27;shield-checkmark-outline&#x27;, category: &#x27;Seguridad&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 11 }
   ]</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="318" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:318</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="335" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:335</a></div>
                         </td>
                     </tr>
 
@@ -3920,7 +4071,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="519" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:519</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="583" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:583</a></div>
                         </td>
                     </tr>
 
@@ -3952,7 +4103,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="521" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:521</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="585" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:585</a></div>
                         </td>
                     </tr>
 
@@ -3984,7 +4135,45 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="344" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:344</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="363" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:363</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="estimatedReorderCost"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>estimatedReorderCost</b></span>
+                        <a href="#estimatedReorderCost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const total &#x3D; this.criticalProducts().reduce((sum, p) &#x3D;&gt; {
+      const needed &#x3D; Math.max(0, 20 - p.stock);
+      return sum + (needed * p.price * 0.7);
+    }, 0);
+    return total.toLocaleString(&#x27;es-ES&#x27;, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="542" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:542</a></div>
                         </td>
                     </tr>
 
@@ -4016,7 +4205,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="194" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:194</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="195" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:195</a></div>
                         </td>
                     </tr>
 
@@ -4060,7 +4249,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="425" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:425</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="444" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:444</a></div>
                         </td>
                     </tr>
 
@@ -4092,7 +4281,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:200</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:201</a></div>
                         </td>
                     </tr>
 
@@ -4124,7 +4313,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="444" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:444</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="463" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:463</a></div>
                         </td>
                     </tr>
 
@@ -4156,7 +4345,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="334" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:334</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="353" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:353</a></div>
                         </td>
                     </tr>
 
@@ -4188,7 +4377,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="207" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:207</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:208</a></div>
                         </td>
                     </tr>
 
@@ -4220,7 +4409,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="331" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:331</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="350" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:350</a></div>
                         </td>
                     </tr>
 
@@ -4252,7 +4441,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="199" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:199</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:200</a></div>
                         </td>
                     </tr>
 
@@ -4284,7 +4473,39 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="204" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:204</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:205</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isPingingTelemetry"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isPingingTelemetry</b></span>
+                        <a href="#isPingingTelemetry"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="538" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:538</a></div>
                         </td>
                     </tr>
 
@@ -4316,7 +4537,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="455" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:455</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="474" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:474</a></div>
                         </td>
                     </tr>
 
@@ -4373,7 +4594,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="210" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:210</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="211" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:211</a></div>
                         </td>
                     </tr>
 
@@ -4405,7 +4626,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="196" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:196</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:197</a></div>
                         </td>
                     </tr>
 
@@ -4442,7 +4663,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="506" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:506</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="525" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:525</a></div>
                         </td>
                     </tr>
 
@@ -4476,7 +4697,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="413" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:413</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="432" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:432</a></div>
                         </td>
                     </tr>
 
@@ -4508,7 +4729,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="456" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:456</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="475" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:475</a></div>
                         </td>
                     </tr>
 
@@ -4540,7 +4761,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="193" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:193</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="194" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:194</a></div>
                         </td>
                     </tr>
 
@@ -4572,7 +4793,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="458" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:458</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="477" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:477</a></div>
                         </td>
                     </tr>
 
@@ -4609,7 +4830,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="498" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:498</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="517" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:517</a></div>
                         </td>
                     </tr>
 
@@ -4641,7 +4862,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:197</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:198</a></div>
                         </td>
                     </tr>
 
@@ -4677,7 +4898,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="446" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:446</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="465" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:465</a></div>
                         </td>
                     </tr>
 
@@ -4709,7 +4930,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:201</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="202" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:202</a></div>
                         </td>
                     </tr>
 
@@ -4741,7 +4962,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="462" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:462</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="481" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:481</a></div>
                         </td>
                     </tr>
 
@@ -4773,7 +4994,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:192</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="193" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:193</a></div>
                         </td>
                     </tr>
 
@@ -4805,7 +5026,39 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="520" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:520</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="584" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:584</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="telemetryLatency"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>telemetryLatency</b></span>
+                        <a href="#telemetryLatency"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(18)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="539" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:539</a></div>
                         </td>
                     </tr>
 
@@ -4897,7 +5150,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="347" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:347</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="366" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:366</a></div>
                         </td>
                     </tr>
 
@@ -4925,7 +5178,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:190</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:191</a></div>
                         </td>
                     </tr>
 
@@ -4957,7 +5210,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="518" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:518</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="582" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:582</a></div>
                         </td>
                     </tr>
 
@@ -4994,7 +5247,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:188</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:189</a></div>
                         </td>
                     </tr>
 
@@ -5026,7 +5279,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="454" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:454</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="473" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:473</a></div>
                         </td>
                     </tr>
 
@@ -5058,7 +5311,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="453" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:453</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="472" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:472</a></div>
                         </td>
                     </tr>
 
@@ -5092,7 +5345,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="237" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:237</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="238" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:238</a></div>
                         </td>
                     </tr>
 
@@ -5124,7 +5377,7 @@ Como solicitó explícitamente el usuario mostrando la captura</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="411" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:411</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="430" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:430</a></div>
                         </td>
                     </tr>
 
@@ -5213,7 +5466,8 @@ import {
   checkmarkCircleOutline,
   colorWandOutline,
   closeCircleOutline,
-  saveOutline
+  cartOutline,
+  hardwareChipOutline
 } from &#x27;ionicons/icons&#x27;;
 import { forkJoin, Subscription } from &#x27;rxjs&#x27;;
 import { take } from &#x27;rxjs/operators&#x27;;
@@ -5450,6 +5704,22 @@ export class DashboardPage implements OnInit, OnDestroy {
       category: &#x27;Urgente&#x27;,
       description: &#x27;Tabla prioritaria de artículos con stock agotado o inferior al umbral de seguridad.&#x27;,
       defaultWidth: &#x27;col-6&#x27;
+    },
+    {
+      id: &#x27;smart_reorder&#x27;,
+      title: &#x27;Sugerencias de Reabastecimiento&#x27;,
+      icon: &#x27;cart-outline&#x27;,
+      category: &#x27;Compras&#x27;,
+      description: &#x27;Cálculo de reposición de artículos con stock por debajo del umbral mínimo y costes de pedido.&#x27;,
+      defaultWidth: &#x27;col-6&#x27;
+    },
+    {
+      id: &#x27;security_telemetry&#x27;,
+      title: &#x27;Telemetría &amp; Conectividad Supabase&#x27;,
+      icon: &#x27;shield-checkmark-outline&#x27;,
+      category: &#x27;Seguridad&#x27;,
+      description: &#x27;Estado de conexión en tiempo real, latencia de red, canales WebSocket y verificación RLS.&#x27;,
+      defaultWidth: &#x27;col-6&#x27;
     }
   ];
 
@@ -5463,7 +5733,9 @@ export class DashboardPage implements OnInit, OnDestroy {
     { id: &#x27;live_activities&#x27;, title: &#x27;Actividades en Vivo (Supabase Realtime)&#x27;, icon: &#x27;pulse-outline&#x27;, category: &#x27;Auditoría&#x27;, visible: true, width: &#x27;col-4&#x27;, order: 6 },
     { id: &#x27;operations&#x27;, title: &#x27;Capacidad Operativa de Almacenes&#x27;, icon: &#x27;layers-outline&#x27;, category: &#x27;Logística&#x27;, visible: true, width: &#x27;col-4&#x27;, order: 7 },
     { id: &#x27;quick_actions&#x27;, title: &#x27;Acciones Rápidas &amp; Atajos&#x27;, icon: &#x27;flash-outline&#x27;, category: &#x27;Gestión&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 8 },
-    { id: &#x27;critical_stock_table&#x27;, title: &#x27;Alerta de Stock Crítico&#x27;, icon: &#x27;alert-circle-outline&#x27;, category: &#x27;Urgente&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 9 }
+    { id: &#x27;critical_stock_table&#x27;, title: &#x27;Alerta de Stock Crítico&#x27;, icon: &#x27;alert-circle-outline&#x27;, category: &#x27;Urgente&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 9 },
+    { id: &#x27;smart_reorder&#x27;, title: &#x27;Sugerencias de Reabastecimiento&#x27;, icon: &#x27;cart-outline&#x27;, category: &#x27;Compras&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 10 },
+    { id: &#x27;security_telemetry&#x27;, title: &#x27;Telemetría &amp; Conectividad Supabase&#x27;, icon: &#x27;shield-checkmark-outline&#x27;, category: &#x27;Seguridad&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 11 }
   ];
 
   // Control de Modo Edición vs Modo Vista limpio
@@ -5654,6 +5926,51 @@ export class DashboardPage implements OnInit, OnDestroy {
     return this.allProducts().filter(p &#x3D;&gt; p.stock &lt;&#x3D; 5).slice(0, 6);
   });
 
+  // Telemetría y conectividad
+  public isPingingTelemetry &#x3D; signal(false);
+  public telemetryLatency &#x3D; signal(18);
+
+  // Coste estimado de reposición sugerida
+  public estimatedReorderCost &#x3D; computed(() &#x3D;&gt; {
+    const total &#x3D; this.criticalProducts().reduce((sum, p) &#x3D;&gt; {
+      const needed &#x3D; Math.max(0, 20 - p.stock);
+      return sum + (needed * p.price * 0.7);
+    }, 0);
+    return total.toLocaleString(&#x27;es-ES&#x27;, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  });
+
+  public pingTelemetry(): void {
+    this.isPingingTelemetry.set(true);
+    const start &#x3D; performance.now();
+    this.sqlService.getProducts().pipe(take(1)).subscribe({
+      next: () &#x3D;&gt; {
+        const elapsed &#x3D; Math.round(performance.now() - start);
+        this.telemetryLatency.set(Math.max(12, elapsed));
+        this.isPingingTelemetry.set(false);
+        this.notificationService.showToast(&#x60;Ping a Supabase completado: ${this.telemetryLatency()}ms&#x60;, &#x27;success&#x27;);
+      },
+      error: () &#x3D;&gt; {
+        this.isPingingTelemetry.set(false);
+        this.notificationService.showToast(&#x27;Error al comprobar latencia.&#x27;, &#x27;danger&#x27;);
+      }
+    });
+  }
+
+  public createReorderPO(product: Product): void {
+    const suggestedUnits &#x3D; Math.max(5, 20 - product.stock);
+    const estCost &#x3D; (suggestedUnits * product.price * 0.7).toFixed(2);
+    this.realtimeService.logActivity(
+      &#x27;ALERT&#x27;,
+      &#x27;PRODUCT&#x27;,
+      &#x60;Orden de reposición sugerida para ${product.name} (+${suggestedUnits} uds. - ${estCost} €)&#x60;,
+      &#x27;info&#x27;
+    );
+    this.notificationService.showToast(
+      &#x60;Orden de compra generada para ${product.name} (+${suggestedUnits} uds.)&#x60;,
+      &#x27;success&#x27;
+    );
+  }
+
   private timelineChart: Chart | null &#x3D; null;
   private doughnutChart: Chart | null &#x3D; null;
   private subscriptions &#x3D; new Subscription();
@@ -5710,7 +6027,9 @@ export class DashboardPage implements OnInit, OnDestroy {
       gridOutline,
       checkmarkCircleOutline,
       colorWandOutline,
-      closeCircleOutline
+      closeCircleOutline,
+      cartOutline,
+      hardwareChipOutline
     });
   }
 
@@ -6655,13 +6974,6 @@ export class DashboardPage implements OnInit, OnDestroy {
                   &lt;span class&#x3D;&quot;widget-cat-tag&quot;&gt;{{ widget.category }}&lt;/span&gt;
                   &lt;h3 class&#x3D;&quot;widget-headline-title&quot;&gt;{{ widget.title }}&lt;/h3&gt;
                 &lt;/div&gt;
-                @if (widget.id &#x3D;&#x3D;&#x3D; &#x27;timeline_wave&#x27;) {
-                  &lt;div class&#x3D;&quot;header-period-chips&quot;&gt;
-                    &lt;button class&#x3D;&quot;header-period-chip&quot; [class.active]&#x3D;&quot;filterPeriod() &#x3D;&#x3D;&#x3D; &#x27;7d&#x27;&quot; (click)&#x3D;&quot;setPeriod(&#x27;7d&#x27;)&quot;&gt;7D&lt;/button&gt;
-                    &lt;button class&#x3D;&quot;header-period-chip&quot; [class.active]&#x3D;&quot;filterPeriod() &#x3D;&#x3D;&#x3D; &#x27;30d&#x27;&quot; (click)&#x3D;&quot;setPeriod(&#x27;30d&#x27;)&quot;&gt;30D&lt;/button&gt;
-                    &lt;button class&#x3D;&quot;header-period-chip&quot; [class.active]&#x3D;&quot;filterPeriod() &#x3D;&#x3D;&#x3D; &#x27;year&#x27;&quot; (click)&#x3D;&quot;setPeriod(&#x27;year&#x27;)&quot;&gt;2026&lt;/button&gt;
-                  &lt;/div&gt;
-                }
               &lt;/div&gt;
             }
 
@@ -7074,6 +7386,98 @@ export class DashboardPage implements OnInit, OnDestroy {
                 &lt;/div&gt;
               }
 
+              &lt;!-- 10. SUGERENCIAS DE REABASTECIMIENTO INTELIGENTE (SMART REORDER) --&gt;
+              @if (widget.id &#x3D;&#x3D;&#x3D; &#x27;smart_reorder&#x27;) {
+                &lt;div class&#x3D;&quot;smart-reorder-inner&quot;&gt;
+                  &lt;div class&#x3D;&quot;reorder-summary-strip&quot;&gt;
+                    &lt;div class&#x3D;&quot;reorder-stat-pill&quot;&gt;
+                      &lt;span class&#x3D;&quot;stat-tag&quot;&gt;Artículos a reponer:&lt;/span&gt;
+                      &lt;strong class&#x3D;&quot;stat-val&quot;&gt;{{ criticalProducts().length }} referencias&lt;/strong&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;reorder-stat-pill&quot;&gt;
+                      &lt;span class&#x3D;&quot;stat-tag&quot;&gt;Inversión estimada:&lt;/span&gt;
+                      &lt;strong class&#x3D;&quot;stat-val text-ruby&quot;&gt;{{ estimatedReorderCost() }} €&lt;/strong&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class&#x3D;&quot;smart-reorder-list&quot;&gt;
+                    @for (item of criticalProducts(); track item.id) {
+                      &lt;div class&#x3D;&quot;reorder-item-card&quot;&gt;
+                        &lt;div class&#x3D;&quot;reorder-item-info&quot;&gt;
+                          &lt;span class&#x3D;&quot;reorder-sku&quot;&gt;#{{ item.id }} · {{ item.category }}&lt;/span&gt;
+                          &lt;h4 class&#x3D;&quot;reorder-title&quot;&gt;{{ item.name }}&lt;/h4&gt;
+                          &lt;span class&#x3D;&quot;reorder-meta&quot;&gt;Stock: &lt;strong [class.text-danger]&#x3D;&quot;item.stock &#x3D;&#x3D;&#x3D; 0&quot;&gt;{{ item.stock }} uds&lt;/strong&gt; | Sugerido: &lt;strong&gt;+{{ 20 - item.stock }} uds&lt;/strong&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div class&#x3D;&quot;reorder-item-actions&quot;&gt;
+                          &lt;span class&#x3D;&quot;reorder-cost&quot;&gt;{{ ((20 - item.stock) * item.price * 0.7) | number:&#x27;1.2-2&#x27; }} €&lt;/span&gt;
+                          &lt;button class&#x3D;&quot;reorder-btn&quot; (click)&#x3D;&quot;createReorderPO(item)&quot; title&#x3D;&quot;Generar orden de compra&quot;&gt;
+                            &lt;ion-icon name&#x3D;&quot;cart-outline&quot;&gt;&lt;/ion-icon&gt; Pedir
+                          &lt;/button&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    } @empty {
+                      &lt;div class&#x3D;&quot;reorder-empty-state&quot;&gt;
+                        &lt;ion-icon name&#x3D;&quot;checkmark-circle-outline&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;span&gt;El inventario está abastecido. No se requieren órdenes de compra urgentes.&lt;/span&gt;
+                      &lt;/div&gt;
+                    }
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              }
+
+              &lt;!-- 11. TELEMETRÍA &amp; CONECTIVIDAD SUPABASE --&gt;
+              @if (widget.id &#x3D;&#x3D;&#x3D; &#x27;security_telemetry&#x27;) {
+                &lt;div class&#x3D;&quot;telemetry-inner&quot;&gt;
+                  &lt;div class&#x3D;&quot;telemetry-grid&quot;&gt;
+                    &lt;div class&#x3D;&quot;telemetry-card&quot;&gt;
+                      &lt;div class&#x3D;&quot;telemetry-card-header&quot;&gt;
+                        &lt;span class&#x3D;&quot;telemetry-label&quot;&gt;Canal WebSocket&lt;/span&gt;
+                        &lt;span class&#x3D;&quot;telemetry-status-badge online&quot;&gt;
+                          &lt;span class&#x3D;&quot;status-pulse-dot&quot;&gt;&lt;/span&gt; EN VIVO
+                        &lt;/span&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;telemetry-val&quot;&gt;Supabase Realtime&lt;/div&gt;
+                      &lt;div class&#x3D;&quot;telemetry-foot&quot;&gt;Escuchando audit_logs &amp; documents&lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;telemetry-card&quot;&gt;
+                      &lt;div class&#x3D;&quot;telemetry-card-header&quot;&gt;
+                        &lt;span class&#x3D;&quot;telemetry-label&quot;&gt;Latencia de Red&lt;/span&gt;
+                        &lt;span class&#x3D;&quot;telemetry-status-badge optimal&quot;&gt;&amp;lt; {{ telemetryLatency() }} ms&lt;/span&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;telemetry-val&quot;&gt;{{ telemetryLatency() }} ms&lt;/div&gt;
+                      &lt;div class&#x3D;&quot;telemetry-foot&quot;&gt;Tiempo de respuesta HTTP PostgREST&lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;telemetry-card&quot;&gt;
+                      &lt;div class&#x3D;&quot;telemetry-card-header&quot;&gt;
+                        &lt;span class&#x3D;&quot;telemetry-label&quot;&gt;Políticas RLS&lt;/span&gt;
+                        &lt;span class&#x3D;&quot;telemetry-status-badge secure&quot;&gt;PROTEGIDO&lt;/span&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;telemetry-val&quot;&gt;100% Tablas Activas&lt;/div&gt;
+                      &lt;div class&#x3D;&quot;telemetry-foot&quot;&gt;profiles, products, audit_logs&lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;telemetry-card&quot;&gt;
+                      &lt;div class&#x3D;&quot;telemetry-card-header&quot;&gt;
+                        &lt;span class&#x3D;&quot;telemetry-label&quot;&gt;Seguridad de Sesión&lt;/span&gt;
+                        &lt;span class&#x3D;&quot;telemetry-status-badge auth&quot;&gt;RBAC&lt;/span&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;telemetry-val&quot;&gt;{{ authService.currentUserSignal()?.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27; ? &#x27;Administrador&#x27; : &#x27;Usuario&#x27; }}&lt;/div&gt;
+                      &lt;div class&#x3D;&quot;telemetry-foot&quot;&gt;JWT con Claims verificados&lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class&#x3D;&quot;telemetry-actions-bar&quot;&gt;
+                    &lt;button class&#x3D;&quot;ping-btn&quot; (click)&#x3D;&quot;pingTelemetry()&quot; [disabled]&#x3D;&quot;isPingingTelemetry()&quot;&gt;
+                      &lt;ion-icon name&#x3D;&quot;refresh-outline&quot; [class.spinning]&#x3D;&quot;isPingingTelemetry()&quot;&gt;&lt;/ion-icon&gt;
+                      {{ isPingingTelemetry() ? &#x27;Midiendo Latencia...&#x27; : &#x27;Probar Latencia Ahora&#x27; }}
+                    &lt;/button&gt;
+                    &lt;span class&#x3D;&quot;telemetry-timestamp&quot;&gt;Monitorización activa&lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              }
+
             &lt;/div&gt;
 
             &lt;!-- Maneta / Indicador de Redimensión en la Esquina Inferior Derecha (Solo en Modo Edición) --&gt;
@@ -7429,10 +7833,11 @@ export class DashboardPage implements OnInit, OnDestroy {
         transform: translateY(-2px);
       }
 
-      &amp;.customize-btn {
-        width: auto;
+      &amp;.customize-btn, &amp;.edit-mode-btn, &amp;.modules-btn {
+        width: auto !important;
         padding: 0 14px;
         gap: 6px;
+        white-space: nowrap;
         background: rgba(255, 42, 109, 0.12);
         border-color: rgba(255, 42, 109, 0.35);
         color: #ff2a6d;
@@ -7441,6 +7846,7 @@ export class DashboardPage implements OnInit, OnDestroy {
           font-size: 0.78rem;
           font-weight: 800;
           letter-spacing: 0.03em;
+          white-space: nowrap;
         }
 
         &amp;.active, &amp;:hover {
@@ -9575,6 +9981,264 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 }
 
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+// MÓDULO 10: SUGERENCIAS DE REABASTECIMIENTO INTELIGENTE (SMART REORDER)
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+.smart-reorder-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .reorder-summary-strip {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    .reorder-stat-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+
+      .stat-tag { color: #94a3b8; }
+      .stat-val { color: #ffffff; }
+      .text-ruby { color: #ff2a6d; }
+    }
+  }
+
+  .smart-reorder-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .reorder-item-card {
+      background: rgba(24, 18, 54, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.2s ease;
+
+      &amp;:hover {
+        border-color: rgba(255, 42, 109, 0.3);
+        transform: translateY(-1px);
+      }
+
+      .reorder-item-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+
+        .reorder-sku {
+          font-size: 0.72rem;
+          color: #94a3b8;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .reorder-title {
+          font-size: 0.92rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+        }
+
+        .reorder-meta {
+          font-size: 0.78rem;
+          color: #cbd5e1;
+
+          .text-danger { color: #ff2a6d; font-weight: 800; }
+        }
+      }
+
+      .reorder-item-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+
+        .reorder-cost {
+          font-size: 1rem;
+          font-weight: 800;
+          color: #ff2a6d;
+        }
+
+        .reorder-btn {
+          background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+          color: #ffffff;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 8px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+          &amp;:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+          }
+        }
+      }
+    }
+
+    .reorder-empty-state {
+      padding: 24px;
+      text-align: center;
+      color: #10b981;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+  }
+}
+
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+// MÓDULO 11: TELEMETRÍA &amp; CONECTIVIDAD SUPABASE
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+.telemetry-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .telemetry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+
+    .telemetry-card {
+      background: rgba(24, 18, 54, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      .telemetry-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .telemetry-label {
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: #94a3b8;
+          text-transform: uppercase;
+        }
+
+        .telemetry-status-badge {
+          font-size: 0.68rem;
+          font-weight: 800;
+          padding: 2px 8px;
+          border-radius: 9999px;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+
+          &amp;.online {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+
+            .status-pulse-dot {
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background: #34d399;
+              animation: pulse 1.5s infinite;
+            }
+          }
+
+          &amp;.optimal {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+          }
+
+          &amp;.secure {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+          }
+
+          &amp;.auth {
+            background: rgba(255, 42, 109, 0.15);
+            color: #ff2a6d;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+          }
+        }
+      }
+
+      .telemetry-val {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #ffffff;
+      }
+
+      .telemetry-foot {
+        font-size: 0.72rem;
+        color: #64748b;
+      }
+    }
+  }
+
+  .telemetry-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+    .ping-btn {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+
+      &amp;:hover:not(:disabled) {
+        background: rgba(56, 189, 248, 0.2);
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+      }
+
+      &amp;:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .spinning {
+        animation: spin 1s linear infinite;
+      }
+    }
+
+    .telemetry-timestamp {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+  }
+}
+
 /* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
    ADAPTACIÓN UNIVERSAL A MODO CLARO (LUMINOUS PEARL GLASS)
    Garantiza paridad estética, contraste WCAG y máxima legibilidad
@@ -9733,6 +10397,66 @@ export class DashboardPage implements OnInit, OnDestroy {
       }
     }
   }
+
+  .smart-reorder-inner {
+    .reorder-summary-strip .reorder-stat-pill {
+      background: #f8fafc !important;
+      border-color: rgba(15, 23, 42, 0.08) !important;
+      .stat-tag { color: #475569 !important; }
+      .stat-val { color: #0f172a !important; }
+      .text-ruby { color: #be123c !important; }
+    }
+
+    .smart-reorder-list .reorder-item-card {
+      background: #f8fafc !important;
+      border-color: rgba(15, 23, 42, 0.08) !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+
+      .reorder-item-info {
+        .reorder-sku { color: #64748b !important; }
+        .reorder-title { color: #0f172a !important; }
+        .reorder-meta {
+          color: #475569 !important;
+          .text-danger { color: #be123c !important; }
+        }
+      }
+
+      .reorder-item-actions .reorder-cost {
+        color: #be123c !important;
+      }
+    }
+  }
+
+  .telemetry-inner {
+    .telemetry-grid .telemetry-card {
+      background: #f8fafc !important;
+      border-color: rgba(15, 23, 42, 0.08) !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+
+      .telemetry-card-header .telemetry-label {
+        color: #475569 !important;
+      }
+      .telemetry-val {
+        color: #0f172a !important;
+      }
+      .telemetry-foot {
+        color: #64748b !important;
+      }
+    }
+
+    .telemetry-actions-bar {
+      border-top-color: rgba(15, 23, 42, 0.08) !important;
+
+      .ping-btn {
+        background: rgba(2, 132, 199, 0.08) !important;
+        border-color: rgba(2, 132, 199, 0.3) !important;
+        color: #0284c7 !important;
+      }
+      .telemetry-timestamp {
+        color: #64748b !important;
+      }
+    }
+  }
 }
 </code></pre>
     </div>
@@ -9762,7 +10486,7 @@ export class DashboardPage implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button></ion-menu-button>    </ion-buttons>    <ion-title>Cuadro de Mando Ejecutivo</ion-title>    <ion-buttons slot="end">      <!-- Botón Personalizar Widgets -->      <ion-button (click)="toggleCustomizer()" aria-label="Personalizar diseño del cuadro de mando">        <ion-icon slot="start" name="options-outline"></ion-icon>        <span class="toolbar-btn-text">Personalizar</span>      </ion-button>      <ion-button (click)="loadConsolidatedData()" aria-label="Actualizar métricas">        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>      </ion-button>      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">        <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>        Salir      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="dashboard-content">  <!-- Fondo Cósmico Neón & Malla Espacial con Blur -->  <div class="ambient-nebula-bg" aria-hidden="true">    <div class="nebula-glow glow-1"></div>    <div class="nebula-glow glow-2"></div>    <div class="nebula-glow glow-3"></div>    <div class="cyber-grid-overlay"></div>  </div>  <div class="dashboard-container">    <!-- BARRA SUPERIOR CYBER: Búsqueda, Notificaciones, Personalizador y Perfil -->    <div class="cyber-top-bar glass-window">      <div class="breadcrumb-box">        <span class="breadcrumb-label">DASHBOARD / CUADRO DE MANDO</span>        <h1 class="dashboard-title">Panel Ejecutivo & Control de Activos</h1>      </div>      <!-- Barra de Búsqueda Estilo Píldora Luminosa -->      <div class="cyber-search-pill">        <ion-icon name="search-outline"></ion-icon>        <input          type="text"          placeholder="Buscar métricas, catálogo, logs de auditoría..."          [value]="searchQuery()"          (input)="searchQuery.set($any($event.target).value)"          aria-label="Buscar en el cuadro de mando"        />      </div>      <!-- Acciones de Cabecera: Modo Edición, Módulos, Alertas y Perfil -->      <div class="cyber-header-actions">        <!-- Botón Modo Edición (Activar/Desactivar) -->        <button          class="action-icon-btn edit-mode-btn"          [class.active]="isEditMode()"          (click)="toggleEditMode()"          [title]="isEditMode() ? \'Finalizar personalización y guardar lienzo\' : \'Personalizar lienzo (organizar, redimensionar, añadir)\'"        >          <ion-icon [name]="isEditMode() ? \'checkmark-circle-outline\' : \'color-wand-outline\'"></ion-icon>          <span class="btn-text-badge">{{ isEditMode() ? \'Listo\' : \'Editar Lienzo\' }}</span>        </button>        <!-- Botón Catálogo de Módulos (Bandeja Lateral) -->        <button          class="action-icon-btn modules-btn"          [class.active]="isCatalogDrawerOpen()"          (click)="toggleCatalogDrawer()"          title="Bandeja de módulos y catálogo de widgets"        >          <ion-icon name="grid-outline"></ion-icon>          <span class="btn-text-badge">Módulos</span>        </button>        <!-- Botón Exportar PDF -->        <button class="action-icon-btn" (click)="exportPdfReport()" title="Exportar Informe PDF">          <ion-icon name="download-outline"></ion-icon>        </button>        <!-- Botón Exportar CSV -->        <button class="action-icon-btn" (click)="exportCsvReport()" title="Exportar Datos CSV">          <ion-icon name="document-text-outline"></ion-icon>        </button>        <!-- BOTÓN DE NOTIFICACIONES INTERACTIVO -->        <div class="notification-wrap">          <button            class="action-icon-btn notification-btn"            [class.active]="isNotificationsOpen()"            (click)="toggleNotifications()"            aria-label="Abrir centro de notificaciones"            title="Centro de Notificaciones"          >            <ion-icon name="notifications-outline"></ion-icon>            @if (unreadNotificationsCount() > 0) {              <span class="pulsing-badge">{{ unreadNotificationsCount() }}</span>            }          </button>          <!-- PANEL DESPLEGABLE DE NOTIFICACIONES (GLASSMORPHIC) -->          @if (isNotificationsOpen()) {            <div class="notif-click-away-backdrop" (click)="toggleNotifications()" aria-hidden="true"></div>            <div class="notifications-dropdown glass-window" role="dialog" aria-label="Notificaciones del Sistema">              <div class="notif-header">                <div class="notif-title-row">                  <ion-icon name="notifications-outline" class="notif-icon-lead"></ion-icon>                  <h2 class="notif-title">Notificaciones del Sistema</h2>                  @if (unreadNotificationsCount() > 0) {                    <span class="unread-pill">{{ unreadNotificationsCount() }} nuevas</span>                  }                </div>                <div class="notif-header-actions">                  <button class="notif-action-link" (click)="markAllNotificationsAsRead()" title="Marcar todas como leídas">                    <ion-icon name="checkmark-done-outline"></ion-icon> Leídas                  </button>                  <button class="notif-action-link danger" (click)="clearNotifications()" title="Limpiar lista">                    <ion-icon name="trash-outline"></ion-icon>                  </button>                  <button class="notif-close-btn" (click)="toggleNotifications()" aria-label="Cerrar panel">                    <ion-icon name="close-outline"></ion-icon>                  </button>                </div>              </div>              <div class="notif-list">                @for (item of notifications(); track item.id) {                  <div                    class="notif-item"                    [class.unread]="!item.read"                    [class.sev-critical]="item.severity === \'critical\'"                    [class.sev-warning]="item.severity === \'warning\'"                    [class.sev-success]="item.severity === \'success\'"                    (click)="markNotificationAsRead(item.id)"                  >                    <div class="notif-icon-col">                      @if (item.severity === \'critical\') {                        <ion-icon name="alert-circle-outline" class="col-crit"></ion-icon>                      } @else if (item.severity === \'warning\') {                        <ion-icon name="flash-outline" class="col-warn"></ion-icon>                      } @else if (item.severity === \'success\') {                        <ion-icon name="checkmark-circle-outline" class="col-succ"></ion-icon>                      } @else {                        <ion-icon name="mail-outline" class="col-info"></ion-icon>                      }                    </div>                    <div class="notif-body-col">                      <div class="notif-item-top">                        <span class="item-title">{{ item.title }}</span>                        <span class="item-time">{{ item.time }}</span>                      </div>                      <p class="item-msg">{{ item.message }}</p>                    </div>                  </div>                } @empty {                  <div class="notif-empty-state">                    <ion-icon name="notifications-off-outline"></ion-icon>                    <p>No tienes alertas pendientes</p>                  </div>                }              </div>            </div>          }        </div>        <!-- Avatar de Usuario con Anillo Online -->        <div class="cyber-user-pill">          <div class="avatar-ring">            <ion-icon name="person-circle-outline"></ion-icon>            <span class="online-dot"></span>          </div>          <div class="user-info-text">            <span class="user-name">{{ authService.currentUserSignal()?.name?.split(\' \')?.[0] || \'Admin\' }}</span>            <span class="user-role">{{ authService.currentUserSignal()?.role === \'admin\' ? \'ADMIN\' : \'USER\' }}</span>          </div>        </div>      </div>    </div>    <!-- INDICADOR DE BÚSQUEDA ACTIVA (FILTRADO INTUITIVO DE WIDGETS) -->    @if (hasSearchQuery()) {      <div class="search-active-pill glass-window" role="status">        <div class="search-pill-content">          <ion-icon name="search-outline"></ion-icon>          <span>Filtrando módulos por "<strong>{{ searchQuery() }}</strong>" ({{ searchMatchCount() }} de {{ activeWidgets().length }} módulos coinciden)</span>        </div>        <button class="clear-search-btn" (click)="clearSearch()" title="Quitar filtro de búsqueda">          <ion-icon name="close-circle-outline"></ion-icon> Limpiar        </button>      </div>    }    <!-- BARRA INTERACTIVA DE MODO EDICIÓN (PRESETS & ACCIONES RÁPIDAS) -->    @if (isEditMode()) {      <div class="canvas-edit-ribbon glass-window" role="region" aria-label="Controles del modo edición">        <div class="ribbon-headline">          <div class="ribbon-badge">            <span class="pulsing-neon-dot"></span>            <span>MODO EDICIÓN ACTIVO</span>          </div>          <p class="ribbon-instruction">Arrastra tarjetas para reordenar, pulsa en 1/3, 1/2, 2/3 o Full, o aplica una plantilla:</p>        </div>        <!-- Selector de Plantillas Predefinidas (Presets) -->        <div class="ribbon-templates-box">          <span class="templates-title">Plantillas predefinidas:</span>          <div class="templates-pills">            @for (tpl of templates; track tpl.id) {              <button                class="tpl-pill-btn"                [class.active]="activeTemplateId() === tpl.id"                (click)="applyTemplate(tpl.id)"                [title]="tpl.description"              >                <ion-icon [name]="tpl.icon"></ion-icon>                <span>{{ tpl.name }}</span>              </button>            }          </div>        </div>        <!-- Acciones Rápidas del Modo Edición -->        <div class="ribbon-actions">          <button class="ribbon-action-btn add-btn" (click)="toggleCatalogDrawer()" title="Abrir bandeja para añadir widgets">            <ion-icon name="add-outline"></ion-icon> + Añadir Módulos          </button>          <button class="ribbon-action-btn reset-btn" (click)="resetDefaultLayout()" title="Restablecer diseño original de fábrica">            <ion-icon name="refresh-outline"></ion-icon> Restablecer          </button>          <button class="ribbon-action-btn finish-btn" (click)="toggleEditMode()" title="Guardar cambios y salir del modo edición">            <ion-icon name="checkmark-done-outline"></ion-icon> Salir de Edición          </button>        </div>      </div>    }    <!-- Indicador de Carga Asíncrona -->    @if (isLoading()) {      <div class="loading-overlay glass-window" role="status" aria-live="polite">        <ion-spinner name="crescent"></ion-spinner>        <span>Sincronizando fuentes asíncronas concurrentes Supabase (SQL & Realtime)...</span>      </div>    }    <!-- ====================================================================         REJILLA MODULAR INTERACTIVA DE 12 COLUMNAS (CANVAS TIPO NOTION / GRAFANA)         ==================================================================== -->    <div class="dashboard-widgets-flow" [class.is-editing-canvas]="isEditMode()">      @for (widget of orderedWidgets(); track widget.id) {        @if (widget.visible) {          <div            class="widget-box resizable-widget glass-window"            [class.width-12]="widget.width === \'col-12\'"            [class.width-8]="widget.width === \'col-8\'"            [class.width-6]="widget.width === \'col-6\'"            [class.width-4]="widget.width === \'col-4\'"            [class.is-editing]="isEditMode()"            [class.drag-over-target]="dragOverWidgetId() === widget.id"            [class.search-dimmed]="hasSearchQuery() && !isWidgetSearchMatch(widget)"            [attr.draggable]="isEditMode() ? \'true\' : null"            (dragstart)="onDragStart($event, widget.id)"            (dragover)="onDragOver($event, widget.id)"            (dragleave)="onDragLeave($event, widget.id)"            (dragend)="onDragEnd()"            (drop)="onDrop($event, widget.id)"          >            <!-- CABECERA EN MODO VISTA LIMPIO (SIN SATURACIÓN NI BOTONES DE EDICIÓN) -->            @if (!isEditMode()) {              <div class="widget-window-header view-mode">                <div class="widget-headline-group">                  <span class="widget-cat-tag">{{ widget.category }}</span>                  <h3 class="widget-headline-title">{{ widget.title }}</h3>                </div>                @if (widget.id === \'timeline_wave\') {                  <div class="header-period-chips">                    <button class="header-period-chip" [class.active]="filterPeriod() === \'7d\'" (click)="setPeriod(\'7d\')">7D</button>                    <button class="header-period-chip" [class.active]="filterPeriod() === \'30d\'" (click)="setPeriod(\'30d\')">30D</button>                    <button class="header-period-chip" [class.active]="filterPeriod() === \'year\'" (click)="setPeriod(\'year\')">2026</button>                  </div>                }              </div>            }            <!-- CABECERA EN MODO EDICIÓN (DRAG HANDLE, ANCHURAS 12-COL, MOVER Y QUITAR) -->            @if (isEditMode()) {              <div class="widget-window-header edit-mode">                <div class="drag-handle-wrap" title="Arrastra este módulo para recolocarlo en la rejilla">                  <ion-icon name="move-outline" class="drag-icon"></ion-icon>                  <span class="drag-label">Arrastrar</span>                  <div class="widget-headline-group">                    <span class="widget-cat-tag">{{ widget.category }}</span>                    <h3 class="widget-headline-title">{{ widget.title }}</h3>                  </div>                </div>                <div class="window-controls">                  <!-- Botones de ancho de rejilla 12 columnas: 1/3, 1/2, 2/3, Full -->                  <div class="quick-size-pills" title="Ajustar ancho en la rejilla de 12 columnas">                    <button                      class="size-mini-btn"                      [class.active]="widget.width === \'col-4\'"                      (click)="setWidgetWidth(widget.id, \'col-4\')"                      title="1/3 de pantalla (4 columnas)"                    >                      1/3                    </button>                    <button                      class="size-mini-btn"                      [class.active]="widget.width === \'col-6\'"                      (click)="setWidgetWidth(widget.id, \'col-6\')"                      title="1/2 de pantalla (6 columnas)"                    >                      1/2                    </button>                    <button                      class="size-mini-btn"                      [class.active]="widget.width === \'col-8\'"                      (click)="setWidgetWidth(widget.id, \'col-8\')"                      title="2/3 de pantalla (8 columnas)"                    >                      2/3                    </button>                    <button                      class="size-mini-btn"                      [class.active]="widget.width === \'col-12\'"                      (click)="setWidgetWidth(widget.id, \'col-12\')"                      title="Ancho completo (12 columnas)"                    >                      Full                    </button>                  </div>                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, \'up\')" title="Mover antes">                    <ion-icon name="arrow-up-outline"></ion-icon>                  </button>                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, \'down\')" title="Mover después">                    <ion-icon name="arrow-down-outline"></ion-icon>                  </button>                  <button class="win-ctrl-btn close-action" (click)="removeWidget(widget.id)" title="Quitar módulo del lienzo">                    <ion-icon name="close-outline"></ion-icon>                  </button>                </div>              </div>            }            <!-- CONTENIDO ESPECÍFICO SEGÚN ID DE WIDGET -->            <div class="widget-inner-body">              <!-- 1. MEDIDORES RADIALES SLA -->              @if (widget.id === \'ring_gauges\') {                <div class="ring-gauges-grid">                  @for (gauge of ringGauges; track gauge.label) {                    <div class="gauge-card glass-subcard">                      <div class="gauge-svg-wrap">                        <svg viewBox="0 0 100 100" class="gauge-svg">                          <circle class="gauge-bg" cx="50" cy="50" r="40" stroke-dasharray="3, 3"></circle>                          <circle                            class="gauge-progress"                            cx="50"                            cy="50"                            r="40"                            [style.stroke]="gauge.color"                            [style.strokeDashoffset]="251.2 - (gauge.percent / 100) * 251.2"                          ></circle>                        </svg>                        <div class="gauge-center-content">                          <span class="gauge-val" [style.color]="gauge.color">{{ gauge.value }}</span>                        </div>                      </div>                      <div class="gauge-info">                        <h4 class="gauge-title">{{ gauge.label }}</h4>                        <span class="gauge-sub">{{ gauge.subtitle }}</span>                      </div>                    </div>                  }                </div>              }              <!-- 2. MÉTRICAS PRINCIPALES KPI -->              @if (widget.id === \'kpis\') {                <div class="kpi-cards-grid">                  <div class="kpi-box box-ruby glass-subcard">                    <div class="kpi-top">                      <span class="kpi-label">Valor del Inventario</span>                      <span class="trend-badge trend-up">                        <ion-icon name="trending-up-outline"></ion-icon> +12.4%                      </span>                    </div>                    <div class="kpi-value-row">                      <div class="kpi-number">{{ (totalInventoryValue() | number:\'1.2-2\') }} €</div>                      <div class="kpi-icon-bubble">                        <ion-icon name="cash-outline"></ion-icon>                      </div>                    </div>                    <span class="kpi-footnote">Basado en existencias físicas en almacén</span>                  </div>                  <div class="kpi-box box-cyan glass-subcard">                    <div class="kpi-top">                      <span class="kpi-label">Artículos en Catálogo</span>                      <span class="trend-badge trend-neutral">                        <ion-icon name="remove-outline"></ion-icon> 5 Categorías                      </span>                    </div>                    <div class="kpi-value-row">                      <div class="kpi-number">{{ totalProducts() }}</div>                      <div class="kpi-icon-bubble">                        <ion-icon name="cube-outline"></ion-icon>                      </div>                    </div>                    <span class="kpi-footnote">Referencias SKU activas registradas</span>                  </div>                  <div class="kpi-box box-amber glass-subcard">                    <div class="kpi-top">                      <span class="kpi-label">Stock Crítico / Bajo</span>                      <span class="trend-badge trend-warning">                        <ion-icon name="alert-circle-outline"></ion-icon> Atención                      </span>                    </div>                    <div class="kpi-value-row">                      <div class="kpi-number">{{ lowStockCount() }}</div>                      <div class="kpi-icon-bubble">                        <ion-icon name="alert-circle-outline"></ion-icon>                      </div>                    </div>                    <span class="kpi-footnote">Menos de 5 unidades disponibles</span>                  </div>                  <div class="kpi-box box-purple glass-subcard">                    <div class="kpi-top">                      <span class="kpi-label">Artículos Agotados</span>                      <span class="trend-badge trend-danger">                        <ion-icon name="flash-outline"></ion-icon> Urgente                      </span>                    </div>                    <div class="kpi-value-row">                      <div class="kpi-number">{{ outOfStockCount() }}</div>                      <div class="kpi-icon-bubble">                        <ion-icon name="sparkles-outline"></ion-icon>                      </div>                    </div>                    <span class="kpi-footnote">Requieren reposición inmediata</span>                  </div>                </div>              }              <!-- 3. EVOLUCIÓN FINANCIERA (TIME LINE) -->              @if (widget.id === \'timeline_wave\') {                <div class="chart-content-inner">                  <div class="period-toggle-row">                    <span class="chart-subtitle-mini">Flujo continuo de ingresos netos vs costes operativos</span>                    <div class="period-toggle-group">                      <button class="period-btn" [class.active]="filterPeriod() === \'7d\'" (click)="setPeriod(\'7d\')">7D</button>                      <button class="period-btn" [class.active]="filterPeriod() === \'30d\'" (click)="setPeriod(\'30d\')">30D</button>                      <button class="period-btn" [class.active]="filterPeriod() === \'year\'" (click)="setPeriod(\'year\')">2026</button>                    </div>                  </div>                  <div class="canvas-responsive-wrap">                    <canvas #timelineWaveChartCanvas role="img" aria-label="Gráfico de líneas con curvas suaves"></canvas>                  </div>                </div>              }              <!-- 4. GRÁFICA CIRCULAR DE DISTRIBUCIÓN DE ACTIVOS (DOUGHNUT) -->              @if (widget.id === \'category_doughnut\') {                <div class="doughnut-content-inner">                  <p class="chart-subtitle-mini">Valoración económica distribuida por categoría de producto</p>                  <div class="canvas-responsive-wrap doughnut-wrap">                    <canvas #categoryDoughnutChartCanvas role="img" aria-label="Gráfica circular de distribución de activos"></canvas>                  </div>                </div>              }              <!-- 5. MINI CALENDARIO INTERACTIVO -->              @if (widget.id === \'mini_calendar\') {                <div class="calendar-content-inner">                  <div class="calendar-nav-bar">                    <button class="cal-nav-btn" (click)="prevMonth()" aria-label="Mes anterior">                      <ion-icon name="chevron-back-outline"></ion-icon>                    </button>                    <span class="cal-month-title">{{ calendarMonthTitle() }}</span>                    <button class="cal-nav-btn" (click)="nextMonth()" aria-label="Mes siguiente">                      <ion-icon name="chevron-forward-outline"></ion-icon>                    </button>                  </div>                  <div class="cal-weekdays">                    <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>                  </div>                  <div class="cal-days-grid">                    @for (c of calendarDays(); track $index) {                      <div                        class="cal-day-cell"                        [class.empty-cell]="c.day === null"                        [class.today-cell]="c.isToday"                        [class.selected-cell]="c.day === selectedCalendarDay()"                        (click)="selectDay(c.day)"                      >                        @if (c.day !== null) {                          <span class="day-num">{{ c.day }}</span>                          @if (c.hasEvent) {                            <span class="day-event-dot"></span>                          }                        }                      </div>                    }                  </div>                </div>              }              <!-- 6. ACTIVIDADES EN VIVO (Supabase Realtime) -->              @if (widget.id === \'live_activities\') {                <div class="activities-content-inner">                  <div class="activities-status-bar">                    <span class="feed-sub">Flujo de trazabilidad reactivo</span>                    <div class="live-pill">                      <span class="live-blink-dot"></span> EN VIVO                    </div>                  </div>                  <div class="activities-scroll-feed">                    @for (log of recentLogs(); track log.id) {                      <div                        class="activity-row"                        [class.sev-warning]="log.severity === \'warning\'"                        [class.sev-critical]="log.severity === \'critical\'"                      >                        <div class="act-time-col">                          <span>{{ log.timestamp | date:\'HH:mm:ss\' }}</span>                        </div>                        <div class="act-body-col">                          <div class="act-tag-row">                            <span class="act-tag">{{ log.action }}</span>                            <span class="act-entity">{{ log.entity }}</span>                          </div>                          <p class="act-desc">{{ log.details }}</p>                          <span class="act-user">Por: {{ log.userEmail }}</span>                        </div>                      </div>                    }                  </div>                </div>              }              <!-- 7. CAPACIDAD OPERATIVA DE ALMACENES -->              @if (widget.id === \'operations\') {                <div class="operations-content-inner">                  <div class="operations-meters-list">                    @for (m of operationalMeters; track m.name) {                      <div class="meter-block">                        <div class="meter-header">                          <span class="meter-name">{{ m.name }}</span>                          <span class="meter-percent" [style.color]="m.color">{{ m.progress }}%</span>                        </div>                        <div class="meter-track">                          <div                            class="meter-fill-bar"                            [style.width.%]="m.progress"                            [style.background]="m.color"                            [style.box-shadow]="\'0 0 10px \' + m.color"                          ></div>                          <div                            class="meter-knob"                            [style.left.%]="m.progress"                            [style.background]="m.color"                            [style.box-shadow]="\'0 0 10px \' + m.color"                          ></div>                        </div>                        <span class="meter-detail">{{ m.detail }}</span>                      </div>                    }                  </div>                </div>              }              <!-- 8. ACCIONES RÁPIDAS & ATAJOS -->              @if (widget.id === \'quick_actions\') {                <div class="quick-actions-inner">                  <div class="quick-actions-grid">                    <button class="quick-action-tile" (click)="navigateTo(\'/product-form\')">                      <div class="tile-icon-bubble tile-ruby">                        <ion-icon name="create-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Nuevo Producto</span>                        <span class="tile-sub">Alta en inventario SQL</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="navigateTo(\'/products\')">                      <div class="tile-icon-bubble tile-cyan">                        <ion-icon name="cube-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Catálogo Completo</span>                        <span class="tile-sub">Consultar referencias</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="navigateTo(\'/reports\')">                      <div class="tile-icon-bubble tile-amber">                        <ion-icon name="stats-chart-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Informes & Reportes</span>                        <span class="tile-sub">Métricas operativas</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="navigateTo(\'/realtime-audit\')">                      <div class="tile-icon-bubble tile-purple">                        <ion-icon name="pulse-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Auditoría en Vivo</span>                        <span class="tile-sub">Supabase Realtime</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="exportPdfReport()">                      <div class="tile-icon-bubble tile-green">                        <ion-icon name="download-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Exportar PDF</span>                        <span class="tile-sub">Informe ejecutivo</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="exportCsvReport()">                      <div class="tile-icon-bubble tile-blue">                        <ion-icon name="document-text-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Descargar CSV</span>                        <span class="tile-sub">Datos tabulados</span>                      </div>                    </button>                  </div>                </div>              }              <!-- 9. ALERTA DE STOCK CRÍTICO & REPOSICIÓN -->              @if (widget.id === \'critical_stock_table\') {                <div class="critical-stock-inner">                  <div class="critical-stock-table-wrap">                    <table class="critical-stock-table">                      <thead>                        <tr>                          <th>Artículo / Ref</th>                          <th>Categoría</th>                          <th>Stock</th>                          <th>PVP</th>                          <th>Acción</th>                        </tr>                      </thead>                      <tbody>                        @for (item of criticalProducts(); track item.id) {                          <tr>                            <td>                              <div class="prod-cell">                                <span class="prod-name">{{ item.name }}</span>                                <span class="prod-sku">ID #{{ item.id }}</span>                              </div>                            </td>                            <td>                              <span class="badge-cat">{{ item.category }}</span>                            </td>                            <td>                              <span class="stock-pill" [class.out-of-stock]="item.stock === 0">                                {{ item.stock === 0 ? \'AGOTADO\' : item.stock + \' uds\' }}                              </span>                            </td>                            <td class="price-cell">{{ item.price | number:\'1.2-2\' }} €</td>                            <td>                              <button class="table-action-btn" (click)="navigateToProduct(item.id)" title="Gestionar existencias">                                <ion-icon name="create-outline"></ion-icon> Gestionar                              </button>                            </td>                          </tr>                        } @empty {                          <tr>                            <td colspan="5" class="empty-stock-td">                              <ion-icon name="shield-checkmark-outline"></ion-icon> Todas las referencias tienen stock suficiente.                            </td>                          </tr>                        }                      </tbody>                    </table>                  </div>                </div>              }            </div>            <!-- Maneta / Indicador de Redimensión en la Esquina Inferior Derecha (Solo en Modo Edición) -->            @if (isEditMode()) {              <div                class="corner-resize-indicator"                (click)="cycleWidgetWidth(widget.id)"                title="Cambiar tamaño del widget (Clic para ciclar: 1/3 → 1/2 → 2/3 → Full)"              >                <span class="resize-pill-indicator">{{ widget.width === \'col-12\' ? \'Full\' : widget.width === \'col-8\' ? \'2/3\' : widget.width === \'col-6\' ? \'1/2\' : \'1/3\' }}</span>                <svg viewBox="0 0 10 10" class="resize-grip-icon" aria-hidden="true">                  <path d="M8 2 L2 8 M9 5 L5 9 M9 8 L8 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>                </svg>              </div>            }          </div>        }      }      <!-- ESTADO VACÍO CUANDO SE HAN QUITADO TODOS LOS WIDGETS -->      @if (activeWidgets().length === 0) {        <div class="dashboard-empty-state glass-window">          <div class="empty-icon-wrap">            <ion-icon name="layers-outline"></ion-icon>          </div>          <h3>El Cuadro de Mando está vacío</h3>          <p>Has quitado todos los widgets activos de tu pantalla. Puedes volver a añadirlos fácilmente desde la bandeja de módulos o restablecer la vista inicial.</p>          <div class="empty-actions">            <button class="btn-add-primary" (click)="toggleCatalogDrawer()">              <ion-icon name="add-outline"></ion-icon> Abrir Bandeja de Módulos            </button>            <button class="btn-restore-sec" (click)="resetDefaultLayout()">              <ion-icon name="refresh-outline"></ion-icon> Restablecer Predeterminados            </button>          </div>        </div>      }    </div>    <!-- BOTÓN CONTEXTUAL FLOTANTE (+) EN EL LIENZO -->    <div class="canvas-floating-dock" role="complementary" aria-label="Añadir módulos disponibles">      <button        class="canvas-fab-btn"        [class.is-editing]="isEditMode()"        (click)="toggleCatalogDrawer()"        title="Añadir o gestionar módulos disponibles (+)"      >        <span class="fab-pulse-effect" aria-hidden="true"></span>        <ion-icon name="add-outline" class="fab-main-icon"></ion-icon>        <span class="fab-text">Añadir Módulos</span>        <span class="fab-badge">{{ activeWidgets().length }}/{{ catalogWidgets.length }}</span>      </button>    </div>    <!-- BANDEJA / DRAWER LATERAL DE CATÁLOGO DE WIDGETS -->    @if (isCatalogDrawerOpen()) {      <div class="drawer-backdrop" (click)="closeCatalogDrawer()" aria-hidden="true"></div>      <aside class="catalog-drawer glass-window" role="dialog" aria-modal="true" aria-label="Bandeja de módulos disponibles">        <div class="drawer-header">          <div class="drawer-title-group">            <div class="drawer-icon-wrap">              <ion-icon name="grid-outline"></ion-icon>            </div>            <div>              <h3>Bandeja de Módulos</h3>              <p>Personaliza tu cuadro de mando activando o retirando widgets</p>            </div>          </div>          <button class="drawer-close-btn" (click)="closeCatalogDrawer()" aria-label="Cerrar bandeja">            <ion-icon name="close-outline"></ion-icon>          </button>        </div>        <!-- Buscador y Filtros por Categoría en la Bandeja -->        <div class="drawer-filter-bar">          <div class="drawer-search-box">            <ion-icon name="search-outline"></ion-icon>            <input              type="text"              placeholder="Buscar módulo en catálogo..."              [value]="catalogSearch()"              (input)="catalogSearch.set($any($event.target).value)"            />            @if (catalogSearch()) {              <button class="clear-drawer-search" (click)="catalogSearch.set(\'\')">                <ion-icon name="close-circle-outline"></ion-icon>              </button>            }          </div>          <div class="category-chips-row">            @for (cat of catalogCategories(); track cat) {              <button                class="cat-chip-btn"                [class.active]="catalogFilterCategory() === cat"                (click)="catalogFilterCategory.set(cat)"              >                {{ cat === \'all\' ? \'Todos\' : cat }}              </button>            }          </div>        </div>        <!-- Lista de Widgets Disponibles -->        <div class="drawer-cards-list">          @for (item of filteredCatalogWidgets(); track item.id) {            <div class="drawer-item-card" [class.is-active]="isWidgetVisible(item.id)">              <div class="card-icon-col">                <ion-icon [name]="item.icon"></ion-icon>              </div>              <div class="card-info-col">                <div class="card-meta-top">                  <span class="cat-pill">{{ item.category }}</span>                  <span class="size-hint">Base: {{ item.defaultWidth === \'col-12\' ? \'Full\' : item.defaultWidth === \'col-8\' ? \'2/3\' : item.defaultWidth === \'col-6\' ? \'1/2\' : \'1/3\' }}</span>                </div>                <h4 class="card-title">{{ item.title }}</h4>                <p class="card-desc">{{ item.description }}</p>              </div>              <div class="card-actions-col">                @if (isWidgetVisible(item.id)) {                  <span class="in-canvas-tag">                    <ion-icon name="checkmark-circle-outline"></ion-icon> En Lienzo                  </span>                  <button class="drawer-action-link danger" (click)="removeWidget(item.id)" title="Quitar del lienzo">                    Quitar                  </button>                } @else {                  <button class="drawer-add-pill-btn" (click)="addWidget(item.id)" title="Añadir a mi lienzo">                    <ion-icon name="add-outline"></ion-icon> Añadir                  </button>                }              </div>            </div>          } @empty {            <div class="drawer-empty-state">              <ion-icon name="search-outline"></ion-icon>              <p>No se encontraron módulos coincidentes con el filtro.</p>            </div>          }        </div>        <!-- Pie de Bandeja -->        <div class="drawer-footer">          <div class="status-summary">            <span class="num">{{ activeWidgets().length }} de {{ catalogWidgets.length }}</span>            <span class="lbl">módulos en lienzo</span>          </div>          <div class="footer-btns">            <button class="btn-sec" (click)="resetDefaultLayout()" title="Restablecer diseño inicial">              <ion-icon name="refresh-outline"></ion-icon> Restablecer            </button>            <button class="btn-pri" (click)="closeCatalogDrawer()">              <ion-icon name="checkmark-outline"></ion-icon> Listo            </button>          </div>        </div>      </aside>    }  </div></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button></ion-menu-button>    </ion-buttons>    <ion-title>Cuadro de Mando Ejecutivo</ion-title>    <ion-buttons slot="end">      <!-- Botón Personalizar Widgets -->      <ion-button (click)="toggleCustomizer()" aria-label="Personalizar diseño del cuadro de mando">        <ion-icon slot="start" name="options-outline"></ion-icon>        <span class="toolbar-btn-text">Personalizar</span>      </ion-button>      <ion-button (click)="loadConsolidatedData()" aria-label="Actualizar métricas">        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>      </ion-button>      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">        <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>        Salir      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="dashboard-content">  <!-- Fondo Cósmico Neón & Malla Espacial con Blur -->  <div class="ambient-nebula-bg" aria-hidden="true">    <div class="nebula-glow glow-1"></div>    <div class="nebula-glow glow-2"></div>    <div class="nebula-glow glow-3"></div>    <div class="cyber-grid-overlay"></div>  </div>  <div class="dashboard-container">    <!-- BARRA SUPERIOR CYBER: Búsqueda, Notificaciones, Personalizador y Perfil -->    <div class="cyber-top-bar glass-window">      <div class="breadcrumb-box">        <span class="breadcrumb-label">DASHBOARD / CUADRO DE MANDO</span>        <h1 class="dashboard-title">Panel Ejecutivo & Control de Activos</h1>      </div>      <!-- Barra de Búsqueda Estilo Píldora Luminosa -->      <div class="cyber-search-pill">        <ion-icon name="search-outline"></ion-icon>        <input          type="text"          placeholder="Buscar métricas, catálogo, logs de auditoría..."          [value]="searchQuery()"          (input)="searchQuery.set($any($event.target).value)"          aria-label="Buscar en el cuadro de mando"        />      </div>      <!-- Acciones de Cabecera: Modo Edición, Módulos, Alertas y Perfil -->      <div class="cyber-header-actions">        <!-- Botón Modo Edición (Activar/Desactivar) -->        <button          class="action-icon-btn edit-mode-btn"          [class.active]="isEditMode()"          (click)="toggleEditMode()"          [title]="isEditMode() ? \'Finalizar personalización y guardar lienzo\' : \'Personalizar lienzo (organizar, redimensionar, añadir)\'"        >          <ion-icon [name]="isEditMode() ? \'checkmark-circle-outline\' : \'color-wand-outline\'"></ion-icon>          <span class="btn-text-badge">{{ isEditMode() ? \'Listo\' : \'Editar Lienzo\' }}</span>        </button>        <!-- Botón Catálogo de Módulos (Bandeja Lateral) -->        <button          class="action-icon-btn modules-btn"          [class.active]="isCatalogDrawerOpen()"          (click)="toggleCatalogDrawer()"          title="Bandeja de módulos y catálogo de widgets"        >          <ion-icon name="grid-outline"></ion-icon>          <span class="btn-text-badge">Módulos</span>        </button>        <!-- Botón Exportar PDF -->        <button class="action-icon-btn" (click)="exportPdfReport()" title="Exportar Informe PDF">          <ion-icon name="download-outline"></ion-icon>        </button>        <!-- Botón Exportar CSV -->        <button class="action-icon-btn" (click)="exportCsvReport()" title="Exportar Datos CSV">          <ion-icon name="document-text-outline"></ion-icon>        </button>        <!-- BOTÓN DE NOTIFICACIONES INTERACTIVO -->        <div class="notification-wrap">          <button            class="action-icon-btn notification-btn"            [class.active]="isNotificationsOpen()"            (click)="toggleNotifications()"            aria-label="Abrir centro de notificaciones"            title="Centro de Notificaciones"          >            <ion-icon name="notifications-outline"></ion-icon>            @if (unreadNotificationsCount() > 0) {              <span class="pulsing-badge">{{ unreadNotificationsCount() }}</span>            }          </button>          <!-- PANEL DESPLEGABLE DE NOTIFICACIONES (GLASSMORPHIC) -->          @if (isNotificationsOpen()) {            <div class="notif-click-away-backdrop" (click)="toggleNotifications()" aria-hidden="true"></div>            <div class="notifications-dropdown glass-window" role="dialog" aria-label="Notificaciones del Sistema">              <div class="notif-header">                <div class="notif-title-row">                  <ion-icon name="notifications-outline" class="notif-icon-lead"></ion-icon>                  <h2 class="notif-title">Notificaciones del Sistema</h2>                  @if (unreadNotificationsCount() > 0) {                    <span class="unread-pill">{{ unreadNotificationsCount() }} nuevas</span>                  }                </div>                <div class="notif-header-actions">                  <button class="notif-action-link" (click)="markAllNotificationsAsRead()" title="Marcar todas como leídas">                    <ion-icon name="checkmark-done-outline"></ion-icon> Leídas                  </button>                  <button class="notif-action-link danger" (click)="clearNotifications()" title="Limpiar lista">                    <ion-icon name="trash-outline"></ion-icon>                  </button>                  <button class="notif-close-btn" (click)="toggleNotifications()" aria-label="Cerrar panel">                    <ion-icon name="close-outline"></ion-icon>                  </button>                </div>              </div>              <div class="notif-list">                @for (item of notifications(); track item.id) {                  <div                    class="notif-item"                    [class.unread]="!item.read"                    [class.sev-critical]="item.severity === \'critical\'"                    [class.sev-warning]="item.severity === \'warning\'"                    [class.sev-success]="item.severity === \'success\'"                    (click)="markNotificationAsRead(item.id)"                  >                    <div class="notif-icon-col">                      @if (item.severity === \'critical\') {                        <ion-icon name="alert-circle-outline" class="col-crit"></ion-icon>                      } @else if (item.severity === \'warning\') {                        <ion-icon name="flash-outline" class="col-warn"></ion-icon>                      } @else if (item.severity === \'success\') {                        <ion-icon name="checkmark-circle-outline" class="col-succ"></ion-icon>                      } @else {                        <ion-icon name="mail-outline" class="col-info"></ion-icon>                      }                    </div>                    <div class="notif-body-col">                      <div class="notif-item-top">                        <span class="item-title">{{ item.title }}</span>                        <span class="item-time">{{ item.time }}</span>                      </div>                      <p class="item-msg">{{ item.message }}</p>                    </div>                  </div>                } @empty {                  <div class="notif-empty-state">                    <ion-icon name="notifications-off-outline"></ion-icon>                    <p>No tienes alertas pendientes</p>                  </div>                }              </div>            </div>          }        </div>        <!-- Avatar de Usuario con Anillo Online -->        <div class="cyber-user-pill">          <div class="avatar-ring">            <ion-icon name="person-circle-outline"></ion-icon>            <span class="online-dot"></span>          </div>          <div class="user-info-text">            <span class="user-name">{{ authService.currentUserSignal()?.name?.split(\' \')?.[0] || \'Admin\' }}</span>            <span class="user-role">{{ authService.currentUserSignal()?.role === \'admin\' ? \'ADMIN\' : \'USER\' }}</span>          </div>        </div>      </div>    </div>    <!-- INDICADOR DE BÚSQUEDA ACTIVA (FILTRADO INTUITIVO DE WIDGETS) -->    @if (hasSearchQuery()) {      <div class="search-active-pill glass-window" role="status">        <div class="search-pill-content">          <ion-icon name="search-outline"></ion-icon>          <span>Filtrando módulos por "<strong>{{ searchQuery() }}</strong>" ({{ searchMatchCount() }} de {{ activeWidgets().length }} módulos coinciden)</span>        </div>        <button class="clear-search-btn" (click)="clearSearch()" title="Quitar filtro de búsqueda">          <ion-icon name="close-circle-outline"></ion-icon> Limpiar        </button>      </div>    }    <!-- BARRA INTERACTIVA DE MODO EDICIÓN (PRESETS & ACCIONES RÁPIDAS) -->    @if (isEditMode()) {      <div class="canvas-edit-ribbon glass-window" role="region" aria-label="Controles del modo edición">        <div class="ribbon-headline">          <div class="ribbon-badge">            <span class="pulsing-neon-dot"></span>            <span>MODO EDICIÓN ACTIVO</span>          </div>          <p class="ribbon-instruction">Arrastra tarjetas para reordenar, pulsa en 1/3, 1/2, 2/3 o Full, o aplica una plantilla:</p>        </div>        <!-- Selector de Plantillas Predefinidas (Presets) -->        <div class="ribbon-templates-box">          <span class="templates-title">Plantillas predefinidas:</span>          <div class="templates-pills">            @for (tpl of templates; track tpl.id) {              <button                class="tpl-pill-btn"                [class.active]="activeTemplateId() === tpl.id"                (click)="applyTemplate(tpl.id)"                [title]="tpl.description"              >                <ion-icon [name]="tpl.icon"></ion-icon>                <span>{{ tpl.name }}</span>              </button>            }          </div>        </div>        <!-- Acciones Rápidas del Modo Edición -->        <div class="ribbon-actions">          <button class="ribbon-action-btn add-btn" (click)="toggleCatalogDrawer()" title="Abrir bandeja para añadir widgets">            <ion-icon name="add-outline"></ion-icon> + Añadir Módulos          </button>          <button class="ribbon-action-btn reset-btn" (click)="resetDefaultLayout()" title="Restablecer diseño original de fábrica">            <ion-icon name="refresh-outline"></ion-icon> Restablecer          </button>          <button class="ribbon-action-btn finish-btn" (click)="toggleEditMode()" title="Guardar cambios y salir del modo edición">            <ion-icon name="checkmark-done-outline"></ion-icon> Salir de Edición          </button>        </div>      </div>    }    <!-- Indicador de Carga Asíncrona -->    @if (isLoading()) {      <div class="loading-overlay glass-window" role="status" aria-live="polite">        <ion-spinner name="crescent"></ion-spinner>        <span>Sincronizando fuentes asíncronas concurrentes Supabase (SQL & Realtime)...</span>      </div>    }    <!-- ====================================================================         REJILLA MODULAR INTERACTIVA DE 12 COLUMNAS (CANVAS TIPO NOTION / GRAFANA)         ==================================================================== -->    <div class="dashboard-widgets-flow" [class.is-editing-canvas]="isEditMode()">      @for (widget of orderedWidgets(); track widget.id) {        @if (widget.visible) {          <div            class="widget-box resizable-widget glass-window"            [class.width-12]="widget.width === \'col-12\'"            [class.width-8]="widget.width === \'col-8\'"            [class.width-6]="widget.width === \'col-6\'"            [class.width-4]="widget.width === \'col-4\'"            [class.is-editing]="isEditMode()"            [class.drag-over-target]="dragOverWidgetId() === widget.id"            [class.search-dimmed]="hasSearchQuery() && !isWidgetSearchMatch(widget)"            [attr.draggable]="isEditMode() ? \'true\' : null"            (dragstart)="onDragStart($event, widget.id)"            (dragover)="onDragOver($event, widget.id)"            (dragleave)="onDragLeave($event, widget.id)"            (dragend)="onDragEnd()"            (drop)="onDrop($event, widget.id)"          >            <!-- CABECERA EN MODO VISTA LIMPIO (SIN SATURACIÓN NI BOTONES DE EDICIÓN) -->            @if (!isEditMode()) {              <div class="widget-window-header view-mode">                <div class="widget-headline-group">                  <span class="widget-cat-tag">{{ widget.category }}</span>                  <h3 class="widget-headline-title">{{ widget.title }}</h3>                </div>              </div>            }            <!-- CABECERA EN MODO EDICIÓN (DRAG HANDLE, ANCHURAS 12-COL, MOVER Y QUITAR) -->            @if (isEditMode()) {              <div class="widget-window-header edit-mode">                <div class="drag-handle-wrap" title="Arrastra este módulo para recolocarlo en la rejilla">                  <ion-icon name="move-outline" class="drag-icon"></ion-icon>                  <span class="drag-label">Arrastrar</span>                  <div class="widget-headline-group">                    <span class="widget-cat-tag">{{ widget.category }}</span>                    <h3 class="widget-headline-title">{{ widget.title }}</h3>                  </div>                </div>                <div class="window-controls">                  <!-- Botones de ancho de rejilla 12 columnas: 1/3, 1/2, 2/3, Full -->                  <div class="quick-size-pills" title="Ajustar ancho en la rejilla de 12 columnas">                    <button                      class="size-mini-btn"                      [class.active]="widget.width === \'col-4\'"                      (click)="setWidgetWidth(widget.id, \'col-4\')"                      title="1/3 de pantalla (4 columnas)"                    >                      1/3                    </button>                    <button                      class="size-mini-btn"                      [class.active]="widget.width === \'col-6\'"                      (click)="setWidgetWidth(widget.id, \'col-6\')"                      title="1/2 de pantalla (6 columnas)"                    >                      1/2                    </button>                    <button                      class="size-mini-btn"                      [class.active]="widget.width === \'col-8\'"                      (click)="setWidgetWidth(widget.id, \'col-8\')"                      title="2/3 de pantalla (8 columnas)"                    >                      2/3                    </button>                    <button                      class="size-mini-btn"                      [class.active]="widget.width === \'col-12\'"                      (click)="setWidgetWidth(widget.id, \'col-12\')"                      title="Ancho completo (12 columnas)"                    >                      Full                    </button>                  </div>                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, \'up\')" title="Mover antes">                    <ion-icon name="arrow-up-outline"></ion-icon>                  </button>                  <button class="win-ctrl-btn" (click)="moveWidget(widget.id, \'down\')" title="Mover después">                    <ion-icon name="arrow-down-outline"></ion-icon>                  </button>                  <button class="win-ctrl-btn close-action" (click)="removeWidget(widget.id)" title="Quitar módulo del lienzo">                    <ion-icon name="close-outline"></ion-icon>                  </button>                </div>              </div>            }            <!-- CONTENIDO ESPECÍFICO SEGÚN ID DE WIDGET -->            <div class="widget-inner-body">              <!-- 1. MEDIDORES RADIALES SLA -->              @if (widget.id === \'ring_gauges\') {                <div class="ring-gauges-grid">                  @for (gauge of ringGauges; track gauge.label) {                    <div class="gauge-card glass-subcard">                      <div class="gauge-svg-wrap">                        <svg viewBox="0 0 100 100" class="gauge-svg">                          <circle class="gauge-bg" cx="50" cy="50" r="40" stroke-dasharray="3, 3"></circle>                          <circle                            class="gauge-progress"                            cx="50"                            cy="50"                            r="40"                            [style.stroke]="gauge.color"                            [style.strokeDashoffset]="251.2 - (gauge.percent / 100) * 251.2"                          ></circle>                        </svg>                        <div class="gauge-center-content">                          <span class="gauge-val" [style.color]="gauge.color">{{ gauge.value }}</span>                        </div>                      </div>                      <div class="gauge-info">                        <h4 class="gauge-title">{{ gauge.label }}</h4>                        <span class="gauge-sub">{{ gauge.subtitle }}</span>                      </div>                    </div>                  }                </div>              }              <!-- 2. MÉTRICAS PRINCIPALES KPI -->              @if (widget.id === \'kpis\') {                <div class="kpi-cards-grid">                  <div class="kpi-box box-ruby glass-subcard">                    <div class="kpi-top">                      <span class="kpi-label">Valor del Inventario</span>                      <span class="trend-badge trend-up">                        <ion-icon name="trending-up-outline"></ion-icon> +12.4%                      </span>                    </div>                    <div class="kpi-value-row">                      <div class="kpi-number">{{ (totalInventoryValue() | number:\'1.2-2\') }} €</div>                      <div class="kpi-icon-bubble">                        <ion-icon name="cash-outline"></ion-icon>                      </div>                    </div>                    <span class="kpi-footnote">Basado en existencias físicas en almacén</span>                  </div>                  <div class="kpi-box box-cyan glass-subcard">                    <div class="kpi-top">                      <span class="kpi-label">Artículos en Catálogo</span>                      <span class="trend-badge trend-neutral">                        <ion-icon name="remove-outline"></ion-icon> 5 Categorías                      </span>                    </div>                    <div class="kpi-value-row">                      <div class="kpi-number">{{ totalProducts() }}</div>                      <div class="kpi-icon-bubble">                        <ion-icon name="cube-outline"></ion-icon>                      </div>                    </div>                    <span class="kpi-footnote">Referencias SKU activas registradas</span>                  </div>                  <div class="kpi-box box-amber glass-subcard">                    <div class="kpi-top">                      <span class="kpi-label">Stock Crítico / Bajo</span>                      <span class="trend-badge trend-warning">                        <ion-icon name="alert-circle-outline"></ion-icon> Atención                      </span>                    </div>                    <div class="kpi-value-row">                      <div class="kpi-number">{{ lowStockCount() }}</div>                      <div class="kpi-icon-bubble">                        <ion-icon name="alert-circle-outline"></ion-icon>                      </div>                    </div>                    <span class="kpi-footnote">Menos de 5 unidades disponibles</span>                  </div>                  <div class="kpi-box box-purple glass-subcard">                    <div class="kpi-top">                      <span class="kpi-label">Artículos Agotados</span>                      <span class="trend-badge trend-danger">                        <ion-icon name="flash-outline"></ion-icon> Urgente                      </span>                    </div>                    <div class="kpi-value-row">                      <div class="kpi-number">{{ outOfStockCount() }}</div>                      <div class="kpi-icon-bubble">                        <ion-icon name="sparkles-outline"></ion-icon>                      </div>                    </div>                    <span class="kpi-footnote">Requieren reposición inmediata</span>                  </div>                </div>              }              <!-- 3. EVOLUCIÓN FINANCIERA (TIME LINE) -->              @if (widget.id === \'timeline_wave\') {                <div class="chart-content-inner">                  <div class="period-toggle-row">                    <span class="chart-subtitle-mini">Flujo continuo de ingresos netos vs costes operativos</span>                    <div class="period-toggle-group">                      <button class="period-btn" [class.active]="filterPeriod() === \'7d\'" (click)="setPeriod(\'7d\')">7D</button>                      <button class="period-btn" [class.active]="filterPeriod() === \'30d\'" (click)="setPeriod(\'30d\')">30D</button>                      <button class="period-btn" [class.active]="filterPeriod() === \'year\'" (click)="setPeriod(\'year\')">2026</button>                    </div>                  </div>                  <div class="canvas-responsive-wrap">                    <canvas #timelineWaveChartCanvas role="img" aria-label="Gráfico de líneas con curvas suaves"></canvas>                  </div>                </div>              }              <!-- 4. GRÁFICA CIRCULAR DE DISTRIBUCIÓN DE ACTIVOS (DOUGHNUT) -->              @if (widget.id === \'category_doughnut\') {                <div class="doughnut-content-inner">                  <p class="chart-subtitle-mini">Valoración económica distribuida por categoría de producto</p>                  <div class="canvas-responsive-wrap doughnut-wrap">                    <canvas #categoryDoughnutChartCanvas role="img" aria-label="Gráfica circular de distribución de activos"></canvas>                  </div>                </div>              }              <!-- 5. MINI CALENDARIO INTERACTIVO -->              @if (widget.id === \'mini_calendar\') {                <div class="calendar-content-inner">                  <div class="calendar-nav-bar">                    <button class="cal-nav-btn" (click)="prevMonth()" aria-label="Mes anterior">                      <ion-icon name="chevron-back-outline"></ion-icon>                    </button>                    <span class="cal-month-title">{{ calendarMonthTitle() }}</span>                    <button class="cal-nav-btn" (click)="nextMonth()" aria-label="Mes siguiente">                      <ion-icon name="chevron-forward-outline"></ion-icon>                    </button>                  </div>                  <div class="cal-weekdays">                    <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>                  </div>                  <div class="cal-days-grid">                    @for (c of calendarDays(); track $index) {                      <div                        class="cal-day-cell"                        [class.empty-cell]="c.day === null"                        [class.today-cell]="c.isToday"                        [class.selected-cell]="c.day === selectedCalendarDay()"                        (click)="selectDay(c.day)"                      >                        @if (c.day !== null) {                          <span class="day-num">{{ c.day }}</span>                          @if (c.hasEvent) {                            <span class="day-event-dot"></span>                          }                        }                      </div>                    }                  </div>                </div>              }              <!-- 6. ACTIVIDADES EN VIVO (Supabase Realtime) -->              @if (widget.id === \'live_activities\') {                <div class="activities-content-inner">                  <div class="activities-status-bar">                    <span class="feed-sub">Flujo de trazabilidad reactivo</span>                    <div class="live-pill">                      <span class="live-blink-dot"></span> EN VIVO                    </div>                  </div>                  <div class="activities-scroll-feed">                    @for (log of recentLogs(); track log.id) {                      <div                        class="activity-row"                        [class.sev-warning]="log.severity === \'warning\'"                        [class.sev-critical]="log.severity === \'critical\'"                      >                        <div class="act-time-col">                          <span>{{ log.timestamp | date:\'HH:mm:ss\' }}</span>                        </div>                        <div class="act-body-col">                          <div class="act-tag-row">                            <span class="act-tag">{{ log.action }}</span>                            <span class="act-entity">{{ log.entity }}</span>                          </div>                          <p class="act-desc">{{ log.details }}</p>                          <span class="act-user">Por: {{ log.userEmail }}</span>                        </div>                      </div>                    }                  </div>                </div>              }              <!-- 7. CAPACIDAD OPERATIVA DE ALMACENES -->              @if (widget.id === \'operations\') {                <div class="operations-content-inner">                  <div class="operations-meters-list">                    @for (m of operationalMeters; track m.name) {                      <div class="meter-block">                        <div class="meter-header">                          <span class="meter-name">{{ m.name }}</span>                          <span class="meter-percent" [style.color]="m.color">{{ m.progress }}%</span>                        </div>                        <div class="meter-track">                          <div                            class="meter-fill-bar"                            [style.width.%]="m.progress"                            [style.background]="m.color"                            [style.box-shadow]="\'0 0 10px \' + m.color"                          ></div>                          <div                            class="meter-knob"                            [style.left.%]="m.progress"                            [style.background]="m.color"                            [style.box-shadow]="\'0 0 10px \' + m.color"                          ></div>                        </div>                        <span class="meter-detail">{{ m.detail }}</span>                      </div>                    }                  </div>                </div>              }              <!-- 8. ACCIONES RÁPIDAS & ATAJOS -->              @if (widget.id === \'quick_actions\') {                <div class="quick-actions-inner">                  <div class="quick-actions-grid">                    <button class="quick-action-tile" (click)="navigateTo(\'/product-form\')">                      <div class="tile-icon-bubble tile-ruby">                        <ion-icon name="create-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Nuevo Producto</span>                        <span class="tile-sub">Alta en inventario SQL</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="navigateTo(\'/products\')">                      <div class="tile-icon-bubble tile-cyan">                        <ion-icon name="cube-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Catálogo Completo</span>                        <span class="tile-sub">Consultar referencias</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="navigateTo(\'/reports\')">                      <div class="tile-icon-bubble tile-amber">                        <ion-icon name="stats-chart-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Informes & Reportes</span>                        <span class="tile-sub">Métricas operativas</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="navigateTo(\'/realtime-audit\')">                      <div class="tile-icon-bubble tile-purple">                        <ion-icon name="pulse-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Auditoría en Vivo</span>                        <span class="tile-sub">Supabase Realtime</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="exportPdfReport()">                      <div class="tile-icon-bubble tile-green">                        <ion-icon name="download-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Exportar PDF</span>                        <span class="tile-sub">Informe ejecutivo</span>                      </div>                    </button>                    <button class="quick-action-tile" (click)="exportCsvReport()">                      <div class="tile-icon-bubble tile-blue">                        <ion-icon name="document-text-outline"></ion-icon>                      </div>                      <div class="tile-texts">                        <span class="tile-title">Descargar CSV</span>                        <span class="tile-sub">Datos tabulados</span>                      </div>                    </button>                  </div>                </div>              }              <!-- 9. ALERTA DE STOCK CRÍTICO & REPOSICIÓN -->              @if (widget.id === \'critical_stock_table\') {                <div class="critical-stock-inner">                  <div class="critical-stock-table-wrap">                    <table class="critical-stock-table">                      <thead>                        <tr>                          <th>Artículo / Ref</th>                          <th>Categoría</th>                          <th>Stock</th>                          <th>PVP</th>                          <th>Acción</th>                        </tr>                      </thead>                      <tbody>                        @for (item of criticalProducts(); track item.id) {                          <tr>                            <td>                              <div class="prod-cell">                                <span class="prod-name">{{ item.name }}</span>                                <span class="prod-sku">ID #{{ item.id }}</span>                              </div>                            </td>                            <td>                              <span class="badge-cat">{{ item.category }}</span>                            </td>                            <td>                              <span class="stock-pill" [class.out-of-stock]="item.stock === 0">                                {{ item.stock === 0 ? \'AGOTADO\' : item.stock + \' uds\' }}                              </span>                            </td>                            <td class="price-cell">{{ item.price | number:\'1.2-2\' }} €</td>                            <td>                              <button class="table-action-btn" (click)="navigateToProduct(item.id)" title="Gestionar existencias">                                <ion-icon name="create-outline"></ion-icon> Gestionar                              </button>                            </td>                          </tr>                        } @empty {                          <tr>                            <td colspan="5" class="empty-stock-td">                              <ion-icon name="shield-checkmark-outline"></ion-icon> Todas las referencias tienen stock suficiente.                            </td>                          </tr>                        }                      </tbody>                    </table>                  </div>                </div>              }              <!-- 10. SUGERENCIAS DE REABASTECIMIENTO INTELIGENTE (SMART REORDER) -->              @if (widget.id === \'smart_reorder\') {                <div class="smart-reorder-inner">                  <div class="reorder-summary-strip">                    <div class="reorder-stat-pill">                      <span class="stat-tag">Artículos a reponer:</span>                      <strong class="stat-val">{{ criticalProducts().length }} referencias</strong>                    </div>                    <div class="reorder-stat-pill">                      <span class="stat-tag">Inversión estimada:</span>                      <strong class="stat-val text-ruby">{{ estimatedReorderCost() }} €</strong>                    </div>                  </div>                  <div class="smart-reorder-list">                    @for (item of criticalProducts(); track item.id) {                      <div class="reorder-item-card">                        <div class="reorder-item-info">                          <span class="reorder-sku">#{{ item.id }} · {{ item.category }}</span>                          <h4 class="reorder-title">{{ item.name }}</h4>                          <span class="reorder-meta">Stock: <strong [class.text-danger]="item.stock === 0">{{ item.stock }} uds</strong> | Sugerido: <strong>+{{ 20 - item.stock }} uds</strong></span>                        </div>                        <div class="reorder-item-actions">                          <span class="reorder-cost">{{ ((20 - item.stock) * item.price * 0.7) | number:\'1.2-2\' }} €</span>                          <button class="reorder-btn" (click)="createReorderPO(item)" title="Generar orden de compra">                            <ion-icon name="cart-outline"></ion-icon> Pedir                          </button>                        </div>                      </div>                    } @empty {                      <div class="reorder-empty-state">                        <ion-icon name="checkmark-circle-outline"></ion-icon>                        <span>El inventario está abastecido. No se requieren órdenes de compra urgentes.</span>                      </div>                    }                  </div>                </div>              }              <!-- 11. TELEMETRÍA & CONECTIVIDAD SUPABASE -->              @if (widget.id === \'security_telemetry\') {                <div class="telemetry-inner">                  <div class="telemetry-grid">                    <div class="telemetry-card">                      <div class="telemetry-card-header">                        <span class="telemetry-label">Canal WebSocket</span>                        <span class="telemetry-status-badge online">                          <span class="status-pulse-dot"></span> EN VIVO                        </span>                      </div>                      <div class="telemetry-val">Supabase Realtime</div>                      <div class="telemetry-foot">Escuchando audit_logs & documents</div>                    </div>                    <div class="telemetry-card">                      <div class="telemetry-card-header">                        <span class="telemetry-label">Latencia de Red</span>                        <span class="telemetry-status-badge optimal">&lt; {{ telemetryLatency() }} ms</span>                      </div>                      <div class="telemetry-val">{{ telemetryLatency() }} ms</div>                      <div class="telemetry-foot">Tiempo de respuesta HTTP PostgREST</div>                    </div>                    <div class="telemetry-card">                      <div class="telemetry-card-header">                        <span class="telemetry-label">Políticas RLS</span>                        <span class="telemetry-status-badge secure">PROTEGIDO</span>                      </div>                      <div class="telemetry-val">100% Tablas Activas</div>                      <div class="telemetry-foot">profiles, products, audit_logs</div>                    </div>                    <div class="telemetry-card">                      <div class="telemetry-card-header">                        <span class="telemetry-label">Seguridad de Sesión</span>                        <span class="telemetry-status-badge auth">RBAC</span>                      </div>                      <div class="telemetry-val">{{ authService.currentUserSignal()?.role === \'admin\' ? \'Administrador\' : \'Usuario\' }}</div>                      <div class="telemetry-foot">JWT con Claims verificados</div>                    </div>                  </div>                  <div class="telemetry-actions-bar">                    <button class="ping-btn" (click)="pingTelemetry()" [disabled]="isPingingTelemetry()">                      <ion-icon name="refresh-outline" [class.spinning]="isPingingTelemetry()"></ion-icon>                      {{ isPingingTelemetry() ? \'Midiendo Latencia...\' : \'Probar Latencia Ahora\' }}                    </button>                    <span class="telemetry-timestamp">Monitorización activa</span>                  </div>                </div>              }            </div>            <!-- Maneta / Indicador de Redimensión en la Esquina Inferior Derecha (Solo en Modo Edición) -->            @if (isEditMode()) {              <div                class="corner-resize-indicator"                (click)="cycleWidgetWidth(widget.id)"                title="Cambiar tamaño del widget (Clic para ciclar: 1/3 → 1/2 → 2/3 → Full)"              >                <span class="resize-pill-indicator">{{ widget.width === \'col-12\' ? \'Full\' : widget.width === \'col-8\' ? \'2/3\' : widget.width === \'col-6\' ? \'1/2\' : \'1/3\' }}</span>                <svg viewBox="0 0 10 10" class="resize-grip-icon" aria-hidden="true">                  <path d="M8 2 L2 8 M9 5 L5 9 M9 8 L8 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>                </svg>              </div>            }          </div>        }      }      <!-- ESTADO VACÍO CUANDO SE HAN QUITADO TODOS LOS WIDGETS -->      @if (activeWidgets().length === 0) {        <div class="dashboard-empty-state glass-window">          <div class="empty-icon-wrap">            <ion-icon name="layers-outline"></ion-icon>          </div>          <h3>El Cuadro de Mando está vacío</h3>          <p>Has quitado todos los widgets activos de tu pantalla. Puedes volver a añadirlos fácilmente desde la bandeja de módulos o restablecer la vista inicial.</p>          <div class="empty-actions">            <button class="btn-add-primary" (click)="toggleCatalogDrawer()">              <ion-icon name="add-outline"></ion-icon> Abrir Bandeja de Módulos            </button>            <button class="btn-restore-sec" (click)="resetDefaultLayout()">              <ion-icon name="refresh-outline"></ion-icon> Restablecer Predeterminados            </button>          </div>        </div>      }    </div>    <!-- BOTÓN CONTEXTUAL FLOTANTE (+) EN EL LIENZO -->    <div class="canvas-floating-dock" role="complementary" aria-label="Añadir módulos disponibles">      <button        class="canvas-fab-btn"        [class.is-editing]="isEditMode()"        (click)="toggleCatalogDrawer()"        title="Añadir o gestionar módulos disponibles (+)"      >        <span class="fab-pulse-effect" aria-hidden="true"></span>        <ion-icon name="add-outline" class="fab-main-icon"></ion-icon>        <span class="fab-text">Añadir Módulos</span>        <span class="fab-badge">{{ activeWidgets().length }}/{{ catalogWidgets.length }}</span>      </button>    </div>    <!-- BANDEJA / DRAWER LATERAL DE CATÁLOGO DE WIDGETS -->    @if (isCatalogDrawerOpen()) {      <div class="drawer-backdrop" (click)="closeCatalogDrawer()" aria-hidden="true"></div>      <aside class="catalog-drawer glass-window" role="dialog" aria-modal="true" aria-label="Bandeja de módulos disponibles">        <div class="drawer-header">          <div class="drawer-title-group">            <div class="drawer-icon-wrap">              <ion-icon name="grid-outline"></ion-icon>            </div>            <div>              <h3>Bandeja de Módulos</h3>              <p>Personaliza tu cuadro de mando activando o retirando widgets</p>            </div>          </div>          <button class="drawer-close-btn" (click)="closeCatalogDrawer()" aria-label="Cerrar bandeja">            <ion-icon name="close-outline"></ion-icon>          </button>        </div>        <!-- Buscador y Filtros por Categoría en la Bandeja -->        <div class="drawer-filter-bar">          <div class="drawer-search-box">            <ion-icon name="search-outline"></ion-icon>            <input              type="text"              placeholder="Buscar módulo en catálogo..."              [value]="catalogSearch()"              (input)="catalogSearch.set($any($event.target).value)"            />            @if (catalogSearch()) {              <button class="clear-drawer-search" (click)="catalogSearch.set(\'\')">                <ion-icon name="close-circle-outline"></ion-icon>              </button>            }          </div>          <div class="category-chips-row">            @for (cat of catalogCategories(); track cat) {              <button                class="cat-chip-btn"                [class.active]="catalogFilterCategory() === cat"                (click)="catalogFilterCategory.set(cat)"              >                {{ cat === \'all\' ? \'Todos\' : cat }}              </button>            }          </div>        </div>        <!-- Lista de Widgets Disponibles -->        <div class="drawer-cards-list">          @for (item of filteredCatalogWidgets(); track item.id) {            <div class="drawer-item-card" [class.is-active]="isWidgetVisible(item.id)">              <div class="card-icon-col">                <ion-icon [name]="item.icon"></ion-icon>              </div>              <div class="card-info-col">                <div class="card-meta-top">                  <span class="cat-pill">{{ item.category }}</span>                  <span class="size-hint">Base: {{ item.defaultWidth === \'col-12\' ? \'Full\' : item.defaultWidth === \'col-8\' ? \'2/3\' : item.defaultWidth === \'col-6\' ? \'1/2\' : \'1/3\' }}</span>                </div>                <h4 class="card-title">{{ item.title }}</h4>                <p class="card-desc">{{ item.description }}</p>              </div>              <div class="card-actions-col">                @if (isWidgetVisible(item.id)) {                  <span class="in-canvas-tag">                    <ion-icon name="checkmark-circle-outline"></ion-icon> En Lienzo                  </span>                  <button class="drawer-action-link danger" (click)="removeWidget(item.id)" title="Quitar del lienzo">                    Quitar                  </button>                } @else {                  <button class="drawer-add-pill-btn" (click)="addWidget(item.id)" title="Añadir a mi lienzo">                    <ion-icon name="add-outline"></ion-icon> Añadir                  </button>                }              </div>            </div>          } @empty {            <div class="drawer-empty-state">              <ion-icon name="search-outline"></ion-icon>              <p>No se encontraron módulos coincidentes con el filtro.</p>            </div>          }        </div>        <!-- Pie de Bandeja -->        <div class="drawer-footer">          <div class="status-summary">            <span class="num">{{ activeWidgets().length }} de {{ catalogWidgets.length }}</span>            <span class="lbl">módulos en lienzo</span>          </div>          <div class="footer-btns">            <button class="btn-sec" (click)="resetDefaultLayout()" title="Restablecer diseño inicial">              <ion-icon name="refresh-outline"></ion-icon> Restablecer            </button>            <button class="btn-pri" (click)="closeCatalogDrawer()">              <ion-icon name="checkmark-outline"></ion-icon> Listo            </button>          </div>        </div>      </aside>    }  </div></ion-content></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProductFormPage', 'selector': 'app-product-form'},{'name': 'ProductsPage', 'selector': 'app-products'},{'name': 'RealtimeAuditPage', 'selector': 'app-realtime-audit'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'UnauthorizedPage', 'selector': 'app-unauthorized'},{'name': 'UsersPage', 'selector': 'app-users'},{'name': 'WelcomePage', 'selector': 'app-welcome'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DashboardPage'};

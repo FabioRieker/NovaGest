@@ -324,8 +324,8 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="414"
-                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:414</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="417"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:417</a></div>
                         </td>
                     </tr>
 
@@ -407,8 +407,8 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="290"
-                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:290</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="293"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:293</a></div>
                         </td>
                     </tr>
 
@@ -478,8 +478,8 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="390"
-                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:390</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="393"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:393</a></div>
                         </td>
                     </tr>
 
@@ -588,8 +588,8 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="274"
-                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:274</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="277"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:277</a></div>
                         </td>
                     </tr>
 
@@ -659,8 +659,8 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="227"
-                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:227</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="230"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:230</a></div>
                         </td>
                     </tr>
 
@@ -730,8 +730,8 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="211"
-                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:211</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="214"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:214</a></div>
                         </td>
                     </tr>
 
@@ -769,8 +769,8 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="429"
-                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:429</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="432"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:432</a></div>
                         </td>
                     </tr>
 
@@ -810,8 +810,8 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="220"
-                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:220</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="223"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:223</a></div>
                         </td>
                     </tr>
 
@@ -892,7 +892,7 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 </div>
 
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+                            <b>Returns : </b>    <code>Promise&lt;[] | null&gt;</code>
 
                         </div>
                 </td>
@@ -921,8 +921,8 @@ filtrado por índices, cálculo de agregaciones y resiliencia con caché local e
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="338"
-                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:338</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="341"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:341</a></div>
                         </td>
                     </tr>
 
@@ -1369,9 +1369,9 @@ export class SqlRestService {
   /**
    * Sincroniza el catálogo con la tabla &#x27;products&#x27; de Supabase
    */
-  public async syncProductsWithSupabase(): Promise&lt;void&gt; {
+  public async syncProductsWithSupabase(): Promise&lt;Product[] | null&gt; {
     const client &#x3D; this.supabaseService.client;
-    if (!client || !this.supabaseService.isConfigured) return;
+    if (!client || !this.supabaseService.isConfigured) return null;
 
     try {
       const { data, error } &#x3D; await client
@@ -1381,7 +1381,7 @@ export class SqlRestService {
 
       if (error) {
         console.warn(&#x27;Aviso sincronizando productos con Supabase:&#x27;, error.message);
-        return;
+        return null;
       }
 
       if (data &amp;&amp; data.length &gt; 0) {
@@ -1401,9 +1401,12 @@ export class SqlRestService {
         }));
 
         this.saveProducts(mapped);
+        return mapped;
       }
+      return null;
     } catch (e) {
       console.warn(&#x27;Error al obtener productos de Supabase:&#x27;, e);
+      return null;
     }
   }
 
@@ -1425,8 +1428,8 @@ export class SqlRestService {
    */
   public getProducts(filters?: ProductFilterOptions): Observable&lt;Product[]&gt; {
     return from((async () &#x3D;&gt; {
-      await this.syncProductsWithSupabase();
-      return this.getStoredProducts();
+      const live &#x3D; await this.syncProductsWithSupabase();
+      return live || this.getStoredProducts();
     })()).pipe(
       map(items &#x3D;&gt; {
         let result &#x3D; [...items];
