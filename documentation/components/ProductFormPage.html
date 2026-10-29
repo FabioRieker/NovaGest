@@ -1,0 +1,2686 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ProductFormPage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/pages/product-form/product-form.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Formulario Reactivo de Creación y Edición de Registros (FASE 1 &amp; RA 2).
+Demuestra separación estricta de lógica y vista, validaciones síncronas y asíncronas,
+estados dirty/touched y gestión de errores de accesibilidad UX avanzada.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-product-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                        <div>    <code>IonHeader</code>
+</div>
+                        <div>    <code>IonToolbar</code>
+</div>
+                        <div>    <code>IonTitle</code>
+</div>
+                        <div>    <code>IonButtons</code>
+</div>
+                        <div>    <code>IonBackButton</code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                        <div>    <code>IonSelect</code>
+</div>
+                        <div>    <code>IonSelectOption</code>
+</div>
+                        <div>    <code>IonButton</code>
+</div>
+                        <div>    <code>IonIcon</code>
+</div>
+                        <div>    <code>IonSpinner</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./product-form.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./product-form.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonToolbar</code>
+                                </li>
+                                <li>
+                                        <code>IonTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonButtons</code>
+                                </li>
+                                <li>
+                                        <code>IonBackButton</code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                                <li>
+                                        <code>IonSelect</code>
+                                </li>
+                                <li>
+                                        <code>IonSelectOption</code>
+                                </li>
+                                <li>
+                                        <code>IonButton</code>
+                                </li>
+                                <li>
+                                        <code>IonIcon</code>
+                                </li>
+                                <li>
+                                        <code>IonSpinner</code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#categories" >categories</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#imagePreviewUrl" >imagePreviewUrl</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isEditMode" >isEditMode</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isSaving" >isSaving</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isUploadingImage" >isUploadingImage</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#notificationService" >notificationService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#productForm" >productForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#productId" >productId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#realtimeService" >realtimeService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#sqlService" >sqlService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#storageService" >storageService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#cancel" >cancel</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#initForm" >initForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadExistingProduct" >loadExistingProduct</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#onFileSelected" >onFileSelected</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#removeImage" >removeImage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:115</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancel"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>cancel</b></span>
+                        <a href="#cancel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cancel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="314"
+                                    class="link-to-prism">src/app/pages/product-form/product-form.page.ts:314</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>initForm</b></span>
+                        <a href="#initForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/pages/product-form/product-form.page.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadExistingProduct"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadExistingProduct</b></span>
+                        <a href="#loadExistingProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadExistingProduct(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/pages/product-form/product-form.page.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/pages/product-form/product-form.page.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/pages/product-form/product-form.page.ts:143</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFileSelected"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>onFileSelected</b></span>
+                        <a href="#onFileSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onFileSelected(event: <a href="https://angular.dev/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/pages/product-form/product-form.page.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.dev/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="240"
+                                    class="link-to-prism">src/app/pages/product-form/product-form.page.ts:240</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeImage"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>removeImage</b></span>
+                        <a href="#removeImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeImage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="235"
+                                    class="link-to-prism">src/app/pages/product-form/product-form.page.ts:235</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categories"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>categories</b></span>
+                        <a href="#categories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Product.html" target="_self" >ProductCategory[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;Hardware&#x27;, &#x27;Electrónica&#x27;, &#x27;Mobiliario&#x27;, &#x27;Servicios&#x27;, &#x27;Papelería&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imagePreviewUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>imagePreviewUrl</b></span>
+                        <a href="#imagePreviewUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEditMode"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isEditMode</b></span>
+                        <a href="#isEditMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSaving"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isSaving</b></span>
+                        <a href="#isSaving"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isUploadingImage"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isUploadingImage</b></span>
+                        <a href="#isUploadingImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="notificationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>notificationService</b></span>
+                        <a href="#notificationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(NotificationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productForm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>productForm</b></span>
+                        <a href="#productForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>productId</b></span>
+                        <a href="#productId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="realtimeService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>realtimeService</b></span>
+                        <a href="#realtimeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseRealtimeService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sqlService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sqlService</b></span>
+                        <a href="#sqlService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SqlRestService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="storageService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>storageService</b></span>
+                        <a href="#storageService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(StorageService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/pages/product-form/product-form.page.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  AbstractControl,
+  AsyncValidatorFn,
+  ValidationErrors
+} from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonBackButton,
+  IonContent,
+  IonSelect,
+  IonSelectOption,
+  IonButton,
+  IonIcon,
+  IonSpinner
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import {
+  saveOutline,
+  closeOutline,
+  cubeOutline,
+  pricetagOutline,
+  mailOutline,
+  checkmarkCircleOutline,
+  alertCircleOutline,
+  logOutOutline,
+  cashOutline,
+  layersOutline,
+  gridOutline,
+  documentTextOutline,
+  imageOutline,
+  cloudUploadOutline,
+  trashOutline
+} from &#x27;ionicons/icons&#x27;;
+import { Observable, timer } from &#x27;rxjs&#x27;;
+import { switchMap, map } from &#x27;rxjs/operators&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { SqlRestService } from &#x27;../../core/services/sql-rest.service&#x27;;
+import { StorageService } from &#x27;../../core/services/storage.service&#x27;;
+import { NotificationService } from &#x27;../../core/services/notification.service&#x27;;
+import { SupabaseRealtimeService } from &#x27;../../core/services/supabase-realtime.service&#x27;;
+import { ProductCategory, StockStatus } from &#x27;../../core/models/product.model&#x27;;
+
+/**
+ * Validador Asíncrono contra Servicio (FASE 1 - Paso 1.2 &amp; RA 2).
+ * Verifica en segundo plano contra la API SQL si el SKU ya existe en la base de datos,
+ * aplicando debounce para evitar sobrecarga de consultas.
+ */
+export function skuAsyncValidator(sqlService: SqlRestService, excludeId?: string): AsyncValidatorFn {
+  return (control: AbstractControl): Observable&lt;ValidationErrors | null&gt; &#x3D;&gt; {
+    if (!control.value || control.value.trim().length &lt; 3) {
+      return new Observable(obs &#x3D;&gt; obs.next(null));
+    }
+
+    return timer(400).pipe(
+      switchMap(() &#x3D;&gt; sqlService.checkSkuExists(control.value, excludeId)),
+      map(exists &#x3D;&gt; (exists ? { skuExists: true } : null))
+    );
+  };
+}
+
+/**
+ * Formulario Reactivo de Creación y Edición de Registros (FASE 1 &amp; RA 2).
+ * Demuestra separación estricta de lógica y vista, validaciones síncronas y asíncronas,
+ * estados dirty/touched y gestión de errores de accesibilidad UX avanzada.
+ */
+@Component({
+  selector: &#x27;app-product-form&#x27;,
+  templateUrl: &#x27;./product-form.page.html&#x27;,
+  styleUrls: [&#x27;./product-form.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonBackButton,
+    IonContent,
+    IonSelect,
+    IonSelectOption,
+    IonButton,
+    IonIcon,
+    IonSpinner
+  ]
+})
+export class ProductFormPage implements OnInit {
+  private fb &#x3D; inject(FormBuilder);
+  private sqlService &#x3D; inject(SqlRestService);
+  private storageService &#x3D; inject(StorageService);
+  private notificationService &#x3D; inject(NotificationService);
+  private realtimeService &#x3D; inject(SupabaseRealtimeService);
+  private authService &#x3D; inject(AuthService);
+  private route &#x3D; inject(ActivatedRoute);
+  private router &#x3D; inject(Router);
+
+  public productForm!: FormGroup;
+  public isEditMode &#x3D; signal(false);
+  public productId &#x3D; signal&lt;string | null&gt;(null);
+  public isSaving &#x3D; signal(false);
+  public isUploadingImage &#x3D; signal(false);
+  public imagePreviewUrl &#x3D; signal&lt;string | null&gt;(null);
+
+  public categories: ProductCategory[] &#x3D; [&#x27;Hardware&#x27;, &#x27;Electrónica&#x27;, &#x27;Mobiliario&#x27;, &#x27;Servicios&#x27;, &#x27;Papelería&#x27;];
+
+  constructor() {
+    addIcons({
+      saveOutline,
+      closeOutline,
+      cubeOutline,
+      pricetagOutline,
+      mailOutline,
+      checkmarkCircleOutline,
+      alertCircleOutline,
+      logOutOutline,
+      cashOutline,
+      layersOutline,
+      gridOutline,
+      documentTextOutline,
+      imageOutline,
+      cloudUploadOutline,
+      trashOutline
+    });
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast(&#x27;Sesión cerrada correctamente.&#x27;, &#x27;primary&#x27;);
+    this.router.navigate([&#x27;/login&#x27;]);
+  }
+
+  ngOnInit(): void {
+    const id &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+    if (id) {
+      this.isEditMode.set(true);
+      this.productId.set(id);
+    }
+
+    this.initForm();
+
+    if (this.isEditMode() &amp;&amp; id) {
+      this.loadExistingProduct(id);
+    }
+  }
+
+  private initForm(): void {
+    this.productForm &#x3D; this.fb.group({
+      sku: [
+        &#x27;&#x27;,
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(15),
+          Validators.pattern(/^[A-Z0-9-]+$/i)
+        ],
+        [skuAsyncValidator(this.sqlService, this.productId() || undefined)]
+      ],
+      name: [&#x27;&#x27;, [Validators.required, Validators.minLength(4), Validators.maxLength(70)]],
+      category: [&#x27;Hardware&#x27;, [Validators.required]],
+      price: [null, [Validators.required, Validators.min(0.01), Validators.max(100000)]],
+      stock: [0, [Validators.required, Validators.min(0), Validators.max(10000)]],
+      supplierEmail: [&#x27;&#x27;, [Validators.required, Validators.email]],
+      imageUrl: [&#x27;&#x27;],
+      description: [&#x27;&#x27;, [Validators.required, Validators.minLength(10), Validators.maxLength(500)]]
+    });
+  }
+
+  private loadExistingProduct(id: string): void {
+    this.sqlService.getProductById(id).subscribe({
+      next: (product) &#x3D;&gt; {
+        this.productForm.patchValue({
+          sku: product.sku,
+          name: product.name,
+          category: product.category,
+          price: product.price,
+          stock: product.stock,
+          supplierEmail: product.supplierEmail,
+          imageUrl: product.imageUrl || &#x27;&#x27;,
+          description: product.description
+        });
+        if (product.imageUrl) {
+          this.imagePreviewUrl.set(product.imageUrl);
+        }
+      },
+      error: () &#x3D;&gt; {
+        this.notificationService.showToast(&#x27;No se pudo encontrar el producto solicitado.&#x27;, &#x27;danger&#x27;);
+        this.router.navigate([&#x27;/products&#x27;]);
+      }
+    });
+  }
+
+  public async onFileSelected(event: Event): Promise&lt;void&gt; {
+    const input &#x3D; event.target as HTMLInputElement;
+    if (!input.files || input.files.length &#x3D;&#x3D;&#x3D; 0) return;
+    const file &#x3D; input.files[0];
+
+    if (!file.type.startsWith(&#x27;image/&#x27;)) {
+      this.notificationService.showToast(&#x27;Por favor seleccione un archivo de imagen válido (JPG, PNG, WEBP).&#x27;, &#x27;warning&#x27;);
+      return;
+    }
+
+    if (file.size &gt; 5 * 1024 * 1024) {
+      this.notificationService.showToast(&#x27;La imagen no debe superar los 5 MB.&#x27;, &#x27;warning&#x27;);
+      return;
+    }
+
+    this.isUploadingImage.set(true);
+    try {
+      const sku &#x3D; this.productForm.get(&#x27;sku&#x27;)?.value || &#x27;producto&#x27;;
+      const uploadedUrl &#x3D; await this.storageService.uploadProductImage(file, sku);
+      if (uploadedUrl) {
+        this.productForm.patchValue({ imageUrl: uploadedUrl });
+        this.imagePreviewUrl.set(uploadedUrl);
+        this.notificationService.showToast(&#x27;Fotografía subida al bucket product-images.&#x27;, &#x27;success&#x27;);
+      }
+    } catch (err: any) {
+      this.notificationService.showToast(&#x27;Error al procesar la imagen: &#x27; + (err.message || &#x27;desconocido&#x27;), &#x27;danger&#x27;);
+    } finally {
+      this.isUploadingImage.set(false);
+      input.value &#x3D; &#x27;&#x27;;
+    }
+  }
+
+  public removeImage(): void {
+    this.productForm.patchValue({ imageUrl: &#x27;&#x27; });
+    this.imagePreviewUrl.set(null);
+  }
+
+  public onSubmit(): void {
+    if (this.productForm.invalid || this.productForm.pending) {
+      this.productForm.markAllAsTouched();
+      setTimeout(() &#x3D;&gt; {
+        const firstInvalid &#x3D; document.querySelector(&#x27;.form-input-item.ion-invalid input, input.ng-invalid, [aria-invalid&#x3D;&quot;true&quot;]&#x27;);
+        (firstInvalid as HTMLElement)?.focus?.();
+      }, 50);
+      return;
+    }
+
+    this.isSaving.set(true);
+    const formVal &#x3D; this.productForm.value;
+
+    const stockNumber &#x3D; Number(formVal.stock);
+    let calculatedStatus: StockStatus &#x3D; &#x27;in_stock&#x27;;
+    if (stockNumber &#x3D;&#x3D;&#x3D; 0) {
+      calculatedStatus &#x3D; &#x27;out_of_stock&#x27;;
+    } else if (stockNumber &lt; 5) {
+      calculatedStatus &#x3D; &#x27;low_stock&#x27;;
+    }
+
+    const payload &#x3D; {
+      sku: formVal.sku.toUpperCase().trim(),
+      name: formVal.name.trim(),
+      category: formVal.category,
+      price: Number(formVal.price),
+      stock: stockNumber,
+      status: calculatedStatus,
+      supplierEmail: formVal.supplierEmail.trim().toLowerCase(),
+      imageUrl: formVal.imageUrl ? formVal.imageUrl.trim() : undefined,
+      description: formVal.description.trim()
+    };
+
+    if (this.isEditMode() &amp;&amp; this.productId()) {
+      this.sqlService.updateProduct(this.productId()!, payload).subscribe({
+        next: (updated) &#x3D;&gt; {
+          this.isSaving.set(false);
+          this.notificationService.showToast(&#x60;Producto &#x27;${updated.name}&#x27; actualizado con éxito.&#x60;, &#x27;success&#x27;);
+          this.realtimeService.logActivity(
+            &#x27;UPDATE&#x27;,
+            &#x27;PRODUCT&#x27;,
+            &#x60;Actualización del producto SKU: ${updated.sku} (${updated.name})&#x60;,
+            &#x27;info&#x27;,
+            updated.id
+          );
+          this.router.navigate([&#x27;/products&#x27;]);
+        },
+        error: (err) &#x3D;&gt; {
+          this.isSaving.set(false);
+          this.notificationService.showToast(err.message || &#x27;Error al actualizar el producto.&#x27;, &#x27;danger&#x27;);
+        }
+      });
+    } else {
+      this.sqlService.createProduct(payload).subscribe({
+        next: (created) &#x3D;&gt; {
+          this.isSaving.set(false);
+          this.notificationService.showToast(&#x60;Producto &#x27;${created.name}&#x27; registrado exitosamente.&#x60;, &#x27;success&#x27;);
+          this.realtimeService.logActivity(
+            &#x27;CREATE&#x27;,
+            &#x27;PRODUCT&#x27;,
+            &#x60;Alta de nuevo producto SKU: ${created.sku} (${created.name})&#x60;,
+            &#x27;success&#x27;,
+            created.id
+          );
+          this.router.navigate([&#x27;/products&#x27;]);
+        },
+        error: (err) &#x3D;&gt; {
+          this.isSaving.set(false);
+          this.notificationService.showToast(err.message || &#x27;Error al crear el producto.&#x27;, &#x27;danger&#x27;);
+        }
+      });
+    }
+  }
+
+  public cancel(): void {
+    this.router.navigate([&#x27;/products&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot;&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;ion-back-button defaultHref&#x3D;&quot;/products&quot;&gt;&lt;/ion-back-button&gt;
+    &lt;/ion-buttons&gt;
+    &lt;ion-title&gt;{{ isEditMode() ? &#x27;Editar Producto&#x27; : &#x27;Alta de Nuevo Producto&#x27; }}&lt;/ion-title&gt;
+    &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
+      &lt;ion-button (click)&#x3D;&quot;logout()&quot; color&#x3D;&quot;light&quot; aria-label&#x3D;&quot;Salir de la sesión&quot;&gt;
+        &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;log-out-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+        Salir
+      &lt;/ion-button&gt;
+    &lt;/ion-buttons&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;form-content&quot;&gt;
+  &lt;div class&#x3D;&quot;form-page-container&quot;&gt;
+    &lt;div class&#x3D;&quot;form-header-intro&quot;&gt;
+      &lt;div class&#x3D;&quot;badge-tag&quot;&gt;INVENTARIO / REGISTRO DE ACTIVOS&lt;/div&gt;
+      &lt;h1 class&#x3D;&quot;page-title&quot;&gt;{{ isEditMode() ? &#x27;Modificar Registro de Catálogo&#x27; : &#x27;Crear Registro de Inventario&#x27; }}&lt;/h1&gt;
+      &lt;p class&#x3D;&quot;page-subtitle&quot;&gt;Formulario empresarial estructurado con validaciones asíncronas de unicidad y control de stock&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;form-card glass-panel&quot;&gt;
+      &lt;div class&#x3D;&quot;form-card-header&quot;&gt;
+        &lt;div class&#x3D;&quot;header-icon-box&quot;&gt;
+          &lt;ion-icon name&#x3D;&quot;cube-outline&quot;&gt;&lt;/ion-icon&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;h2 class&#x3D;&quot;card-main-title&quot;&gt;Ficha Técnica &amp; Comercial&lt;/h2&gt;
+          &lt;p class&#x3D;&quot;card-sub-title&quot;&gt;Complete los campos requeridos marcados con asterisco (*)&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;form-card-body&quot;&gt;
+        &lt;form [formGroup]&#x3D;&quot;productForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; novalidate&gt;
+
+          &lt;!-- FILA 1: SKU ÚNICO Y NOMBRE DEL PRODUCTO --&gt;
+          &lt;div class&#x3D;&quot;form-grid-row duo&quot;&gt;
+            &lt;!-- SKU con Validación Asíncrona --&gt;
+            &lt;div class&#x3D;&quot;field-item&quot;&gt;
+              &lt;label class&#x3D;&quot;field-label&quot; for&#x3D;&quot;sku-input&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;pricetag-outline&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;Código SKU Único *&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;div
+                class&#x3D;&quot;input-box-wrapper&quot;
+                [class.has-error]&#x3D;&quot;productForm.get(&#x27;sku&#x27;)?.touched &amp;&amp; productForm.get(&#x27;sku&#x27;)?.invalid&quot;
+                [class.has-success]&#x3D;&quot;productForm.get(&#x27;sku&#x27;)?.valid &amp;&amp; productForm.get(&#x27;sku&#x27;)?.touched&quot;
+              &gt;
+                &lt;input
+                  id&#x3D;&quot;sku-input&quot;
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;sku&quot;
+                  placeholder&#x3D;&quot;Ej. HARD-SRV-99&quot;
+                  class&#x3D;&quot;clean-native-input&quot;
+                  [attr.aria-invalid]&#x3D;&quot;productForm.get(&#x27;sku&#x27;)?.touched &amp;&amp; productForm.get(&#x27;sku&#x27;)?.invalid&quot;
+                  aria-describedby&#x3D;&quot;sku-feedback&quot;
+                /&gt;
+                @if (productForm.get(&#x27;sku&#x27;)?.pending) {
+                  &lt;ion-spinner name&#x3D;&quot;crescent&quot; color&#x3D;&quot;primary&quot; class&#x3D;&quot;input-adornment-spinner&quot; aria-label&#x3D;&quot;Verificando disponibilidad de SKU&quot;&gt;&lt;/ion-spinner&gt;
+                }
+                @if (productForm.get(&#x27;sku&#x27;)?.valid &amp;&amp; productForm.get(&#x27;sku&#x27;)?.touched) {
+                  &lt;ion-icon name&#x3D;&quot;checkmark-circle-outline&quot; class&#x3D;&quot;input-adornment-icon valid&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+                }
+              &lt;/div&gt;
+              &lt;div id&#x3D;&quot;sku-feedback&quot; class&#x3D;&quot;field-feedback&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+                @if (productForm.get(&#x27;sku&#x27;)?.pending) {
+                  &lt;span class&#x3D;&quot;pending-msg&quot;&gt;Comprobando unicidad del SKU en la base de datos...&lt;/span&gt;
+                }
+                @if (productForm.get(&#x27;sku&#x27;)?.touched &amp;&amp; productForm.get(&#x27;sku&#x27;)?.hasError(&#x27;required&#x27;)) {
+                  &lt;span class&#x3D;&quot;error-msg&quot;&gt;El SKU es obligatorio.&lt;/span&gt;
+                }
+                @if (productForm.get(&#x27;sku&#x27;)?.touched &amp;&amp; productForm.get(&#x27;sku&#x27;)?.hasError(&#x27;pattern&#x27;)) {
+                  &lt;span class&#x3D;&quot;error-msg&quot;&gt;Formato inválido (solo mayúsculas, números y guiones).&lt;/span&gt;
+                }
+                @if (productForm.get(&#x27;sku&#x27;)?.hasError(&#x27;skuExists&#x27;)) {
+                  &lt;span class&#x3D;&quot;error-msg&quot;&gt;Este SKU ya existe en la base de datos. Elija otro código.&lt;/span&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Nombre del Producto --&gt;
+            &lt;div class&#x3D;&quot;field-item&quot;&gt;
+              &lt;label class&#x3D;&quot;field-label&quot; for&#x3D;&quot;name-input&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;cube-outline&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;Nombre del Producto / Activo *&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;div
+                class&#x3D;&quot;input-box-wrapper&quot;
+                [class.has-error]&#x3D;&quot;productForm.get(&#x27;name&#x27;)?.touched &amp;&amp; productForm.get(&#x27;name&#x27;)?.invalid&quot;
+                [class.has-success]&#x3D;&quot;productForm.get(&#x27;name&#x27;)?.valid &amp;&amp; productForm.get(&#x27;name&#x27;)?.touched&quot;
+              &gt;
+                &lt;input
+                  id&#x3D;&quot;name-input&quot;
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;name&quot;
+                  placeholder&#x3D;&quot;Ej. Servidor Blade Xeon 64GB&quot;
+                  class&#x3D;&quot;clean-native-input&quot;
+                  [attr.aria-invalid]&#x3D;&quot;productForm.get(&#x27;name&#x27;)?.touched &amp;&amp; productForm.get(&#x27;name&#x27;)?.invalid&quot;
+                  aria-describedby&#x3D;&quot;name-feedback&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;div id&#x3D;&quot;name-feedback&quot; class&#x3D;&quot;field-feedback&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+                @if (productForm.get(&#x27;name&#x27;)?.touched &amp;&amp; productForm.get(&#x27;name&#x27;)?.hasError(&#x27;required&#x27;)) {
+                  &lt;span class&#x3D;&quot;error-msg&quot;&gt;El nombre es requerido.&lt;/span&gt;
+                }
+                @if (productForm.get(&#x27;name&#x27;)?.touched &amp;&amp; productForm.get(&#x27;name&#x27;)?.hasError(&#x27;minlength&#x27;)) {
+                  &lt;span class&#x3D;&quot;error-msg&quot;&gt;Debe tener al menos 4 caracteres.&lt;/span&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- FILA 2: CATEGORÍA Y EMAIL DE PROVEEDOR --&gt;
+          &lt;div class&#x3D;&quot;form-grid-row duo&quot;&gt;
+            &lt;!-- Categoría Empresarial --&gt;
+            &lt;div class&#x3D;&quot;field-item&quot;&gt;
+              &lt;label class&#x3D;&quot;field-label&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;grid-outline&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;Categoría Empresarial *&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;div class&#x3D;&quot;input-box-wrapper select-box&quot;&gt;
+                &lt;ion-select
+                  formControlName&#x3D;&quot;category&quot;
+                  interface&#x3D;&quot;popover&quot;
+                  aria-label&#x3D;&quot;Seleccionar categoría&quot;
+                  placeholder&#x3D;&quot;Seleccione categoría&quot;
+                  class&#x3D;&quot;clean-ion-select&quot;
+                &gt;
+                  @for (cat of categories; track cat) {
+                    &lt;ion-select-option [value]&#x3D;&quot;cat&quot;&gt;{{ cat }}&lt;/ion-select-option&gt;
+                  }
+                &lt;/ion-select&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;field-feedback&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Email de Contacto de Proveedor --&gt;
+            &lt;div class&#x3D;&quot;field-item&quot;&gt;
+              &lt;label class&#x3D;&quot;field-label&quot; for&#x3D;&quot;email-input&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;mail-outline&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;Correo de Contacto del Proveedor *&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;div
+                class&#x3D;&quot;input-box-wrapper&quot;
+                [class.has-error]&#x3D;&quot;productForm.get(&#x27;supplierEmail&#x27;)?.touched &amp;&amp; productForm.get(&#x27;supplierEmail&#x27;)?.invalid&quot;
+                [class.has-success]&#x3D;&quot;productForm.get(&#x27;supplierEmail&#x27;)?.valid &amp;&amp; productForm.get(&#x27;supplierEmail&#x27;)?.touched&quot;
+              &gt;
+                &lt;input
+                  id&#x3D;&quot;email-input&quot;
+                  type&#x3D;&quot;email&quot;
+                  formControlName&#x3D;&quot;supplierEmail&quot;
+                  placeholder&#x3D;&quot;proveedor@empresa.com&quot;
+                  class&#x3D;&quot;clean-native-input&quot;
+                  [attr.aria-invalid]&#x3D;&quot;productForm.get(&#x27;supplierEmail&#x27;)?.touched &amp;&amp; productForm.get(&#x27;supplierEmail&#x27;)?.invalid&quot;
+                  aria-describedby&#x3D;&quot;email-feedback&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;div id&#x3D;&quot;email-feedback&quot; class&#x3D;&quot;field-feedback&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+                @if (productForm.get(&#x27;supplierEmail&#x27;)?.touched &amp;&amp; productForm.get(&#x27;supplierEmail&#x27;)?.errors) {
+                  &lt;span class&#x3D;&quot;error-msg&quot;&gt;Introduzca un correo electrónico válido (ej. contacto&amp;#64;proveedor.com).&lt;/span&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- FILA 3: PRECIO Y STOCK --&gt;
+          &lt;div class&#x3D;&quot;form-grid-row duo&quot;&gt;
+            &lt;!-- Precio Unitario --&gt;
+            &lt;div class&#x3D;&quot;field-item&quot;&gt;
+              &lt;label class&#x3D;&quot;field-label&quot; for&#x3D;&quot;price-input&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;cash-outline&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;Precio Unitario (€) *&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;div
+                class&#x3D;&quot;input-box-wrapper&quot;
+                [class.has-error]&#x3D;&quot;productForm.get(&#x27;price&#x27;)?.touched &amp;&amp; productForm.get(&#x27;price&#x27;)?.invalid&quot;
+                [class.has-success]&#x3D;&quot;productForm.get(&#x27;price&#x27;)?.valid &amp;&amp; productForm.get(&#x27;price&#x27;)?.touched&quot;
+              &gt;
+                &lt;input
+                  id&#x3D;&quot;price-input&quot;
+                  type&#x3D;&quot;number&quot;
+                  step&#x3D;&quot;0.01&quot;
+                  min&#x3D;&quot;0.01&quot;
+                  formControlName&#x3D;&quot;price&quot;
+                  placeholder&#x3D;&quot;0.00&quot;
+                  class&#x3D;&quot;clean-native-input&quot;
+                  [attr.aria-invalid]&#x3D;&quot;productForm.get(&#x27;price&#x27;)?.touched &amp;&amp; productForm.get(&#x27;price&#x27;)?.invalid&quot;
+                  aria-describedby&#x3D;&quot;price-feedback&quot;
+                /&gt;
+                &lt;span class&#x3D;&quot;input-unit-badge&quot;&gt;€&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div id&#x3D;&quot;price-feedback&quot; class&#x3D;&quot;field-feedback&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+                @if (productForm.get(&#x27;price&#x27;)?.touched &amp;&amp; productForm.get(&#x27;price&#x27;)?.errors) {
+                  &lt;span class&#x3D;&quot;error-msg&quot;&gt;El precio debe ser un número positivo mayor a 0.&lt;/span&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Unidades en Stock --&gt;
+            &lt;div class&#x3D;&quot;field-item&quot;&gt;
+              &lt;label class&#x3D;&quot;field-label&quot; for&#x3D;&quot;stock-input&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;layers-outline&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;Unidades en Stock *&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;div
+                class&#x3D;&quot;input-box-wrapper&quot;
+                [class.has-error]&#x3D;&quot;productForm.get(&#x27;stock&#x27;)?.touched &amp;&amp; productForm.get(&#x27;stock&#x27;)?.invalid&quot;
+                [class.has-success]&#x3D;&quot;productForm.get(&#x27;stock&#x27;)?.valid &amp;&amp; productForm.get(&#x27;stock&#x27;)?.touched&quot;
+              &gt;
+                &lt;input
+                  id&#x3D;&quot;stock-input&quot;
+                  type&#x3D;&quot;number&quot;
+                  step&#x3D;&quot;1&quot;
+                  min&#x3D;&quot;0&quot;
+                  formControlName&#x3D;&quot;stock&quot;
+                  placeholder&#x3D;&quot;0&quot;
+                  class&#x3D;&quot;clean-native-input&quot;
+                  [attr.aria-invalid]&#x3D;&quot;productForm.get(&#x27;stock&#x27;)?.touched &amp;&amp; productForm.get(&#x27;stock&#x27;)?.invalid&quot;
+                  aria-describedby&#x3D;&quot;stock-feedback&quot;
+                /&gt;
+                &lt;span class&#x3D;&quot;input-unit-badge&quot;&gt;Uds&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div id&#x3D;&quot;stock-feedback&quot; class&#x3D;&quot;field-feedback&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+                @if (productForm.get(&#x27;stock&#x27;)?.touched &amp;&amp; productForm.get(&#x27;stock&#x27;)?.errors) {
+                  &lt;span class&#x3D;&quot;error-msg&quot;&gt;El stock no puede ser un valor negativo.&lt;/span&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- FILA 4: FOTOGRAFÍA DEL PRODUCTO (SUPABASE STORAGE) --&gt;
+          &lt;div class&#x3D;&quot;form-grid-row single&quot;&gt;
+            &lt;div class&#x3D;&quot;field-item&quot;&gt;
+              &lt;label class&#x3D;&quot;field-label&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;image-outline&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;Fotografía del Producto (Supabase Storage)&lt;/span&gt;
+              &lt;/label&gt;
+
+              &lt;input
+                #imageFileInput
+                type&#x3D;&quot;file&quot;
+                accept&#x3D;&quot;image/png, image/jpeg, image/webp&quot;
+                (change)&#x3D;&quot;onFileSelected($event)&quot;
+                style&#x3D;&quot;display: none&quot;
+                aria-label&#x3D;&quot;Seleccionar imagen de producto&quot;
+              /&gt;
+
+              &lt;div class&#x3D;&quot;image-upload-container&quot;&gt;
+                @if (imagePreviewUrl()) {
+                  &lt;div class&#x3D;&quot;image-preview-card&quot;&gt;
+                    &lt;div class&#x3D;&quot;preview-img-wrapper&quot;&gt;
+                      &lt;img [src]&#x3D;&quot;imagePreviewUrl()&quot; alt&#x3D;&quot;Previsualización de producto&quot; class&#x3D;&quot;preview-thumbnail&quot; /&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;preview-info&quot;&gt;
+                      &lt;div class&#x3D;&quot;preview-title&quot;&gt;Imagen Asociada al Catálogo&lt;/div&gt;
+                      &lt;div class&#x3D;&quot;preview-subtitle&quot;&gt;Almacenada en bucket &#x27;product-images&#x27; con redundancia local&lt;/div&gt;
+                      &lt;div class&#x3D;&quot;preview-actions&quot;&gt;
+                        &lt;button
+                          type&#x3D;&quot;button&quot;
+                          class&#x3D;&quot;img-action-btn change-btn&quot;
+                          (click)&#x3D;&quot;imageFileInput.click()&quot;
+                          [disabled]&#x3D;&quot;isUploadingImage()&quot;
+                        &gt;
+                          &lt;ion-icon name&#x3D;&quot;cloud-upload-outline&quot;&gt;&lt;/ion-icon&gt;
+                          &lt;span&gt;Cambiar Foto&lt;/span&gt;
+                        &lt;/button&gt;
+                        &lt;button
+                          type&#x3D;&quot;button&quot;
+                          class&#x3D;&quot;img-action-btn delete-btn&quot;
+                          (click)&#x3D;&quot;removeImage()&quot;
+                          [disabled]&#x3D;&quot;isUploadingImage()&quot;
+                        &gt;
+                          &lt;ion-icon name&#x3D;&quot;trash-outline&quot;&gt;&lt;/ion-icon&gt;
+                          &lt;span&gt;Eliminar&lt;/span&gt;
+                        &lt;/button&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                } @else {
+                  &lt;div
+                    class&#x3D;&quot;image-dropzone-box&quot;
+                    (click)&#x3D;&quot;imageFileInput.click()&quot;
+                    role&#x3D;&quot;button&quot;
+                    tabindex&#x3D;&quot;0&quot;
+                    (keydown.enter)&#x3D;&quot;imageFileInput.click()&quot;
+                    (keydown.space)&#x3D;&quot;imageFileInput.click()&quot;
+                  &gt;
+                    @if (isUploadingImage()) {
+                      &lt;div class&#x3D;&quot;uploading-state&quot;&gt;
+                        &lt;ion-spinner name&#x3D;&quot;crescent&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-spinner&gt;
+                        &lt;span&gt;Subiendo fotografía a Supabase Storage...&lt;/span&gt;
+                      &lt;/div&gt;
+                    } @else {
+                      &lt;div class&#x3D;&quot;dropzone-content&quot;&gt;
+                        &lt;div class&#x3D;&quot;dropzone-icon&quot;&gt;
+                          &lt;ion-icon name&#x3D;&quot;cloud-upload-outline&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;/div&gt;
+                        &lt;div class&#x3D;&quot;dropzone-texts&quot;&gt;
+                          &lt;span class&#x3D;&quot;dropzone-primary&quot;&gt;Haga clic para examinar y cargar fotografía&lt;/span&gt;
+                          &lt;span class&#x3D;&quot;dropzone-secondary&quot;&gt;Formatos soportados: JPG, PNG o WebP (Máx. 5 MB)&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;dropzone-browse-btn&quot;&gt;
+                          Examinar Archivo
+                        &lt;/button&gt;
+                      &lt;/div&gt;
+                    }
+                  &lt;/div&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- FILA 5: DESCRIPCIÓN DETALLADA --&gt;
+          &lt;div class&#x3D;&quot;form-grid-row single&quot;&gt;
+            &lt;div class&#x3D;&quot;field-item&quot;&gt;
+              &lt;label class&#x3D;&quot;field-label&quot; for&#x3D;&quot;desc-input&quot;&gt;
+                &lt;ion-icon name&#x3D;&quot;document-text-outline&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;Descripción Detallada *&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;div
+                class&#x3D;&quot;input-box-wrapper textarea-box&quot;
+                [class.has-error]&#x3D;&quot;productForm.get(&#x27;description&#x27;)?.touched &amp;&amp; productForm.get(&#x27;description&#x27;)?.invalid&quot;
+                [class.has-success]&#x3D;&quot;productForm.get(&#x27;description&#x27;)?.valid &amp;&amp; productForm.get(&#x27;description&#x27;)?.touched&quot;
+              &gt;
+                &lt;textarea
+                  id&#x3D;&quot;desc-input&quot;
+                  rows&#x3D;&quot;3&quot;
+                  formControlName&#x3D;&quot;description&quot;
+                  placeholder&#x3D;&quot;Especifique características técnicas, compatibilidad, ubicación o notas de gestión...&quot;
+                  class&#x3D;&quot;clean-native-textarea&quot;
+                  [attr.aria-invalid]&#x3D;&quot;productForm.get(&#x27;description&#x27;)?.touched &amp;&amp; productForm.get(&#x27;description&#x27;)?.invalid&quot;
+                  aria-describedby&#x3D;&quot;desc-feedback&quot;
+                &gt;&lt;/textarea&gt;
+              &lt;/div&gt;
+              &lt;div id&#x3D;&quot;desc-feedback&quot; class&#x3D;&quot;field-feedback&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+                @if (productForm.get(&#x27;description&#x27;)?.touched &amp;&amp; productForm.get(&#x27;description&#x27;)?.errors) {
+                  &lt;span class&#x3D;&quot;error-msg&quot;&gt;La descripción debe tener entre 10 y 500 caracteres.&lt;/span&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- BOTONES DE ACCIÓN DEL FORMULARIO --&gt;
+          &lt;div class&#x3D;&quot;form-actions-bar&quot;&gt;
+            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;form-btn cancel-btn&quot; (click)&#x3D;&quot;cancel()&quot;&gt;
+              &lt;ion-icon name&#x3D;&quot;close-outline&quot;&gt;&lt;/ion-icon&gt;
+              &lt;span&gt;Cancelar&lt;/span&gt;
+            &lt;/button&gt;
+
+            &lt;button
+              type&#x3D;&quot;submit&quot;
+              class&#x3D;&quot;form-btn submit-btn&quot;
+              [disabled]&#x3D;&quot;productForm.invalid || productForm.pending || isSaving()&quot;
+              aria-label&#x3D;&quot;Guardar registro&quot;
+            &gt;
+              @if (isSaving()) {
+                &lt;ion-spinner name&#x3D;&quot;crescent&quot; class&#x3D;&quot;btn-spinner&quot;&gt;&lt;/ion-spinner&gt;
+                &lt;span&gt;Guardando en SQL...&lt;/span&gt;
+              } @else {
+                &lt;ion-icon name&#x3D;&quot;save-outline&quot;&gt;&lt;/ion-icon&gt;
+                &lt;span&gt;{{ isEditMode() ? &#x27;Actualizar Producto&#x27; : &#x27;Registrar Producto&#x27; }}&lt;/span&gt;
+              }
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./product-form.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.form-content {
+  --background: var(--ambient-bg-color, #f8fafc);
+  background-color: var(--ambient-bg-color, #f8fafc);
+  color: var(--cyber-text-main, #0f172a);
+}
+
+.form-page-container {
+  padding: 24px 16px 48px 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-header-intro {
+  margin-bottom: 22px;
+
+  .badge-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--ion-color-primary, #e11d48);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .page-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--cyber-text-main, #0f172a);
+    margin: 0 0 6px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 0.90rem;
+    color: var(--cyber-text-sub, #64748b);
+    margin: 0;
+    font-weight: 500;
+  }
+}
+
+.form-card {
+  border-radius: 20px;
+  background: var(--glass-window-bg, #ffffff);
+  border: 1px solid var(--glass-border, rgba(225, 29, 72, 0.12));
+  box-shadow: var(--card-shadow-ambient, 0 12px 36px -6px rgba(0, 0, 0, 0.08));
+  position: relative;
+  overflow: hidden;
+
+  &amp;::before {
+    content: &#x27;&#x27;;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--brand-gradient, linear-gradient(135deg, #e11d48 0%, #be123c 100%));
+  }
+
+  .form-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 26px 18px 26px;
+    border-bottom: 1px solid var(--glass-subcard-border, rgba(15, 23, 42, 0.08));
+
+    .header-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--brand-gradient);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 14px var(--brand-glow-primary, rgba(225, 29, 72, 0.25));
+      flex-shrink: 0;
+    }
+
+    .card-main-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--cyber-text-main, #0f172a);
+      margin: 0 0 2px 0;
+      letter-spacing: -0.01em;
+    }
+
+    .card-sub-title {
+      font-size: 0.82rem;
+      color: var(--cyber-text-sub, #64748b);
+      margin: 0;
+      font-weight: 500;
+    }
+  }
+
+  .form-card-body {
+    padding: 26px;
+  }
+}
+
+.form-grid-row {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 6px;
+
+  &amp;.duo {
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (max-width: 680px) {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+
+  &amp;.single {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field-item {
+  display: flex;
+  flex-direction: column;
+
+  .field-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--cyber-text-main, #0f172a);
+    margin-bottom: 7px;
+
+    ion-icon {
+      font-size: 1.05rem;
+      color: var(--ion-color-primary, #e11d48);
+    }
+  }
+
+  .input-box-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--cyber-pill-bg, #ffffff);
+    border: 1px solid var(--cyber-pill-border, rgba(15, 23, 42, 0.16));
+    border-radius: 12px;
+    padding: 0 14px;
+    min-height: 48px;
+    transition: all 0.2s ease;
+    position: relative;
+
+    &amp;:hover {
+      border-color: rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.45);
+    }
+
+    &amp;:focus-within {
+      border-color: var(--ion-color-primary, #e11d48);
+      box-shadow: 0 0 0 3px rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.16);
+    }
+
+    &amp;.has-error {
+      border-color: var(--ion-color-danger, #ef4444) !important;
+      background: rgba(var(--ion-color-danger-rgb, 239, 68, 68), 0.03);
+    }
+
+    &amp;.has-success {
+      border-color: var(--ion-color-success, #10b981);
+    }
+
+    &amp;.select-box {
+      padding: 0 6px;
+    }
+
+    &amp;.textarea-box {
+      padding: 10px 14px;
+      min-height: 90px;
+    }
+
+    .clean-native-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--cyber-text-main, #0f172a);
+
+      &amp;::placeholder {
+        color: var(--cyber-text-sub, #94a3b8);
+        font-weight: 500;
+      }
+    }
+
+    .clean-native-textarea {
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 0.90rem;
+      font-weight: 500;
+      color: var(--cyber-text-main, #0f172a);
+      resize: vertical;
+      line-height: 1.5;
+
+      &amp;::placeholder {
+        color: var(--cyber-text-sub, #94a3b8);
+      }
+    }
+
+    .clean-ion-select {
+      width: 100%;
+      --color: var(--cyber-text-main, #0f172a);
+      --placeholder-color: var(--cyber-text-sub, #94a3b8);
+      font-weight: 600;
+      font-size: 0.90rem;
+    }
+
+    .input-unit-badge {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--cyber-text-sub, #64748b);
+      background: rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.08);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+
+    .input-adornment-spinner {
+      width: 20px;
+      height: 20px;
+      margin-left: 8px;
+    }
+
+    .input-adornment-icon {
+      font-size: 1.25rem;
+      margin-left: 8px;
+
+      &amp;.valid {
+        color: var(--ion-color-success, #10b981);
+      }
+    }
+  }
+
+  .field-feedback {
+    min-height: 20px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 3px 6px;
+
+    .error-msg {
+      color: var(--ion-color-danger, #ef4444);
+    }
+
+    .pending-msg {
+      color: var(--ion-color-primary, #e11d48);
+      font-style: italic;
+    }
+  }
+}
+
+.form-actions-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--glass-subcard-border, rgba(15, 23, 42, 0.08));
+
+  .form-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 12px;
+    font-size: 0.90rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+
+    ion-icon {
+      font-size: 1.15rem;
+    }
+
+    &amp;.cancel-btn {
+      background: var(--glass-subcard-bg, #f1f5f9);
+      color: var(--cyber-text-main, #334155);
+      border: 1px solid var(--glass-subcard-border, rgba(15, 23, 42, 0.12));
+
+      &amp;:hover {
+        background: rgba(15, 23, 42, 0.06);
+        transform: translateY(-1px);
+      }
+    }
+
+    &amp;.submit-btn {
+      background: var(--brand-gradient, linear-gradient(135deg, #e11d48 0%, #be123c 100%));
+      color: #ffffff;
+      box-shadow: 0 4px 16px var(--brand-glow-primary, rgba(225, 29, 72, 0.35));
+
+      &amp;:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(225, 29, 72, 0.45);
+      }
+
+      &amp;:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+
+      .btn-spinner {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
+
+.image-upload-container {
+  width: 100%;
+}
+
+.image-dropzone-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 2px dashed var(--cyber-pill-border, rgba(15, 23, 42, 0.2));
+  border-radius: 14px;
+  background: var(--glass-subcard-bg, rgba(241, 245, 249, 0.5));
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &amp;:hover, &amp;:focus-visible {
+    border-color: var(--ion-color-primary, #e11d48);
+    background: rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.04);
+    outline: none;
+  }
+
+  .dropzone-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+
+    .dropzone-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.1);
+      color: var(--ion-color-primary, #e11d48);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .dropzone-texts {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      .dropzone-primary {
+        font-size: 0.90rem;
+        font-weight: 700;
+        color: var(--cyber-text-main, #0f172a);
+      }
+
+      .dropzone-secondary {
+        font-size: 0.78rem;
+        color: var(--cyber-text-sub, #64748b);
+      }
+    }
+
+    .dropzone-browse-btn {
+      margin-top: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: var(--brand-gradient);
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--brand-glow-primary, rgba(225, 29, 72, 0.25));
+    }
+  }
+
+  .uploading-state {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ion-color-primary, #e11d48);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+}
+
+.image-preview-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--glass-subcard-bg, #f8fafc);
+  border: 1px solid var(--glass-subcard-border, rgba(15, 23, 42, 0.12));
+
+  @media (max-width: 540px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .preview-img-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000000;
+    flex-shrink: 0;
+    border: 1px solid rgba(var(--ion-color-primary-rgb, 225, 29, 72), 0.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+    .preview-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .preview-info {
+    flex: 1;
+
+    .preview-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--cyber-text-main, #0f172a);
+    }
+
+    .preview-subtitle {
+      font-size: 0.78rem;
+      color: var(--cyber-text-sub, #64748b);
+      margin-bottom: 10px;
+    }
+
+    .preview-actions {
+      display: flex;
+      gap: 8px;
+
+      .img-action-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        transition: all 0.15s ease;
+
+        ion-icon {
+          font-size: 0.95rem;
+        }
+
+        &amp;.change-btn {
+          background: var(--brand-gradient);
+          color: #ffffff;
+        }
+
+        &amp;.delete-btn {
+          background: rgba(var(--ion-color-danger-rgb, 239, 68, 68), 0.1);
+          color: var(--ion-color-danger, #ef4444);
+          border: 1px solid rgba(var(--ion-color-danger-rgb, 239, 68, 68), 0.25);
+
+          &amp;:hover {
+            background: var(--ion-color-danger, #ef4444);
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-back-button defaultHref="/products"></ion-back-button>    </ion-buttons>    <ion-title>{{ isEditMode() ? \'Editar Producto\' : \'Alta de Nuevo Producto\' }}</ion-title>    <ion-buttons slot="end">      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">        <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>        Salir      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="form-content">  <div class="form-page-container">    <div class="form-header-intro">      <div class="badge-tag">INVENTARIO / REGISTRO DE ACTIVOS</div>      <h1 class="page-title">{{ isEditMode() ? \'Modificar Registro de Catálogo\' : \'Crear Registro de Inventario\' }}</h1>      <p class="page-subtitle">Formulario empresarial estructurado con validaciones asíncronas de unicidad y control de stock</p>    </div>    <div class="form-card glass-panel">      <div class="form-card-header">        <div class="header-icon-box">          <ion-icon name="cube-outline"></ion-icon>        </div>        <div>          <h2 class="card-main-title">Ficha Técnica & Comercial</h2>          <p class="card-sub-title">Complete los campos requeridos marcados con asterisco (*)</p>        </div>      </div>      <div class="form-card-body">        <form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>          <!-- FILA 1: SKU ÚNICO Y NOMBRE DEL PRODUCTO -->          <div class="form-grid-row duo">            <!-- SKU con Validación Asíncrona -->            <div class="field-item">              <label class="field-label" for="sku-input">                <ion-icon name="pricetag-outline"></ion-icon>                <span>Código SKU Único *</span>              </label>              <div                class="input-box-wrapper"                [class.has-error]="productForm.get(\'sku\')?.touched && productForm.get(\'sku\')?.invalid"                [class.has-success]="productForm.get(\'sku\')?.valid && productForm.get(\'sku\')?.touched"              >                <input                  id="sku-input"                  type="text"                  formControlName="sku"                  placeholder="Ej. HARD-SRV-99"                  class="clean-native-input"                  [attr.aria-invalid]="productForm.get(\'sku\')?.touched && productForm.get(\'sku\')?.invalid"                  aria-describedby="sku-feedback"                />                @if (productForm.get(\'sku\')?.pending) {                  <ion-spinner name="crescent" color="primary" class="input-adornment-spinner" aria-label="Verificando disponibilidad de SKU"></ion-spinner>                }                @if (productForm.get(\'sku\')?.valid && productForm.get(\'sku\')?.touched) {                  <ion-icon name="checkmark-circle-outline" class="input-adornment-icon valid" aria-hidden="true"></ion-icon>                }              </div>              <div id="sku-feedback" class="field-feedback" role="alert" aria-live="polite">                @if (productForm.get(\'sku\')?.pending) {                  <span class="pending-msg">Comprobando unicidad del SKU en la base de datos...</span>                }                @if (productForm.get(\'sku\')?.touched && productForm.get(\'sku\')?.hasError(\'required\')) {                  <span class="error-msg">El SKU es obligatorio.</span>                }                @if (productForm.get(\'sku\')?.touched && productForm.get(\'sku\')?.hasError(\'pattern\')) {                  <span class="error-msg">Formato inválido (solo mayúsculas, números y guiones).</span>                }                @if (productForm.get(\'sku\')?.hasError(\'skuExists\')) {                  <span class="error-msg">Este SKU ya existe en la base de datos. Elija otro código.</span>                }              </div>            </div>            <!-- Nombre del Producto -->            <div class="field-item">              <label class="field-label" for="name-input">                <ion-icon name="cube-outline"></ion-icon>                <span>Nombre del Producto / Activo *</span>              </label>              <div                class="input-box-wrapper"                [class.has-error]="productForm.get(\'name\')?.touched && productForm.get(\'name\')?.invalid"                [class.has-success]="productForm.get(\'name\')?.valid && productForm.get(\'name\')?.touched"              >                <input                  id="name-input"                  type="text"                  formControlName="name"                  placeholder="Ej. Servidor Blade Xeon 64GB"                  class="clean-native-input"                  [attr.aria-invalid]="productForm.get(\'name\')?.touched && productForm.get(\'name\')?.invalid"                  aria-describedby="name-feedback"                />              </div>              <div id="name-feedback" class="field-feedback" role="alert" aria-live="polite">                @if (productForm.get(\'name\')?.touched && productForm.get(\'name\')?.hasError(\'required\')) {                  <span class="error-msg">El nombre es requerido.</span>                }                @if (productForm.get(\'name\')?.touched && productForm.get(\'name\')?.hasError(\'minlength\')) {                  <span class="error-msg">Debe tener al menos 4 caracteres.</span>                }              </div>            </div>          </div>          <!-- FILA 2: CATEGORÍA Y EMAIL DE PROVEEDOR -->          <div class="form-grid-row duo">            <!-- Categoría Empresarial -->            <div class="field-item">              <label class="field-label">                <ion-icon name="grid-outline"></ion-icon>                <span>Categoría Empresarial *</span>              </label>              <div class="input-box-wrapper select-box">                <ion-select                  formControlName="category"                  interface="popover"                  aria-label="Seleccionar categoría"                  placeholder="Seleccione categoría"                  class="clean-ion-select"                >                  @for (cat of categories; track cat) {                    <ion-select-option [value]="cat">{{ cat }}</ion-select-option>                  }                </ion-select>              </div>              <div class="field-feedback"></div>            </div>            <!-- Email de Contacto de Proveedor -->            <div class="field-item">              <label class="field-label" for="email-input">                <ion-icon name="mail-outline"></ion-icon>                <span>Correo de Contacto del Proveedor *</span>              </label>              <div                class="input-box-wrapper"                [class.has-error]="productForm.get(\'supplierEmail\')?.touched && productForm.get(\'supplierEmail\')?.invalid"                [class.has-success]="productForm.get(\'supplierEmail\')?.valid && productForm.get(\'supplierEmail\')?.touched"              >                <input                  id="email-input"                  type="email"                  formControlName="supplierEmail"                  placeholder="proveedor@empresa.com"                  class="clean-native-input"                  [attr.aria-invalid]="productForm.get(\'supplierEmail\')?.touched && productForm.get(\'supplierEmail\')?.invalid"                  aria-describedby="email-feedback"                />              </div>              <div id="email-feedback" class="field-feedback" role="alert" aria-live="polite">                @if (productForm.get(\'supplierEmail\')?.touched && productForm.get(\'supplierEmail\')?.errors) {                  <span class="error-msg">Introduzca un correo electrónico válido (ej. contacto&#64;proveedor.com).</span>                }              </div>            </div>          </div>          <!-- FILA 3: PRECIO Y STOCK -->          <div class="form-grid-row duo">            <!-- Precio Unitario -->            <div class="field-item">              <label class="field-label" for="price-input">                <ion-icon name="cash-outline"></ion-icon>                <span>Precio Unitario (€) *</span>              </label>              <div                class="input-box-wrapper"                [class.has-error]="productForm.get(\'price\')?.touched && productForm.get(\'price\')?.invalid"                [class.has-success]="productForm.get(\'price\')?.valid && productForm.get(\'price\')?.touched"              >                <input                  id="price-input"                  type="number"                  step="0.01"                  min="0.01"                  formControlName="price"                  placeholder="0.00"                  class="clean-native-input"                  [attr.aria-invalid]="productForm.get(\'price\')?.touched && productForm.get(\'price\')?.invalid"                  aria-describedby="price-feedback"                />                <span class="input-unit-badge">€</span>              </div>              <div id="price-feedback" class="field-feedback" role="alert" aria-live="polite">                @if (productForm.get(\'price\')?.touched && productForm.get(\'price\')?.errors) {                  <span class="error-msg">El precio debe ser un número positivo mayor a 0.</span>                }              </div>            </div>            <!-- Unidades en Stock -->            <div class="field-item">              <label class="field-label" for="stock-input">                <ion-icon name="layers-outline"></ion-icon>                <span>Unidades en Stock *</span>              </label>              <div                class="input-box-wrapper"                [class.has-error]="productForm.get(\'stock\')?.touched && productForm.get(\'stock\')?.invalid"                [class.has-success]="productForm.get(\'stock\')?.valid && productForm.get(\'stock\')?.touched"              >                <input                  id="stock-input"                  type="number"                  step="1"                  min="0"                  formControlName="stock"                  placeholder="0"                  class="clean-native-input"                  [attr.aria-invalid]="productForm.get(\'stock\')?.touched && productForm.get(\'stock\')?.invalid"                  aria-describedby="stock-feedback"                />                <span class="input-unit-badge">Uds</span>              </div>              <div id="stock-feedback" class="field-feedback" role="alert" aria-live="polite">                @if (productForm.get(\'stock\')?.touched && productForm.get(\'stock\')?.errors) {                  <span class="error-msg">El stock no puede ser un valor negativo.</span>                }              </div>            </div>          </div>          <!-- FILA 4: FOTOGRAFÍA DEL PRODUCTO (SUPABASE STORAGE) -->          <div class="form-grid-row single">            <div class="field-item">              <label class="field-label">                <ion-icon name="image-outline"></ion-icon>                <span>Fotografía del Producto (Supabase Storage)</span>              </label>              <input                #imageFileInput                type="file"                accept="image/png, image/jpeg, image/webp"                (change)="onFileSelected($event)"                style="display: none"                aria-label="Seleccionar imagen de producto"              />              <div class="image-upload-container">                @if (imagePreviewUrl()) {                  <div class="image-preview-card">                    <div class="preview-img-wrapper">                      <img [src]="imagePreviewUrl()" alt="Previsualización de producto" class="preview-thumbnail" />                    </div>                    <div class="preview-info">                      <div class="preview-title">Imagen Asociada al Catálogo</div>                      <div class="preview-subtitle">Almacenada en bucket \'product-images\' con redundancia local</div>                      <div class="preview-actions">                        <button                          type="button"                          class="img-action-btn change-btn"                          (click)="imageFileInput.click()"                          [disabled]="isUploadingImage()"                        >                          <ion-icon name="cloud-upload-outline"></ion-icon>                          <span>Cambiar Foto</span>                        </button>                        <button                          type="button"                          class="img-action-btn delete-btn"                          (click)="removeImage()"                          [disabled]="isUploadingImage()"                        >                          <ion-icon name="trash-outline"></ion-icon>                          <span>Eliminar</span>                        </button>                      </div>                    </div>                  </div>                } @else {                  <div                    class="image-dropzone-box"                    (click)="imageFileInput.click()"                    role="button"                    tabindex="0"                    (keydown.enter)="imageFileInput.click()"                    (keydown.space)="imageFileInput.click()"                  >                    @if (isUploadingImage()) {                      <div class="uploading-state">                        <ion-spinner name="crescent" color="primary"></ion-spinner>                        <span>Subiendo fotografía a Supabase Storage...</span>                      </div>                    } @else {                      <div class="dropzone-content">                        <div class="dropzone-icon">                          <ion-icon name="cloud-upload-outline"></ion-icon>                        </div>                        <div class="dropzone-texts">                          <span class="dropzone-primary">Haga clic para examinar y cargar fotografía</span>                          <span class="dropzone-secondary">Formatos soportados: JPG, PNG o WebP (Máx. 5 MB)</span>                        </div>                        <button type="button" class="dropzone-browse-btn">                          Examinar Archivo                        </button>                      </div>                    }                  </div>                }              </div>            </div>          </div>          <!-- FILA 5: DESCRIPCIÓN DETALLADA -->          <div class="form-grid-row single">            <div class="field-item">              <label class="field-label" for="desc-input">                <ion-icon name="document-text-outline"></ion-icon>                <span>Descripción Detallada *</span>              </label>              <div                class="input-box-wrapper textarea-box"                [class.has-error]="productForm.get(\'description\')?.touched && productForm.get(\'description\')?.invalid"                [class.has-success]="productForm.get(\'description\')?.valid && productForm.get(\'description\')?.touched"              >                <textarea                  id="desc-input"                  rows="3"                  formControlName="description"                  placeholder="Especifique características técnicas, compatibilidad, ubicación o notas de gestión..."                  class="clean-native-textarea"                  [attr.aria-invalid]="productForm.get(\'description\')?.touched && productForm.get(\'description\')?.invalid"                  aria-describedby="desc-feedback"                ></textarea>              </div>              <div id="desc-feedback" class="field-feedback" role="alert" aria-live="polite">                @if (productForm.get(\'description\')?.touched && productForm.get(\'description\')?.errors) {                  <span class="error-msg">La descripción debe tener entre 10 y 500 caracteres.</span>                }              </div>            </div>          </div>          <!-- BOTONES DE ACCIÓN DEL FORMULARIO -->          <div class="form-actions-bar">            <button type="button" class="form-btn cancel-btn" (click)="cancel()">              <ion-icon name="close-outline"></ion-icon>              <span>Cancelar</span>            </button>            <button              type="submit"              class="form-btn submit-btn"              [disabled]="productForm.invalid || productForm.pending || isSaving()"              aria-label="Guardar registro"            >              @if (isSaving()) {                <ion-spinner name="crescent" class="btn-spinner"></ion-spinner>                <span>Guardando en SQL...</span>              } @else {                <ion-icon name="save-outline"></ion-icon>                <span>{{ isEditMode() ? \'Actualizar Producto\' : \'Registrar Producto\' }}</span>              }            </button>          </div>        </form>      </div>    </div>  </div></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'ProductFormPage', 'selector': 'app-product-form'},{'name': 'ProductsPage', 'selector': 'app-products'},{'name': 'RealtimeAuditPage', 'selector': 'app-realtime-audit'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'UnauthorizedPage', 'selector': 'app-unauthorized'},{'name': 'UsersPage', 'selector': 'app-users'},{'name': 'WelcomePage', 'selector': 'app-welcome'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ProductFormPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProductFormPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

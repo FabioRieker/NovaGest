@@ -1,0 +1,1882 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  DashboardWidget</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/pages/dashboard/dashboard.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+
+            </div>
+
+    <div class="tab-pane fade " id="api"><section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-3">
+                    <h6><b>Properties</b></h6>
+                </td>
+                <td class="col-md-9">
+                    <ul class="index-list">
+                        <li>
+                                <a href="#category" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">category</span>
+                                </a>
+                        </li>
+                        <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#description" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">description</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#icon" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">icon</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#id" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">id</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#order" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">order</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#title" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">title</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#visible" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">visible</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#width" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">width</span>
+                                </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+    <section data-compodoc="block-properties">
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="category"></a>
+                                <span class="name "><b>category</b>
+                                    <a href="#category">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>category:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:123</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="description"></a>
+                                <span class="name "><b>description</b>
+                                    <a href="#description">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>description:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Optional</i>
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:124</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="icon"></a>
+                                <span class="name "><b>icon</b>
+                                    <a href="#icon">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>icon:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:122</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="id"></a>
+                                <span class="name "><b>id</b>
+                                    <a href="#id">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:120</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="order"></a>
+                                <span class="name "><b>order</b>
+                                    <a href="#order">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>order:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:127</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="title"></a>
+                                <span class="name "><b>title</b>
+                                    <a href="#title">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>title:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:121</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="visible"></a>
+                                <span class="name "><b>visible</b>
+                                    <a href="#visible">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>visible:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:125</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="width"></a>
+                                <span class="name "><b>width</b>
+                                    <a href="#width">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>width:     <code>&quot;col-12&quot; | &quot;col-8&quot; | &quot;col-6&quot; | &quot;col-4&quot;</code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>&quot;col-12&quot; | &quot;col-8&quot; | &quot;col-6&quot; | &quot;col-4&quot;</code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:126</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+    </section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ElementRef,
+  ViewChild,
+  inject,
+  signal,
+  computed,
+  ChangeDetectionStrategy
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonMenuButton,
+  IonContent,
+  IonButton,
+  IonIcon,
+  IonSpinner
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import {
+  refreshOutline,
+  downloadOutline,
+  statsChartOutline,
+  cubeOutline,
+  cashOutline,
+  alertCircleOutline,
+  timeOutline,
+  sparklesOutline,
+  documentTextOutline,
+  logOutOutline,
+  searchOutline,
+  notificationsOutline,
+  notificationsOffOutline,
+  settingsOutline,
+  mailOutline,
+  personCircleOutline,
+  chevronBackOutline,
+  chevronForwardOutline,
+  repeatOutline,
+  flashOutline,
+  shieldCheckmarkOutline,
+  filterOutline,
+  trendingUpOutline,
+  trendingDownOutline,
+  removeOutline,
+  calendarOutline,
+  layersOutline,
+  pieChartOutline,
+  optionsOutline,
+  closeOutline,
+  checkmarkOutline,
+  checkmarkDoneOutline,
+  arrowUpOutline,
+  arrowDownOutline,
+  expandOutline,
+  contractOutline,
+  moveOutline,
+  eyeOutline,
+  eyeOffOutline,
+  trashOutline,
+  addOutline,
+  speedometerOutline,
+  pulseOutline,
+  openOutline,
+  createOutline,
+  appsOutline,
+  gridOutline,
+  checkmarkCircleOutline,
+  colorWandOutline,
+  closeCircleOutline,
+  saveOutline
+} from &#x27;ionicons/icons&#x27;;
+import { forkJoin, Subscription } from &#x27;rxjs&#x27;;
+import { take } from &#x27;rxjs/operators&#x27;;
+import {
+  Chart,
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Filler,
+  DoughnutController,
+  ArcElement,
+  Legend,
+  Tooltip
+} from &#x27;chart.js&#x27;;
+import { SqlRestService } from &#x27;../../core/services/sql-rest.service&#x27;;
+import { SupabaseRealtimeService } from &#x27;../../core/services/supabase-realtime.service&#x27;;
+import { ExportService } from &#x27;../../core/services/export.service&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { NotificationService } from &#x27;../../core/services/notification.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Product } from &#x27;../../core/models/product.model&#x27;;
+import { AuditLogDocument } from &#x27;../../core/models/audit-log.model&#x27;;
+
+// Registrar componentes de Chart.js optimizados (Tree-shaking para máximo rendimiento)
+Chart.register(
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Filler,
+  DoughnutController,
+  ArcElement,
+  Legend,
+  Tooltip
+);
+
+const LAYOUT_STORAGE_KEY &#x3D; &#x27;novagest_dashboard_layout_v2&#x27;;
+
+export interface DashboardWidget {
+  id: string;
+  title: string;
+  icon: string;
+  category: string;
+  description?: string;
+  visible: boolean;
+  width: &#x27;col-12&#x27; | &#x27;col-8&#x27; | &#x27;col-6&#x27; | &#x27;col-4&#x27;;
+  order: number;
+}
+
+export interface CatalogWidgetDefinition {
+  id: string;
+  title: string;
+  icon: string;
+  category: string;
+  description: string;
+  defaultWidth: &#x27;col-12&#x27; | &#x27;col-8&#x27; | &#x27;col-6&#x27; | &#x27;col-4&#x27;;
+}
+
+export interface DashboardTemplate {
+  id: string;
+  name: string;
+  icon: string;
+  badge?: string;
+  description: string;
+  widgets: Array&lt;{
+    id: string;
+    width: &#x27;col-12&#x27; | &#x27;col-8&#x27; | &#x27;col-6&#x27; | &#x27;col-4&#x27;;
+    order: number;
+  }&gt;;
+}
+
+export interface SystemNotification {
+  id: string;
+  title: string;
+  message: string;
+  time: string;
+  severity: &#x27;critical&#x27; | &#x27;warning&#x27; | &#x27;info&#x27; | &#x27;success&#x27;;
+  read: boolean;
+}
+
+interface CalendarDay {
+  day: number | null;
+  hasEvent?: boolean;
+  isToday?: boolean;
+}
+
+@Component({
+  selector: &#x27;app-dashboard&#x27;,
+  templateUrl: &#x27;./dashboard.page.html&#x27;,
+  styleUrls: [&#x27;./dashboard.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonMenuButton,
+    IonContent,
+    IonButton,
+    IonIcon,
+    IonSpinner
+  ]
+})
+export class DashboardPage implements OnInit, OnDestroy {
+  @ViewChild(&#x27;timelineWaveChartCanvas&#x27;) timelineWaveChartCanvas?: ElementRef&lt;HTMLCanvasElement&gt;;
+  @ViewChild(&#x27;categoryDoughnutChartCanvas&#x27;) categoryDoughnutChartCanvas?: ElementRef&lt;HTMLCanvasElement&gt;;
+  private themeObserver?: MutationObserver;
+
+  private sqlService &#x3D; inject(SqlRestService);
+  private realtimeService &#x3D; inject(SupabaseRealtimeService);
+  private exportService &#x3D; inject(ExportService);
+  public authService &#x3D; inject(AuthService);
+  private notificationService &#x3D; inject(NotificationService);
+  private router &#x3D; inject(Router);
+
+  public isLoading &#x3D; signal(true);
+  public filterPeriod &#x3D; signal&lt;&#x27;7d&#x27; | &#x27;30d&#x27; | &#x27;year&#x27;&gt;(&#x27;30d&#x27;);
+  public searchQuery &#x3D; signal(&#x27;&#x27;);
+
+  // Control de panel de notificaciones
+  public isNotificationsOpen &#x3D; signal(false);
+
+  // Control de personalizador de widgets
+  public isCustomizerOpen &#x3D; signal(false);
+
+  // Notificaciones interactivas del sistema
+  public notifications &#x3D; signal&lt;SystemNotification[]&gt;([
+    {
+      id: &#x27;notif-1&#x27;,
+      title: &#x27;Alerta de Stock Crítico&#x27;,
+      message: &#x27;3 referencias de hardware están por debajo de 5 unidades.&#x27;,
+      time: &#x27;Hace 5 min&#x27;,
+      severity: &#x27;critical&#x27;,
+      read: false
+    },
+    {
+      id: &#x27;notif-2&#x27;,
+      title: &#x27;Aprovisionamiento de Cuenta&#x27;,
+      message: &#x27;Se ha registrado un nuevo usuario operativo con permisos estándar.&#x27;,
+      time: &#x27;Hace 22 min&#x27;,
+      severity: &#x27;info&#x27;,
+      read: false
+    },
+    {
+      id: &#x27;notif-3&#x27;,
+      title: &#x27;Auditoría Supabase Realtime&#x27;,
+      message: &#x27;Sincronización en tiempo real con Supabase completada con 0 anomalías.&#x27;,
+      time: &#x27;Hace 1 hora&#x27;,
+      severity: &#x27;success&#x27;,
+      read: false
+    }
+  ]);
+
+  public unreadNotificationsCount &#x3D; computed(() &#x3D;&gt;
+    this.notifications().filter(n &#x3D;&gt; !n.read).length
+  );
+
+  // Catálogo completo de widgets disponibles en NovaGest
+  public readonly catalogWidgets: CatalogWidgetDefinition[] &#x3D; [
+    {
+      id: &#x27;ring_gauges&#x27;,
+      title: &#x27;Medidores Radiales SLA&#x27;,
+      icon: &#x27;speedometer-outline&#x27;,
+      category: &#x27;Métricas&#x27;,
+      description: &#x27;Indicadores en tiempo real de disponibilidad de stock, rotación y SLA de cumplimiento.&#x27;,
+      defaultWidth: &#x27;col-12&#x27;
+    },
+    {
+      id: &#x27;kpis&#x27;,
+      title: &#x27;Métricas Principales KPI&#x27;,
+      icon: &#x27;cash-outline&#x27;,
+      category: &#x27;Finanzas&#x27;,
+      description: &#x27;Tarjetas con valor económico del inventario, referencias, stock bajo y roturas.&#x27;,
+      defaultWidth: &#x27;col-12&#x27;
+    },
+    {
+      id: &#x27;timeline_wave&#x27;,
+      title: &#x27;Evolución Financiera (TIME LINE)&#x27;,
+      icon: &#x27;stats-chart-outline&#x27;,
+      category: &#x27;Analítica&#x27;,
+      description: &#x27;Curvas de ingresos continuos, costes operativos y previsiones por periodo (7D, 30D, Año).&#x27;,
+      defaultWidth: &#x27;col-8&#x27;
+    },
+    {
+      id: &#x27;category_doughnut&#x27;,
+      title: &#x27;Distribución de Activos (Circular)&#x27;,
+      icon: &#x27;pie-chart-outline&#x27;,
+      category: &#x27;Inventario&#x27;,
+      description: &#x27;Gráfica de anillo interactiva con la distribución de capital por familia de producto.&#x27;,
+      defaultWidth: &#x27;col-4&#x27;
+    },
+    {
+      id: &#x27;mini_calendar&#x27;,
+      title: &#x27;Calendario &amp; Citas de Auditoría&#x27;,
+      icon: &#x27;calendar-outline&#x27;,
+      category: &#x27;Operativo&#x27;,
+      description: &#x27;Navegador mensual interactivo con fechas clave de inspección y eventos de auditoría.&#x27;,
+      defaultWidth: &#x27;col-4&#x27;
+    },
+    {
+      id: &#x27;live_activities&#x27;,
+      title: &#x27;Actividades en Vivo (Supabase Realtime)&#x27;,
+      icon: &#x27;pulse-outline&#x27;,
+      category: &#x27;Auditoría&#x27;,
+      description: &#x27;Feed reactivo conectado a Supabase Realtime con trazabilidad en vivo de modificaciones.&#x27;,
+      defaultWidth: &#x27;col-4&#x27;
+    },
+    {
+      id: &#x27;operations&#x27;,
+      title: &#x27;Capacidad Operativa de Almacenes&#x27;,
+      icon: &#x27;layers-outline&#x27;,
+      category: &#x27;Logística&#x27;,
+      description: &#x27;Barras de progreso de ocupación de centros de distribución y despachos 24h.&#x27;,
+      defaultWidth: &#x27;col-4&#x27;
+    },
+    {
+      id: &#x27;quick_actions&#x27;,
+      title: &#x27;Acciones Rápidas &amp; Atajos&#x27;,
+      icon: &#x27;flash-outline&#x27;,
+      category: &#x27;Gestión&#x27;,
+      description: &#x27;Accesos directos rápidos para dar de alta productos, exportar informes y revisar auditorías.&#x27;,
+      defaultWidth: &#x27;col-6&#x27;
+    },
+    {
+      id: &#x27;critical_stock_table&#x27;,
+      title: &#x27;Alerta de Stock Crítico&#x27;,
+      icon: &#x27;alert-circle-outline&#x27;,
+      category: &#x27;Urgente&#x27;,
+      description: &#x27;Tabla prioritaria de artículos con stock agotado o inferior al umbral de seguridad.&#x27;,
+      defaultWidth: &#x27;col-6&#x27;
+    }
+  ];
+
+  // Definición inicial de widgets con estado por defecto
+  private defaultWidgets: DashboardWidget[] &#x3D; [
+    { id: &#x27;ring_gauges&#x27;, title: &#x27;Medidores Radiales SLA&#x27;, icon: &#x27;speedometer-outline&#x27;, category: &#x27;Métricas&#x27;, visible: true, width: &#x27;col-12&#x27;, order: 1 },
+    { id: &#x27;kpis&#x27;, title: &#x27;Métricas Principales KPI&#x27;, icon: &#x27;cash-outline&#x27;, category: &#x27;Finanzas&#x27;, visible: true, width: &#x27;col-12&#x27;, order: 2 },
+    { id: &#x27;timeline_wave&#x27;, title: &#x27;Evolución Financiera (TIME LINE)&#x27;, icon: &#x27;stats-chart-outline&#x27;, category: &#x27;Analítica&#x27;, visible: true, width: &#x27;col-8&#x27;, order: 3 },
+    { id: &#x27;category_doughnut&#x27;, title: &#x27;Distribución de Activos (Circular)&#x27;, icon: &#x27;pie-chart-outline&#x27;, category: &#x27;Inventario&#x27;, visible: true, width: &#x27;col-4&#x27;, order: 4 },
+    { id: &#x27;mini_calendar&#x27;, title: &#x27;Calendario &amp; Citas de Auditoría&#x27;, icon: &#x27;calendar-outline&#x27;, category: &#x27;Operativo&#x27;, visible: true, width: &#x27;col-4&#x27;, order: 5 },
+    { id: &#x27;live_activities&#x27;, title: &#x27;Actividades en Vivo (Supabase Realtime)&#x27;, icon: &#x27;pulse-outline&#x27;, category: &#x27;Auditoría&#x27;, visible: true, width: &#x27;col-4&#x27;, order: 6 },
+    { id: &#x27;operations&#x27;, title: &#x27;Capacidad Operativa de Almacenes&#x27;, icon: &#x27;layers-outline&#x27;, category: &#x27;Logística&#x27;, visible: true, width: &#x27;col-4&#x27;, order: 7 },
+    { id: &#x27;quick_actions&#x27;, title: &#x27;Acciones Rápidas &amp; Atajos&#x27;, icon: &#x27;flash-outline&#x27;, category: &#x27;Gestión&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 8 },
+    { id: &#x27;critical_stock_table&#x27;, title: &#x27;Alerta de Stock Crítico&#x27;, icon: &#x27;alert-circle-outline&#x27;, category: &#x27;Urgente&#x27;, visible: false, width: &#x27;col-6&#x27;, order: 9 }
+  ];
+
+  // Control de Modo Edición vs Modo Vista limpio
+  public isEditMode &#x3D; signal(false);
+
+  // Control de bandeja / drawer lateral de widgets
+  public isCatalogDrawerOpen &#x3D; signal(false);
+
+  // Identificador de plantilla activa
+  public activeTemplateId &#x3D; signal&lt;string&gt;(&#x27;executive&#x27;);
+
+  // Filtros internos de la bandeja de widgets
+  public catalogSearch &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+  public catalogFilterCategory &#x3D; signal&lt;string&gt;(&#x27;all&#x27;);
+
+  // Widget sobre el que se hace hover en drag &amp; drop para drop target visual
+  public dragOverWidgetId &#x3D; signal&lt;string | null&gt;(null);
+
+  // Plantillas predefinidas del cuadro de mando (Presets ejecutivos)
+  public readonly templates: DashboardTemplate[] &#x3D; [
+    {
+      id: &#x27;executive&#x27;,
+      name: &#x27;Ejecutivo 360°&#x27;,
+      icon: &#x27;sparkles-outline&#x27;,
+      badge: &#x27;Recomendado&#x27;,
+      description: &#x27;Visión integral: SLAs en tiempo real, KPIs económicos, timeline y actividad reciente.&#x27;,
+      widgets: [
+        { id: &#x27;ring_gauges&#x27;, width: &#x27;col-12&#x27;, order: 1 },
+        { id: &#x27;kpis&#x27;, width: &#x27;col-12&#x27;, order: 2 },
+        { id: &#x27;timeline_wave&#x27;, width: &#x27;col-8&#x27;, order: 3 },
+        { id: &#x27;category_doughnut&#x27;, width: &#x27;col-4&#x27;, order: 4 },
+        { id: &#x27;mini_calendar&#x27;, width: &#x27;col-4&#x27;, order: 5 },
+        { id: &#x27;live_activities&#x27;, width: &#x27;col-4&#x27;, order: 6 },
+        { id: &#x27;operations&#x27;, width: &#x27;col-4&#x27;, order: 7 }
+      ]
+    },
+    {
+      id: &#x27;financial&#x27;,
+      name: &#x27;Analítica Financiera&#x27;,
+      icon: &#x27;stats-chart-outline&#x27;,
+      badge: &#x27;Finanzas&#x27;,
+      description: &#x27;Enfocado en facturación, evolución de ingresos y costes, y balance por familias de artículos.&#x27;,
+      widgets: [
+        { id: &#x27;timeline_wave&#x27;, width: &#x27;col-12&#x27;, order: 1 },
+        { id: &#x27;kpis&#x27;, width: &#x27;col-12&#x27;, order: 2 },
+        { id: &#x27;category_doughnut&#x27;, width: &#x27;col-6&#x27;, order: 3 },
+        { id: &#x27;operations&#x27;, width: &#x27;col-6&#x27;, order: 4 },
+        { id: &#x27;ring_gauges&#x27;, width: &#x27;col-12&#x27;, order: 5 }
+      ]
+    },
+    {
+      id: &#x27;operations&#x27;,
+      name: &#x27;Logística &amp; Stock Crítico&#x27;,
+      icon: &#x27;layers-outline&#x27;,
+      badge: &#x27;Operativa&#x27;,
+      description: &#x27;Monitorización de roturas de stock, capacidad de almacenes y acciones urgentes.&#x27;,
+      widgets: [
+        { id: &#x27;ring_gauges&#x27;, width: &#x27;col-12&#x27;, order: 1 },
+        { id: &#x27;critical_stock_table&#x27;, width: &#x27;col-6&#x27;, order: 2 },
+        { id: &#x27;operations&#x27;, width: &#x27;col-6&#x27;, order: 3 },
+        { id: &#x27;live_activities&#x27;, width: &#x27;col-6&#x27;, order: 4 },
+        { id: &#x27;quick_actions&#x27;, width: &#x27;col-6&#x27;, order: 5 },
+        { id: &#x27;mini_calendar&#x27;, width: &#x27;col-12&#x27;, order: 6 }
+      ]
+    },
+    {
+      id: &#x27;minimal&#x27;,
+      name: &#x27;Resumen Ejecutivo Compacto&#x27;,
+      icon: &#x27;grid-outline&#x27;,
+      badge: &#x27;Minimal&#x27;,
+      description: &#x27;Vista condensada y sin distracciones con los indicadores vitales de la compañía.&#x27;,
+      widgets: [
+        { id: &#x27;kpis&#x27;, width: &#x27;col-12&#x27;, order: 1 },
+        { id: &#x27;timeline_wave&#x27;, width: &#x27;col-8&#x27;, order: 2 },
+        { id: &#x27;category_doughnut&#x27;, width: &#x27;col-4&#x27;, order: 3 },
+        { id: &#x27;ring_gauges&#x27;, width: &#x27;col-12&#x27;, order: 4 }
+      ]
+    }
+  ];
+
+  // Control de pestaña en el personalizador secundario: activos vs catálogo
+  public customizerTab &#x3D; signal&lt;&#x27;active&#x27; | &#x27;catalog&#x27;&gt;(&#x27;active&#x27;);
+
+  public widgets &#x3D; signal&lt;DashboardWidget[]&gt;(this.loadWidgetsLayout());
+
+  public orderedWidgets &#x3D; computed(() &#x3D;&gt; {
+    return [...this.widgets()].sort((a, b) &#x3D;&gt; a.order - b.order);
+  });
+
+  public activeWidgets &#x3D; computed(() &#x3D;&gt; {
+    return this.orderedWidgets().filter(w &#x3D;&gt; w.visible);
+  });
+
+  public availableWidgetsToAdd &#x3D; computed(() &#x3D;&gt; {
+    return this.widgets().filter(w &#x3D;&gt; !w.visible);
+  });
+
+  public filteredCatalogWidgets &#x3D; computed(() &#x3D;&gt; {
+    const q &#x3D; this.catalogSearch().toLowerCase().trim();
+    const cat &#x3D; this.catalogFilterCategory();
+
+    return this.catalogWidgets.filter(w &#x3D;&gt; {
+      const matchQuery &#x3D; !q ||
+        w.title.toLowerCase().includes(q) ||
+        w.description.toLowerCase().includes(q) ||
+        w.category.toLowerCase().includes(q);
+      const matchCat &#x3D; cat &#x3D;&#x3D;&#x3D; &#x27;all&#x27; || w.category.toLowerCase() &#x3D;&#x3D;&#x3D; cat.toLowerCase();
+      return matchQuery &amp;&amp; matchCat;
+    });
+  });
+
+  public catalogCategories &#x3D; computed(() &#x3D;&gt; {
+    const cats &#x3D; new Set(this.catalogWidgets.map(w &#x3D;&gt; w.category));
+    return [&#x27;all&#x27;, ...Array.from(cats)];
+  });
+
+  public hasSearchQuery &#x3D; computed(() &#x3D;&gt; !!this.searchQuery().trim());
+
+  public searchMatchCount &#x3D; computed(() &#x3D;&gt; {
+    const q &#x3D; this.searchQuery().toLowerCase().trim();
+    if (!q) return this.activeWidgets().length;
+    return this.activeWidgets().filter(w &#x3D;&gt; this.isWidgetSearchMatch(w)).length;
+  });
+
+  // Datos consolidados
+  public totalProducts &#x3D; signal(0);
+  public totalInventoryValue &#x3D; signal(0);
+  public lowStockCount &#x3D; signal(0);
+  public outOfStockCount &#x3D; signal(0);
+  public allProducts &#x3D; signal&lt;Product[]&gt;([]);
+  public recentLogs &#x3D; signal&lt;AuditLogDocument[]&gt;([]);
+
+  // Calendario
+  public calendarMonth &#x3D; signal(new Date(2026, 9, 1)); // Octubre 2026
+  public selectedCalendarDay &#x3D; signal(26);
+
+  public calendarMonthTitle &#x3D; computed(() &#x3D;&gt; {
+    const months &#x3D; [
+      &#x27;Enero&#x27;, &#x27;Febrero&#x27;, &#x27;Marzo&#x27;, &#x27;Abril&#x27;, &#x27;Mayo&#x27;, &#x27;Junio&#x27;,
+      &#x27;Julio&#x27;, &#x27;Agosto&#x27;, &#x27;Septiembre&#x27;, &#x27;Octubre&#x27;, &#x27;Noviembre&#x27;, &#x27;Diciembre&#x27;
+    ];
+    const m &#x3D; this.calendarMonth();
+    return &#x60;${months[m.getMonth()]} ${m.getFullYear()}&#x60;;
+  });
+
+  public calendarDays &#x3D; computed&lt;CalendarDay[]&gt;(() &#x3D;&gt; {
+    const d &#x3D; this.calendarMonth();
+    const year &#x3D; d.getFullYear();
+    const month &#x3D; d.getMonth();
+    const firstDayIndex &#x3D; (new Date(year, month, 1).getDay() + 6) % 7;
+    const totalDays &#x3D; new Date(year, month + 1, 0).getDate();
+
+    const days: CalendarDay[] &#x3D; [];
+    for (let i &#x3D; 0; i &lt; firstDayIndex; i++) {
+      days.push({ day: null });
+    }
+
+    const eventDays &#x3D; [3, 8, 14, 19, 24, 26, 29];
+    for (let day &#x3D; 1; day &lt;&#x3D; totalDays; day++) {
+      days.push({
+        day,
+        hasEvent: eventDays.includes(day),
+        isToday: day &#x3D;&#x3D;&#x3D; 26 &amp;&amp; month &#x3D;&#x3D;&#x3D; 9 &amp;&amp; year &#x3D;&#x3D;&#x3D; 2026
+      });
+    }
+
+    return days;
+  });
+
+  // Gauges
+  public ringGauges &#x3D; [
+    { label: &#x27;Disponibilidad Stock&#x27;, value: &#x27;94%&#x27;, percent: 94, color: &#x27;#38bdf8&#x27;, icon: &#x27;cube-outline&#x27;, subtitle: &#x27;Catálogo operativo&#x27; },
+    { label: &#x27;Rotación Inventario&#x27;, value: &#x27;82%&#x27;, percent: 82, color: &#x27;#ff2a6d&#x27;, icon: &#x27;repeat-outline&#x27;, subtitle: &#x27;Alta rotación&#x27; },
+    { label: &#x27;Eficiencia Almacén&#x27;, value: &#x27;76%&#x27;, percent: 76, color: &#x27;#a855f7&#x27;, icon: &#x27;flash-outline&#x27;, subtitle: &#x27;Rendimiento SLA&#x27; },
+    { label: &#x27;SLA Cumplimiento&#x27;, value: &#x27;98%&#x27;, percent: 98, color: &#x27;#f59e0b&#x27;, icon: &#x27;shield-checkmark-outline&#x27;, subtitle: &#x27;Despacho puntual&#x27; }
+  ];
+
+  // Sliders operacionales
+  public operationalMeters &#x3D; [
+    { name: &#x27;Almacén Central (Madrid)&#x27;, progress: 78, color: &#x27;#ff2a6d&#x27;, detail: &#x27;3.420 / 4.400 pallets&#x27; },
+    { name: &#x27;Hub Logístico (Barcelona)&#x27;, progress: 64, color: &#x27;#38bdf8&#x27;, detail: &#x27;1.920 / 3.000 pallets&#x27; },
+    { name: &#x27;Plataforma Norte (Bilbao)&#x27;, progress: 88, color: &#x27;#a855f7&#x27;, detail: &#x27;880 / 1.000 pallets&#x27; },
+    { name: &#x27;Tasa de Despacho 24h&#x27;, progress: 92, color: &#x27;#10b981&#x27;, detail: &#x27;92% entrega inmediata&#x27; }
+  ];
+
+  // Lista de productos críticos (stock &lt;&#x3D; 5 o agotados) para widget de alertas prioritarias
+  public criticalProducts &#x3D; computed(() &#x3D;&gt; {
+    return this.allProducts().filter(p &#x3D;&gt; p.stock &lt;&#x3D; 5).slice(0, 6);
+  });
+
+  private timelineChart: Chart | null &#x3D; null;
+  private doughnutChart: Chart | null &#x3D; null;
+  private subscriptions &#x3D; new Subscription();
+  private draggedWidgetId: string | null &#x3D; null;
+
+  constructor() {
+    addIcons({
+      refreshOutline,
+      downloadOutline,
+      statsChartOutline,
+      cubeOutline,
+      cashOutline,
+      alertCircleOutline,
+      timeOutline,
+      sparklesOutline,
+      documentTextOutline,
+      logOutOutline,
+      searchOutline,
+      notificationsOutline,
+      notificationsOffOutline,
+      settingsOutline,
+      mailOutline,
+      personCircleOutline,
+      chevronBackOutline,
+      chevronForwardOutline,
+      repeatOutline,
+      flashOutline,
+      shieldCheckmarkOutline,
+      filterOutline,
+      trendingUpOutline,
+      trendingDownOutline,
+      removeOutline,
+      calendarOutline,
+      layersOutline,
+      pieChartOutline,
+      optionsOutline,
+      closeOutline,
+      checkmarkOutline,
+      checkmarkDoneOutline,
+      arrowUpOutline,
+      arrowDownOutline,
+      expandOutline,
+      contractOutline,
+      moveOutline,
+      eyeOutline,
+      eyeOffOutline,
+      trashOutline,
+      addOutline,
+      speedometerOutline,
+      pulseOutline,
+      openOutline,
+      createOutline,
+      appsOutline,
+      gridOutline,
+      checkmarkCircleOutline,
+      colorWandOutline,
+      closeCircleOutline
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadConsolidatedData();
+    this.setupThemeObserver();
+
+    this.subscriptions.add(
+      this.realtimeService.documents$.subscribe(docs &#x3D;&gt; {
+        this.recentLogs.set(docs.slice(0, 6));
+      })
+    );
+  }
+
+  private setupThemeObserver(): void {
+    if (typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; &#x27;MutationObserver&#x27; in window) {
+      this.themeObserver &#x3D; new MutationObserver(() &#x3D;&gt; {
+        setTimeout(() &#x3D;&gt; this.renderCharts(), 50);
+      });
+      this.themeObserver.observe(document.body, { attributes: true, attributeFilter: [&#x27;class&#x27;] });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.themeObserver) {
+      this.themeObserver.disconnect();
+    }
+    this.destroyCharts();
+    this.subscriptions.unsubscribe();
+  }
+
+  private destroyCharts(): void {
+    if (this.timelineChart) {
+      this.timelineChart.destroy();
+      this.timelineChart &#x3D; null;
+    }
+    if (this.doughnutChart) {
+      this.doughnutChart.destroy();
+      this.doughnutChart &#x3D; null;
+    }
+  }
+
+  private loadWidgetsLayout(): DashboardWidget[] {
+    try {
+      const data &#x3D; localStorage.getItem(LAYOUT_STORAGE_KEY);
+      if (data) {
+        const parsed: DashboardWidget[] &#x3D; JSON.parse(data);
+        if (Array.isArray(parsed) &amp;&amp; parsed.length &gt; 0) {
+          // Fusionar con catálogo para garantizar que widgets nuevos estén disponibles
+          const merged: DashboardWidget[] &#x3D; [...parsed];
+          for (const def of this.defaultWidgets) {
+            if (!merged.some(w &#x3D;&gt; w.id &#x3D;&#x3D;&#x3D; def.id)) {
+              merged.push({ ...def, visible: false, order: merged.length + 1 });
+            }
+          }
+          return merged;
+        }
+      }
+    } catch (e) {
+      console.warn(&#x27;Error leyendo layout de widgets guardado&#x27;, e);
+    }
+    return JSON.parse(JSON.stringify(this.defaultWidgets));
+  }
+
+  private saveWidgetsLayout(widgets: DashboardWidget[]): void {
+    localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(widgets));
+    this.widgets.set(widgets);
+  }
+
+  public loadConsolidatedData(): void {
+    this.isLoading.set(true);
+
+    this.subscriptions.add(
+      forkJoin({
+        products: this.sqlService.getProducts(),
+        metrics: this.sqlService.getSummaryMetrics(),
+        recentAlerts: this.realtimeService.getRecentAlerts().pipe(take(1))
+      }).subscribe({
+        next: ({ products, metrics }) &#x3D;&gt; {
+          this.allProducts.set(products);
+          this.totalProducts.set(metrics.totalProducts);
+          this.totalInventoryValue.set(metrics.totalInventoryValue);
+          this.lowStockCount.set(metrics.lowStockCount);
+          this.outOfStockCount.set(metrics.outOfStockCount);
+
+          this.isLoading.set(false);
+
+          setTimeout(() &#x3D;&gt; {
+            this.renderCharts();
+          }, 120);
+        },
+        error: (err) &#x3D;&gt; {
+          console.error(&#x27;Error cargando datos:&#x27;, err);
+          this.isLoading.set(false);
+        }
+      })
+    );
+  }
+
+  // GESTIÓN DE NOTIFICACIONES
+  public toggleNotifications(): void {
+    this.isNotificationsOpen.update(v &#x3D;&gt; !v);
+  }
+
+  public markNotificationAsRead(id: string): void {
+    this.notifications.update(list &#x3D;&gt;
+      list.map(n &#x3D;&gt; n.id &#x3D;&#x3D;&#x3D; id ? { ...n, read: true } : n)
+    );
+  }
+
+  public markAllNotificationsAsRead(): void {
+    this.notifications.update(list &#x3D;&gt; list.map(n &#x3D;&gt; ({ ...n, read: true })));
+    this.notificationService.showToast(&#x27;Todas las alertas marcadas como leídas.&#x27;, &#x27;success&#x27;);
+  }
+
+  public clearNotifications(): void {
+    this.notifications.set([]);
+    this.notificationService.showToast(&#x27;Bandeja de alertas limpiada.&#x27;, &#x27;primary&#x27;);
+  }
+
+  // GESTIÓN DE MODO EDICIÓN, PLANTILLAS Y BANDEJA DE WIDGETS
+  public toggleEditMode(): void {
+    this.isEditMode.update(v &#x3D;&gt; {
+      const next &#x3D; !v;
+      if (next) {
+        this.notificationService.showToast(&#x27;Modo Edición activo. Arrastra las tarjetas o ajusta tamaños.&#x27;, &#x27;primary&#x27;);
+      } else {
+        this.notificationService.showToast(&#x27;Diseño del cuadro de mando guardado.&#x27;, &#x27;success&#x27;);
+      }
+      return next;
+    });
+  }
+
+  public toggleCatalogDrawer(): void {
+    this.isCatalogDrawerOpen.update(v &#x3D;&gt; !v);
+  }
+
+  public closeCatalogDrawer(): void {
+    this.isCatalogDrawerOpen.set(false);
+  }
+
+  /**
+   * Aplica una plantilla predefinida y reorganiza instantáneamente los widgets
+   */
+  public applyTemplate(templateId: string): void {
+    const tpl &#x3D; this.templates.find(t &#x3D;&gt; t.id &#x3D;&#x3D;&#x3D; templateId);
+    if (!tpl) return;
+
+    this.activeTemplateId.set(templateId);
+
+    const updated &#x3D; this.widgets().map(w &#x3D;&gt; {
+      const match &#x3D; tpl.widgets.find(item &#x3D;&gt; item.id &#x3D;&#x3D;&#x3D; w.id);
+      if (match) {
+        return {
+          ...w,
+          visible: true,
+          width: match.width,
+          order: match.order
+        };
+      } else {
+        return {
+          ...w,
+          visible: false
+        };
+      }
+    });
+
+    this.saveWidgetsLayout(updated);
+    this.notificationService.showToast(&#x60;Plantilla &quot;${tpl.name}&quot; aplicada correctamente.&#x60;, &#x27;success&#x27;);
+    setTimeout(() &#x3D;&gt; this.renderCharts(), 120);
+  }
+
+  public isWidgetSearchMatch(widget: DashboardWidget): boolean {
+    const q &#x3D; this.searchQuery().toLowerCase().trim();
+    if (!q) return true;
+    return widget.title.toLowerCase().includes(q) ||
+           widget.category.toLowerCase().includes(q) ||
+           (widget.description || &#x27;&#x27;).toLowerCase().includes(q);
+  }
+
+  public clearSearch(): void {
+    this.searchQuery.set(&#x27;&#x27;);
+  }
+
+  public toggleCustomizer(): void {
+    this.isCustomizerOpen.update(v &#x3D;&gt; !v);
+  }
+
+  /**
+   * Quita un widget del cuadro de mando activo y lo envía al catálogo de disponibles
+   */
+  public removeWidget(id: string): void {
+    const target &#x3D; this.widgets().find(w &#x3D;&gt; w.id &#x3D;&#x3D;&#x3D; id);
+    const updated &#x3D; this.widgets().map(w &#x3D;&gt;
+      w.id &#x3D;&#x3D;&#x3D; id ? { ...w, visible: false } : w
+    );
+    this.saveWidgetsLayout(updated);
+    this.notificationService.showToast(
+      &#x60;Módulo &quot;${target?.title || id}&quot; quitado del lienzo.&#x60;,
+      &#x27;primary&#x27;
+    );
+    setTimeout(() &#x3D;&gt; this.renderCharts(), 100);
+  }
+
+  /**
+   * Añade un widget del catálogo al cuadro de mando activo
+   */
+  public addWidget(id: string): void {
+    const currentActive &#x3D; this.widgets().filter(w &#x3D;&gt; w.visible);
+    const nextOrder &#x3D; currentActive.length + 1;
+    const target &#x3D; this.widgets().find(w &#x3D;&gt; w.id &#x3D;&#x3D;&#x3D; id);
+
+    const updated &#x3D; this.widgets().map(w &#x3D;&gt;
+      w.id &#x3D;&#x3D;&#x3D; id ? { ...w, visible: true, order: nextOrder } : w
+    );
+    this.saveWidgetsLayout(updated);
+    this.notificationService.showToast(
+      &#x60;Módulo &quot;${target?.title || id}&quot; añadido al lienzo.&#x60;,
+      &#x27;success&#x27;
+    );
+    setTimeout(() &#x3D;&gt; this.renderCharts(), 120);
+  }
+
+  /**
+   * Alterna la visibilidad rápida de un widget
+   */
+  public toggleWidgetVisibility(id: string): void {
+    const w &#x3D; this.widgets().find(item &#x3D;&gt; item.id &#x3D;&#x3D;&#x3D; id);
+    if (w?.visible) {
+      this.removeWidget(id);
+    } else {
+      this.addWidget(id);
+    }
+  }
+
+  /**
+   * Fija la anchura específica de un widget (col-4, col-6, col-8, col-12)
+   */
+  public setWidgetWidth(id: string, width: &#x27;col-12&#x27; | &#x27;col-8&#x27; | &#x27;col-6&#x27; | &#x27;col-4&#x27;): void {
+    const updated &#x3D; this.widgets().map(w &#x3D;&gt;
+      w.id &#x3D;&#x3D;&#x3D; id ? { ...w, width } : w
+    );
+    this.saveWidgetsLayout(updated);
+    setTimeout(() &#x3D;&gt; this.renderCharts(), 100);
+  }
+
+  /**
+   * Cicla interactivamente el tamaño del widget al pulsar en la manija inferior derecha
+   * (33% -&gt; 50% -&gt; 66% -&gt; 100% -&gt; 33%)
+   */
+  public cycleWidgetWidth(id: string): void {
+    const widths: Array&lt;&#x27;col-4&#x27; | &#x27;col-6&#x27; | &#x27;col-8&#x27; | &#x27;col-12&#x27;&gt; &#x3D; [&#x27;col-4&#x27;, &#x27;col-6&#x27;, &#x27;col-8&#x27;, &#x27;col-12&#x27;];
+    const current &#x3D; this.widgets().find(w &#x3D;&gt; w.id &#x3D;&#x3D;&#x3D; id);
+    if (!current) return;
+    const currentIdx &#x3D; widths.indexOf(current.width);
+    const nextWidth &#x3D; widths[(currentIdx + 1) % widths.length];
+    this.setWidgetWidth(id, nextWidth);
+
+    const percentText &#x3D; nextWidth &#x3D;&#x3D;&#x3D; &#x27;col-12&#x27; ? &#x27;100% (12 col)&#x27; : nextWidth &#x3D;&#x3D;&#x3D; &#x27;col-8&#x27; ? &#x27;66% (8 col)&#x27; : nextWidth &#x3D;&#x3D;&#x3D; &#x27;col-6&#x27; ? &#x27;50% (6 col)&#x27; : &#x27;33% (4 col)&#x27;;
+    this.notificationService.showToast(&#x60;Tamaño de &quot;${current.title}&quot; ajustado a ${percentText}&#x60;, &#x27;primary&#x27;);
+  }
+
+  /**
+   * Mueve un widget arriba o abajo dentro de los widgets activos
+   */
+  public moveWidget(id: string, direction: &#x27;up&#x27; | &#x27;down&#x27;): void {
+    const all &#x3D; [...this.widgets()];
+    const active &#x3D; all.filter(w &#x3D;&gt; w.visible).sort((a, b) &#x3D;&gt; a.order - b.order);
+    const index &#x3D; active.findIndex(w &#x3D;&gt; w.id &#x3D;&#x3D;&#x3D; id);
+    if (index &#x3D;&#x3D;&#x3D; -1) return;
+
+    if (direction &#x3D;&#x3D;&#x3D; &#x27;up&#x27; &amp;&amp; index &gt; 0) {
+      const prev &#x3D; active[index - 1];
+      const current &#x3D; active[index];
+      const tempOrder &#x3D; prev.order;
+      prev.order &#x3D; current.order;
+      current.order &#x3D; tempOrder;
+    } else if (direction &#x3D;&#x3D;&#x3D; &#x27;down&#x27; &amp;&amp; index &lt; active.length - 1) {
+      const next &#x3D; active[index + 1];
+      const current &#x3D; active[index];
+      const tempOrder &#x3D; next.order;
+      next.order &#x3D; current.order;
+      current.order &#x3D; tempOrder;
+    } else {
+      return;
+    }
+
+    const updated &#x3D; all.map(w &#x3D;&gt; {
+      const match &#x3D; active.find(a &#x3D;&gt; a.id &#x3D;&#x3D;&#x3D; w.id);
+      return match ? match : w;
+    });
+
+    this.saveWidgetsLayout(updated);
+  }
+
+  /**
+   * Restablece el cuadro de mando a la configuración original de fábrica
+   */
+  public resetDefaultLayout(): void {
+    this.saveWidgetsLayout(JSON.parse(JSON.stringify(this.defaultWidgets)));
+    this.activeTemplateId.set(&#x27;executive&#x27;);
+    this.notificationService.showToast(&#x27;Diseño del Cuadro de Mando restablecido a la configuración de fábrica.&#x27;, &#x27;primary&#x27;);
+    setTimeout(() &#x3D;&gt; this.renderCharts(), 120);
+  }
+
+  // DRAG &amp; DROP DE WIDGETS
+  public onDragStart(event: DragEvent, widgetId: string): void {
+    if (!this.isEditMode()) {
+      event.preventDefault();
+      return;
+    }
+    this.draggedWidgetId &#x3D; widgetId;
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed &#x3D; &#x27;move&#x27;;
+      event.dataTransfer.setData(&#x27;text/plain&#x27;, widgetId);
+    }
+  }
+
+  public onDragOver(event: DragEvent, targetWidgetId?: string): void {
+    if (!this.isEditMode()) return;
+    event.preventDefault();
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect &#x3D; &#x27;move&#x27;;
+    }
+    if (targetWidgetId &amp;&amp; this.draggedWidgetId &amp;&amp; this.draggedWidgetId !&#x3D;&#x3D; targetWidgetId) {
+      this.dragOverWidgetId.set(targetWidgetId);
+    }
+  }
+
+  public onDragLeave(event: DragEvent, targetWidgetId?: string): void {
+    if (targetWidgetId &amp;&amp; this.dragOverWidgetId() &#x3D;&#x3D;&#x3D; targetWidgetId) {
+      this.dragOverWidgetId.set(null);
+    }
+  }
+
+  public onDragEnd(): void {
+    this.draggedWidgetId &#x3D; null;
+    this.dragOverWidgetId.set(null);
+  }
+
+  public onDrop(event: DragEvent, targetWidgetId: string): void {
+    event.preventDefault();
+    this.dragOverWidgetId.set(null);
+    if (!this.draggedWidgetId || this.draggedWidgetId &#x3D;&#x3D;&#x3D; targetWidgetId) return;
+
+    const all &#x3D; [...this.widgets()];
+    const active &#x3D; all.filter(w &#x3D;&gt; w.visible).sort((a, b) &#x3D;&gt; a.order - b.order);
+    const fromIndex &#x3D; active.findIndex(w &#x3D;&gt; w.id &#x3D;&#x3D;&#x3D; this.draggedWidgetId);
+    const toIndex &#x3D; active.findIndex(w &#x3D;&gt; w.id &#x3D;&#x3D;&#x3D; targetWidgetId);
+
+    if (fromIndex !&#x3D;&#x3D; -1 &amp;&amp; toIndex !&#x3D;&#x3D; -1) {
+      const [moved] &#x3D; active.splice(fromIndex, 1);
+      active.splice(toIndex, 0, moved);
+
+      // Reasignar órdenes continuos
+      active.forEach((w, idx) &#x3D;&gt; {
+        w.order &#x3D; idx + 1;
+      });
+
+      const updated &#x3D; all.map(w &#x3D;&gt; {
+        const match &#x3D; active.find(a &#x3D;&gt; a.id &#x3D;&#x3D;&#x3D; w.id);
+        return match ? match : w;
+      });
+
+      this.saveWidgetsLayout(updated);
+      this.notificationService.showToast(&#x60;Módulo recolocado en posición #${toIndex + 1}&#x60;, &#x27;primary&#x27;);
+    }
+
+    this.draggedWidgetId &#x3D; null;
+  }
+
+  public isWidgetVisible(id: string): boolean {
+    const w &#x3D; this.widgets().find(item &#x3D;&gt; item.id &#x3D;&#x3D;&#x3D; id);
+    return w ? w.visible : false;
+  }
+
+  public getWidgetWidthClass(id: string): string {
+    const w &#x3D; this.widgets().find(item &#x3D;&gt; item.id &#x3D;&#x3D;&#x3D; id);
+    return w ? w.width : &#x27;col-6&#x27;;
+  }
+
+  // Navegación auxiliar para widgets interactivos
+  public navigateTo(route: string): void {
+    this.router.navigate([route]);
+  }
+
+  public navigateToProduct(id?: string | number): void {
+    if (id) {
+      this.router.navigate([&#x27;/product-form&#x27;, id]);
+    } else {
+      this.router.navigate([&#x27;/product-form&#x27;]);
+    }
+  }
+
+  public setPeriod(period: &#x27;7d&#x27; | &#x27;30d&#x27; | &#x27;year&#x27;): void {
+    this.filterPeriod.set(period);
+    this.renderTimelineWaveChart();
+  }
+
+  public prevMonth(): void {
+    const cur &#x3D; this.calendarMonth();
+    this.calendarMonth.set(new Date(cur.getFullYear(), cur.getMonth() - 1, 1));
+  }
+
+  public nextMonth(): void {
+    const cur &#x3D; this.calendarMonth();
+    this.calendarMonth.set(new Date(cur.getFullYear(), cur.getMonth() + 1, 1));
+  }
+
+  public selectDay(day: number | null): void {
+    if (day !&#x3D;&#x3D; null) {
+      this.selectedCalendarDay.set(day);
+      this.notificationService.showToast(&#x60;Filtrando auditoría para el día ${day} de ${this.calendarMonthTitle()}&#x60;, &#x27;primary&#x27;);
+    }
+  }
+
+  public renderCharts(): void {
+    if (this.isWidgetVisible(&#x27;timeline_wave&#x27;)) {
+      this.renderTimelineWaveChart();
+    }
+    if (this.isWidgetVisible(&#x27;category_doughnut&#x27;)) {
+      this.renderCategoryDoughnutChart();
+    }
+  }
+
+  /**
+   * Gráfico de Ondas Multicapa Fluídas (Spline Wave Area Chart)
+   */
+  private renderTimelineWaveChart(): void {
+    if (!this.timelineWaveChartCanvas) return;
+
+    if (this.timelineChart) {
+      this.timelineChart.destroy();
+    }
+
+    const ctx &#x3D; this.timelineWaveChartCanvas.nativeElement.getContext(&#x27;2d&#x27;);
+    if (!ctx) return;
+
+    const period &#x3D; this.filterPeriod();
+
+    let labels: string[];
+    let salesData: number[];
+    let costsData: number[];
+    let projectionData: number[];
+
+    if (period &#x3D;&#x3D;&#x3D; &#x27;7d&#x27;) {
+      labels &#x3D; [&#x27;Lun&#x27;, &#x27;Mar&#x27;, &#x27;Mié&#x27;, &#x27;Jue&#x27;, &#x27;Vie&#x27;, &#x27;Sáb&#x27;, &#x27;Dom&#x27;];
+      salesData &#x3D; [3200, 4800, 3900, 5600, 6800, 4200, 5100];
+      costsData &#x3D; [1600, 2100, 1800, 2400, 2800, 1900, 2200];
+      projectionData &#x3D; [2800, 3900, 3400, 4900, 5700, 3800, 4500];
+    } else if (period &#x3D;&#x3D;&#x3D; &#x27;year&#x27;) {
+      labels &#x3D; [&#x27;2021&#x27;, &#x27;2022&#x27;, &#x27;2023&#x27;, &#x27;2024&#x27;, &#x27;2025&#x27;, &#x27;2026 (Act.)&#x27;];
+      salesData &#x3D; [120000, 165000, 210000, 280000, 340000, 420000];
+      costsData &#x3D; [75000, 98000, 115000, 145000, 180000, 210000];
+      projectionData &#x3D; [100000, 140000, 185000, 240000, 310000, 390000];
+    } else {
+      labels &#x3D; [&#x27;Ene&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Abr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Ago&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;];
+      salesData &#x3D; [18500, 22800, 19400, 27500, 31200, 28900, 34100, 38200, 36500, 43200];
+      costsData &#x3D; [9800, 11500, 10200, 13400, 14800, 13900, 15600, 17200, 16800, 19100];
+      projectionData &#x3D; [15000, 19000, 17200, 23000, 27500, 25000, 30000, 34500, 33000, 39000];
+    }
+
+    const gradSales &#x3D; ctx.createLinearGradient(0, 0, 0, 320);
+    gradSales.addColorStop(0, &#x27;rgba(255, 42, 109, 0.45)&#x27;);
+    gradSales.addColorStop(0.5, &#x27;rgba(225, 29, 72, 0.18)&#x27;);
+    gradSales.addColorStop(1, &#x27;rgba(225, 29, 72, 0.0)&#x27;);
+
+    const gradCosts &#x3D; ctx.createLinearGradient(0, 0, 0, 320);
+    gradCosts.addColorStop(0, &#x27;rgba(251, 146, 60, 0.4)&#x27;);
+    gradCosts.addColorStop(0.5, &#x27;rgba(249, 115, 22, 0.15)&#x27;);
+    gradCosts.addColorStop(1, &#x27;rgba(249, 115, 22, 0.0)&#x27;);
+
+    const gradProj &#x3D; ctx.createLinearGradient(0, 0, 0, 320);
+    gradProj.addColorStop(0, &#x27;rgba(168, 85, 247, 0.35)&#x27;);
+    gradProj.addColorStop(0.5, &#x27;rgba(56, 189, 248, 0.15)&#x27;);
+    gradProj.addColorStop(1, &#x27;rgba(56, 189, 248, 0.0)&#x27;);
+
+    this.timelineChart &#x3D; new Chart(ctx, {
+      type: &#x27;line&#x27;,
+      data: {
+        labels,
+        datasets: [
+          {
+            label: &#x27;Ingresos Netos (€)&#x27;,
+            data: salesData,
+            borderColor: &#x27;#ff2a6d&#x27;,
+            backgroundColor: gradSales,
+            fill: true,
+            tension: 0.42,
+            borderWidth: 3,
+            pointBackgroundColor: &#x27;#ff2a6d&#x27;,
+            pointBorderColor: &#x27;#ffffff&#x27;,
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 7
+          },
+          {
+            label: &#x27;Costes Operativos (€)&#x27;,
+            data: costsData,
+            borderColor: &#x27;#fb923c&#x27;,
+            backgroundColor: gradCosts,
+            fill: true,
+            tension: 0.42,
+            borderWidth: 2.5,
+            pointBackgroundColor: &#x27;#fb923c&#x27;,
+            pointBorderColor: &#x27;#ffffff&#x27;,
+            pointBorderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 6
+          },
+          {
+            label: &#x27;Previsión de Flujo (€)&#x27;,
+            data: projectionData,
+            borderColor: &#x27;#a855f7&#x27;,
+            backgroundColor: gradProj,
+            fill: true,
+            tension: 0.42,
+            borderWidth: 2,
+            borderDash: [5, 4],
+            pointRadius: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 300
+        },
+        interaction: { mode: &#x27;index&#x27;, intersect: false },
+        plugins: {
+          legend: {
+            position: &#x27;top&#x27;,
+            labels: {
+              color: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;#cbd5e1&#x27; : &#x27;#1e293b&#x27;,
+              font: { family: &#x27;inherit&#x27;, size: 11, weight: 600 },
+              usePointStyle: true,
+              pointStyle: &#x27;circle&#x27;,
+              padding: 16
+            }
+          },
+          tooltip: {
+            backgroundColor: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;rgba(16, 11, 38, 0.95)&#x27; : &#x27;rgba(15, 23, 42, 0.95)&#x27;,
+            titleColor: &#x27;#ffffff&#x27;,
+            bodyColor: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;#e2e8f0&#x27; : &#x27;#f8fafc&#x27;,
+            borderColor: &#x27;rgba(255, 42, 109, 0.4)&#x27;,
+            borderWidth: 1,
+            padding: 12,
+            boxPadding: 6,
+            callbacks: {
+              label: (ctx) &#x3D;&gt; &#x60; ${ctx.dataset.label}: ${Number(ctx.raw).toLocaleString(&#x27;es-ES&#x27;)} €&#x60;
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;rgba(255, 255, 255, 0.05)&#x27; : &#x27;rgba(15, 23, 42, 0.06)&#x27; },
+            ticks: { color: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;#94a3b8&#x27; : &#x27;#475569&#x27;, font: { family: &#x27;inherit&#x27;, size: 11 } }
+          },
+          y: {
+            beginAtZero: true,
+            grid: { color: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;rgba(255, 255, 255, 0.05)&#x27; : &#x27;rgba(15, 23, 42, 0.06)&#x27; },
+            ticks: {
+              color: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;#94a3b8&#x27; : &#x27;#475569&#x27;,
+              font: { family: &#x27;inherit&#x27;, size: 11 },
+              callback: (val) &#x3D;&gt; &#x60;${val} €&#x60;
+            }
+          }
+        }
+      }
+    });
+  }
+
+  /**
+   * Gráfica Circular de Distribución de Activos (Doughnut Chart)
+   * Como solicitó explícitamente el usuario mostrando la captura
+   */
+  private renderCategoryDoughnutChart(): void {
+    if (!this.categoryDoughnutChartCanvas) return;
+
+    if (this.doughnutChart) {
+      this.doughnutChart.destroy();
+    }
+
+    const ctx &#x3D; this.categoryDoughnutChartCanvas.nativeElement.getContext(&#x27;2d&#x27;);
+    if (!ctx) return;
+
+    const products &#x3D; this.allProducts();
+    const categories &#x3D; [&#x27;Hardware&#x27;, &#x27;Electrónica&#x27;, &#x27;Mobiliario&#x27;, &#x27;Servicios&#x27;, &#x27;Papelería&#x27;];
+    const dataValues &#x3D; categories.map(cat &#x3D;&gt;
+      products.filter(p &#x3D;&gt; p.category &#x3D;&#x3D;&#x3D; cat).reduce((sum, p) &#x3D;&gt; sum + (p.price * p.stock), 0)
+    );
+
+    // Paleta Ruby Neón &amp; Slate (Idéntica a la captura de pantalla adjunta)
+    const sliceColors &#x3D; [
+      &#x27;#e11d48&#x27;, // Hardware (Rojo rubí)
+      &#x27;#f43f5e&#x27;, // Electrónica (Crimson)
+      &#x27;#fb7185&#x27;, // Mobiliario (Rosa palo)
+      &#x27;#9f1239&#x27;, // Servicios (Granate oscuro)
+      &#x27;#334155&#x27;  // Papelería (Pizarra titanio)
+    ];
+
+    this.doughnutChart &#x3D; new Chart(ctx, {
+      type: &#x27;doughnut&#x27;,
+      data: {
+        labels: categories,
+        datasets: [
+          {
+            data: dataValues,
+            backgroundColor: sliceColors,
+            borderColor: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;rgba(21, 15, 46, 0.9)&#x27; : &#x27;#ffffff&#x27;,
+            borderWidth: 3,
+            hoverOffset: 8
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 300
+        },
+        cutout: &#x27;62%&#x27;,
+        plugins: {
+          legend: {
+            position: &#x27;right&#x27;,
+            labels: {
+              color: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;#f8fafc&#x27; : &#x27;#1e293b&#x27;,
+              font: { family: &#x27;inherit&#x27;, size: 11, weight: 600 },
+              usePointStyle: true,
+              pointStyle: &#x27;rectRounded&#x27;,
+              padding: 12
+            }
+          },
+          tooltip: {
+            backgroundColor: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;rgba(16, 11, 38, 0.95)&#x27; : &#x27;rgba(15, 23, 42, 0.95)&#x27;,
+            titleColor: &#x27;#ffffff&#x27;,
+            bodyColor: document.body.classList.contains(&#x27;dark&#x27;) ? &#x27;#e2e8f0&#x27; : &#x27;#f8fafc&#x27;,
+            borderColor: &#x27;rgba(255, 42, 109, 0.5)&#x27;,
+            borderWidth: 1,
+            padding: 12,
+            callbacks: {
+              label: (ctx) &#x3D;&gt; &#x60; ${ctx.label}: ${Number(ctx.raw).toLocaleString(&#x27;es-ES&#x27;, { minimumFractionDigits: 2 })} €&#x60;
+            }
+          }
+        }
+      }
+    });
+  }
+
+  public exportPdfReport(): void {
+    this.exportService.exportProductsToPdf(this.allProducts(), &#x27;Cuadro de Mando Ejecutivo y Stock&#x27;);
+  }
+
+  public exportCsvReport(): void {
+    this.exportService.exportProductsToCsv(this.allProducts(), &#x27;Dashboard_Metricas_NovaGest&#x27;);
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.notificationService.showToast(&#x27;Sesión cerrada correctamente.&#x27;, &#x27;primary&#x27;);
+    this.router.navigate([&#x27;/login&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'DashboardWidget.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

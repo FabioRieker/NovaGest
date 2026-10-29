@@ -1,0 +1,636 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  TableActionPayload&lt;T &#x3D; any&gt;</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/shared/components/data-table/data-table.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+
+            </div>
+
+    <div class="tab-pane fade " id="api"><section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-3">
+                    <h6><b>Properties</b></h6>
+                </td>
+                <td class="col-md-9">
+                    <ul class="index-list">
+                        <li>
+                                <a href="#action" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">action</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#item" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">item</span>
+                                </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+    <section data-compodoc="block-properties">
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="action"></a>
+                                <span class="name "><b>action</b>
+                                    <a href="#action">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>action:     <code>&quot;view&quot; | &quot;edit&quot; | &quot;delete&quot;</code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>&quot;view&quot; | &quot;edit&quot; | &quot;delete&quot;</code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:47</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="item"></a>
+                                <span class="name "><b>item</b>
+                                    <a href="#item">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>item:     <code>T</code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>T</code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:48</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+    </section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+  OnInit,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+  signal
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import {
+  IonSearchbar,
+  IonButton,
+  IonIcon,
+  IonSpinner,
+  IonBadge
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import {
+  arrowUpOutline,
+  arrowDownOutline,
+  chevronBackOutline,
+  chevronForwardOutline,
+  createOutline,
+  trashOutline,
+  eyeOutline,
+  swapVerticalOutline,
+  imageOutline,
+  closeOutline
+} from &#x27;ionicons/icons&#x27;;
+import { Subject, Subscription } from &#x27;rxjs&#x27;;
+import { debounceTime, distinctUntilChanged } from &#x27;rxjs/operators&#x27;;
+
+export interface TableColumn {
+  key: string;
+  label: string;
+  sortable?: boolean;
+  type?: &#x27;text&#x27; | &#x27;currency&#x27; | &#x27;badge&#x27; | &#x27;date&#x27; | &#x27;image&#x27;;
+  width?: string;
+}
+
+export interface TableActionPayload&lt;T &#x3D; any&gt; {
+  action: &#x27;view&#x27; | &#x27;edit&#x27; | &#x27;delete&#x27;;
+  item: T;
+}
+
+/**
+ * Componente Visual Personalizado 1: Tabla de Datos Avanzada Reutilizable (RA 3).
+ * Completamente agnóstico de la vista contenedora, configurable mediante @Input()
+ * y emisor de interacciones mediante @Output().
+ * Cumple con ChangeDetectionStrategy.OnPush y normativas WCAG de accesibilidad.
+ */
+@Component({
+  selector: &#x27;app-data-table&#x27;,
+  templateUrl: &#x27;./data-table.component.html&#x27;,
+  styleUrls: [&#x27;./data-table.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonSearchbar,
+    IonButton,
+    IonIcon,
+    IonSpinner,
+    IonBadge
+  ]
+})
+export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() columns: TableColumn[] &#x3D; [];
+  @Input() data: any[] &#x3D; [];
+  @Input() pageSize &#x3D; 6;
+  @Input() searchPlaceholder &#x3D; &#x27;Buscar registros...&#x27;;
+  @Input() loading &#x3D; false;
+  @Input() emptyMessage &#x3D; &#x27;No se encontraron registros.&#x27;;
+  @Input() showActions &#x3D; true;
+  @Input() canEdit &#x3D; true;
+  @Input() canDelete &#x3D; true;
+  @Input() canView &#x3D; true;
+
+  @Output() rowClick &#x3D; new EventEmitter&lt;any&gt;();
+  @Output() actionClick &#x3D; new EventEmitter&lt;TableActionPayload&gt;();
+  @Output() sortChange &#x3D; new EventEmitter&lt;{ column: string; direction: &#x27;asc&#x27; | &#x27;desc&#x27; }&gt;();
+  @Output() pageChange &#x3D; new EventEmitter&lt;number&gt;();
+
+  // Estado interno de la tabla
+  public searchTerm &#x3D; &#x27;&#x27;;
+  public currentPage &#x3D; 1;
+  public sortColumn &#x3D; &#x27;&#x27;;
+  public sortDirection: &#x27;asc&#x27; | &#x27;desc&#x27; &#x3D; &#x27;asc&#x27;;
+
+  public filteredData: any[] &#x3D; [];
+  public paginatedData: any[] &#x3D; [];
+  public totalPages &#x3D; 1;
+
+  private searchSubject &#x3D; new Subject&lt;string&gt;();
+  private subscriptions &#x3D; new Subscription();
+
+  public previewModal &#x3D; signal&lt;{ url: string; title: string } | null&gt;(null);
+
+  constructor() {
+    addIcons({
+      arrowUpOutline,
+      arrowDownOutline,
+      chevronBackOutline,
+      chevronForwardOutline,
+      createOutline,
+      trashOutline,
+      eyeOutline,
+      swapVerticalOutline,
+      imageOutline,
+      closeOutline
+    });
+  }
+
+  ngOnInit(): void {
+    // Configurar debounce en la barra de búsqueda para evitar recomputaciones innecesarias
+    this.subscriptions.add(
+      this.searchSubject.pipe(
+        debounceTime(250),
+        distinctUntilChanged()
+      ).subscribe(term &#x3D;&gt; {
+        this.searchTerm &#x3D; term;
+        this.currentPage &#x3D; 1;
+        this.applyFilterAndPagination();
+      })
+    );
+
+    this.applyFilterAndPagination();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes[&#x27;data&#x27;] || changes[&#x27;pageSize&#x27;]) {
+      this.applyFilterAndPagination();
+    }
+  }
+
+  ngOnDestroy(): void {
+    // Evitar memory leaks liberando suscripciones de Observables
+    this.subscriptions.unsubscribe();
+  }
+
+  public onSearchInput(event: any): void {
+    const val &#x3D; event.target?.value ?? &#x27;&#x27;;
+    this.searchSubject.next(val);
+  }
+
+  public onSort(col: TableColumn): void {
+    if (!col.sortable) return;
+
+    if (this.sortColumn &#x3D;&#x3D;&#x3D; col.key) {
+      this.sortDirection &#x3D; this.sortDirection &#x3D;&#x3D;&#x3D; &#x27;asc&#x27; ? &#x27;desc&#x27; : &#x27;asc&#x27;;
+    } else {
+      this.sortColumn &#x3D; col.key;
+      this.sortDirection &#x3D; &#x27;asc&#x27;;
+    }
+
+    this.sortChange.emit({ column: this.sortColumn, direction: this.sortDirection });
+    this.applyFilterAndPagination();
+  }
+
+  public setPage(page: number): void {
+    if (page &lt; 1 || page &gt; this.totalPages || page &#x3D;&#x3D;&#x3D; this.currentPage) return;
+    this.currentPage &#x3D; page;
+    this.pageChange.emit(this.currentPage);
+    this.applyPaginationOnly();
+  }
+
+  public onRowSelect(item: any): void {
+    this.rowClick.emit(item);
+  }
+
+  public triggerAction(action: &#x27;view&#x27; | &#x27;edit&#x27; | &#x27;delete&#x27;, item: any, event: Event): void {
+    event.stopPropagation();
+    this.actionClick.emit({ action, item });
+  }
+
+  private applyFilterAndPagination(): void {
+    let result &#x3D; [...(this.data || [])];
+
+    // Búsqueda en todos los campos visibles
+    if (this.searchTerm.trim()) {
+      const q &#x3D; this.searchTerm.toLowerCase().trim();
+      result &#x3D; result.filter(item &#x3D;&gt;
+        this.columns.some(col &#x3D;&gt; {
+          const val &#x3D; item[col.key];
+          return val !&#x3D;&#x3D; null &amp;&amp; val !&#x3D;&#x3D; undefined &amp;&amp; String(val).toLowerCase().includes(q);
+        })
+      );
+    }
+
+    // Ordenación
+    if (this.sortColumn) {
+      const dir &#x3D; this.sortDirection &#x3D;&#x3D;&#x3D; &#x27;desc&#x27; ? -1 : 1;
+      result.sort((a, b) &#x3D;&gt; {
+        const valA &#x3D; a[this.sortColumn];
+        const valB &#x3D; b[this.sortColumn];
+        if (typeof valA &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; typeof valB &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+          return dir * (valA - valB);
+        }
+        return dir * String(valA || &#x27;&#x27;).localeCompare(String(valB || &#x27;&#x27;));
+      });
+    }
+
+    this.filteredData &#x3D; result;
+    this.totalPages &#x3D; Math.max(1, Math.ceil(this.filteredData.length / this.pageSize));
+
+    if (this.currentPage &gt; this.totalPages) {
+      this.currentPage &#x3D; 1;
+    }
+
+    this.applyPaginationOnly();
+  }
+
+  private applyPaginationOnly(): void {
+    const start &#x3D; (this.currentPage - 1) * this.pageSize;
+    const end &#x3D; start + this.pageSize;
+    this.paginatedData &#x3D; this.filteredData.slice(start, end);
+  }
+
+  public getBadgeColor(status: string): string {
+    switch (status) {
+      case &#x27;in_stock&#x27;: return &#x27;success&#x27;;
+      case &#x27;low_stock&#x27;: return &#x27;warning&#x27;;
+      case &#x27;out_of_stock&#x27;: return &#x27;danger&#x27;;
+      case &#x27;admin&#x27;: return &#x27;primary&#x27;;
+      case &#x27;user&#x27;: return &#x27;medium&#x27;;
+      default: return &#x27;secondary&#x27;;
+    }
+  }
+
+  public formatCellValue(item: any, col: TableColumn): string {
+    const val &#x3D; item[col.key];
+    if (val &#x3D;&#x3D;&#x3D; null || val &#x3D;&#x3D;&#x3D; undefined) return &#x27;-&#x27;;
+    if (col.type &#x3D;&#x3D;&#x3D; &#x27;currency&#x27;) {
+      return &#x60;${Number(val).toFixed(2)} €&#x60;;
+    }
+    if (col.type &#x3D;&#x3D;&#x3D; &#x27;date&#x27;) {
+      try {
+        return new Date(val).toLocaleDateString(&#x27;es-ES&#x27;, { day: &#x27;2-digit&#x27;, month: &#x27;short&#x27;, year: &#x27;numeric&#x27; });
+      } catch {
+        return String(val);
+      }
+    }
+    return String(val);
+  }
+
+  public openImagePreview(url: string, title: string, event: Event): void {
+    event.stopPropagation();
+    if (url) {
+      this.previewModal.set({ url, title });
+    }
+  }
+
+  public closeImagePreview(): void {
+    this.previewModal.set(null);
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'TableActionPayload.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

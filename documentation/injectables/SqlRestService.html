@@ -1,0 +1,1762 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >SqlRestService</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/core/services/sql-rest.service.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio de Consumo de Base de Datos Relacional (SQL) conectada a Supabase PostgreSQL (RA 5).
+Gestiona operaciones CRUD asíncronas sobre la tabla <code>products</code>, validaciones de integridad referencial,
+filtrado por índices, cálculo de agregaciones y resiliencia con caché local estructurada.</p>
+
+            </p>
+
+
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+                    <tr>
+                        <td class="col-md-3">providedIn</td>
+                        <td class="col-md-9"><code>root</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+            </div>
+
+    <div class="tab-pane fade " id="api">
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#initialSeed" >initialSeed</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#checkSkuExists" >checkSkuExists</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#createProduct" >createProduct</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#deleteProduct" >deleteProduct</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#ensureInitialized" >ensureInitialized</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#getProductById" >getProductById</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#getProducts" >getProducts</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#getStoredProducts" >getStoredProducts</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#getSummaryMetrics" >getSummaryMetrics</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#saveProducts" >saveProducts</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#syncProductsWithSupabase" >syncProductsWithSupabase</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#updateProduct" >updateProduct</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/app/core/services/sql-rest.service.ts:157</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkSkuExists"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>checkSkuExists</b></span>
+                        <a href="#checkSkuExists"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkSkuExists(sku: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, excludeId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="414"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:414</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Validador asíncrono para verificar unicidad de SKU</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sku</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>excludeId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createProduct"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>createProduct</b></span>
+                        <a href="#createProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createProduct(data: <a href="../interfaces/Product.html" target="_self">Omit&lt;Product, &quot;id&quot; | &quot;createdAt&quot; | &quot;updatedAt&quot;&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:290</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Inserta un nuevo producto en Supabase PostgreSQL garantizando unicidad de SKU</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Product.html" target="_self" >Omit&lt;Product, &quot;id&quot; | &quot;createdAt&quot; | &quot;updatedAt&quot;&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Product.html" target="_self" >Observable&lt;Product&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteProduct"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>deleteProduct</b></span>
+                        <a href="#deleteProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteProduct(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="390"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:390</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Elimina un producto por su ID en Supabase PostgreSQL</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ensureInitialized"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>ensureInitialized</b></span>
+                        <a href="#ensureInitialized"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ensureInitialized()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProductById"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getProductById</b></span>
+                        <a href="#getProductById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getProductById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="274"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:274</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene un producto por su clave primaria (ID)</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Product.html" target="_self" >Observable&lt;Product&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProducts"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getProducts</b></span>
+                        <a href="#getProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getProducts(filters?: <a href="../interfaces/ProductFilterOptions.html" target="_self">ProductFilterOptions</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:227</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene todos los productos con soporte para filtrado, búsqueda y ordenación</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>filters</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ProductFilterOptions.html" target="_self" >ProductFilterOptions</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Product.html" target="_self" >Observable&lt;Product[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStoredProducts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getStoredProducts</b></span>
+                        <a href="#getStoredProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStoredProducts()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="211"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:211</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Product.html" target="_self" >Product[]</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSummaryMetrics"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getSummaryMetrics</b></span>
+                        <a href="#getSummaryMetrics"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSummaryMetrics()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="429"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:429</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene métricas agregadas SQL para el Dashboard</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Product.html" target="_self" >Observable&lt;{ totalProducts: number; totalInventoryValue: number; lowStockCount: number; outOfStockCount: number; categoryCounts: Record&lt;string, number&gt; }&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveProducts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>saveProducts</b></span>
+                        <a href="#saveProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>saveProducts(products: <a href="../interfaces/Product.html" target="_self">Product[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>products</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Product.html" target="_self" >Product[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="syncProductsWithSupabase"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>syncProductsWithSupabase</b></span>
+                        <a href="#syncProductsWithSupabase"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>syncProductsWithSupabase()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sincroniza el catálogo con la tabla &#39;products&#39; de Supabase</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProduct"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>updateProduct</b></span>
+                        <a href="#updateProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateProduct(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, changes: <a href="../interfaces/Product.html" target="_self">Partial&lt;Product&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="338"
+                                    class="link-to-prism">src/app/core/services/sql-rest.service.ts:338</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza un producto existente en Supabase PostgreSQL</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Product.html" target="_self" >Partial&lt;Product&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Product.html" target="_self" >Observable&lt;Product&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialSeed"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>initialSeed</b></span>
+                        <a href="#initialSeed"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Product.html" target="_self" >Product[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      id: &#x27;prod-001&#x27;,
+      sku: &#x27;TECH-SRV-01&#x27;,
+      name: &#x27;Servidor Rack Dell PowerEdge R750&#x27;,
+      category: &#x27;Hardware&#x27;,
+      price: 3499.99,
+      stock: 8,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;dell.enterprise@proveedor.es&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Servidor 2U para virtualización de alta densidad con doble Intel Xeon.&#x27;,
+      createdAt: &#x27;2026-01-10T10:00:00Z&#x27;,
+      updatedAt: &#x27;2026-01-10T10:00:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-002&#x27;,
+      sku: &#x27;TECH-NB-02&#x27;,
+      name: &#x27;Portátil Lenovo ThinkPad P1 Gen 6&#x27;,
+      category: &#x27;Hardware&#x27;,
+      price: 2150.00,
+      stock: 14,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;ventas@lenovobusiness.com&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Estación de trabajo portátil para ingenieros con GPU NVIDIA RTX 4080.&#x27;,
+      createdAt: &#x27;2026-01-12T11:20:00Z&#x27;,
+      updatedAt: &#x27;2026-01-12T11:20:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-003&#x27;,
+      sku: &#x27;TECH-SW-03&#x27;,
+      name: &#x27;Licencia Anual Cloud ERP Enterprise (x50 users)&#x27;,
+      category: &#x27;Servicios&#x27;,
+      price: 5400.00,
+      stock: 45,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;cloud.sales@novagest-saas.com&#x27;,
+      description: &#x27;Suscripción corporativa para gestión de inventarios y contabilidad distribuida.&#x27;,
+      createdAt: &#x27;2026-01-15T09:15:00Z&#x27;,
+      updatedAt: &#x27;2026-01-15T09:15:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-004&#x27;,
+      sku: &#x27;MOB-CHR-04&#x27;,
+      name: &#x27;Silla Ergonómica Herman Miller Aeron&#x27;,
+      category: &#x27;Mobiliario&#x27;,
+      price: 1320.50,
+      stock: 3,
+      status: &#x27;low_stock&#x27;,
+      supplierEmail: &#x27;contacto@ergodesign.es&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1580481077195-c2763297a73e?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Silla ergonómica de oficina con soporte lumbar ajustable PostureFit SL.&#x27;,
+      createdAt: &#x27;2026-01-18T14:40:00Z&#x27;,
+      updatedAt: &#x27;2026-01-18T14:40:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-005&#x27;,
+      sku: &#x27;MOB-DSK-05&#x27;,
+      name: &#x27;Escritorio Elevable Eléctrico Dual-Motor&#x27;,
+      category: &#x27;Mobiliario&#x27;,
+      price: 680.00,
+      stock: 12,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;info@standingdesk.pro&#x27;,
+      description: &#x27;Mesa sit-stand con memorias de altura y estructura reforzada de acero.&#x27;,
+      createdAt: &#x27;2026-01-20T16:00:00Z&#x27;,
+      updatedAt: &#x27;2026-01-20T16:00:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-006&#x27;,
+      sku: &#x27;ELEC-MON-06&#x27;,
+      name: &#x27;Monitor Curvo LG UltraWide 38WN95C&#x27;,
+      category: &#x27;Electrónica&#x27;,
+      price: 1199.00,
+      stock: 0,
+      status: &#x27;out_of_stock&#x27;,
+      supplierEmail: &#x27;distribucion@lgdisplays.com&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Panel IPS QHD+ con Thunderbolt 3 y cobertura DCI-P3 98%.&#x27;,
+      createdAt: &#x27;2026-01-22T08:30:00Z&#x27;,
+      updatedAt: &#x27;2026-01-22T08:30:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-007&#x27;,
+      sku: &#x27;ELEC-AUD-07&#x27;,
+      name: &#x27;Auriculares Inalámbricos Sony WH-1000XM5&#x27;,
+      category: &#x27;Electrónica&#x27;,
+      price: 349.00,
+      stock: 22,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;pedidos@sonypro.es&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Cancelación activa de ruido líder en el mercado para conferencias y trabajo remoto.&#x27;,
+      createdAt: &#x27;2026-01-25T13:10:00Z&#x27;,
+      updatedAt: &#x27;2026-01-25T13:10:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-008&#x27;,
+      sku: &#x27;PAP-ORG-08&#x27;,
+      name: &#x27;Lote Papelería Corporativa y Cuadernos Ecológicos&#x27;,
+      category: &#x27;Papelería&#x27;,
+      price: 185.00,
+      stock: 4,
+      status: &#x27;low_stock&#x27;,
+      supplierEmail: &#x27;pedidos@ecopaper.org&#x27;,
+      description: &#x27;Kit de 50 cuadernos de bambú y bolígrafos reciclados con sello FSC.&#x27;,
+      createdAt: &#x27;2026-01-28T10:00:00Z&#x27;,
+      updatedAt: &#x27;2026-01-28T10:00:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-009&#x27;,
+      sku: &#x27;TECH-NET-09&#x27;,
+      name: &#x27;Switch Gestionable Cisco Catalyst 9200L 48 Puertos&#x27;,
+      category: &#x27;Hardware&#x27;,
+      price: 2890.00,
+      stock: 6,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;sales@ciscopartner.com&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Conmutador PoE+ Gigabit con enlaces ascendentes 4x10G para red troncal.&#x27;,
+      createdAt: &#x27;2026-02-02T12:00:00Z&#x27;,
+      updatedAt: &#x27;2026-02-02T12:00:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-010&#x27;,
+      sku: &#x27;SERV-MNT-10&#x27;,
+      name: &#x27;Contrato Mantenimiento Preventivo Servidores 24/7&#x27;,
+      category: &#x27;Servicios&#x27;,
+      price: 3200.00,
+      stock: 10,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;soporte@infrastructurecare.es&#x27;,
+      description: &#x27;SLA de respuesta en menos de 2 horas con sustitución de piezas críticas.&#x27;,
+      createdAt: &#x27;2026-02-05T15:30:00Z&#x27;,
+      updatedAt: &#x27;2026-02-05T15:30:00Z&#x27;
+    }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/core/services/sql-rest.service.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/core/services/sql-rest.service.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
+import { Observable, of, throwError, from } from &#x27;rxjs&#x27;;
+import { delay, map, tap } from &#x27;rxjs/operators&#x27;;
+import { Product, ProductCategory, ProductFilterOptions, StockStatus } from &#x27;../models/product.model&#x27;;
+import { SupabaseService } from &#x27;./supabase.service&#x27;;
+
+const SQL_STORAGE_KEY &#x3D; &#x27;novagest_sql_products&#x27;;
+
+/**
+ * Servicio de Consumo de Base de Datos Relacional (SQL) conectada a Supabase PostgreSQL (RA 5).
+ * Gestiona operaciones CRUD asíncronas sobre la tabla &#x60;products&#x60;, validaciones de integridad referencial,
+ * filtrado por índices, cálculo de agregaciones y resiliencia con caché local estructurada.
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class SqlRestService {
+  private supabaseService &#x3D; inject(SupabaseService);
+
+  private readonly initialSeed: Product[] &#x3D; [
+    {
+      id: &#x27;prod-001&#x27;,
+      sku: &#x27;TECH-SRV-01&#x27;,
+      name: &#x27;Servidor Rack Dell PowerEdge R750&#x27;,
+      category: &#x27;Hardware&#x27;,
+      price: 3499.99,
+      stock: 8,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;dell.enterprise@proveedor.es&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Servidor 2U para virtualización de alta densidad con doble Intel Xeon.&#x27;,
+      createdAt: &#x27;2026-01-10T10:00:00Z&#x27;,
+      updatedAt: &#x27;2026-01-10T10:00:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-002&#x27;,
+      sku: &#x27;TECH-NB-02&#x27;,
+      name: &#x27;Portátil Lenovo ThinkPad P1 Gen 6&#x27;,
+      category: &#x27;Hardware&#x27;,
+      price: 2150.00,
+      stock: 14,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;ventas@lenovobusiness.com&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Estación de trabajo portátil para ingenieros con GPU NVIDIA RTX 4080.&#x27;,
+      createdAt: &#x27;2026-01-12T11:20:00Z&#x27;,
+      updatedAt: &#x27;2026-01-12T11:20:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-003&#x27;,
+      sku: &#x27;TECH-SW-03&#x27;,
+      name: &#x27;Licencia Anual Cloud ERP Enterprise (x50 users)&#x27;,
+      category: &#x27;Servicios&#x27;,
+      price: 5400.00,
+      stock: 45,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;cloud.sales@novagest-saas.com&#x27;,
+      description: &#x27;Suscripción corporativa para gestión de inventarios y contabilidad distribuida.&#x27;,
+      createdAt: &#x27;2026-01-15T09:15:00Z&#x27;,
+      updatedAt: &#x27;2026-01-15T09:15:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-004&#x27;,
+      sku: &#x27;MOB-CHR-04&#x27;,
+      name: &#x27;Silla Ergonómica Herman Miller Aeron&#x27;,
+      category: &#x27;Mobiliario&#x27;,
+      price: 1320.50,
+      stock: 3,
+      status: &#x27;low_stock&#x27;,
+      supplierEmail: &#x27;contacto@ergodesign.es&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1580481077195-c2763297a73e?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Silla ergonómica de oficina con soporte lumbar ajustable PostureFit SL.&#x27;,
+      createdAt: &#x27;2026-01-18T14:40:00Z&#x27;,
+      updatedAt: &#x27;2026-01-18T14:40:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-005&#x27;,
+      sku: &#x27;MOB-DSK-05&#x27;,
+      name: &#x27;Escritorio Elevable Eléctrico Dual-Motor&#x27;,
+      category: &#x27;Mobiliario&#x27;,
+      price: 680.00,
+      stock: 12,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;info@standingdesk.pro&#x27;,
+      description: &#x27;Mesa sit-stand con memorias de altura y estructura reforzada de acero.&#x27;,
+      createdAt: &#x27;2026-01-20T16:00:00Z&#x27;,
+      updatedAt: &#x27;2026-01-20T16:00:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-006&#x27;,
+      sku: &#x27;ELEC-MON-06&#x27;,
+      name: &#x27;Monitor Curvo LG UltraWide 38WN95C&#x27;,
+      category: &#x27;Electrónica&#x27;,
+      price: 1199.00,
+      stock: 0,
+      status: &#x27;out_of_stock&#x27;,
+      supplierEmail: &#x27;distribucion@lgdisplays.com&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Panel IPS QHD+ con Thunderbolt 3 y cobertura DCI-P3 98%.&#x27;,
+      createdAt: &#x27;2026-01-22T08:30:00Z&#x27;,
+      updatedAt: &#x27;2026-01-22T08:30:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-007&#x27;,
+      sku: &#x27;ELEC-AUD-07&#x27;,
+      name: &#x27;Auriculares Inalámbricos Sony WH-1000XM5&#x27;,
+      category: &#x27;Electrónica&#x27;,
+      price: 349.00,
+      stock: 22,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;pedidos@sonypro.es&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Cancelación activa de ruido líder en el mercado para conferencias y trabajo remoto.&#x27;,
+      createdAt: &#x27;2026-01-25T13:10:00Z&#x27;,
+      updatedAt: &#x27;2026-01-25T13:10:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-008&#x27;,
+      sku: &#x27;PAP-ORG-08&#x27;,
+      name: &#x27;Lote Papelería Corporativa y Cuadernos Ecológicos&#x27;,
+      category: &#x27;Papelería&#x27;,
+      price: 185.00,
+      stock: 4,
+      status: &#x27;low_stock&#x27;,
+      supplierEmail: &#x27;pedidos@ecopaper.org&#x27;,
+      description: &#x27;Kit de 50 cuadernos de bambú y bolígrafos reciclados con sello FSC.&#x27;,
+      createdAt: &#x27;2026-01-28T10:00:00Z&#x27;,
+      updatedAt: &#x27;2026-01-28T10:00:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-009&#x27;,
+      sku: &#x27;TECH-NET-09&#x27;,
+      name: &#x27;Switch Gestionable Cisco Catalyst 9200L 48 Puertos&#x27;,
+      category: &#x27;Hardware&#x27;,
+      price: 2890.00,
+      stock: 6,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;sales@ciscopartner.com&#x27;,
+      imageUrl: &#x27;https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w&#x3D;400&amp;q&#x3D;80&#x27;,
+      description: &#x27;Conmutador PoE+ Gigabit con enlaces ascendentes 4x10G para red troncal.&#x27;,
+      createdAt: &#x27;2026-02-02T12:00:00Z&#x27;,
+      updatedAt: &#x27;2026-02-02T12:00:00Z&#x27;
+    },
+    {
+      id: &#x27;prod-010&#x27;,
+      sku: &#x27;SERV-MNT-10&#x27;,
+      name: &#x27;Contrato Mantenimiento Preventivo Servidores 24/7&#x27;,
+      category: &#x27;Servicios&#x27;,
+      price: 3200.00,
+      stock: 10,
+      status: &#x27;in_stock&#x27;,
+      supplierEmail: &#x27;soporte@infrastructurecare.es&#x27;,
+      description: &#x27;SLA de respuesta en menos de 2 horas con sustitución de piezas críticas.&#x27;,
+      createdAt: &#x27;2026-02-05T15:30:00Z&#x27;,
+      updatedAt: &#x27;2026-02-05T15:30:00Z&#x27;
+    }
+  ];
+
+  constructor() {
+    this.ensureInitialized();
+    this.syncProductsWithSupabase();
+  }
+
+  private ensureInitialized(): void {
+    if (!localStorage.getItem(SQL_STORAGE_KEY)) {
+      localStorage.setItem(SQL_STORAGE_KEY, JSON.stringify(this.initialSeed));
+    }
+  }
+
+  /**
+   * Sincroniza el catálogo con la tabla &#x27;products&#x27; de Supabase
+   */
+  public async syncProductsWithSupabase(): Promise&lt;void&gt; {
+    const client &#x3D; this.supabaseService.client;
+    if (!client || !this.supabaseService.isConfigured) return;
+
+    try {
+      const { data, error } &#x3D; await client
+        .from(&#x27;products&#x27;)
+        .select(&#x27;*&#x27;)
+        .order(&#x27;created_at&#x27;, { ascending: false });
+
+      if (error) {
+        console.warn(&#x27;Aviso sincronizando productos con Supabase:&#x27;, error.message);
+        return;
+      }
+
+      if (data &amp;&amp; data.length &gt; 0) {
+        const mapped: Product[] &#x3D; data.map((item: any) &#x3D;&gt; ({
+          id: item.id,
+          sku: item.sku,
+          name: item.name,
+          category: item.category as ProductCategory,
+          price: Number(item.price),
+          stock: Number(item.stock),
+          status: item.status as StockStatus,
+          supplierEmail: item.supplier_email,
+          description: item.description || &#x27;&#x27;,
+          imageUrl: item.image_url || &#x27;&#x27;,
+          createdAt: item.created_at,
+          updatedAt: item.updated_at
+        }));
+
+        this.saveProducts(mapped);
+      }
+    } catch (e) {
+      console.warn(&#x27;Error al obtener productos de Supabase:&#x27;, e);
+    }
+  }
+
+  private getStoredProducts(): Product[] {
+    try {
+      const raw &#x3D; localStorage.getItem(SQL_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [...this.initialSeed];
+    } catch {
+      return [...this.initialSeed];
+    }
+  }
+
+  private saveProducts(products: Product[]): void {
+    localStorage.setItem(SQL_STORAGE_KEY, JSON.stringify(products));
+  }
+
+  /**
+   * Obtiene todos los productos con soporte para filtrado, búsqueda y ordenación
+   */
+  public getProducts(filters?: ProductFilterOptions): Observable&lt;Product[]&gt; {
+    return from((async () &#x3D;&gt; {
+      await this.syncProductsWithSupabase();
+      return this.getStoredProducts();
+    })()).pipe(
+      map(items &#x3D;&gt; {
+        let result &#x3D; [...items];
+
+        if (filters?.searchQuery) {
+          const q &#x3D; filters.searchQuery.toLowerCase().trim();
+          result &#x3D; result.filter(p &#x3D;&gt;
+            p.name.toLowerCase().includes(q) ||
+            p.sku.toLowerCase().includes(q) ||
+            p.category.toLowerCase().includes(q) ||
+            p.supplierEmail.toLowerCase().includes(q)
+          );
+        }
+
+        if (filters?.category &amp;&amp; filters.category !&#x3D;&#x3D; &#x27;ALL&#x27;) {
+          result &#x3D; result.filter(p &#x3D;&gt; p.category &#x3D;&#x3D;&#x3D; filters.category);
+        }
+
+        if (filters?.status &amp;&amp; filters.status !&#x3D;&#x3D; &#x27;ALL&#x27;) {
+          result &#x3D; result.filter(p &#x3D;&gt; p.status &#x3D;&#x3D;&#x3D; filters.status);
+        }
+
+        if (filters?.sortBy) {
+          const key &#x3D; filters.sortBy;
+          const dir &#x3D; filters.sortDirection &#x3D;&#x3D;&#x3D; &#x27;desc&#x27; ? -1 : 1;
+          result.sort((a, b) &#x3D;&gt; {
+            const valA &#x3D; a[key];
+            const valB &#x3D; b[key];
+            if (typeof valA &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+              return dir * (valA as string).localeCompare(valB as string);
+            }
+            return dir * ((valA as number) - (valB as number));
+          });
+        }
+
+        return result;
+      })
+    );
+  }
+
+  /**
+   * Obtiene un producto por su clave primaria (ID)
+   */
+  public getProductById(id: string): Observable&lt;Product&gt; {
+    return of(null).pipe(
+      delay(250),
+      map(() &#x3D;&gt; {
+        const item &#x3D; this.getStoredProducts().find(p &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; id);
+        if (!item) {
+          throw new Error(&#x60;Producto con ID ${id} no encontrado en la base de datos.&#x60;);
+        }
+        return item;
+      })
+    );
+  }
+
+  /**
+   * Inserta un nuevo producto en Supabase PostgreSQL garantizando unicidad de SKU
+   */
+  public createProduct(data: Omit&lt;Product, &#x27;id&#x27; | &#x27;createdAt&#x27; | &#x27;updatedAt&#x27;&gt;): Observable&lt;Product&gt; {
+    return from((async () &#x3D;&gt; {
+      const items &#x3D; this.getStoredProducts();
+      const skuExists &#x3D; items.some(p &#x3D;&gt; p.sku.toUpperCase() &#x3D;&#x3D;&#x3D; data.sku.toUpperCase());
+      if (skuExists) {
+        throw new Error(&#x60;Error de restricción UNIQUE: El SKU &#x27;${data.sku}&#x27; ya está registrado.&#x60;);
+      }
+
+      const newProduct: Product &#x3D; {
+        ...data,
+        id: &#x60;prod-${Date.now().toString(36)}&#x60;,
+        sku: data.sku.toUpperCase().trim(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      const client &#x3D; this.supabaseService.client;
+      if (client &amp;&amp; this.supabaseService.isConfigured) {
+        const { error } &#x3D; await client.from(&#x27;products&#x27;).insert({
+          id: newProduct.id,
+          sku: newProduct.sku,
+          name: newProduct.name,
+          category: newProduct.category,
+          price: newProduct.price,
+          stock: newProduct.stock,
+          status: newProduct.status,
+          supplier_email: newProduct.supplierEmail,
+          description: newProduct.description,
+          image_url: newProduct.imageUrl || null,
+          created_at: newProduct.createdAt,
+          updated_at: newProduct.updatedAt
+        });
+
+        if (error) {
+          console.error(&#x27;Error insertando producto en Supabase:&#x27;, error);
+          throw new Error(&#x60;Error en Supabase: ${error.message}&#x60;);
+        }
+      }
+
+      items.unshift(newProduct);
+      this.saveProducts(items);
+      return newProduct;
+    })());
+  }
+
+  /**
+   * Actualiza un producto existente en Supabase PostgreSQL
+   */
+  public updateProduct(id: string, changes: Partial&lt;Product&gt;): Observable&lt;Product&gt; {
+    return from((async () &#x3D;&gt; {
+      const items &#x3D; this.getStoredProducts();
+      const index &#x3D; items.findIndex(p &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; id);
+      if (index &#x3D;&#x3D;&#x3D; -1) {
+        throw new Error(&#x60;Error: Producto con ID ${id} no existe.&#x60;);
+      }
+
+      if (changes.sku) {
+        const skuConflict &#x3D; items.some(p &#x3D;&gt; p.id !&#x3D;&#x3D; id &amp;&amp; p.sku.toUpperCase() &#x3D;&#x3D;&#x3D; changes.sku!.toUpperCase());
+        if (skuConflict) {
+          throw new Error(&#x60;Error de integridad: El SKU &#x27;${changes.sku}&#x27; ya está en uso.&#x60;);
+        }
+      }
+
+      const updated: Product &#x3D; {
+        ...items[index],
+        ...changes,
+        sku: changes.sku ? changes.sku.toUpperCase().trim() : items[index].sku,
+        updatedAt: new Date().toISOString()
+      };
+
+      const client &#x3D; this.supabaseService.client;
+      if (client &amp;&amp; this.supabaseService.isConfigured) {
+        const payload: any &#x3D; {
+          updated_at: updated.updatedAt
+        };
+        if (changes.sku !&#x3D;&#x3D; undefined) payload.sku &#x3D; updated.sku;
+        if (changes.name !&#x3D;&#x3D; undefined) payload.name &#x3D; updated.name;
+        if (changes.category !&#x3D;&#x3D; undefined) payload.category &#x3D; updated.category;
+        if (changes.price !&#x3D;&#x3D; undefined) payload.price &#x3D; updated.price;
+        if (changes.stock !&#x3D;&#x3D; undefined) payload.stock &#x3D; updated.stock;
+        if (changes.status !&#x3D;&#x3D; undefined) payload.status &#x3D; updated.status;
+        if (changes.supplierEmail !&#x3D;&#x3D; undefined) payload.supplier_email &#x3D; updated.supplierEmail;
+        if (changes.description !&#x3D;&#x3D; undefined) payload.description &#x3D; updated.description;
+        if (changes.imageUrl !&#x3D;&#x3D; undefined) payload.image_url &#x3D; updated.imageUrl || null;
+
+        const { error } &#x3D; await client.from(&#x27;products&#x27;).update(payload).eq(&#x27;id&#x27;, id);
+        if (error) {
+          console.warn(&#x27;Error actualizando producto en Supabase:&#x27;, error.message);
+        }
+      }
+
+      items[index] &#x3D; updated;
+      this.saveProducts(items);
+      return updated;
+    })());
+  }
+
+  /**
+   * Elimina un producto por su ID en Supabase PostgreSQL
+   */
+  public deleteProduct(id: string): Observable&lt;boolean&gt; {
+    return from((async () &#x3D;&gt; {
+      const items &#x3D; this.getStoredProducts();
+      const filtered &#x3D; items.filter(p &#x3D;&gt; p.id !&#x3D;&#x3D; id);
+      if (filtered.length &#x3D;&#x3D;&#x3D; items.length) {
+        throw new Error(&#x60;Producto con ID ${id} no encontrado.&#x60;);
+      }
+
+      const client &#x3D; this.supabaseService.client;
+      if (client &amp;&amp; this.supabaseService.isConfigured) {
+        const { error } &#x3D; await client.from(&#x27;products&#x27;).delete().eq(&#x27;id&#x27;, id);
+        if (error) {
+          console.warn(&#x27;Error eliminando producto de Supabase:&#x27;, error.message);
+        }
+      }
+
+      this.saveProducts(filtered);
+      return true;
+    })());
+  }
+
+  /**
+   * Validador asíncrono para verificar unicidad de SKU
+   */
+  public checkSkuExists(sku: string, excludeId?: string): Observable&lt;boolean&gt; {
+    return of(null).pipe(
+      delay(300),
+      map(() &#x3D;&gt; {
+        if (!sku || sku.trim().length &#x3D;&#x3D;&#x3D; 0) return false;
+        const normalized &#x3D; sku.trim().toUpperCase();
+        const items &#x3D; this.getStoredProducts();
+        return items.some(p &#x3D;&gt; p.sku &#x3D;&#x3D;&#x3D; normalized &amp;&amp; p.id !&#x3D;&#x3D; excludeId);
+      })
+    );
+  }
+
+  /**
+   * Obtiene métricas agregadas SQL para el Dashboard
+   */
+  public getSummaryMetrics(): Observable&lt;{
+    totalProducts: number;
+    totalInventoryValue: number;
+    lowStockCount: number;
+    outOfStockCount: number;
+    categoryCounts: Record&lt;string, number&gt;;
+  }&gt; {
+    return this.getProducts().pipe(
+      map(items &#x3D;&gt; {
+        const totalProducts &#x3D; items.length;
+        const totalInventoryValue &#x3D; items.reduce((acc, p) &#x3D;&gt; acc + (p.price * p.stock), 0);
+        const lowStockCount &#x3D; items.filter(p &#x3D;&gt; p.status &#x3D;&#x3D;&#x3D; &#x27;low_stock&#x27;).length;
+        const outOfStockCount &#x3D; items.filter(p &#x3D;&gt; p.status &#x3D;&#x3D;&#x3D; &#x27;out_of_stock&#x27;).length;
+
+        const categoryCounts: Record&lt;string, number&gt; &#x3D; {};
+        for (const item of items) {
+          categoryCounts[item.category] &#x3D; (categoryCounts[item.category] || 0) + 1;
+        }
+
+        return {
+          totalProducts,
+          totalInventoryValue,
+          lowStockCount,
+          outOfStockCount,
+          categoryCounts
+        };
+      })
+    );
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'SqlRestService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

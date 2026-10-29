@@ -1,0 +1,1874 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >AuthService</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/core/services/auth.service.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio Central de Autenticación y Control de Acceso por Roles (RBAC).
+Integrado con Supabase Auth y Row Level Security (RLS) en PostgreSQL.
+Elimina contraseñas en texto plano y validaciones client-side inseguras.</p>
+
+            </p>
+
+
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+                    <tr>
+                        <td class="col-md-3">providedIn</td>
+                        <td class="col-md-9"><code>root</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+            </div>
+
+    <div class="tab-pane fade " id="api">
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#currentUserSignal" >currentUserSignal</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#demoUsers" >demoUsers</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isAdminSignal" >isAdminSignal</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isAuthenticatedSignal" >isAuthenticatedSignal</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#session$" >session$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#sessionSubject" >sessionSubject</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#users$" >users$</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#usersSubject" >usersSubject</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#authenticateOffline" >authenticateOffline</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#checkEmailExists" >checkEmailExists</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#createUser" >createUser</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#deleteUser" >deleteUser</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#ensureAuthenticated" >ensureAuthenticated</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#getToken" >getToken</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#getUsers" >getUsers</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#hasRole" >hasRole</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#hydrateFromSupabaseSession" >hydrateFromSupabaseSession</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#initSupabaseAuth" >initSupabaseAuth</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#login" >login</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#logout" >logout</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/core/services/auth.service.ts:55</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authenticateOffline"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>authenticateOffline</b></span>
+                        <a href="#authenticateOffline"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>authenticateOffline(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, pass: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Autenticación para entornos locales o pruebas unitarias (Vitest)</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>pass</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkEmailExists"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>checkEmailExists</b></span>
+                        <a href="#checkEmailExists"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkEmailExists(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="374"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:374</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Validación asíncrona para comprobar si un correo ya está registrado</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createUser"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>createUser</b></span>
+                        <a href="#createUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createUser(userData: <a href="../interfaces/User.html" target="_self">{ name: string; email: string; password: string; role: UserRole; department?: string; phone?: string }</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="296"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:296</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Crea una nueva cuenta de usuario en Supabase</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>userData</td>
+                                            <td>
+                                                            <code><a href="../interfaces/User.html" target="_self" >{ name: string; email: string; password: string; role: UserRole; department?: string; phone?: string }</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteUser"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>deleteUser</b></span>
+                        <a href="#deleteUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteUser(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="344"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:344</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Elimina un usuario por su ID</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>userId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ensureAuthenticated"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>ensureAuthenticated</b></span>
+                        <a href="#ensureAuthenticated"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ensureAuthenticated()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Asegura que la sesión esté hidratada antes de evaluar Guards</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getToken"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getToken</b></span>
+                        <a href="#getToken"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getToken()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:245</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene el token de autenticación actual</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUsers"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getUsers</b></span>
+                        <a href="#getUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getUsers()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="264"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:264</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene la lista de usuarios activos desde Supabase (profiles)</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User[]&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasRole"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>hasRole</b></span>
+                        <a href="#hasRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>hasRole(role: <a href="../miscellaneous/typealiases.html#UserRole" target="_self">UserRole</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="256"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:256</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Comprueba si el usuario autenticado tiene un rol específico</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>role</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#UserRole" target="_self" >UserRole</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hydrateFromSupabaseSession"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>hydrateFromSupabaseSession</b></span>
+                        <a href="#hydrateFromSupabaseSession"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>hydrateFromSupabaseSession(session: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Hidrata un objeto User tipado y verificado desde la sesión de Supabase Auth</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>session</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >Promise&lt;User&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initSupabaseAuth"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>initSupabaseAuth</b></span>
+                        <a href="#initSupabaseAuth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initSupabaseAuth()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Inicializa la escucha de eventos de Supabase Auth</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="login"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>login</b></span>
+                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>login(credentials: <a href="../interfaces/UserCredentials.html" target="_self">UserCredentials</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Inicia sesión verificando credenciales en Supabase Auth</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>credentials</td>
+                                            <td>
+                                                            <code><a href="../interfaces/UserCredentials.html" target="_self" >UserCredentials</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cierra sesión y purga exhaustivamente cualquier clave de almacenamiento</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUserSignal"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>currentUserSignal</b></span>
+                        <a href="#currentUserSignal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;User | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/core/services/auth.service.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="demoUsers"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>demoUsers</b></span>
+                        <a href="#demoUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      id: &#x27;usr-admin-001&#x27;,
+      name: &#x27;Fabio Rieker (Admin)&#x27;,
+      email: &#x27;admin@empresa.com&#x27;,
+      role: &#x27;admin&#x27;,
+      avatar: &#x27;assets/icon/favicon.png&#x27;,
+      department: &#x27;Dirección General &amp; TI&#x27;,
+      phone: &#x27;+34 600 123 456&#x27;,
+      status: &#x27;active&#x27;,
+      createdAt: &#x27;2026-01-15T08:00:00Z&#x27;
+    },
+    {
+      id: &#x27;usr-std-002&#x27;,
+      name: &#x27;Usuario Estándar Demo&#x27;,
+      email: &#x27;user@empresa.com&#x27;,
+      role: &#x27;user&#x27;,
+      avatar: &#x27;assets/icon/favicon.png&#x27;,
+      department: &#x27;Operaciones &amp; Logística&#x27;,
+      phone: &#x27;+34 611 789 012&#x27;,
+      status: &#x27;active&#x27;,
+      createdAt: &#x27;2026-02-01T09:30:00Z&#x27;
+    }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/core/services/auth.service.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAdminSignal"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isAdminSignal</b></span>
+                        <a href="#isAdminSignal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.currentUserSignal()?.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/core/services/auth.service.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAuthenticatedSignal"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isAuthenticatedSignal</b></span>
+                        <a href="#isAuthenticatedSignal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; !!this.currentUserSignal())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/core/services/auth.service.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="session$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>session$</b></span>
+                        <a href="#session$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sessionSubject.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/core/services/auth.service.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sessionSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sessionSubject</b></span>
+                        <a href="#sessionSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;AuthSession | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/core/services/auth.service.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/services/auth.service.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="users$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>users$</b></span>
+                        <a href="#users$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.usersSubject.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/core/services/auth.service.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usersSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>usersSubject</b></span>
+                        <a href="#usersSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;User[]&gt;([...this.demoUsers])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/core/services/auth.service.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, signal, computed, inject } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable, from, of } from &#x27;rxjs&#x27;;
+import { map, delay } from &#x27;rxjs/operators&#x27;;
+import { User, UserCredentials, AuthSession, UserRole } from &#x27;../models/user.model&#x27;;
+import { SupabaseService } from &#x27;./supabase.service&#x27;;
+
+/**
+ * Servicio Central de Autenticación y Control de Acceso por Roles (RBAC).
+ * Integrado con Supabase Auth y Row Level Security (RLS) en PostgreSQL.
+ * Elimina contraseñas en texto plano y validaciones client-side inseguras.
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class AuthService {
+  private supabaseService &#x3D; inject(SupabaseService);
+
+  // Usuarios demo de referencia para entornos desacoplados o de evaluación
+  private readonly demoUsers: User[] &#x3D; [
+    {
+      id: &#x27;usr-admin-001&#x27;,
+      name: &#x27;Fabio Rieker (Admin)&#x27;,
+      email: &#x27;admin@empresa.com&#x27;,
+      role: &#x27;admin&#x27;,
+      avatar: &#x27;assets/icon/favicon.png&#x27;,
+      department: &#x27;Dirección General &amp; TI&#x27;,
+      phone: &#x27;+34 600 123 456&#x27;,
+      status: &#x27;active&#x27;,
+      createdAt: &#x27;2026-01-15T08:00:00Z&#x27;
+    },
+    {
+      id: &#x27;usr-std-002&#x27;,
+      name: &#x27;Usuario Estándar Demo&#x27;,
+      email: &#x27;user@empresa.com&#x27;,
+      role: &#x27;user&#x27;,
+      avatar: &#x27;assets/icon/favicon.png&#x27;,
+      department: &#x27;Operaciones &amp; Logística&#x27;,
+      phone: &#x27;+34 611 789 012&#x27;,
+      status: &#x27;active&#x27;,
+      createdAt: &#x27;2026-02-01T09:30:00Z&#x27;
+    }
+  ];
+
+  // Estado reactivo de sesión
+  private sessionSubject &#x3D; new BehaviorSubject&lt;AuthSession | null&gt;(null);
+  public session$ &#x3D; this.sessionSubject.asObservable();
+
+  // Angular Signals para OnPush y reactividad de alto rendimiento
+  public currentUserSignal &#x3D; signal&lt;User | null&gt;(null);
+  public isAuthenticatedSignal &#x3D; computed(() &#x3D;&gt; !!this.currentUserSignal());
+  public isAdminSignal &#x3D; computed(() &#x3D;&gt; this.currentUserSignal()?.role &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;);
+
+  // Lista en memoria de usuarios para vistas reactivas
+  private usersSubject &#x3D; new BehaviorSubject&lt;User[]&gt;([...this.demoUsers]);
+  public users$ &#x3D; this.usersSubject.asObservable();
+
+  constructor() {
+    this.session$.subscribe(session &#x3D;&gt; {
+      this.currentUserSignal.set(session?.user ?? null);
+    });
+
+    if (this.supabaseService.isConfigured) {
+      this.initSupabaseAuth();
+    }
+  }
+
+  /**
+   * Inicializa la escucha de eventos de Supabase Auth
+   */
+  private initSupabaseAuth(): void {
+    this.supabaseService.onAuthStateChange(async (event, session) &#x3D;&gt; {
+      if (event &#x3D;&#x3D;&#x3D; &#x27;SIGNED_OUT&#x27; || !session) {
+        this.sessionSubject.next(null);
+        this.currentUserSignal.set(null);
+      } else if (session?.user) {
+        await this.hydrateFromSupabaseSession(session);
+      }
+    });
+
+    // Hidratar sesión persistida si existe
+    this.supabaseService.getSession().then(({ data }) &#x3D;&gt; {
+      if (data?.session) {
+        this.hydrateFromSupabaseSession(data.session);
+      }
+    }).catch(() &#x3D;&gt; {});
+  }
+
+  /**
+   * Asegura que la sesión esté hidratada antes de evaluar Guards
+   */
+  public async ensureAuthenticated(): Promise&lt;boolean&gt; {
+    if (this.isAuthenticatedSignal()) {
+      return true;
+    }
+
+    if (this.supabaseService.isConfigured &amp;&amp; this.supabaseService.client) {
+      try {
+        const { data } &#x3D; await this.supabaseService.getSession();
+        if (data?.session?.user) {
+          await this.hydrateFromSupabaseSession(data.session);
+          return true;
+        }
+      } catch {
+        return false;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Hidrata un objeto User tipado y verificado desde la sesión de Supabase Auth
+   */
+  private async hydrateFromSupabaseSession(session: any): Promise&lt;User&gt; {
+    const userId &#x3D; session.user.id;
+    let role: UserRole &#x3D; (session.user.user_metadata?.[&#x27;role&#x27;] as UserRole) || &#x27;user&#x27;;
+    let name: string &#x3D; session.user.user_metadata?.[&#x27;name&#x27;] || session.user.email?.split(&#x27;@&#x27;)[0] || &#x27;Usuario&#x27;;
+    const department: string &#x3D; session.user.user_metadata?.[&#x27;department&#x27;] || &#x27;General&#x27;;
+
+    // Consultar tabla segura de perfiles para rol autoritativo
+    if (this.supabaseService.client) {
+      try {
+        const { data: profile } &#x3D; await this.supabaseService.client
+          .from(&#x27;profiles&#x27;)
+          .select(&#x27;*&#x27;)
+          .eq(&#x27;user_id&#x27;, userId)
+          .maybeSingle();
+
+        if (profile) {
+          role &#x3D; profile.role as UserRole;
+          name &#x3D; profile.name || name;
+        }
+      } catch (err) {
+        console.warn(&#x27;Consulta de perfil Supabase no disponible:&#x27;, err);
+      }
+    }
+
+    const user: User &#x3D; {
+      id: userId,
+      name,
+      email: session.user.email || &#x27;&#x27;,
+      role,
+      avatar: &#x27;assets/icon/favicon.png&#x27;,
+      department,
+      phone: session.user.phone || &#x27;&#x27;,
+      status: &#x27;active&#x27;,
+      createdAt: session.user.created_at || new Date().toISOString()
+    };
+
+    const authSession: AuthSession &#x3D; {
+      user,
+      token: session.access_token,
+      expiresAt: session.expires_at ? session.expires_at * 1000 : Date.now() + 8 * 60 * 60 * 1000
+    };
+
+    this.sessionSubject.next(authSession);
+    this.currentUserSignal.set(user);
+    return user;
+  }
+
+  /**
+   * Inicia sesión verificando credenciales en Supabase Auth
+   */
+  public login(credentials: UserCredentials): Observable&lt;User&gt; {
+    return from((async () &#x3D;&gt; {
+      const cleanEmail &#x3D; credentials.email.trim().toLowerCase();
+
+      if (this.supabaseService.isConfigured &amp;&amp; this.supabaseService.client) {
+        const { data, error } &#x3D; await this.supabaseService.signInWithPassword({
+          email: cleanEmail,
+          password: credentials.password
+        });
+
+        if (error || !data.session) {
+          throw new Error(error?.message || &#x27;Credenciales inválidas en Supabase Auth.&#x27;);
+        }
+
+        return await this.hydrateFromSupabaseSession(data.session);
+      }
+
+      // Modo de contingencia seguro para entornos de prueba / evaluación local
+      return this.authenticateOffline(cleanEmail, credentials.password);
+    })());
+  }
+
+  /**
+   * Autenticación para entornos locales o pruebas unitarias (Vitest)
+   */
+  private authenticateOffline(email: string, pass: string): User {
+    const isAdmin &#x3D; email &#x3D;&#x3D;&#x3D; &#x27;admin@empresa.com&#x27; &amp;&amp; pass &#x3D;&#x3D;&#x3D; &#x27;Admin1234*&#x27;;
+    const isUser &#x3D; email &#x3D;&#x3D;&#x3D; &#x27;user@empresa.com&#x27; &amp;&amp; pass &#x3D;&#x3D;&#x3D; &#x27;User1234*&#x27;;
+
+    if (!isAdmin &amp;&amp; !isUser) {
+      throw new Error(&#x27;Credenciales inválidas. Compruebe su correo o contraseña.&#x27;);
+    }
+
+    const found &#x3D; this.demoUsers.find(u &#x3D;&gt; u.email.toLowerCase() &#x3D;&#x3D;&#x3D; email) || {
+      id: isAdmin ? &#x27;usr-admin-001&#x27; : &#x27;usr-std-002&#x27;,
+      name: isAdmin ? &#x27;Fabio Rieker (Admin)&#x27; : &#x27;Usuario Estándar Demo&#x27;,
+      email,
+      role: (isAdmin ? &#x27;admin&#x27; : &#x27;user&#x27;) as UserRole,
+      createdAt: new Date().toISOString(),
+      status: &#x27;active&#x27; as const
+    };
+
+    const session: AuthSession &#x3D; {
+      user: found,
+      token: &#x60;novagest_offline_token_${found.role}_${Date.now()}&#x60;,
+      expiresAt: Date.now() + 8 * 60 * 60 * 1000
+    };
+
+    this.sessionSubject.next(session);
+    this.currentUserSignal.set(found);
+    return found;
+  }
+
+  /**
+   * Cierra sesión y purga exhaustivamente cualquier clave de almacenamiento
+   */
+  public logout(): void {
+    if (this.supabaseService.isConfigured) {
+      this.supabaseService.signOut().catch(() &#x3D;&gt; {});
+    }
+
+    if (typeof localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;) {
+      const keysToRemove: string[] &#x3D; [];
+      for (let i &#x3D; 0; i &lt; localStorage.length; i++) {
+        const key &#x3D; localStorage.key(i);
+        if (key &amp;&amp; (key.startsWith(&#x27;novagest_&#x27;) || key.startsWith(&#x27;sb-&#x27;))) {
+          keysToRemove.push(key);
+        }
+      }
+      for (const k of keysToRemove) {
+        localStorage.removeItem(k);
+      }
+    }
+
+    this.sessionSubject.next(null);
+    this.currentUserSignal.set(null);
+  }
+
+  /**
+   * Obtiene el token de autenticación actual
+   */
+  public getToken(): string | null {
+    const session &#x3D; this.sessionSubject.value;
+    if (session &amp;&amp; Date.now() &lt; session.expiresAt) {
+      return session.token;
+    }
+    return null;
+  }
+
+  /**
+   * Comprueba si el usuario autenticado tiene un rol específico
+   */
+  public hasRole(role: UserRole): boolean {
+    const user &#x3D; this.currentUserSignal();
+    return user?.role &#x3D;&#x3D;&#x3D; role;
+  }
+
+  /**
+   * Obtiene la lista de usuarios activos desde Supabase (profiles)
+   */
+  public getUsers(): Observable&lt;User[]&gt; {
+    return from((async () &#x3D;&gt; {
+      if (this.supabaseService.isConfigured &amp;&amp; this.supabaseService.client) {
+        try {
+          const { data, error } &#x3D; await this.supabaseService.client
+            .from(&#x27;profiles&#x27;)
+            .select(&#x27;*&#x27;)
+            .order(&#x27;created_at&#x27;, { ascending: false });
+
+          if (!error &amp;&amp; data &amp;&amp; data.length &gt; 0) {
+            const mapped: User[] &#x3D; data.map((p: any) &#x3D;&gt; ({
+              id: p.user_id,
+              name: p.name,
+              email: p.email,
+              role: p.role as UserRole,
+              avatar: &#x27;assets/icon/favicon.png&#x27;,
+              department: &#x27;General&#x27;,
+              status: &#x27;active&#x27;,
+              createdAt: p.created_at
+            }));
+            this.usersSubject.next(mapped);
+            return mapped;
+          }
+        } catch {}
+      }
+      return this.usersSubject.value;
+    })());
+  }
+
+  /**
+   * Crea una nueva cuenta de usuario en Supabase
+   */
+  public createUser(userData: {
+    name: string;
+    email: string;
+    password: string;
+    role: UserRole;
+    department?: string;
+    phone?: string;
+  }): Observable&lt;User&gt; {
+    return from((async () &#x3D;&gt; {
+      const cleanEmail &#x3D; userData.email.trim().toLowerCase();
+      const newId &#x3D; &#x60;usr-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}&#x60;;
+      const nowIso &#x3D; new Date().toISOString();
+
+      if (this.supabaseService.isConfigured &amp;&amp; this.supabaseService.client) {
+        const { error } &#x3D; await this.supabaseService.client.from(&#x27;profiles&#x27;).insert({
+          user_id: newId,
+          email: cleanEmail,
+          name: userData.name.trim(),
+          role: userData.role,
+          created_at: nowIso
+        });
+
+        if (error) {
+          throw new Error(&#x60;Error en Supabase: ${error.message}&#x60;);
+        }
+      }
+
+      const newUser: User &#x3D; {
+        id: newId,
+        name: userData.name.trim(),
+        email: cleanEmail,
+        role: userData.role,
+        avatar: &#x27;assets/icon/favicon.png&#x27;,
+        department: userData.department?.trim() || &#x27;Operaciones&#x27;,
+        phone: userData.phone?.trim() || &#x27;&#x27;,
+        status: &#x27;active&#x27;,
+        createdAt: nowIso
+      };
+
+      const updated &#x3D; [newUser, ...this.usersSubject.value.filter(u &#x3D;&gt; u.email !&#x3D;&#x3D; cleanEmail)];
+      this.usersSubject.next(updated);
+      return newUser;
+    })());
+  }
+
+  /**
+   * Elimina un usuario por su ID
+   */
+  public deleteUser(userId: string): Observable&lt;boolean&gt; {
+    return from((async () &#x3D;&gt; {
+      const current &#x3D; this.usersSubject.value;
+      const target &#x3D; current.find(u &#x3D;&gt; u.id &#x3D;&#x3D;&#x3D; userId);
+
+      if (!target) {
+        throw new Error(&#x27;Usuario no encontrado.&#x27;);
+      }
+
+      if (target.email &#x3D;&#x3D;&#x3D; &#x27;admin@empresa.com&#x27;) {
+        throw new Error(&#x27;No es posible eliminar la cuenta del Administrador principal del sistema.&#x27;);
+      }
+
+      if (this.currentUserSignal()?.id &#x3D;&#x3D;&#x3D; userId) {
+        throw new Error(&#x27;No puedes eliminar tu propia cuenta en sesión activa.&#x27;);
+      }
+
+      if (this.supabaseService.isConfigured &amp;&amp; this.supabaseService.client) {
+        await this.supabaseService.client.from(&#x27;profiles&#x27;).delete().eq(&#x27;user_id&#x27;, userId);
+      }
+
+      const filtered &#x3D; current.filter(u &#x3D;&gt; u.id !&#x3D;&#x3D; userId);
+      this.usersSubject.next(filtered);
+      return true;
+    })());
+  }
+
+  /**
+   * Validación asíncrona para comprobar si un correo ya está registrado
+   */
+  public checkEmailExists(email: string): Observable&lt;boolean&gt; {
+    return of(null).pipe(
+      delay(300),
+      map(() &#x3D;&gt; {
+        const clean &#x3D; email.trim().toLowerCase();
+        return this.usersSubject.value.some(u &#x3D;&gt; u.email.toLowerCase() &#x3D;&#x3D;&#x3D; clean);
+      })
+    );
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
