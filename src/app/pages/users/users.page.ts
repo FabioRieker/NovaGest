@@ -254,6 +254,10 @@ export class UsersPage implements OnInit {
   public onSubmit(): void {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
+      setTimeout(() => {
+        const firstInvalid = document.querySelector('.cyber-input-item.ion-invalid input, input.ng-invalid, [aria-invalid="true"]');
+        (firstInvalid as HTMLElement)?.focus?.();
+      }, 50);
       return;
     }
 

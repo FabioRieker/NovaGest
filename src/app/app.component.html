@@ -1,4 +1,7 @@
 <ion-app>
+  <!-- Enlace accesible de salto al contenido principal (WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
   <ion-split-pane contentId="main-content" when="md">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
@@ -28,8 +31,8 @@
                   <ion-icon name="shield-checkmark-outline" aria-hidden="true"></ion-icon>
                   {{ user.role === 'admin' ? 'Administrador' : 'Usuario Estándar' }}
                 </ion-badge>
-                <ion-button fill="clear" size="small" color="danger" (click)="logout()" class="quick-logout-btn" aria-label="Cerrar sesión">
-                  <ion-icon slot="start" name="log-out-outline"></ion-icon>
+                <ion-button fill="clear" size="small" color="danger" (click)="logout()" class="quick-logout-btn" aria-label="Salir de la sesión">
+                  <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
                   Salir
                 </ion-button>
               </div>

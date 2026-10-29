@@ -34,6 +34,7 @@
           @for (col of columns; track col.key) {
             <th
               role="columnheader"
+              scope="col"
               [style.width]="col.width || 'auto'"
               [attr.aria-sort]="sortColumn === col.key ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'"
               [class.sortable]="col.sortable"
@@ -57,7 +58,7 @@
             </th>
           }
           @if (showActions) {
-            <th role="columnheader" class="actions-header">Acciones</th>
+            <th role="columnheader" scope="col" class="actions-header">Acciones</th>
           }
         </tr>
       </thead>
@@ -194,6 +195,8 @@
     <div
       class="image-lightbox-overlay"
       (click)="closeImagePreview()"
+      (keydown.escape)="closeImagePreview()"
+      tabindex="0"
       role="dialog"
       aria-modal="true"
       aria-label="Vista previa ampliada de imagen"

@@ -123,10 +123,11 @@
                           placeholder="Ej. Carmen Navarro Sánchez"
                           formControlName="name"
                           autocomplete="name"
+                          [attr.aria-invalid]="userForm.get('name')?.touched && userForm.get('name')?.invalid"
                         ></ion-input>
                       </ion-item>
                       @if (userForm.get('name')?.touched && userForm.get('name')?.invalid) {
-                        <span class="field-error">El nombre debe tener al menos 3 caracteres.</span>
+                        <span class="field-error" role="alert" aria-live="polite">El nombre debe tener al menos 3 caracteres.</span>
                       }
                     </div>
                   </ion-col>
@@ -143,10 +144,11 @@
                           placeholder="usuario@empresa.com"
                           formControlName="email"
                           autocomplete="email"
+                          [attr.aria-invalid]="userForm.get('email')?.touched && userForm.get('email')?.invalid"
                         ></ion-input>
                       </ion-item>
                       @if (userForm.get('email')?.touched && userForm.get('email')?.invalid) {
-                        <span class="field-error">Ingrese un correo electrónico válido.</span>
+                        <span class="field-error" role="alert" aria-live="polite">Ingrese un correo electrónico válido.</span>
                       }
                     </div>
                   </ion-col>
@@ -246,6 +248,7 @@
                           placeholder="Mínimo 6 caracteres"
                           formControlName="password"
                           autocomplete="new-password"
+                          [attr.aria-invalid]="userForm.get('password')?.touched && userForm.get('password')?.invalid"
                         ></ion-input>
                         <ion-button fill="clear" slot="end" type="button" (click)="togglePassword()">
                           <ion-icon slot="icon-only" [name]="showPassword() ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
@@ -283,13 +286,14 @@
                           placeholder="Repita la contraseña"
                           formControlName="confirmPassword"
                           autocomplete="new-password"
+                          [attr.aria-invalid]="userForm.get('confirmPassword')?.touched && userForm.get('confirmPassword')?.invalid"
                         ></ion-input>
                         <ion-button fill="clear" slot="end" type="button" (click)="toggleConfirmPassword()">
                           <ion-icon slot="icon-only" [name]="showConfirmPassword() ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
                         </ion-button>
                       </ion-item>
                       @if (userForm.get('confirmPassword')?.touched && userForm.get('confirmPassword')?.hasError('passwordMismatch')) {
-                        <span class="field-error">Las contraseñas no coinciden.</span>
+                        <span class="field-error" role="alert" aria-live="polite">Las contraseñas no coinciden.</span>
                       }
                     </div>
                   </ion-col>

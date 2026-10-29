@@ -240,6 +240,10 @@ export class ProductFormPage implements OnInit {
   public onSubmit(): void {
     if (this.productForm.invalid || this.productForm.pending) {
       this.productForm.markAllAsTouched();
+      setTimeout(() => {
+        const firstInvalid = document.querySelector('.form-input-item.ion-invalid input, input.ng-invalid, [aria-invalid="true"]');
+        (firstInvalid as HTMLElement)?.focus?.();
+      }, 50);
       return;
     }
 
