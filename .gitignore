@@ -82,3 +82,6 @@ Thumbs.db
 src/environments/environment.local.ts
 *.key
 
+# Documentos internos de auditoria y optimizacion (no subir a GitHub)
+AUDITORIA_NOVAGEST.*
+PLAN_OPTIMIZACION.md

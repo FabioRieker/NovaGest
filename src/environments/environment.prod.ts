@@ -2,7 +2,7 @@
 export const environment = {
   production: true,
   supabase: {
-    url: 'https://eoruvartgxagrgfrgxjv.supabase.co',
-    anonKey: 'sb_publishable_Z9kdn_91KlnfAKWzz7_Ljg_ohm-7AKU',
+    url: 'SUPABASE_URL_PLACEHOLDER',
+    anonKey: 'SUPABASE_ANON_KEY_PLACEHOLDER'
   }
 };

@@ -33,13 +33,22 @@ export class SupabaseService {
       url &&
       anonKey &&
       !anonKey.includes('dummy_anon_key') &&
-      url.startsWith('https://')
+      !anonKey.includes('PLACEHOLDER') &&
+      url.startsWith('https://') &&
+      !url.includes('PLACEHOLDER')
     );
 
     try {
+      const clientUrl = (url && url.startsWith('https://') && !url.includes('PLACEHOLDER'))
+        ? url
+        : 'https://novagest-erp-dam2.supabase.co';
+      const clientKey = (anonKey && !anonKey.includes('PLACEHOLDER'))
+        ? anonKey
+        : 'SUPABASE_ANON_KEY_PLACEHOLDER';
+
       this.supabaseClient = createClient(
-        url || 'https://novagest-erp-dam2.supabase.co',
-        anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.dummy_anon_key_dam2_interfaces_evaluation',
+        clientUrl,
+        clientKey,
         {
           auth: {
             persistSession: true,
