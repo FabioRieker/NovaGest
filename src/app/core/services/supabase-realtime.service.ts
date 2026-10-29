@@ -1,4 +1,4 @@
-import { Injectable, inject, OnDestroy } from '@angular/core';
+import { Injectable, inject, OnDestroy, signal } from '@angular/core';
 import { BehaviorSubject, Observable, interval, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AuditLogDocument, AuditAction, AuditEntity, AuditSeverity } from '../models/audit-log.model';
@@ -21,6 +21,7 @@ export class SupabaseRealtimeService implements OnDestroy {
   private supabaseService = inject(SupabaseService);
 
   private realtimeChannel: any = null;
+  public connectionState = signal<'DISCONNECTED' | 'CONNECTING' | 'SUBSCRIBED' | 'CLOSED' | 'CHANNEL_ERROR'>('CONNECTING');
 
   private readonly initialDocs: AuditLogDocument[] = [
     {
@@ -92,7 +93,10 @@ export class SupabaseRealtimeService implements OnDestroy {
    */
   private initSupabaseRealtimeChannel(): void {
     const client = this.supabaseService.client;
-    if (!client) return;
+    if (!client) {
+      this.connectionState.set('DISCONNECTED');
+      return;
+    }
 
     try {
       this.realtimeChannel = client.channel('public:audit_logs')
@@ -106,12 +110,56 @@ export class SupabaseRealtimeService implements OnDestroy {
           { event: 'INSERT', schema: 'public', table: 'audit_logs' },
           (payload: any) => {
             if (payload?.new) {
-              this.handleIncomingDoc(payload.new as AuditLogDocument);
+              const row = payload.new;
+              this.handleIncomingDoc({
+                id: row.id || `doc-${Date.now()}`,
+                timestamp: row.timestamp || new Date().toISOString(),
+                action: row.action,
+                entity: row.entity,
+                entityId: row.entity_id,
+                details: row.details,
+                userId: row.user_id || 'anonymous',
+                userEmail: row.user_email || 'usuario@sistema',
+                severity: row.severity || 'info'
+              });
             }
           }
         )
-        .subscribe();
+        .subscribe((status: string) => {
+          if (status === 'SUBSCRIBED') {
+            this.connectionState.set('SUBSCRIBED');
+          } else if (status === 'CLOSED') {
+            this.connectionState.set('CLOSED');
+          } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+            this.connectionState.set('CHANNEL_ERROR');
+          }
+        });
+
+      if (this.supabaseService.isConfigured) {
+        client
+          .from('audit_logs')
+          .select('*')
+          .order('timestamp', { ascending: false })
+          .limit(50)
+          .then(({ data, error }: { data: any[] | null; error: any }) => {
+            if (!error && data && data.length > 0) {
+              const mapped: AuditLogDocument[] = data.map((d: any) => ({
+                id: d.id || `doc-${d.timestamp}`,
+                timestamp: d.timestamp,
+                action: d.action,
+                entity: d.entity,
+                entityId: d.entity_id,
+                details: d.details,
+                userId: d.user_id || 'anonymous',
+                userEmail: d.user_email || 'usuario@sistema',
+                severity: d.severity || 'info'
+              }));
+              this.saveDocuments(mapped);
+            }
+          });
+      }
     } catch (e) {
+      this.connectionState.set('CHANNEL_ERROR');
       console.warn('Canal Supabase Realtime en modo local resiliente:', e);
     }
   }
@@ -141,6 +189,9 @@ export class SupabaseRealtimeService implements OnDestroy {
    * Inicia telemetría reactiva en tiempo real sobre el canal Supabase Realtime
    */
   private startHeartbeatSimulation(): void {
+    if (this.supabaseService.isConfigured) {
+      return;
+    }
     this.heartbeatSubscription = interval(25000).subscribe(() => {
       const randomPings = [
         'Sincronización Supabase Realtime: Canal WebSocket activo y verificado',
@@ -196,11 +247,58 @@ export class SupabaseRealtimeService implements OnDestroy {
       } catch {}
     }
 
+    // Persistir en tabla audit_logs de Supabase si está disponible
+    if (this.supabaseService.isConfigured && this.supabaseService.client) {
+      this.supabaseService.client
+        .from('audit_logs')
+        .insert({
+          action: doc.action,
+          entity: doc.entity,
+          details: doc.details,
+          severity: doc.severity,
+          user_id: doc.userId !== 'anonymous' && doc.userId !== 'system-agent' ? doc.userId : null
+        })
+        .then(({ error }: { error: any }) => {
+          if (error) {
+            console.warn('Persistencia en audit_logs de Supabase:', error.message);
+          }
+        });
+    }
+
     const currentDocs = this.documentsSubject.value;
-    const updated = [doc, ...currentDocs].slice(0, 50); // Mantener últimos 50 eventos
+    const updated = [doc, ...currentDocs].slice(0, 50);
     this.saveDocuments(updated);
 
     return Promise.resolve(doc);
+  }
+
+  /**
+   * Colección documental NoSQL sobre PostgreSQL (tabla documents JSONB) - RA 5
+   */
+  public async saveDocument(collection: string, doc: Record<string, any>): Promise<any> {
+    if (!this.supabaseService.isConfigured || !this.supabaseService.client) {
+      return null;
+    }
+    const { data, error } = await this.supabaseService.client
+      .from('documents')
+      .insert({ collection, doc })
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  }
+
+  public async getDocuments(collection: string): Promise<any[]> {
+    if (!this.supabaseService.isConfigured || !this.supabaseService.client) {
+      return [];
+    }
+    const { data, error } = await this.supabaseService.client
+      .from('documents')
+      .select('*')
+      .eq('collection', collection)
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return data || [];
   }
 
   /**

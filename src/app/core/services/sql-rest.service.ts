@@ -170,9 +170,9 @@ export class SqlRestService {
   /**
    * Sincroniza el catálogo con la tabla 'products' de Supabase
    */
-  public async syncProductsWithSupabase(): Promise<void> {
+  public async syncProductsWithSupabase(): Promise<Product[] | null> {
     const client = this.supabaseService.client;
-    if (!client || !this.supabaseService.isConfigured) return;
+    if (!client || !this.supabaseService.isConfigured) return null;
 
     try {
       const { data, error } = await client
@@ -182,7 +182,7 @@ export class SqlRestService {
 
       if (error) {
         console.warn('Aviso sincronizando productos con Supabase:', error.message);
-        return;
+        return null;
       }
 
       if (data && data.length > 0) {
@@ -202,9 +202,12 @@ export class SqlRestService {
         }));
 
         this.saveProducts(mapped);
+        return mapped;
       }
+      return null;
     } catch (e) {
       console.warn('Error al obtener productos de Supabase:', e);
+      return null;
     }
   }
 
@@ -226,8 +229,8 @@ export class SqlRestService {
    */
   public getProducts(filters?: ProductFilterOptions): Observable<Product[]> {
     return from((async () => {
-      await this.syncProductsWithSupabase();
-      return this.getStoredProducts();
+      const live = await this.syncProductsWithSupabase();
+      return live || this.getStoredProducts();
     })()).pipe(
       map(items => {
         let result = [...items];
