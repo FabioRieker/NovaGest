@@ -78,6 +78,115 @@ body {
 }
 
 /* ==========================================================================
+   ESTRUCTURA Y RESPONSIVIDAD DE LA BARRA SUPERIOR (TOOLBAR)
+   Previene colisiones y solapamientos de ion-title en móviles e iOS
+   ========================================================================== */
+ion-toolbar {
+  --min-height: 56px;
+
+  &::part(container) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  // Desactivar centrado absoluto de iOS que causa solapamiento con los botones
+  ion-title,
+  ion-title.title-ios,
+  ion-title.title-default {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: auto !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    padding: 0 8px !important;
+    margin: 0 !important;
+    text-align: left !important;
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.01em !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    transform: none !important;
+    contain: none !important;
+    pointer-events: auto !important;
+  }
+
+  ion-buttons[slot="start"] {
+    flex-shrink: 0 !important;
+    margin-inline-start: 4px !important;
+    z-index: 2;
+
+    ion-menu-button {
+      --padding-start: 4px;
+      --padding-end: 4px;
+      margin: 0;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  ion-buttons[slot="end"] {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    margin-inline-end: 6px !important;
+    z-index: 2;
+
+    ion-button {
+      margin: 0 !important;
+      --padding-start: 4px !important;
+      --padding-end: 4px !important;
+      min-width: 34px !important;
+      height: 36px !important;
+
+      ion-icon {
+        font-size: 1.25rem !important;
+      }
+    }
+
+    app-lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      margin-inline-end: 2px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    --min-height: 52px;
+
+    ion-title,
+    ion-title.title-ios,
+    ion-title.title-default {
+      font-size: 0.95rem !important;
+      padding: 0 4px !important;
+    }
+
+    ion-buttons[slot="end"] {
+      gap: 2px !important;
+      margin-inline-end: 4px !important;
+
+      ion-button {
+        min-width: 32px !important;
+        height: 34px !important;
+
+        ion-icon {
+          font-size: 1.15rem !important;
+        }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
    Estilos para Modo Oscuro
    ========================================================================== */
 body.dark {
@@ -105,6 +214,27 @@ body.dark {
 
       ion-icon {
         color: #ffffff !important;
+      }
+    }
+
+    .lang-switcher-pill {
+      background: rgba(0, 0, 0, 0.28) !important;
+      border-color: rgba(255, 255, 255, 0.22) !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25) !important;
+
+      .lang-btn {
+        color: rgba(255, 255, 255, 0.75) !important;
+
+        &.active {
+          background: #ffffff !important;
+          color: #be123c !important;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        &:hover:not(.active) {
+          color: #ffffff !important;
+          background: rgba(255, 255, 255, 0.15) !important;
+        }
       }
     }
   }
@@ -452,6 +582,25 @@ body:not(.dark) {
       &[aria-label*="Salir"] {
         --color: #be123c !important;
         color: #be123c !important;
+      }
+    }
+
+    .lang-switcher-pill {
+      background: #f1f5f9 !important;
+      border-color: rgba(15, 23, 42, 0.12) !important;
+
+      .lang-btn {
+        color: #64748b !important;
+
+        &.active {
+          background: #be123c !important;
+          color: #ffffff !important;
+        }
+
+        &:hover:not(.active) {
+          color: #0f172a !important;
+          background: rgba(190, 18, 60, 0.08) !important;
+        }
       }
     }
   }
