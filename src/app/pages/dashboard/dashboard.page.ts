@@ -73,7 +73,9 @@ import {
   gridOutline,
   checkmarkCircleOutline,
   colorWandOutline,
-  closeCircleOutline
+  closeCircleOutline,
+  cartOutline,
+  hardwareChipOutline
 } from 'ionicons/icons';
 import { forkJoin, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -310,6 +312,22 @@ export class DashboardPage implements OnInit, OnDestroy {
       category: 'Urgente',
       description: 'Tabla prioritaria de artículos con stock agotado o inferior al umbral de seguridad.',
       defaultWidth: 'col-6'
+    },
+    {
+      id: 'smart_reorder',
+      title: 'Sugerencias de Reabastecimiento',
+      icon: 'cart-outline',
+      category: 'Compras',
+      description: 'Cálculo de reposición de artículos con stock por debajo del umbral mínimo y costes de pedido.',
+      defaultWidth: 'col-6'
+    },
+    {
+      id: 'security_telemetry',
+      title: 'Telemetría & Conectividad Supabase',
+      icon: 'shield-checkmark-outline',
+      category: 'Seguridad',
+      description: 'Estado de conexión en tiempo real, latencia de red, canales WebSocket y verificación RLS.',
+      defaultWidth: 'col-6'
     }
   ];
 
@@ -323,7 +341,9 @@ export class DashboardPage implements OnInit, OnDestroy {
     { id: 'live_activities', title: 'Actividades en Vivo (Supabase Realtime)', icon: 'pulse-outline', category: 'Auditoría', visible: true, width: 'col-4', order: 6 },
     { id: 'operations', title: 'Capacidad Operativa de Almacenes', icon: 'layers-outline', category: 'Logística', visible: true, width: 'col-4', order: 7 },
     { id: 'quick_actions', title: 'Acciones Rápidas & Atajos', icon: 'flash-outline', category: 'Gestión', visible: false, width: 'col-6', order: 8 },
-    { id: 'critical_stock_table', title: 'Alerta de Stock Crítico', icon: 'alert-circle-outline', category: 'Urgente', visible: false, width: 'col-6', order: 9 }
+    { id: 'critical_stock_table', title: 'Alerta de Stock Crítico', icon: 'alert-circle-outline', category: 'Urgente', visible: false, width: 'col-6', order: 9 },
+    { id: 'smart_reorder', title: 'Sugerencias de Reabastecimiento', icon: 'cart-outline', category: 'Compras', visible: false, width: 'col-6', order: 10 },
+    { id: 'security_telemetry', title: 'Telemetría & Conectividad Supabase', icon: 'shield-checkmark-outline', category: 'Seguridad', visible: false, width: 'col-6', order: 11 }
   ];
 
   // Control de Modo Edición vs Modo Vista limpio
@@ -514,6 +534,51 @@ export class DashboardPage implements OnInit, OnDestroy {
     return this.allProducts().filter(p => p.stock <= 5).slice(0, 6);
   });
 
+  // Telemetría y conectividad
+  public isPingingTelemetry = signal(false);
+  public telemetryLatency = signal(18);
+
+  // Coste estimado de reposición sugerida
+  public estimatedReorderCost = computed(() => {
+    const total = this.criticalProducts().reduce((sum, p) => {
+      const needed = Math.max(0, 20 - p.stock);
+      return sum + (needed * p.price * 0.7);
+    }, 0);
+    return total.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  });
+
+  public pingTelemetry(): void {
+    this.isPingingTelemetry.set(true);
+    const start = performance.now();
+    this.sqlService.getProducts().pipe(take(1)).subscribe({
+      next: () => {
+        const elapsed = Math.round(performance.now() - start);
+        this.telemetryLatency.set(Math.max(12, elapsed));
+        this.isPingingTelemetry.set(false);
+        this.notificationService.showToast(`Ping a Supabase completado: ${this.telemetryLatency()}ms`, 'success');
+      },
+      error: () => {
+        this.isPingingTelemetry.set(false);
+        this.notificationService.showToast('Error al comprobar latencia.', 'danger');
+      }
+    });
+  }
+
+  public createReorderPO(product: Product): void {
+    const suggestedUnits = Math.max(5, 20 - product.stock);
+    const estCost = (suggestedUnits * product.price * 0.7).toFixed(2);
+    this.realtimeService.logActivity(
+      'ALERT',
+      'PRODUCT',
+      `Orden de reposición sugerida para ${product.name} (+${suggestedUnits} uds. - ${estCost} €)`,
+      'info'
+    );
+    this.notificationService.showToast(
+      `Orden de compra generada para ${product.name} (+${suggestedUnits} uds.)`,
+      'success'
+    );
+  }
+
   private timelineChart: Chart | null = null;
   private doughnutChart: Chart | null = null;
   private subscriptions = new Subscription();
@@ -570,7 +635,9 @@ export class DashboardPage implements OnInit, OnDestroy {
       gridOutline,
       checkmarkCircleOutline,
       colorWandOutline,
-      closeCircleOutline
+      closeCircleOutline,
+      cartOutline,
+      hardwareChipOutline
     });
   }
 

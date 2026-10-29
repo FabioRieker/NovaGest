@@ -78,7 +78,7 @@ body {
 }
 
 /* ==========================================================================
-   OPTIMIZACIONES DE MÁXIMA LEGIBILIDAD EN MODO OSCURO (WCAG AA/AAA)
+   Estilos para Modo Oscuro
    ========================================================================== */
 body.dark {
   // 1. Cabecera y Barra Superior (Toolbar)
@@ -367,10 +367,55 @@ body.dark {
       color: #94a3b8 !important;
     }
   }
+
+  // Página de Bienvenida en Modo Oscuro
+  .welcome-content {
+    --background: #0d0b1a !important;
+    background-color: #0d0b1a !important;
+    color: #f8fafc !important;
+  }
+
+  .system-metrics-strip {
+    background: #150f2e !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5) !important;
+
+    .metric-item .metric-num {
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      color: #ffffff !important;
+    }
+    .metric-item .metric-label {
+      color: #ff2a6d !important;
+    }
+    .metric-divider {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+
+  .modules-section .module-card {
+    background: #150f2e !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4) !important;
+
+    .module-title {
+      color: #ffffff !important;
+    }
+    .module-text {
+      color: #cbd5e1 !important;
+    }
+  }
+
+  .demo-box-section .demo-card, .credential-demo-box {
+    background: #150f2e !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #f8fafc !important;
+  }
 }
 
 /* ==========================================================================
-   COHERENCIA VISUAL Y CONTRASTE EN MODO CLARO (WCAG AA)
+   Estilos para Modo Claro
    ========================================================================== */
 body:not(.dark) {
   // Cuadro de Mando en Modo Claro
@@ -624,9 +669,63 @@ body:not(.dark) {
       }
     }
   }
+
+  // Gestión de Usuarios en Modo Claro
+  .cyber-input-item {
+    --background: #ffffff !important;
+    background-color: #ffffff !important;
+    --color: #0f172a !important;
+    --placeholder-color: #64748b !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+
+    &:hover {
+      border-color: #be123c !important;
+    }
+    &:focus-within {
+      border-color: #be123c !important;
+      box-shadow: 0 0 0 3px rgba(190, 18, 60, 0.15) !important;
+    }
+
+    ion-icon {
+      color: #be123c !important;
+    }
+
+    ion-input, ion-select {
+      --color: #0f172a !important;
+      color: #0f172a !important;
+    }
+  }
+
+  .section-label {
+    color: #475569 !important;
+  }
+
+  .role-card {
+    background: #ffffff !important;
+    border: 2px solid #e2e8f0 !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+
+    &:hover {
+      border-color: #be123c !important;
+    }
+
+    &.active {
+      border-color: #be123c !important;
+      background: rgba(190, 18, 60, 0.06) !important;
+      box-shadow: 0 4px 14px rgba(190, 18, 60, 0.12) !important;
+    }
+
+    .role-title {
+      color: #0f172a !important;
+    }
+    .role-desc {
+      color: #64748b !important;
+    }
+  }
 }
 
-// Accesibilidad Universal (WCAG 2.2 AA)
+// Enlace de salto al contenido principal
 .skip-link {
   position: absolute;
   top: -100px;

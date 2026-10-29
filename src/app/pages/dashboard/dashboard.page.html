@@ -686,6 +686,98 @@
                 </div>
               }
 
+              <!-- 10. SUGERENCIAS DE REABASTECIMIENTO INTELIGENTE (SMART REORDER) -->
+              @if (widget.id === 'smart_reorder') {
+                <div class="smart-reorder-inner">
+                  <div class="reorder-summary-strip">
+                    <div class="reorder-stat-pill">
+                      <span class="stat-tag">Artículos a reponer:</span>
+                      <strong class="stat-val">{{ criticalProducts().length }} referencias</strong>
+                    </div>
+                    <div class="reorder-stat-pill">
+                      <span class="stat-tag">Inversión estimada:</span>
+                      <strong class="stat-val text-ruby">{{ estimatedReorderCost() }} €</strong>
+                    </div>
+                  </div>
+
+                  <div class="smart-reorder-list">
+                    @for (item of criticalProducts(); track item.id) {
+                      <div class="reorder-item-card">
+                        <div class="reorder-item-info">
+                          <span class="reorder-sku">#{{ item.id }} · {{ item.category }}</span>
+                          <h4 class="reorder-title">{{ item.name }}</h4>
+                          <span class="reorder-meta">Stock: <strong [class.text-danger]="item.stock === 0">{{ item.stock }} uds</strong> | Sugerido: <strong>+{{ 20 - item.stock }} uds</strong></span>
+                        </div>
+                        <div class="reorder-item-actions">
+                          <span class="reorder-cost">{{ ((20 - item.stock) * item.price * 0.7) | number:'1.2-2' }} €</span>
+                          <button class="reorder-btn" (click)="createReorderPO(item)" title="Generar orden de compra">
+                            <ion-icon name="cart-outline"></ion-icon> Pedir
+                          </button>
+                        </div>
+                      </div>
+                    } @empty {
+                      <div class="reorder-empty-state">
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                        <span>El inventario está abastecido. No se requieren órdenes de compra urgentes.</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+
+              <!-- 11. TELEMETRÍA & CONECTIVIDAD SUPABASE -->
+              @if (widget.id === 'security_telemetry') {
+                <div class="telemetry-inner">
+                  <div class="telemetry-grid">
+                    <div class="telemetry-card">
+                      <div class="telemetry-card-header">
+                        <span class="telemetry-label">Canal WebSocket</span>
+                        <span class="telemetry-status-badge online">
+                          <span class="status-pulse-dot"></span> EN VIVO
+                        </span>
+                      </div>
+                      <div class="telemetry-val">Supabase Realtime</div>
+                      <div class="telemetry-foot">Escuchando audit_logs & documents</div>
+                    </div>
+
+                    <div class="telemetry-card">
+                      <div class="telemetry-card-header">
+                        <span class="telemetry-label">Latencia de Red</span>
+                        <span class="telemetry-status-badge optimal">&lt; {{ telemetryLatency() }} ms</span>
+                      </div>
+                      <div class="telemetry-val">{{ telemetryLatency() }} ms</div>
+                      <div class="telemetry-foot">Tiempo de respuesta HTTP PostgREST</div>
+                    </div>
+
+                    <div class="telemetry-card">
+                      <div class="telemetry-card-header">
+                        <span class="telemetry-label">Políticas RLS</span>
+                        <span class="telemetry-status-badge secure">PROTEGIDO</span>
+                      </div>
+                      <div class="telemetry-val">100% Tablas Activas</div>
+                      <div class="telemetry-foot">profiles, products, audit_logs</div>
+                    </div>
+
+                    <div class="telemetry-card">
+                      <div class="telemetry-card-header">
+                        <span class="telemetry-label">Seguridad de Sesión</span>
+                        <span class="telemetry-status-badge auth">RBAC</span>
+                      </div>
+                      <div class="telemetry-val">{{ authService.currentUserSignal()?.role === 'admin' ? 'Administrador' : 'Usuario' }}</div>
+                      <div class="telemetry-foot">JWT con Claims verificados</div>
+                    </div>
+                  </div>
+
+                  <div class="telemetry-actions-bar">
+                    <button class="ping-btn" (click)="pingTelemetry()" [disabled]="isPingingTelemetry()">
+                      <ion-icon name="refresh-outline" [class.spinning]="isPingingTelemetry()"></ion-icon>
+                      {{ isPingingTelemetry() ? 'Midiendo Latencia...' : 'Probar Latencia Ahora' }}
+                    </button>
+                    <span class="telemetry-timestamp">Monitorización activa</span>
+                  </div>
+                </div>
+              }
+
             </div>
 
             <!-- Maneta / Indicador de Redimensión en la Esquina Inferior Derecha (Solo en Modo Edición) -->

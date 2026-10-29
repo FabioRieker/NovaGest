@@ -8,7 +8,7 @@
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-body.dark .welcome-content {
+:host-context(body.dark) .welcome-content {
   --background: #0d0b1a;
   background-color: #0d0b1a;
   color: #f8fafc;
@@ -47,7 +47,7 @@ body.dark .welcome-content {
   }
 }
 
-body.dark .header-brand-wrap {
+:host-context(body.dark) .header-brand-wrap {
   .brand-icon-mini {
     background: linear-gradient(135deg, #ff2a6d 0%, #be123c 100%);
     box-shadow: 0 0 10px rgba(255, 42, 109, 0.4);
@@ -212,7 +212,7 @@ body.dark .header-brand-wrap {
   }
 }
 
-body.dark .hero-section {
+:host-context(body.dark) .hero-section {
   .hero-badge {
     background: rgba(255, 42, 109, 0.12);
     border-color: rgba(255, 42, 109, 0.35);
@@ -322,7 +322,7 @@ body.dark .hero-section {
   }
 }
 
-body.dark .system-metrics-strip {
+:host-context(body.dark) .system-metrics-strip {
   background: #150f2e;
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
@@ -472,7 +472,7 @@ body.dark .system-metrics-strip {
   }
 }
 
-body.dark .modules-section {
+:host-context(body.dark) .modules-section {
   .section-title-wrap {
     .section-kicker {
       color: #00f0ff;
@@ -671,7 +671,7 @@ body.dark .modules-section {
   }
 }
 
-body.dark .demo-box-section {
+:host-context(body.dark) .demo-box-section {
   .demo-card {
     background: #150f2e;
     border-color: rgba(0, 240, 255, 0.25);
@@ -811,7 +811,7 @@ body.dark .demo-box-section {
   }
 }
 
-body.dark .welcome-footer {
+:host-context(body.dark) .welcome-footer {
   border-top-color: rgba(255, 255, 255, 0.08);
 
   .footer-content {

@@ -694,19 +694,59 @@
     ion-card-title { color: var(--cyber-text-main) !important; }
     ion-card-subtitle { color: var(--cyber-text-sub) !important; }
 
-    .custom-cyber-input {
-      background: #ffffff !important;
-      border-color: rgba(225, 29, 72, 0.2) !important;
-      input { color: var(--cyber-text-main) !important; }
-    }
+    .cyber-input-item {
+      --background: #ffffff !important;
+      background-color: #ffffff !important;
+      --color: #0f172a !important;
+      --placeholder-color: #64748b !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
 
-    .custom-cyber-select {
-      background: #ffffff !important;
-      border-color: rgba(225, 29, 72, 0.2) !important;
-      ion-select { color: var(--cyber-text-main) !important; }
+      &:hover {
+        border-color: #be123c !important;
+      }
+
+      &:focus-within {
+        border-color: #be123c !important;
+        box-shadow: 0 0 0 3px rgba(190, 18, 60, 0.15) !important;
+      }
+
+      ion-icon {
+        color: #be123c !important;
+      }
+
+      ion-input, ion-select {
+        --color: #0f172a !important;
+        color: #0f172a !important;
+      }
     }
 
     .field-label { color: var(--cyber-text-main) !important; }
+    .section-label { color: #475569 !important; }
+
+    .role-card {
+      background: #ffffff !important;
+      border: 2px solid #e2e8f0 !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+
+      &:hover {
+        border-color: #be123c !important;
+      }
+
+      &.active {
+        border-color: #be123c !important;
+        background: rgba(190, 18, 60, 0.06) !important;
+        box-shadow: 0 4px 14px rgba(190, 18, 60, 0.12) !important;
+      }
+
+      .role-title {
+        color: #0f172a !important;
+      }
+
+      .role-desc {
+        color: #64748b !important;
+      }
+    }
   }
 
   .user-card {

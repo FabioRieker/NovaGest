@@ -131,7 +131,11 @@ export class LoginPage {
         this.notificationService.showToast(`¡Bienvenido/a, ${user.name}!`, 'success');
 
         const returnUrl = this.route.snapshot.queryParams['returnUrl'];
-        if (returnUrl && returnUrl.startsWith('/') && !returnUrl.startsWith('//')) {
+        const allowedRoutes = ['/dashboard', '/products', '/users', '/realtime-audit', '/reports', '/help', '/product-form'];
+        const isSafeReturnUrl = returnUrl && returnUrl.startsWith('/') && !returnUrl.startsWith('//')
+          && allowedRoutes.some(route => returnUrl === route || returnUrl.startsWith(`${route}/`) || returnUrl.startsWith(`${route}?`));
+
+        if (isSafeReturnUrl) {
           this.router.navigateByUrl(returnUrl);
         } else if (user.role === 'admin') {
           this.router.navigate(['/dashboard']);

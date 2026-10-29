@@ -1,4 +1,4 @@
-// Entorno generado automáticamente para protección de claves (Rúbrica DAM2)
+// Variables de entorno para Supabase
 export const environment = {
   production: true,
   supabase: {

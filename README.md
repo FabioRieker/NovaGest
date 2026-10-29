@@ -1,4 +1,4 @@
-# 🏢 NovaGest ERP - Sistema de Gestión Multiplataforma (PWA/Híbrida)
+# NovaGest ERP - Sistema de Gestión Multiplataforma (PWA/Híbrida)
 
 [![CI/CD Pipeline](https://github.com/FabioRieker/NovaGest/actions/workflows/ci.yml/badge.svg)](https://github.com/FabioRieker/NovaGest/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -13,7 +13,7 @@
 
 ---
 
-## 📌 Descripción del Proyecto
+## Descripción del Proyecto
 **NovaGest ERP** es una aplicación de gestión empresarial multiplataforma desarrollada desde cero con **Ionic** y **Angular Standalone**. La solución incorpora:
 - Arquitectura desacoplada **MVVM** con servicios reactivos basados en Signals y RxJS.
 - **Control de Acceso Basado en Roles (RBAC)** con enrutamiento protegido mediante Guards e inyección asíncrona de tokens JWT con interceptores HTTP.
@@ -31,7 +31,7 @@
 
 ---
 
-## 🔑 Credenciales de Acceso Oficiales
+## Credenciales de Acceso Oficiales
 
 | Rol | Usuario / Email | Contraseña | Vistas y Capacidades |
 | :--- | :--- | :--- | :--- |
@@ -42,7 +42,7 @@
 
 ---
 
-## 🛠️ Tecnologías Empleadas
+## Tecnologías Empleadas
 
 - **Framework Híbrido:** Ionic Framework 8 (`@ionic/angular`)
 - **Lógica y Arquitectura:** Angular Standalone Components & Signals
@@ -55,7 +55,7 @@
 
 ---
 
-## 🚀 Instalación y Puesta en Marcha
+## Instalación y Puesta en Marcha
 
 ### Prerrequisitos
 - Node.js (v18.x o superior)
@@ -97,7 +97,7 @@
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```text
 src/
@@ -127,5 +127,5 @@ src/
 
 ---
 
-## 📄 Licencia y Autoría
+## Licencia y Autoría
 Proyecto desarrollado por **Fabio Luis Rieker González** como entrega oficial de la Actividad Individual 1 de DAM2. Distribuido bajo licencia MIT.

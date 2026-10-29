@@ -2332,6 +2332,264 @@
   }
 }
 
+// ============================================================================
+// MÓDULO 10: SUGERENCIAS DE REABASTECIMIENTO INTELIGENTE (SMART REORDER)
+// ============================================================================
+.smart-reorder-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .reorder-summary-strip {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    .reorder-stat-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+
+      .stat-tag { color: #94a3b8; }
+      .stat-val { color: #ffffff; }
+      .text-ruby { color: #ff2a6d; }
+    }
+  }
+
+  .smart-reorder-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .reorder-item-card {
+      background: rgba(24, 18, 54, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: rgba(255, 42, 109, 0.3);
+        transform: translateY(-1px);
+      }
+
+      .reorder-item-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+
+        .reorder-sku {
+          font-size: 0.72rem;
+          color: #94a3b8;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .reorder-title {
+          font-size: 0.92rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+        }
+
+        .reorder-meta {
+          font-size: 0.78rem;
+          color: #cbd5e1;
+
+          .text-danger { color: #ff2a6d; font-weight: 800; }
+        }
+      }
+
+      .reorder-item-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+
+        .reorder-cost {
+          font-size: 1rem;
+          font-weight: 800;
+          color: #ff2a6d;
+        }
+
+        .reorder-btn {
+          background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+          color: #ffffff;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 8px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+          &:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+          }
+        }
+      }
+    }
+
+    .reorder-empty-state {
+      padding: 24px;
+      text-align: center;
+      color: #10b981;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+  }
+}
+
+// ============================================================================
+// MÓDULO 11: TELEMETRÍA & CONECTIVIDAD SUPABASE
+// ============================================================================
+.telemetry-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .telemetry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+
+    .telemetry-card {
+      background: rgba(24, 18, 54, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      .telemetry-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .telemetry-label {
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: #94a3b8;
+          text-transform: uppercase;
+        }
+
+        .telemetry-status-badge {
+          font-size: 0.68rem;
+          font-weight: 800;
+          padding: 2px 8px;
+          border-radius: 9999px;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+
+          &.online {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+
+            .status-pulse-dot {
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background: #34d399;
+              animation: pulse 1.5s infinite;
+            }
+          }
+
+          &.optimal {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+          }
+
+          &.secure {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+          }
+
+          &.auth {
+            background: rgba(255, 42, 109, 0.15);
+            color: #ff2a6d;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+          }
+        }
+      }
+
+      .telemetry-val {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #ffffff;
+      }
+
+      .telemetry-foot {
+        font-size: 0.72rem;
+        color: #64748b;
+      }
+    }
+  }
+
+  .telemetry-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+    .ping-btn {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+
+      &:hover:not(:disabled) {
+        background: rgba(56, 189, 248, 0.2);
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .spinning {
+        animation: spin 1s linear infinite;
+      }
+    }
+
+    .telemetry-timestamp {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+  }
+}
+
 /* ==========================================================================
    ADAPTACIÓN UNIVERSAL A MODO CLARO (LUMINOUS PEARL GLASS)
    Garantiza paridad estética, contraste WCAG y máxima legibilidad
@@ -2487,6 +2745,66 @@
       &:hover, &.active {
         background: #e11d48 !important;
         color: #ffffff !important;
+      }
+    }
+  }
+
+  .smart-reorder-inner {
+    .reorder-summary-strip .reorder-stat-pill {
+      background: #f8fafc !important;
+      border-color: rgba(15, 23, 42, 0.08) !important;
+      .stat-tag { color: #475569 !important; }
+      .stat-val { color: #0f172a !important; }
+      .text-ruby { color: #be123c !important; }
+    }
+
+    .smart-reorder-list .reorder-item-card {
+      background: #f8fafc !important;
+      border-color: rgba(15, 23, 42, 0.08) !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+
+      .reorder-item-info {
+        .reorder-sku { color: #64748b !important; }
+        .reorder-title { color: #0f172a !important; }
+        .reorder-meta {
+          color: #475569 !important;
+          .text-danger { color: #be123c !important; }
+        }
+      }
+
+      .reorder-item-actions .reorder-cost {
+        color: #be123c !important;
+      }
+    }
+  }
+
+  .telemetry-inner {
+    .telemetry-grid .telemetry-card {
+      background: #f8fafc !important;
+      border-color: rgba(15, 23, 42, 0.08) !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+
+      .telemetry-card-header .telemetry-label {
+        color: #475569 !important;
+      }
+      .telemetry-val {
+        color: #0f172a !important;
+      }
+      .telemetry-foot {
+        color: #64748b !important;
+      }
+    }
+
+    .telemetry-actions-bar {
+      border-top-color: rgba(15, 23, 42, 0.08) !important;
+
+      .ping-btn {
+        background: rgba(2, 132, 199, 0.08) !important;
+        border-color: rgba(2, 132, 199, 0.3) !important;
+        color: #0284c7 !important;
+      }
+      .telemetry-timestamp {
+        color: #64748b !important;
       }
     }
   }

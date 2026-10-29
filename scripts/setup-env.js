@@ -32,7 +32,7 @@ function parseEnvFile(filePath) {
 }
 
 function writeEnvFile(filePath, isProd, url, anonKey) {
-  const content = `// Entorno generado automáticamente para protección de claves (Rúbrica DAM2)
+  const content = `// Variables de entorno para Supabase
 export const environment = {
   production: ${isProd},
   supabase: {
@@ -49,10 +49,10 @@ function isRealCredential(val, placeholder) {
 }
 
 if (isReset) {
-  console.log('🔄 Restaurando credenciales de entorno a valores plantilla de seguridad...');
+  console.log('Restaurando variables de entorno a valores por defecto...');
   writeEnvFile(envTsPath, false, PLACEHOLDER_URL, PLACEHOLDER_KEY);
   writeEnvFile(envProdTsPath, true, PLACEHOLDER_URL, PLACEHOLDER_KEY);
-  console.log('✅ Entorno restaurado a plantilla limpia. No hay claves en texto plano en Git.');
+  console.log('Variables de entorno restauradas.');
   process.exit(0);
 }
 
@@ -60,34 +60,31 @@ if (isIfEnv) {
   const envUrl = process.env.SUPABASE_URL;
   const envKey = process.env.SUPABASE_ANON_KEY;
   if (isRealCredential(envUrl, PLACEHOLDER_URL) && isRealCredential(envKey, PLACEHOLDER_KEY)) {
-    console.log('🔧 Inyectando variables de entorno de compilación (process.env) para Supabase...');
+    console.log('Inyectando variables de entorno desde process.env para Supabase...');
     writeEnvFile(envTsPath, false, envUrl, envKey);
     writeEnvFile(envProdTsPath, true, envUrl, envKey);
-    console.log('✅ Variables de entorno aplicadas con éxito.');
-  } else {
-    console.log('ℹ️  Modo --if-env: Sin variables process.env. Conservando placeholders seguros para compilación.');
+    console.log('Variables de entorno aplicadas.');
   }
   process.exit(0);
 }
 
-// 1. Prioridad: variables de entorno del sistema (Vercel, CI/CD, contenedor)
+// 1. Variables de entorno del sistema (Vercel, CI/CD)
 let url = process.env.SUPABASE_URL;
 let anonKey = process.env.SUPABASE_ANON_KEY;
 
-// 2. Si no están en process.env, leer de .env local si existe
+// 2. Si no estan en process.env, leer de .env local si existe
 if ((!url || !anonKey) && fs.existsSync(envPath)) {
   const fileVars = parseEnvFile(envPath);
   url = url || fileVars.SUPABASE_URL;
   anonKey = anonKey || fileVars.SUPABASE_ANON_KEY;
 }
 
-// Modo interactivo / env:setup explícito
 if (!fs.existsSync(envPath) && !url && !anonKey) {
-  console.log('⚠️  No se encontró el archivo .env. Creando uno a partir de .env.example...');
+  console.log('No se encontro el archivo .env. Creando uno a partir de .env.example...');
   if (fs.existsSync(envExamplePath)) {
     fs.copyFileSync(envExamplePath, envPath);
   }
-  console.log('👉 Edita .env con tus claves de Supabase y vuelve a ejecutar: npm run env:setup');
+  console.log('Configura las claves de Supabase en .env y ejecuta: npm run env:setup');
   process.exit(0);
 }
 
@@ -98,7 +95,7 @@ writeEnvFile(envTsPath, false, finalUrl, finalKey);
 writeEnvFile(envProdTsPath, true, finalUrl, finalKey);
 
 if (isRealCredential(finalUrl, PLACEHOLDER_URL) && isRealCredential(finalKey, PLACEHOLDER_KEY)) {
-  console.log('✅ Credenciales de Supabase inyectadas de forma segura.');
+  console.log('Variables de Supabase configuradas correctamente.');
 } else {
-  console.log('ℹ️  Placeholders configurados. Para conectar con Supabase en vivo, añade credenciales a .env.');
+  console.log('Placeholders configurados. Para conectar con Supabase, anade tus credenciales en .env.');
 }

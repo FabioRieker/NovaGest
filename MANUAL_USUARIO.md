@@ -1,4 +1,4 @@
-# 📖 Manual de Usuario - NovaGest ERP
+# Manual de Usuario - NovaGest ERP
 
 **Módulo:** Desarrollo de Interfaces (Código: 0488)  
 **Ciclo Formativo:** Grado Superior en Desarrollo de Aplicaciones Multiplataforma (DAM2)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🏢 1. Introducción y Alcance del Sistema
+## 1. Introducción y Alcance del Sistema
 **NovaGest ERP** es un sistema de gestión empresarial multiplataforma (PWA/Híbrida) diseñado con el framework **Ionic** y **Angular**, estructurado bajo el patrón arquitectónico MVVM y orientado a la optimización de procesos de negocio, control de stock y auditoría de eventos en tiempo real.
 
 El sistema consume concurrentemente dos orígenes de datos en **Supabase**:
@@ -16,7 +16,7 @@ El sistema consume concurrentemente dos orígenes de datos en **Supabase**:
 
 ---
 
-## 🔐 2. Credenciales de Acceso Oficiales
+## 2. Credenciales de Acceso Oficiales
 
 El sistema implementa **Control de Acceso Basado en Roles (RBAC)** con dos perfiles diferenciados:
 
@@ -29,7 +29,7 @@ El sistema implementa **Control de Acceso Basado en Roles (RBAC)** con dos perfi
 
 ---
 
-## 🚀 3. Funcionalidades Principales
+## 3. Funcionalidades Principales
 
 ### 3.1. Navegación Global y Side Menu
 - **Menú Lateral Responsivo:** Emplea `IonSplitPane` para mostrar permanentemente la navegación en pantallas grandes (escritorio/tablets en horizontal) y como menú lateral desplegable en móviles.
@@ -68,7 +68,7 @@ El sistema implementa **Control de Acceso Basado en Roles (RBAC)** con dos perfi
 
 ---
 
-## ♿ 4. Accesibilidad (WCAG 2.1 AA / AAA)
+## 4. Accesibilidad
 
 NovaGest ERP ha sido desarrollado con un compromiso estricto con la accesibilidad:
 - **Navegación Integral por Teclado:**
