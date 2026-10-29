@@ -34,6 +34,9 @@ import {
 } from 'ionicons/icons';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { inject } from '@angular/core';
+import { TranslationService } from '../../../core/services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 export interface TableColumn {
   key: string;
@@ -67,10 +70,13 @@ export interface TableActionPayload<T = any> {
     IonButton,
     IonIcon,
     IonSpinner,
-    IonBadge
+    IonBadge,
+    TranslatePipe
   ]
 })
 export class DataTableComponent<T extends Record<string, any> = Record<string, any>> implements OnInit, OnChanges, OnDestroy {
+  public translationService = inject(TranslationService);
+
   @Input() columns: TableColumn[] = [];
   @Input() data: readonly T[] = [];
   @Input() pageSize = 6;
@@ -231,6 +237,20 @@ export class DataTableComponent<T extends Record<string, any> = Record<string, a
 
   public getBadgeColor(status: string): string {
     return this.badgeColorMap[status] || 'secondary';
+  }
+
+  public getBadgeLabel(status: string): string {
+    if (!status) return '';
+    if (status === 'in_stock' || status === 'low_stock' || status === 'out_of_stock') {
+      return this.translationService.t('STATUS.' + status);
+    }
+    if (status === 'admin') {
+      return this.translationService.t('NAV.ADMIN_ROLE');
+    }
+    if (status === 'user') {
+      return this.translationService.t('NAV.USER_ROLE');
+    }
+    return status;
   }
 
   public formatCellValue(item: any, col: TableColumn): string {

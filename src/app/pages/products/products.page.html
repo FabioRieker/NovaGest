@@ -3,14 +3,17 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Inventario & Catálogo</ion-title>
+    <ion-title>{{ 'PRODUCTS.PAGE_TITLE' | translate }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="fetchProducts()" aria-label="Actualizar listado de productos">
+      <!-- Selector de idioma compacto en la cabecera -->
+      <app-lang-switcher [compact]="true"></app-lang-switcher>
+
+      <ion-button (click)="fetchProducts()" [attr.aria-label]="'COMMON.REFRESH' | translate" [title]="'COMMON.REFRESH' | translate">
         <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">
+      <ion-button (click)="logout()" color="light" [attr.aria-label]="'NAV.LOGOUT' | translate">
         <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
-        Salir
+        {{ 'NAV.QUICK_LOGOUT' | translate }}
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -20,23 +23,23 @@
   <div class="products-container">
     <div class="page-top-bar">
       <div>
-        <h1 class="page-title">Gestión de Productos</h1>
-        <p class="page-subtitle">Consumo de API REST relacional (SQL simulado) con persistencia</p>
+        <h1 class="page-title">{{ 'PRODUCTS.PAGE_TITLE' | translate }}</h1>
+        <p class="page-subtitle">{{ 'PRODUCTS.PAGE_DESC' | translate }}</p>
       </div>
 
       <div class="action-buttons-group">
-        <ion-button fill="outline" color="primary" size="small" (click)="exportPdf()" [disabled]="isLoading()" [attr.aria-busy]="isLoading()" aria-label="Exportar a PDF">
+        <ion-button fill="outline" color="primary" size="small" (click)="exportPdf()" [disabled]="isLoading()" [attr.aria-busy]="isLoading()" [attr.aria-label]="'PRODUCTS.EXPORT_PDF' | translate">
           <ion-icon slot="start" name="download-outline"></ion-icon>
           PDF
         </ion-button>
-        <ion-button fill="outline" color="secondary" size="small" (click)="exportCsv()" [disabled]="isLoading()" [attr.aria-busy]="isLoading()" aria-label="Exportar a CSV">
+        <ion-button fill="outline" color="secondary" size="small" (click)="exportCsv()" [disabled]="isLoading()" [attr.aria-busy]="isLoading()" [attr.aria-label]="'PRODUCTS.EXPORT_EXCEL' | translate">
           <ion-icon slot="start" name="document-text-outline"></ion-icon>
           CSV
         </ion-button>
         @if (authService.isAdminSignal()) {
-          <ion-button color="primary" size="small" (click)="navigateToCreate()" aria-label="Añadir nuevo producto">
+          <ion-button color="primary" size="small" (click)="navigateToCreate()" [attr.aria-label]="'PRODUCTS.ADD_BUTTON' | translate">
             <ion-icon slot="start" name="add-outline"></ion-icon>
-            Nuevo Producto
+            {{ 'PRODUCTS.ADD_BUTTON' | translate }}
           </ion-button>
         }
       </div>
@@ -46,7 +49,7 @@
     <div class="filters-bar">
       <div class="filter-group">
         <ion-icon name="filter-outline" aria-hidden="true"></ion-icon>
-        <span class="filter-title">Filtrar por:</span>
+        <span class="filter-title">{{ 'COMMON.FILTER' | translate }}:</span>
       </div>
 
       <div class="filter-controls">
@@ -56,7 +59,7 @@
           (ionChange)="selectedCategory.set($event.detail.value); onFilterChange()"
           aria-label="Filtrar por categoría"
         >
-          <ion-select-option value="ALL">Todas las Categorías</ion-select-option>
+          <ion-select-option value="ALL">{{ 'PRODUCTS.ALL_CATEGORIES' | translate }}</ion-select-option>
           <ion-select-option value="Hardware">Hardware</ion-select-option>
           <ion-select-option value="Electrónica">Electrónica</ion-select-option>
           <ion-select-option value="Mobiliario">Mobiliario</ion-select-option>
@@ -70,10 +73,10 @@
           (ionChange)="selectedStatus.set($event.detail.value); onFilterChange()"
           aria-label="Filtrar por estado de stock"
         >
-          <ion-select-option value="ALL">Cualquier Estado</ion-select-option>
-          <ion-select-option value="in_stock">En Stock</ion-select-option>
-          <ion-select-option value="low_stock">Stock Bajo</ion-select-option>
-          <ion-select-option value="out_of_stock">Agotado</ion-select-option>
+          <ion-select-option value="ALL">{{ 'PRODUCTS.ALL_STATUSES' | translate }}</ion-select-option>
+          <ion-select-option value="in_stock">{{ 'STATUS.in_stock' | translate }}</ion-select-option>
+          <ion-select-option value="low_stock">{{ 'STATUS.low_stock' | translate }}</ion-select-option>
+          <ion-select-option value="out_of_stock">{{ 'STATUS.out_of_stock' | translate }}</ion-select-option>
         </ion-select>
       </div>
 
@@ -84,22 +87,22 @@
           class="toggle-mode-btn"
           [class.active]="viewMode() === 'table'"
           (click)="viewMode.set('table')"
-          aria-label="Ver en modo tabla"
-          title="Vista Tabla"
+          [attr.aria-label]="'PRODUCTS.VIEW_TABLE' | translate"
+          [title]="'PRODUCTS.VIEW_TABLE' | translate"
         >
           <ion-icon name="list-outline"></ion-icon>
-          <span>Tabla</span>
+          <span>{{ 'PRODUCTS.VIEW_TABLE' | translate }}</span>
         </button>
         <button
           type="button"
           class="toggle-mode-btn"
           [class.active]="viewMode() === 'cards'"
           (click)="viewMode.set('cards')"
-          aria-label="Ver en modo tarjetas"
-          title="Vista Tarjetas"
+          [attr.aria-label]="'PRODUCTS.VIEW_CARDS' | translate"
+          [title]="'PRODUCTS.VIEW_CARDS' | translate"
         >
           <ion-icon name="grid-outline"></ion-icon>
-          <span>Tarjetas</span>
+          <span>{{ 'PRODUCTS.VIEW_CARDS' | translate }}</span>
         </button>
       </div>
     </div>
@@ -107,10 +110,10 @@
     @if (viewMode() === 'table') {
       <!-- Componente 1 Visual Reutilizable (RA 3) -->
       <app-data-table
-        [columns]="tableColumns"
+        [columns]="tableColumns()"
         [data]="products()"
         [pageSize]="6"
-        searchPlaceholder="Buscar por SKU, nombre o proveedor..."
+        [searchPlaceholder]="translationService.t('PRODUCTS.SEARCH_PLACEHOLDER')"
         [loading]="isLoading()"
         [showActions]="true"
         [canEdit]="authService.isAdminSignal()"
@@ -126,13 +129,13 @@
         @if (isLoading()) {
           <div class="cards-loading-state">
             <ion-spinner name="crescent" color="primary"></ion-spinner>
-            <span>Cargando productos en formato tarjetas...</span>
+            <span>{{ 'PRODUCTS.LOADING_CARDS' | translate }}</span>
           </div>
         } @else if (products().length === 0) {
           <div class="cards-empty-state">
             <ion-icon name="cube-outline"></ion-icon>
-            <h3>No se encontraron productos</h3>
-            <p>Modifique los filtros seleccionados para ver más resultados.</p>
+            <h3>{{ 'PRODUCTS.NO_PRODUCTS' | translate }}</h3>
+            <p>{{ 'PRODUCTS.NO_PRODUCTS_DESC' | translate }}</p>
           </div>
         } @else {
           <div class="product-cards-grid">
@@ -147,7 +150,7 @@
                   } @else {
                     <div class="card-no-img">
                       <ion-icon name="image-outline"></ion-icon>
-                      <span>Sin imagen</span>
+                      <span>{{ 'PRODUCTS.NO_IMAGE' | translate }}</span>
                     </div>
                   }
                   <span class="card-status-badge" [class]="item.status">
@@ -159,7 +162,7 @@
                 <div class="card-content-box">
                   <div class="card-sku-stock-row">
                     <span class="sku-tag">{{ item.sku }}</span>
-                    <span class="stock-tag">Stock: <strong>{{ item.stock }} uds</strong></span>
+                    <span class="stock-tag">{{ 'PRODUCTS.STOCK_LABEL' | translate }}: <strong>{{ item.stock }} {{ 'PRODUCTS.UNITS' | translate }}</strong></span>
                   </div>
 
                   <h3 class="card-title" [title]="item.name">{{ item.name }}</h3>
@@ -167,7 +170,7 @@
 
                   <div class="card-footer-row">
                     <div class="card-price-block">
-                      <span class="price-label">PVP</span>
+                      <span class="price-label">{{ 'PRODUCTS.PRICE_LABEL' | translate }}</span>
                       <strong class="price-val">{{ item.price | number:'1.2-2' }} €</strong>
                     </div>
 
@@ -176,8 +179,8 @@
                         type="button"
                         class="card-action-btn view"
                         (click)="openDetail(item)"
-                        title="Ver detalles"
-                        aria-label="Ver detalles"
+                        [title]="'PRODUCTS.VIEW_DETAILS' | translate"
+                        [attr.aria-label]="'PRODUCTS.VIEW_DETAILS' | translate"
                       >
                         <ion-icon name="eye-outline"></ion-icon>
                       </button>
@@ -187,8 +190,8 @@
                           type="button"
                           class="card-action-btn edit"
                           (click)="navigateToEdit(item.id)"
-                          title="Editar producto"
-                          aria-label="Editar producto"
+                          [title]="'PRODUCTS.EDIT_PRODUCT' | translate"
+                          [attr.aria-label]="'PRODUCTS.EDIT_PRODUCT' | translate"
                         >
                           <ion-icon name="create-outline"></ion-icon>
                         </button>
@@ -196,8 +199,8 @@
                           type="button"
                           class="card-action-btn delete"
                           (click)="confirmDelete(item)"
-                          title="Eliminar producto"
-                          aria-label="Eliminar producto"
+                          [title]="'PRODUCTS.DELETE_PRODUCT' | translate"
+                          [attr.aria-label]="'PRODUCTS.DELETE_PRODUCT' | translate"
                         >
                           <ion-icon name="trash-outline"></ion-icon>
                         </button>
@@ -218,7 +221,7 @@
         <div class="lightbox-modal-card" (click)="$event.stopPropagation()">
           <div class="lightbox-modal-header">
             <h4>{{ previewModalImage()?.title }}</h4>
-            <button type="button" class="close-modal-btn" (click)="closeImagePreview()" aria-label="Cerrar vista previa">
+            <button type="button" class="close-modal-btn" (click)="closeImagePreview()" [attr.aria-label]="'PRODUCTS.CLOSE_PREVIEW' | translate">
               <ion-icon name="close-outline"></ion-icon>
             </button>
           </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, inject, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {
@@ -36,7 +36,10 @@ import { AuthService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { ExportService } from '../../core/services/export.service';
 import { SupabaseRealtimeService } from '../../core/services/supabase-realtime.service';
+import { TranslationService } from '../../core/services/translation.service';
 import { DataTableComponent, TableColumn, TableActionPayload } from '../../shared/components/data-table/data-table.component';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
 import { Product, StockStatus } from '../../core/models/product.model';
 
 /**
@@ -63,12 +66,15 @@ import { Product, StockStatus } from '../../core/models/product.model';
     IonSelect,
     IonSelectOption,
     IonSpinner,
-    DataTableComponent
+    DataTableComponent,
+    TranslatePipe,
+    LangSwitcherComponent
   ]
 })
 export class ProductsPage implements OnInit {
   private sqlService = inject(SqlRestService);
   public authService = inject(AuthService);
+  public translationService = inject(TranslationService);
   private notificationService = inject(NotificationService);
   private exportService = inject(ExportService);
   private realtimeService = inject(SupabaseRealtimeService);
@@ -91,16 +97,20 @@ export class ProductsPage implements OnInit {
     this.currentPage.set(page);
   }
 
-  // Configuración de columnas para <app-data-table>
-  public tableColumns: TableColumn[] = [
-    { key: 'imageUrl', label: 'Foto', sortable: false, type: 'image', width: '70px' },
-    { key: 'sku', label: 'SKU / Código', sortable: true, width: '130px' },
-    { key: 'name', label: 'Nombre de Artículo', sortable: true },
-    { key: 'category', label: 'Categoría', sortable: true, width: '130px' },
-    { key: 'price', label: 'Precio', sortable: true, type: 'currency', width: '110px' },
-    { key: 'stock', label: 'Stock', sortable: true, width: '90px' },
-    { key: 'status', label: 'Disponibilidad', sortable: true, type: 'badge', width: '130px' }
-  ];
+  // Configuración de columnas reactivas con i18n para <app-data-table>
+  public tableColumns = computed<TableColumn[]>(() => {
+    // Reacciona en caliente al cambio de idioma
+    this.translationService.currentLang();
+    return [
+      { key: 'imageUrl', label: this.translationService.t('TABLE.COLUMN_IMAGE'), sortable: false, type: 'image', width: '70px' },
+      { key: 'sku', label: this.translationService.t('TABLE.COLUMN_SKU'), sortable: true, width: '130px' },
+      { key: 'name', label: this.translationService.t('TABLE.COLUMN_NAME'), sortable: true },
+      { key: 'category', label: this.translationService.t('TABLE.COLUMN_CATEGORY'), sortable: true, width: '130px' },
+      { key: 'price', label: this.translationService.t('TABLE.COLUMN_PRICE'), sortable: true, type: 'currency', width: '110px' },
+      { key: 'stock', label: this.translationService.t('TABLE.COLUMN_STOCK'), sortable: true, width: '90px' },
+      { key: 'status', label: this.translationService.t('TABLE.COLUMN_STATUS'), sortable: true, type: 'badge', width: '130px' }
+    ];
+  });
 
   constructor() {
     addIcons({
@@ -198,12 +208,7 @@ export class ProductsPage implements OnInit {
   }
 
   public getStatusLabel(status: string): string {
-    switch (status) {
-      case 'in_stock': return 'En Stock';
-      case 'low_stock': return 'Stock Bajo';
-      case 'out_of_stock': return 'Agotado';
-      default: return status;
-    }
+    return this.translationService.t('STATUS.' + status);
   }
 
   public getBadgeColor(status: string): string {
