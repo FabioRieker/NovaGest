@@ -6,8 +6,8 @@
     <ion-title>Manual de Usuario & Ayuda</ion-title>
     <ion-buttons slot="end">
       @if (authService.isAuthenticatedSignal()) {
-        <ion-button (click)="logout()" color="light" aria-label="Cerrar sesión">
-          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">
+          <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
           Salir
         </ion-button>
       } @else {

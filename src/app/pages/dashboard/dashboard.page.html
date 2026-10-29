@@ -13,8 +13,8 @@
       <ion-button (click)="loadConsolidatedData()" aria-label="Actualizar métricas">
         <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logout()" color="light" aria-label="Cerrar sesión">
-        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      <ion-button (click)="logout()" color="light" aria-label="Salir de la sesión">
+        <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
         Salir
       </ion-button>
     </ion-buttons>
@@ -107,7 +107,7 @@
               <div class="notif-header">
                 <div class="notif-title-row">
                   <ion-icon name="notifications-outline" class="notif-icon-lead"></ion-icon>
-                  <h4>Notificaciones del Sistema</h4>
+                  <h2 class="notif-title">Notificaciones del Sistema</h2>
                   @if (unreadNotificationsCount() > 0) {
                     <span class="unread-pill">{{ unreadNotificationsCount() }} nuevas</span>
                   }
@@ -390,7 +390,7 @@
                       </span>
                     </div>
                     <div class="kpi-value-row">
-                      <h2 class="kpi-number">{{ (totalInventoryValue() | number:'1.2-2') }} €</h2>
+                      <div class="kpi-number">{{ (totalInventoryValue() | number:'1.2-2') }} €</div>
                       <div class="kpi-icon-bubble">
                         <ion-icon name="cash-outline"></ion-icon>
                       </div>
@@ -406,7 +406,7 @@
                       </span>
                     </div>
                     <div class="kpi-value-row">
-                      <h2 class="kpi-number">{{ totalProducts() }}</h2>
+                      <div class="kpi-number">{{ totalProducts() }}</div>
                       <div class="kpi-icon-bubble">
                         <ion-icon name="cube-outline"></ion-icon>
                       </div>
@@ -422,7 +422,7 @@
                       </span>
                     </div>
                     <div class="kpi-value-row">
-                      <h2 class="kpi-number">{{ lowStockCount() }}</h2>
+                      <div class="kpi-number">{{ lowStockCount() }}</div>
                       <div class="kpi-icon-bubble">
                         <ion-icon name="alert-circle-outline"></ion-icon>
                       </div>
@@ -438,7 +438,7 @@
                       </span>
                     </div>
                     <div class="kpi-value-row">
-                      <h2 class="kpi-number">{{ outOfStockCount() }}</h2>
+                      <div class="kpi-number">{{ outOfStockCount() }}</div>
                       <div class="kpi-icon-bubble">
                         <ion-icon name="sparkles-outline"></ion-icon>
                       </div>
