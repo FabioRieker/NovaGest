@@ -33,7 +33,8 @@
                 "output": "assets"
               },
               "src/manifest.webmanifest",
-              "src/sw.js"
+              "src/sw.js",
+              "src/robots.txt"
             ],
             "styles": ["src/global.scss", "src/theme/variables.scss"],
             "scripts": [],
